@@ -53,5 +53,8 @@
 		<p>실시간으로 바뀌면 안되는부분2</p>
 		<p id="currenttime2"></p>
 	</div>
+	<div>
+		${mid }
+	</div>
 </body>
 </html>

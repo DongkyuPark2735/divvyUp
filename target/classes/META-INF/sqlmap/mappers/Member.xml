@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.divvyup.dao.MemberDao">
+	<resultMap type="Member" id="MemberResult">
+		<result property="mid" column="mid"/>  
+		<result property="mpw" column="mpw"/>  
+		<result property="mname" column="mname"/>  
+		<result property="memail" column="memail"/>  
+		<result property="mrdate" column="mrdate"/>  
+	</resultMap>
+	
+	<select id="loginMember" parameterType="Member" resultType="Member"> <!-- 로그인 -->
+		SELECT * FROM MEMBER WHERE MID=#{mid}
+	</select>
+	
+	<select id="confirmMid" parameterType="Member" resultType="int"> <!-- 아이디 중복체크 -->
+		SELECT COUNT(*) FROM MEMBER WHERE MID=#{mid}
+	</select>
+	
+	<select id="confirmMemail" parameterType="Member" resultType="int"> <!-- 이메일 중복체크 -->
+		SELECT COUNT(*) FROM MEMBER WHERE MEMAIL=#{memail}
+	</select>
+	
+	<insert id="joinMember" parameterType="Member"> <!-- 회원가입 -->
+		INSERT INTO MEMBER (MID, MPW, MNAME, MEMAIL) VALUES (#{mid}, #{mpw}, #{mname}, #{memail})
+	</insert>
+	
+	<select id="getMember" parameterType="Member" resultType="Member"> <!-- 회원정보 가져오기 -->
+		SELECT * FROM MEMBER WHERE MID=#{mid}
+	</select>
+	
+	<update id="modifyMember" parameterType="Member"> <!-- 회원정보 수정 -->
+		UPDATE MEMBER SET MPW=#{mpw},
+                  MNAME=#{mname},
+                  MEMAIL=#{memail}
+            WHERE MID=#{mid}
+	</update>
+	
+	<select id="searchMid" parameterType="Member" resultType="String"> <!-- 아이디 찾기 -->
+		SELECT MID FROM MEMBER WHERE MNAME=#{mname} AND MEMAIL=#{memail}
+	</select>
+	
+	<select id="searchMpw" parameterType="Member" resultType="String"> <!-- 비밀번호 찾기 -->
+		SELECT MPW FROM MEMBER WHERE MID=#{mid} AND MNAME=#{mname} AND MEMAIL=#{memail}
+	</select>
+		
+</mapper>
