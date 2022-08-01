@@ -17,6 +17,6 @@
 </script>
 </head>
 <body>
-	<jsp:forward page="main.do"/>
+	<jsp:forward page="groupboard/main.do"/>
 </body>
 </html>
