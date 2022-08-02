@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.lec.unie.dao.MemberDao2">
+	<resultMap type="Member2" id="MemberResult">
+		<result property="mid" column="mid"/>
+		<result property="mpw" column="mpw"/>
+		<result property="mname" column="mname"/>
+		<result property="memail" column="memail"/>
+		<result property="mrdate" column="mrdate"/>
+	</resultMap>
+
+	<select id="idConfirm" parameterType="String" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM MEMBER WHERE MID = #{mid, jdbcType=VARCHAR}
+		]]>
+	</select>
+	
+	<insert id="joinMember" parameterType="Member2">
+		<![CDATA[
+			INSERT INTO MEMBER (MID, MPW, MNAME, MEMAIL)
+	    		VALUES(#{mid}, #{mpw}, #{mname}, #{memail})
+	    ]]>
+	</insert>
+	<select id="getDetailMember" parameterType="String" resultType="Member2">
+		<![CDATA[
+			SELECT * FROM MEMBER WHERE MID = #{mid}
+		 ]]>
+	</select>
+	<update id="modifyMember" parameterType="Member2">
+		<![CDATA[
+			UPDATE MEMBER SET
+			    MPW = #{mpw},
+			    MNAME = #{mname},
+			    MEMAIL = #{memail},
+			    MRDATE = #{mrdate}
+		    WHERE MID = #{mid}
+		]]>
+	</update>
+</mapper>

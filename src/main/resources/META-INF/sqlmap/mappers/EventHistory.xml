@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.lec.unie.dao.EventHistoryDao">
+	<resultMap type="EventHistory" id="EventHistorykResult">
+		<result property="edid" column="edid"/>
+		<result property="eid" column="eid"/>
+		<result property="mid" column="mid"/>
+		<result property="edshare" column="edshare"/>
+	</resultMap>
+	
+	<insert id="insertEventHistory" parameterType="EventHistory">
+		INSERT INTO EVENTHISTORY
+		    (SELECT  EVENTHISTORY_SEQ.NEXTVAL, E.EID, ED.MID, ED.EDSHARE, E.ERDATE, E.ENAME
+		    FROM EVENTDETAIL ED, EVENT E
+		    WHERE E.EID=ED.EID
+		    AND E.EID=#{eid})
+	</insert>
+	
+
+</mapper>

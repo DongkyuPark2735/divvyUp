@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.lec.unie.dao.EventDao">
+	<resultMap type="Event" id="EventResult">
+		<result property="eid" column="eid"/>
+		<result property="ename" column="ename"/>
+		<result property="econtent" column="econtent"/>
+		<result property="eimage" column="eimage"/>
+		<result property="eamount" column="eamount"/>
+		<result property="eaddress" column="eaddress"/>
+		<result property="ecount" column="ecount"/>
+		<result property="erdate" column="erdate"/>
+		<result property="mid" column="mid"/>
+		<result property="gid" column="gid"/>
+	</resultMap>
+	
+	<!-- 그룹에 새로운 이벤트 추가 -->
+	<insert id="insertEvent" parameterType="Event">
+		<if test="eimage==''">
+			INSERT INTO EVENT (EID, ENAME, ECONTENT, EAMOUNT, EADDRESS, ECOUNT, MID, GID)
+	   			VALUES (EVENT_SEQ.NEXTVAL, #{ename}, #{econtent}, #{eamount}, #{eaddress}, #{ecount}, #{mid}, #{gid})
+		</if>
+		<if test="eimage!=''">
+				INSERT INTO EVENT (EID, ENAME, ECONTENT, EIMAGE, EAMOUNT, EADDRESS, ECOUNT, MID, GID)
+	   			VALUES (EVENT_SEQ.NEXTVAL, #{ename}, #{econtent}, #{eimage}, #{eamount}, #{eaddress}, #{ecount}, #{mid}, #{gid})
+		</if>
+	</insert>
+	<select id="eventList" resultMap="EventResult" parameterType="int">
+		SELECT * FROM EVENT WHERE GID = #{gid} ORDER BY erdate DESC
+	</select>
+
+</mapper>

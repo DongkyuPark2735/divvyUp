@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ 
+<configuration>
+ 	<typeAliases>
+		<typeAlias type="com.lec.unie.dto.Member2" alias="Member2"/>
+		<typeAlias type="com.lec.unie.dto.Book" alias="Book"/>
+		<typeAlias type="com.lec.unie.dto.Groups" alias="Groups"/>
+		<typeAlias type="com.lec.unie.dto.GroupDetail" alias="GroupDetail"/>
+		<typeAlias type="com.lec.unie.dto.Event" alias="Event"/>
+		<typeAlias type="com.lec.unie.dto.EventDetail" alias="EventDetail"/>
+		<typeAlias type="com.lec.unie.dto.EventHistory" alias="EventHistory"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="META-INF/sqlmap/mappers/Member2.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Book.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Groups.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/GroupDetail.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Event.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/EventDetail.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/EventHistory.xml"/>
+	</mappers>
+</configuration>
