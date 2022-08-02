@@ -1,22 +1,22 @@
-<%@ page language="java" contentType="text/html; charset= UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="conPath" value="${pageContext.request.contextPath }"/>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
+<c:set var="conPath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
-	<meta charset="UTF-8">
-	<link href="${conPath }/css/style.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
-	<script>
+<meta charset="${encoding}">
+<title>Insert title here</title>
+<link href="${conPath}/css/style.css" rel="stylesheet">
+<style></style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
 		$(document).ready(function(){
-			
 		});
-	</script>
+</script>
 </head>
 <body>
-<jsp:forward page="main.do"/>
+	<jsp:forward page="member/loginForm.do"/>
 </body>
 </html>

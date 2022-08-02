@@ -17,7 +17,6 @@
 	</script>
 </head>
 <body>
-	<jsp:include page="../main/header.jsp"/>
 	<div id="content">
 		<form action="${conPath }/groupDetail.do?method=a" method="post">
 		<table>
@@ -37,6 +36,5 @@
 		</table>
 		</form>
 	</div>
-	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.lec.unie">
+	<logger name="com.lec.divvyup">
 		<level value="info" />
 	</logger>
 	

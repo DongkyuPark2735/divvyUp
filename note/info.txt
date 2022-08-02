@@ -1,4 +1,0 @@
-db: divvyup/divvyup
-
-
-tomcat: 8060

@@ -18,19 +18,19 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/js/**" location="/js/" />
-	<resources mapping="/bookImgFileUpload/**" location="/bookImgFileUpload/" />
-	<resources mapping="/img/**" location="/img/" />
-
+	<resources mapping="/imgFileUpload/**" location="/imgFileUpload/" />
+	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.lec.unie" />
-	<mybatis-spring:scan base-package="com.lec.unie.dao"/>
-	<context:property-placeholder location="classpath:META-INF/property/mail.properties"/>
+	<context:component-scan base-package="com.lec.divvyup" />
 	
+	<mybatis-spring:scan base-package="com.lec.divvyup.dao"/>
+	
+	<context:property-placeholder location="classpath:META-INF/property/mail.properties"/>
 	<!-- 메일발송 빈 -->
 	<beans:bean id="mailSender"
 		class="org.springframework.mail.javamail.JavaMailSenderImpl">
@@ -49,11 +49,33 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>
+	<!-- 파일첨부 빈 -->
 	
-	<!-- 파일첨부 -->
+	<!-- 파일 첨부 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="10485760"/>
 	</beans:bean>
 	
+	
+
 </beans:beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

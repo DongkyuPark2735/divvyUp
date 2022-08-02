@@ -1,47 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="conPath" value="${pageContext.request.contextPath }"/>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
+<c:set var="conPath" value="${pageContext.request.contextPath }" />
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="${encoding}">
 <title>Insert title here</title>
-<link href="${conPath }/css/style.css" rel="stylesheet">
+<link href="${conPath}/css/style.css" rel="stylesheet">
 <style>
-	#content {
-		width: 800px; 
-		height:350px;
-		margin: 50px auto;
+	*{
+		margin : 0 auto;
+		
 	}
-	img{
-		width: 100px;
+	div{
+		width : 500px;
+		height : 500px;
+		border: 1px solid black;
+		display: inline-block;
+		
 	}
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<c:if test="${not empty modifyResult }">
-		<script> alert("정보 수정이 돤료 되었습니다");</script>
-	</c:if>
-	<jsp:include page="header.jsp"/>
-	<div id="content">
-		<table>
-			<caption>신규 도서 BEST 5</caption>
-			<tr><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
-			<tr>
-			<c:forEach var="book" items="${mainList }" begin="0" end="4">
-				<td>
-				   ${book.btitle }<br>
-				   <a href="${conPath }/book.do?method=detail&bnum=${book.bnum}&pageNum=1">
-				   <img src="${conPath }/bookImgFileUpload/${book.bimg1}"></a><br>
-				   ${book.bwriter } 著 <br>
-				   출판일 : ${book.brdate }
-				</td>
-			</c:forEach>
-			</tr>
-		</table>
+
+	<h1>메인페이지</h1>
+	<div>
+		<input type="button" value="UNIE" onclick="location.href='${conPath }/main/unieTestMain.do'"/>
 	</div>
-	<jsp:include page="footer.jsp"/>
+	<div>
+		<p>실시간으로 바뀌면 안되는부분</p>
+		<p id="currenttime"></p>
+	</div>
+	<div>
+		<p>구분 2</p>
+		
+	</div>
+	<div>
+		<p>실시간으로 바뀌면 안되는부분2</p>
+		<p id="currenttime2"></p>
+	</div>
+	<div>
+		${mid }
+	</div>
+	
+
 </body>
 </html>

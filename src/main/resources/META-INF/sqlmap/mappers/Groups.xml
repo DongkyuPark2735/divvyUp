@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    
-<mapper namespace="com.lec.unie.dao.GroupsDao">
+ 
+<mapper namespace="com.lec.divvyup.dao.GroupsDao">
 	<resultMap type="Groups" id="GroupsResult">
 		<result property="gid" column="gid"/>
 		<result property="gname" column="gname"/>

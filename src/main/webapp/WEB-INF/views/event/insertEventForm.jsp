@@ -8,15 +8,10 @@
 <head>
 	<title>Home</title>
 	<meta charset="UTF-8">
-	<link href="${conPath }/css/style.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
-	<script>
-	</script>
 </head>
 <body>
-<jsp:include page="../main/header.jsp"/>
 	<div id="content">
-		<form action="${conPath }/event.do?method=insertEvent&gid=${param.gid }&mid=${member.mid  }" method="post" enctype="multipart/form-data">
+		<form action="${conPath }/event/insertEvent.do?gid=${param.gid }&mid=${member.mid  }" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="method" value="insertEvent">
 		<table>
 		<caption>그룹 ${param.gid }에 이벤트 추가</caption>
@@ -41,6 +36,5 @@
 		</table>
 		</form>
 	</div>
-	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

@@ -8,20 +8,17 @@
 <head>
 	<title>Home</title>
 	<meta charset="UTF-8">
-	<link href="${conPath }/css/style.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
-	<script>
-		$(document).ready(function(){
-			
-		});
-	</script>
 </head>
 <body>
 
 	<c:forEach var="groups" items="${groupList }">
-		<input type="button" value="${groups.gid }" onclick="location='groups.do?method=groupInfo&gid=${groups.gid }'">
+		<input type="button" value="${groups.gid }" onclick="location='${conPath }/groups/groupInfo.do?gid=${groups.gid }'">
 		
 	</c:forEach>
 	
 </body>
 </html>
+
+
+<%-- <body>
+	<jsp:forward page="member/loginForm.do"/> --%>

@@ -8,13 +8,6 @@
 <head>
 	<title>Home</title>
 	<meta charset="UTF-8">
-	<link href="${conPath }/css/style.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
-	<script>
-		$(document).ready(function(){
-			
-		});
-	</script>
 </head>
 <body>
 		<table>
@@ -24,10 +17,10 @@
 			<tr>
 				<td>
 				   이벤트 아이디: ${event.eid }<br>
-				   <a href="${conPath }/event.do?method=eventDetail&eid=${event.eid}">
-				   이벤트 이름:  ${event.ename }<br>
+				   <a href="${conPath }/event/eventDetail.do&eid=${event.eid}">
+				   이벤트 이름:  ${event.ename }<br></a>
 				   이벤트 내용:  ${event.econtent }<br>
-				   이벤트 사진: <img src="${conPath }/bookImgFileUpload/${event.eimage}"></a><br>
+				   이벤트 사진: <img src="${conPath }/imgFileUpload/${event.eimage}"><br>
 				   이벤트 총지출:  ${event.eamount }<br>
 				   이벤트 주소:  ${event.eaddress }<br>
 				   이벤트 참여 자:  ${event.ecount }<br>

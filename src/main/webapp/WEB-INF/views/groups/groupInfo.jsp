@@ -7,13 +7,6 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link href="${conPath }/css/style.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
-	<script>
-		$(document).ready(function(){
-			
-		});
-	</script>
 </head>
 <body>
 	<table>
@@ -22,7 +15,7 @@
 			<tr><td>date : ${groupInfo.grdate }</td></tr>
 			<tr><td>group img : 
 				<c:if test="${not empty groupInfo.gimg }">
-					<img src="${conPath }/bookImgFileUpload/${groupInfo.gimg }">
+					<img src="${conPath }/imgFileUpload/${groupInfo.gimg }">
 				</c:if>
 				<c:if test="${empty groupInfo.gimg }">
 					첫번째 첨부파일 첨부 안 함
@@ -30,8 +23,8 @@
 			</td></tr>
 			<tr><td>group summary : ${groupInfo.gcontent }</td></tr>
 			<tr><td>group leader : ${groupInfo.mid }</td></tr>
-			<tr><td><input type="button" value="이벤트 목록" onclick="location='event.do?method=eventList&gid=${groupInfo.gid }'"></td></tr>
-			<tr><td><input type="button" value="이벤트 추기" onclick="location='event.do?method=insertEventForm&gid=${groupInfo.gid }'"></td></tr>
+			<tr><td><input type="button" value="이벤트 목록" onclick="location='${conPath }/event/eventList.do?gid=${groupInfo.gid }'"></td></tr>
+			<tr><td><input type="button" value="이벤트 추기" onclick="location='${conPath }/event/insertEventForm.do?gid=${groupInfo.gid }'"></td></tr>
 	</table>	
 	
 </body>
