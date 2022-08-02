@@ -23,20 +23,6 @@
 	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-		$(document).ready(function(){
-			var curDate = new Date();
-			var curTime = curDate.getFullYear() + "-" 
-			+ (curDate.getMonth() + 1) + "-" 
-			+ curDate.getDate() + " " 
-			+ curDate.getHours() + ":" 
-			+ curDate.getMinutes() + ":" 
-			+ curDate.getSeconds();
-			
-			$('#currenttime').text(curTime);
-			$('#currenttime2').text(curTime);
-		});
-</script>
 </head>
 <body>
 
@@ -56,5 +42,7 @@
 	<div>
 		${mid }
 	</div>
+
+
 </body>
 </html>
