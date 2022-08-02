@@ -5,10 +5,10 @@
 <configuration>
 	<typeAliases>
 	  <typeAlias type="com.lec.divvyup.vo.Member" alias="Member"/>
-	  
+	  <typeAlias type="com.lec.divvyup.vo.Qboard" alias="Qboard"/>
 	</typeAliases>
 	<mappers>
 	  <mapper resource="META-INF/sqlmap/mappers/Member.xml"/>
-	  
+	  <mapper resource="META-INF/sqlmap/mappers/Qboard.xml"/>
 	</mappers>
 </configuration>
