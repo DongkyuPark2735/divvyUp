@@ -1,36 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
-		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
-		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
-
+	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-
-
-
-	<context:property-placeholder
-		location="classpath:META-INF/property/db.properties" />
-
+	<context:property-placeholder location="classpath:META-INF/property/db.properties" />	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="${db.driverClassName}" />
-		<property name="url" value="${db.url}" />
-		<property name="username" value="${db.username}" />
-		<property name="password" value="${db.password}" />
+	  <property name="driverClassName" value="${db.driverClassName}"/>
+	  <property name="url" value="${db.url}"/>
+	  <property name="username" value="${db.username}"/>
+	  <property name="password" value="${db.password}"/>
 	</bean>
-
-	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:META-INF/sqlmap/config/mybatis-config.xml" />
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+	  <property name="dataSource" ref="dataSource" />
+	  <property name="configLocation" value="classpath:META-INF/sqlmap/config/mybatis-config.xml" />
 	</bean>
-
-	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" name="sqlSessionFactory" ref="sqlSessionFactoryBean" />
+	<bean id="sqlSessionTemplate"	class="org.mybatis.spring.SqlSessionTemplate">
+	  <constructor-arg index="0" ref="sqlSessionFactory"/>
 	</bean>
-
 
 </beans>

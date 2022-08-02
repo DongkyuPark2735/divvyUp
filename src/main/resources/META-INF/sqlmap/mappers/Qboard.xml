@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.divvyup.dao.QboardDao">
+	<resultMap type="Qboard" id="QboardResult">
+		<result property="qbid" column="qbid"/>
+		<result property="mid" column="mid"/>
+		<result property="qbtitle" column="qbtitle"/>
+		<result property="qbcontent" column="qbcontent"/>
+		<result property="qbrdate" column="qbrdate"/>
+		<result property="qbip" column="qbip"/>
+		<result property="qbreplycheck" column="qbreplycheck"/>
+	</resultMap>
+	
+	<insert id="writeQboard" parameterType="Qboard">
+		INSERT INTO QBOARD (QBID, MID, QBTITLE, QBCONTENT, QBIP)
+    VALUES (QBOARD_SEQ.NEXTVAL, #{mid}, #{qbtitle}, #{qbcontent}, #{qbip})
+	</insert>
+	
+	<update id="modifyQboard" parameterType="int">
+		UPDATE QBOARD SET QBTITLE=#{qbtitle},
+                  QBCONTENT=#{qbcontent},
+                  QBIP=#{qbip}
+            WHERE QBID=#{qbid} AND QBREPLYCHECK=0
+	</update>
+	
+	<select id="viewQboard" parameterType="Qboard" resultType="Qboard">
+		SELECT * FROM QBOARD WHERE QBID=#{qbid}
+	</select>
+	
+	<select id="listQboardForMember" parameterType="Qboard" resultMap="QboardResult">
+		SELECT * FROM (SELECT ROWNUM RN, A.* 
+            FROM (SELECT * FROM QBOARD ORDER BY QBRDATE DESC) A)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="getQboardTotCntForMember" resultType="int">
+		SELECT COUNT(*) FROM QBOARD
+	</select>
+	
+	<select id="listQboardForMe" parameterType="Qboard" resultMap="QboardResult">
+		SELECT * FROM (SELECT ROWNUM RN, A.* 
+            FROM (SELECT * FROM QBOARD WHERE MID=#{mid} ORDER BY QBRDATE DESC) A)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="getQboardTotCntForMe" parameterType="Qboard" resultType="int">
+		SELECT COUNT(*) FROM QBOARD WHERE MID=#{mid}
+	</select>
+	
+	<select id="listUncheckedQboardForAdmin" parameterType="Qboard" resultMap="QboardResult">
+		SELECT * FROM (SELECT ROWNUM RN, A.* 
+            FROM (SELECT * FROM QBOARD WHERE QBREPLYCHECK=0 ORDER BY QBRDATE DESC) A)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="getUncheckedQboardTotCntForAdmin" resultType="int">
+		SELECT COUNT(*) FROM QBOARD WHERE QBREPLYCHECK=0
+	</select>
+	
+	<select id="listCheckedQboardForAdmin" resultType="Qboard" resultMap="QboardResult">
+		SELECT * FROM (SELECT ROWNUM RN, A.* 
+            FROM (SELECT * FROM QBOARD WHERE QBREPLYCHECK=1 ORDER BY QBRDATE DESC) A)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="getCheckedQboardTotCntForAdmin" resultType="int">
+		SELECT COUNT(*) FROM QBOARD WHERE QBREPLYCHECK=1
+	</select>
+	
+	<update id="updateQboardReplyCheck" parameterType="Qboard"> <!-- AboardServiceImpl에서 실행 -->
+		UPDATE QBOARD SET QBREPLYCHECK=1 WHERE QBID=#{qbid}
+	</update>
+	
+	<delete id="deleteQboard" parameterType="Qboard">
+		DELETE FROM QBOARD WHERE QBID=#{qbid}
+	</delete>
+</mapper>

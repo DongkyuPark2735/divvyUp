@@ -26,7 +26,23 @@
 </head>
 <body>
 
-	<input type="button" value="그룹디테일로 ㄱㄱ" 
-	onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=100'">	
+	<h1>메인페이지</h1>
+	<div>
+		<p>실시간으로 바뀌면 안되는부분</p>
+		<p id="currenttime"></p>
+	</div>
+	<div>
+		<p>구분 2</p>
+		
+	</div>
+	<div>
+		<p>실시간으로 바뀌면 안되는부분2</p>
+		<p id="currenttime2"></p>
+	</div>
+	<div>
+		${mid }
+	</div>
+
+
 </body>
 </html>
