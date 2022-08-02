@@ -28,6 +28,9 @@
 
 	<h1>메인페이지</h1>
 	<div>
+		<input type="button" value="UNIE" onclick="location.href='${conPath }/main/unieTestMain.do'"/>
+	</div>
+	<div>
 		<p>실시간으로 바뀌면 안되는부분</p>
 		<p id="currenttime"></p>
 	</div>
@@ -42,7 +45,7 @@
 	<div>
 		${mid }
 	</div>
-
+	
 
 </body>
 </html>

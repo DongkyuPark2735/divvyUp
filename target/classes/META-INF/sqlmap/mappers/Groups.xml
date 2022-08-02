@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.lec.divvyup.dao.GroupsDao">
+	<resultMap type="Groups" id="GroupsResult">
+		<result property="gid" column="gid"/>
+		<result property="gname" column="gname"/>
+		<result property="grdate" column="grdate"/>
+		<result property="gimg" column="gimg"/>
+		<result property="gcontent" column="gcontent"/>
+		<result property="mid" column="mid"/>
+	</resultMap>
+
+
+	<select id="groupList" resultType="Groups">
+		SELECT * FROM GROUPS ORDER BY GRDATE DESC
+	</select>
+	<select id="groupInfo" parameterType="int" resultType="Groups">
+		SELECT * FROM GROUPS WHERE GID =  #{gid}
+	</select>
+</mapper>

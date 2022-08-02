@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.lec.divvyup.dao.GroupDetailDao">
+	<resultMap type="GroupDetail" id="GroupDetailResult">
+		<result property="gdid" column="gdid"/>
+		<result property="gid" column="gid"/>
+		<result property="mid" column="mid"/>
+		<result property="gdbalancce" column="gdbalancce"/>
+	</resultMap>
+	
+	<!-- 그룹에 멤버 추가 -->
+	<insert id="insertGroupDetail" parameterType="GroupDetail">
+		INSERT INTO GROUPDETAIL (GDID, GID, MID)
+    		VALUES (GROUPDETAIL_SEQ.NEXTVAL, #{gid} , #{mid})
+	</insert>
+	
+	<!-- STEP 3 OF ADDING EVENT : 새 이벤트 진행시, GROUPDETAIL에 멤버 정보를 업데이트 해준다 -->
+	<update id="updateGroupDetail" parameterType="GroupDetail">
+		UPDATE GROUPDETAIL 
+        	SET GDBALANCE = GDBALANCE + (SELECT EDSHARE FROM EVENTDETAIL WHERE MID= #{mid} AND EID= #{eid})
+        	WHERE MID={mid}
+	</update>
+	<select id="groupDetailList" resultType="GroupDetail" parameterType="int">
+		SELECT * FROM GROUPDETAIL WHERE GID=#{gid}
+	</select>
+	
+</mapper>

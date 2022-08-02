@@ -108,6 +108,8 @@ SELECT *
                     WHERE GID = 100 ORDER BY GBID DESC) GB)
     WHERE RN = 1;
      
+-- 그룹별 총 글 갯수 
+
 
 commit;
 

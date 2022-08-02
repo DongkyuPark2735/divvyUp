@@ -4,13 +4,23 @@
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-	  <typeAlias type="com.lec.divvyup.vo.Member" alias="Member"/>
-	  <typeAlias type="com.lec.divvyup.vo.Qboard" alias="Qboard"/>
-    <typeAlias type="com.lec.divvyup.vo.GroupBoard" alias="GroupBoard"/>
+		<typeAlias type="com.lec.divvyup.vo.Member" alias="Member"/>
+		<typeAlias type="com.lec.divvyup.vo.Qboard" alias="Qboard"/>
+		<typeAlias type="com.lec.divvyup.vo.GroupBoard" alias="GroupBoard"/>
+		<typeAlias type="com.lec.divvyup.vo.Groups" alias="Groups"/>
+		<typeAlias type="com.lec.divvyup.vo.GroupDetail" alias="GroupDetail"/>
+		<typeAlias type="com.lec.divvyup.vo.Event" alias="Event"/>
+		<typeAlias type="com.lec.divvyup.vo.EventDetail" alias="EventDetail"/>
+		<typeAlias type="com.lec.divvyup.vo.EventHistory" alias="EventHistory"/>
 	</typeAliases>
 	<mappers>
-	  <mapper resource="META-INF/sqlmap/mappers/Member.xml"/>
-	  <mapper resource="META-INF/sqlmap/mappers/Qboard.xml"/>
-    <mapper resource="META-INF/sqlmap/mappers/groupBoard.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Member.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Qboard.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/groupBoard.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Groups.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/GroupDetail.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Event.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/EventDetail.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/EventHistory.xml"/>
 	</mappers>
 </configuration>
