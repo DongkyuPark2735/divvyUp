@@ -3,12 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="conPath" value="${pageContext.request.contextPath }" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-</head>
-<body>
 	<c:forEach var="plist" items="${pastList }">
 		<table>
 			<tr>
@@ -21,5 +15,3 @@
 			</tr>
 		</table>
 	</c:forEach>
-</body>
-</html>

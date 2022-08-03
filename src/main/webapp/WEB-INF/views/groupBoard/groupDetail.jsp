@@ -28,24 +28,23 @@ div {
 		$(document).ready(function(){
 			/* 타이머 새글 가져오기 */
 			timer = setInterval( function () {
-
-				console.log('1');
-	    	var exsitingGid = $("table#exsitingList tr:last td:nth-child(3)").text();
-			  
-	    	var checkGid = $(this).children().text();
-			  
-			  console.log(exsitingGid);
+				console.log('새글 가져오기 타이머 작동 중');
+				var exsitingGidByList = $("table#exsitingList tr:last td:nth-child(1)").text();
+				var exsitingGidByTimer = $("table#singleLatestGroupboardResult tr:last td:nth-child(1)").text();
 				$.ajax({
 					url : "${conPath}/groupboard/singleLatestGroupboard.do",
 			    type : "GET",
 			    data : {"gid" : 1}, 
 			    success: function(data){
-// 			    	if(gidCheck != exsitingGid){
+				    	var checkGid = $.trim(data).substring(4, 7);
+				    	console.log(data.indexOf("<"));
+				    	console.log(checkGid);
+			    	if(checkGid != exsitingGidByList && checkGid != exsitingGidByTimer){
 							$('#singleLatestGroupboardResult').append("<tr>"+data+"</tr>");
-// 			    	}
+			    	}
 			    }
 				});
-			}, 1000);
+			}, 500);
 			
 			
 			/* 이전글 가져오기  */
@@ -61,10 +60,12 @@ div {
 	       	type : "GET",
 	       	data : {"startRow" : startRow, "endRow":endRow, "gid":1}, 
 	       	success: function(data){
-	       		if(!isNaN(data)){
+	       		var tmpData = $.trim(data);
+	       		console.log(tmpData);
+	       		if(data){
 							$('#pastGroupBoardResult').prepend(data);
 						  cnt = cnt+1;
-	       		}else if(isNaN(data)){
+	       		}else if(tmpData == ""){
 							$('#pastGroupBoardResult').prepend("<b>이전 대화가 없습니다.</b>");
 	       		}
 	   	    }
@@ -72,7 +73,7 @@ div {
 			});
 			
 			
-			/* 대화 입력 */
+			/* 글 입력 */
 			$('#insertGroupBoard').click(function(){
 				var gid = $('#tempGid').val();
 				var mid = $('#tempMid').val();
@@ -83,10 +84,12 @@ div {
 	       	type : "POST",
 	       	data : {"gid" : gid, "mid":mid, "gbcontent":gbcontent, "gbfilename":gbfilename}, 
 	       	success: function(data){
-						$('#insertGroupBoardResult').html(data);
+						$('#tempGbcontent').val('');
+						$('#tempGbfilename').val('');
 	       	}
 				});
 			});
+			
 			
 			var curDate = new Date();
 			var curTime = curDate.getFullYear() + "-" 
@@ -139,14 +142,17 @@ div {
 						<td class="exsitingGid">${glist.gbid}</td>
 						<td>${glist.gid}</td>
 						<td>${glist.mid}</td>
+						<c:if test="${not empty glist.gbfilename}">
+							<td>
+								<img src="${conPath }/groupFileBoardUploadFiles/${glist.gbfilename}" 
+										 alt="첨부이미지" width="100" height="100">
+							</td>
+						</c:if>
+						
 						<td>${glist.gbcontent}</td>
-						<td>${glist.gbfilename}</td>
 						<td>${glist.gbrdate}</td>
 					</tr>
 				</c:forEach>
-				
-				<tr id="insertGroupBoardResult">
-				</tr>
 			</c:if>
 		</table>
 		<table id="singleLatestGroupboardResult">

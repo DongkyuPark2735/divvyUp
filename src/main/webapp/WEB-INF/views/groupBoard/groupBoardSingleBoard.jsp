@@ -3,17 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="conPath" value="${pageContext.request.contextPath }" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-</head>
-<body>
-		<td class="checkGid">${singleLatestGroupboard.gbid }</td>
+		<td>${singleLatestGroupboard.gbid }</td>
 		<td>${singleLatestGroupboard.gid }</td>
 		<td>${singleLatestGroupboard.mid }</td>
 		<td>${singleLatestGroupboard.gbcontent }</td>
 		<td>${singleLatestGroupboard.gbfilename }</td>
 		<td>${singleLatestGroupboard.gbrdate }</td>
-</body>
-</html>

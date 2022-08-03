@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.lec.divvyup.service.GroupBoardService;
 import com.lec.divvyup.vo.GroupBoard;
@@ -30,8 +31,8 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "insertGroupBoard", method = RequestMethod.POST)
-	public String insertGroupBoard(GroupBoard groupBoard, Model model) {
-		model.addAttribute("insertGroupBoardVO", groupBoardService.insertGroupboard(groupBoard)); 
+	public String insertGroupBoard(GroupBoard groupBoard, Model model, MultipartHttpServletRequest mRequest) {
+		groupBoardService.insertGroupboard(groupBoard, mRequest); 
 		return "groupBoard/groupBoardInsert";
 	}
 	
