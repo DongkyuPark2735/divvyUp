@@ -23,23 +23,9 @@
 	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-		$(document).ready(function(){
-			var curDate = new Date();
-			var curTime = curDate.getFullYear() + "-" 
-			+ (curDate.getMonth() + 1) + "-" 
-			+ curDate.getDate() + " " 
-			+ curDate.getHours() + ":" 
-			+ curDate.getMinutes() + ":" 
-			+ curDate.getSeconds();
-			
-			$('#currenttime').text(curTime);
-			$('#currenttime2').text(curTime);
-		});
-</script>
 </head>
 <body>
-
+	
 	<h1>메인페이지</h1>
 	<div>
 		<p>실시간으로 바뀌면 안되는부분</p>
@@ -53,5 +39,10 @@
 		<p>실시간으로 바뀌면 안되는부분2</p>
 		<p id="currenttime2"></p>
 	</div>
+	<div>
+		${mid }
+	</div>
+
+
 </body>
 </html>
