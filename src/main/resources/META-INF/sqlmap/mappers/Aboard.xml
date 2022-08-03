@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.divvyup.dao.AboardDao">
+	<resultMap type="Aboard" id="AboardResult">
+		<result property="abid" column="abid"/>
+		<result property="aid" column="aid"/>
+		<result property="abtitle" column="abtitle"/>
+		<result property="abcontent" column="abcontent"/>
+		<result property="abdate" column="abdate"/>
+		<result property="abip" column="abip"/>
+		<result property="qbid" column="qbid"/>
+	</resultMap>
+	
+	<insert id="writeAboard" parameterType="Aboard">
+		INSERT INTO ABOARD (ABID, AID, ABTITLE, ABCONTENT, ABIP, QBID)
+    VALUES (ABOARD_SEQ.NEXTVAL, #{aid}, #{abtitle}, #{abcontent}, #{abip}, #{qbid})
+	</insert>
+	
+	<update id="modifyAboard" parameterType="Aboard">
+		UPDATE ABOARD SET ABTITLE=#{abtitle},
+                  ABCONTENT=#{abcontent},
+                  ABIP=#{abip}
+            WHERE ABID=#{abid}
+	</update>
+	
+	<select id="viewAboard" parameterType="Aboard" resultType="Aboard">
+		SELECT * FROM ABOARD WHERE QBID=#{qbid}
+	</select>
+	
+	<delete id="deleteAboard" parameterType="Aboard"> <!-- 우선 임시로 만들어 놓은 답글 삭제 -->
+		DELETE FROM ABOARD WHERE ABID=#{abid}
+	</delete>
+</mapper>

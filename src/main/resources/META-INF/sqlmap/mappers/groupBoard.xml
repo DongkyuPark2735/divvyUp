@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.lec.divvyup.dao.GroupBoardDao">
+	<resultMap type="GroupBoard" id="GroupBoardResupltMap">
+		<result column="gbid" property="gbid"/>
+		<result column="gid" property="gid"/>
+		<result column="mid" property="mid"/>
+		<result column="gbcontent" property="gbcontent"/>
+		<result column="gbfilename" property="gbfilename"/>
+		<result column="gbrdate" property="gbrdate"/>
+	</resultMap>
+	
+	<!-- 그룹게시판 글 입력 -->
+	<insert id="insertGroupboard" parameterType="GroupBoard">
+		INSERT INTO GROUPBOARD(GBID, GID, MID, GBCONTENT, GBFILENAME)
+	    VALUES(GROUPBOARD_SEQ.NEXTVAL, #{gid}, #{mid}, #{gbcontent}, #{gbfilename})
+	</insert>
+	
+	<!-- 그룹게시판 글 삭제 -->
+	<delete id="deleteGroupboard" parameterType="int">
+		DELETE FROM GROUPBOARD WHERE GBID = #{gbid}
+	</delete>
+	
+	<!-- 그룹게시판 글 출력 최근 20개  -->
+	<select id="listLatest20Groupboard" resultMap="GroupBoardResupltMap" parameterType="int"> 
+		SELECT *
+	    FROM(SELECT ROWNUM RN2, GB.* 
+	            FROM (SELECT ROWNUM RN, GROUPBOARD.* 
+	                    FROM GROUPBOARD 
+	                    WHERE GID = #{gid} ORDER BY GBID DESC)GB
+	            ORDER BY RN2 DESC) 
+	    WHERE RN2 BETWEEN 1 AND 20
+	</select>
+	
+	<!-- 그룹게시판 글 불러오기 이전내역 20개  -->
+	<select id="listPast20Groupboard" resultMap="GroupBoardResupltMap" parameterType="GroupBoard"> 
+		SELECT *
+	    FROM(SELECT ROWNUM RN2, GB.* 
+	            FROM (SELECT ROWNUM RN, GROUPBOARD.* 
+	                    FROM GROUPBOARD 
+	                    WHERE GID = #{gid} ORDER BY GBID DESC)GB
+	            ORDER BY RN2 DESC) 
+	    WHERE RN2 BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<!-- 그룹게시판 글 최근글 하나 불러오기 -->
+	<select id="singleLatestGroupboard" resultMap="GroupBoardResupltMap" parameterType="int"> 
+		SELECT * 
+		    FROM (SELECT ROWNUM RN, GB.*
+		            FROM(SELECT * 
+		                    FROM GROUPBOARD  
+		                    WHERE GID = #{gid} ORDER BY GBID DESC) GB)
+		    WHERE RN = 1
+	</select>
+
+	<!-- 그룹게시판 글 mid별 최근글 하나 불러오기 -->
+	<select id="getGroupboardVO" resultMap="GroupBoardResupltMap" parameterType="String">
+		SELECT * 
+		    FROM (SELECT ROWNUM RN, GB.*
+		            FROM(SELECT * 
+		                    FROM GROUPBOARD  
+		                    WHERE MID = #{mid} ORDER BY GBID DESC) GB)
+		    WHERE RN = 1
+	</select>
+
+</mapper>
+

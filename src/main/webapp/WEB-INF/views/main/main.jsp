@@ -23,24 +23,15 @@
 	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-		$(document).ready(function(){
-			var curDate = new Date();
-			var curTime = curDate.getFullYear() + "-" 
-			+ (curDate.getMonth() + 1) + "-" 
-			+ curDate.getDate() + " " 
-			+ curDate.getHours() + ":" 
-			+ curDate.getMinutes() + ":" 
-			+ curDate.getSeconds();
-			
-			$('#currenttime').text(curTime);
-			$('#currenttime2').text(curTime);
-		});
-</script>
 </head>
 <body>
-
+	<button onclick="location='${conPath}/main/logout.do'">LOGOUT</button>
+	<p>${mid }</p>
+	<p>${aid }</p>
 	<h1>메인페이지</h1>
+	<div>
+		<input type="button" value="UNIE" onclick="location.href='${conPath }/main/unieTestMain.do'"/>
+	</div>
 	<div>
 		<p>실시간으로 바뀌면 안되는부분</p>
 		<p id="currenttime"></p>
@@ -53,5 +44,15 @@
 		<p>실시간으로 바뀌면 안되는부분2</p>
 		<p id="currenttime2"></p>
 	</div>
+
+	<c:if test="${empty member and not empty admin }">
+	  <button onclick="location='${conPath}/qboard/listUncheckedQboardForAdmin.do'">처리대기목록</button>
+	</c:if>
+	
+	<div>
+		${mid }
+	</div>
+	
+
 </body>
 </html>
