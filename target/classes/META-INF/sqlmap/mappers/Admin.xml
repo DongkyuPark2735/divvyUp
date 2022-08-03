@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.divvyup.dao.AdminDao">
+	<resultMap type="Admin" id="AdminrResult">
+		<result property="aid" column="aid"/>  
+		<result property="apw" column="apw"/>  
+		<result property="aname" column="aname"/>
+	</resultMap>
+	
+	<select id="getAdmin" parameterType="Admin" resultType="Admin"> <!-- 회원정보 가져오기 -->
+		SELECT * FROM ADMIN WHERE AID=#{aid}
+	</select>
+</mapper>

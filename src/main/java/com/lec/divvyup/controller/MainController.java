@@ -1,6 +1,8 @@
 package com.lec.divvyup.controller;
 
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +19,11 @@ public class MainController {
 		return "main/unieTestMain";
 	}
 	
+	@RequestMapping(value="logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:member/loginForm.do";
+	}
 	
 
 }

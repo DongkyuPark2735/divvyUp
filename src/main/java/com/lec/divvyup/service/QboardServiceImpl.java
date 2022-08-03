@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lec.divvyup.dao.AboardDao;
 import com.lec.divvyup.dao.QboardDao;
 import com.lec.divvyup.util.Paging;
 import com.lec.divvyup.vo.Qboard;
