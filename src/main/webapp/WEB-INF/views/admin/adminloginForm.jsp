@@ -17,29 +17,27 @@
   </script>
 </head>
 <body>
-	<c:if test="${not empty result}">
-		<script>alert('${result}');</script>
+	<c:if test="${not empty adminloginResult}">
+		<script>alert('${adminloginResult}');</script>
 	</c:if>
 	<div>
-	  <form action="${conPath }/member/login.do" method="post">
+	  <form action="${conPath }/admin/adminlogin.do" method="post">
 	    <table>
-	      <caption>LOGIN</caption>
+	      <caption>ALOGIN</caption>
 	      <tr>
 	        <th>ID</th>
-	        <td><input type="text" name="mid" required="required" value="${mid }"></td>
+	        <td><input type="text" name="aid" required="required" value="${aid }"></td>
 	      </tr>
 	      <tr>
 	        <th>PW</th>
-	        <td><input type="password" name="mpw" required="required" value="${mpw }"></td>
+	        <td><input type="password" name="apw" required="required" value="${apw }"></td>
 	      </tr>
 	      <tr>
 	        <td colspan="2">
-	          <input type="submit" value="LOGIN">
-	          <input type="button" value="AMODE" onclick="location='${conPath}/admin/adminloginForm.do'">
+	          <input type="submit" value="ALOGIN"> 
 	        </td>
 	      </tr>
 	    </table>
-	    <button onclick="location='${conPath}/qboard/listQboardForMember.do'">QBOARD</button>
 	  </form>
 	</div>
 </body>

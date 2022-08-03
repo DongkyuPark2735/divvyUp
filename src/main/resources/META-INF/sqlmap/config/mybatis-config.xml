@@ -6,11 +6,16 @@
 	<typeAliases>
 	  <typeAlias type="com.lec.divvyup.vo.Member" alias="Member"/>
 	  <typeAlias type="com.lec.divvyup.vo.Qboard" alias="Qboard"/>
-    <typeAlias type="com.lec.divvyup.vo.GroupBoard" alias="GroupBoard"/>
+      <typeAlias type="com.lec.divvyup.vo.GroupBoard" alias="GroupBoard"/>
+      <typeAlias type="com.lec.divvyup.vo.Aboard" alias="Aboard"/>
+      <typeAlias type="com.lec.divvyup.vo.Admin" alias="Admin"/>
+      
 	</typeAliases>
 	<mappers>
 	  <mapper resource="META-INF/sqlmap/mappers/Member.xml"/>
 	  <mapper resource="META-INF/sqlmap/mappers/Qboard.xml"/>
-    <mapper resource="META-INF/sqlmap/mappers/groupBoard.xml"/>
+      <mapper resource="META-INF/sqlmap/mappers/groupBoard.xml"/>
+	  <mapper resource="META-INF/sqlmap/mappers/Aboard.xml"/>
+	  <mapper resource="META-INF/sqlmap/mappers/Admin.xml"/>
 	</mappers>
 </configuration>

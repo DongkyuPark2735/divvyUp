@@ -25,7 +25,7 @@ public class MemberController {
 	public String login(String mid, String mpw, Model model, HttpSession session) {
 		String result = memberService.loginCheck(mid, mpw, session);
 		if(result.equals("로그인 성공")) {
-			return "../main.do";
+			return "redirect:../main.do";
 		}else {
 			model.addAttribute("mid", mid);
 			model.addAttribute("mpw", mpw);
