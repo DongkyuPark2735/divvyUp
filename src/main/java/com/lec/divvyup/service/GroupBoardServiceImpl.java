@@ -15,12 +15,18 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 	private GroupBoardDao groupBoardDao; 
 	
 	@Override
+<<<<<<< HEAD
 	public GroupBoard insertGroupboard(GroupBoard groupBoard) {
 		GroupBoard gb = new GroupBoard();
 		if(groupBoardDao.insertGroupboard(groupBoard) == 1) {
 			gb = groupBoardDao.getGroupboardVO(groupBoard.getMid());
 		};
 		return gb;
+=======
+	public int insertGroupboard(GroupBoard groupBoard) {
+		// TODO Auto-generated method stub
+		return 0;
+>>>>>>> 1cdd6702cab83b23a214fd9ec8601e97792e39dd
 	}
 
 	@Override
@@ -37,18 +43,27 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 
 	@Override
 	public List<GroupBoard> listPast20Groupboard(GroupBoard groupBoard) {
+<<<<<<< HEAD
 		List<GroupBoard> pastGList = groupBoardDao.listPast20Groupboard(groupBoard);
 		return pastGList;
+=======
+		// TODO Auto-generated method stub
+		return null;
+>>>>>>> 1cdd6702cab83b23a214fd9ec8601e97792e39dd
 	}
 
 	@Override
 	public GroupBoard singleLatestGroupboard(int gid) {
+<<<<<<< HEAD
 		GroupBoard gbBoarad = groupBoardDao.singleLatestGroupboard(gid);
 		return gbBoarad;
 	}
 
 	@Override
 	public GroupBoard getGroupboardVO(String mid) {
+=======
+		// TODO Auto-generated method stub
+>>>>>>> 1cdd6702cab83b23a214fd9ec8601e97792e39dd
 		return null;
 	}
 

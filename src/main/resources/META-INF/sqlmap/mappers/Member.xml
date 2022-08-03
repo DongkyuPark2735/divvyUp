@@ -2,6 +2,10 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 1cdd6702cab83b23a214fd9ec8601e97792e39dd
 <mapper namespace="com.lec.divvyup.dao.MemberDao">
 	<resultMap type="Member" id="MemberResult">
 		<result property="mid" column="mid"/>  

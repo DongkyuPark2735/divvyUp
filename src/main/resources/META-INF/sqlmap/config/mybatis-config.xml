@@ -4,13 +4,49 @@
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
+<<<<<<< HEAD
 	  <typeAlias type="com.lec.divvyup.vo.Member" alias="Member"/>
 	  <typeAlias type="com.lec.divvyup.vo.Qboard" alias="Qboard"/>
     <typeAlias type="com.lec.divvyup.vo.GroupBoard" alias="GroupBoard"/>
+=======
+<<<<<<< HEAD
+	  <typeAlias type="com.lec.divvyup.vo.Member" alias="Member"/>
+	  <typeAlias type="com.lec.divvyup.vo.Qboard" alias="Qboard"/>
+      <typeAlias type="com.lec.divvyup.vo.GroupBoard" alias="GroupBoard"/>
+      <typeAlias type="com.lec.divvyup.vo.Aboard" alias="Aboard"/>
+      <typeAlias type="com.lec.divvyup.vo.Admin" alias="Admin"/>
+      
+>>>>>>> 1cdd6702cab83b23a214fd9ec8601e97792e39dd
 	</typeAliases>
 	<mappers>
 	  <mapper resource="META-INF/sqlmap/mappers/Member.xml"/>
 	  <mapper resource="META-INF/sqlmap/mappers/Qboard.xml"/>
+<<<<<<< HEAD
     <mapper resource="META-INF/sqlmap/mappers/groupBoard.xml"/>
+=======
+      <mapper resource="META-INF/sqlmap/mappers/groupBoard.xml"/>
+	  <mapper resource="META-INF/sqlmap/mappers/Aboard.xml"/>
+	  <mapper resource="META-INF/sqlmap/mappers/Admin.xml"/>
+=======
+		<typeAlias type="com.lec.divvyup.vo.Member" alias="Member"/>
+		<typeAlias type="com.lec.divvyup.vo.Qboard" alias="Qboard"/>
+		<typeAlias type="com.lec.divvyup.vo.GroupBoard" alias="GroupBoard"/>
+		<typeAlias type="com.lec.divvyup.vo.Groups" alias="Groups"/>
+		<typeAlias type="com.lec.divvyup.vo.GroupDetail" alias="GroupDetail"/>
+		<typeAlias type="com.lec.divvyup.vo.Event" alias="Event"/>
+		<typeAlias type="com.lec.divvyup.vo.EventDetail" alias="EventDetail"/>
+		<typeAlias type="com.lec.divvyup.vo.EventHistory" alias="EventHistory"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="META-INF/sqlmap/mappers/Member.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Qboard.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/groupBoard.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Groups.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/GroupDetail.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/Event.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/EventDetail.xml"/>
+		<mapper resource="META-INF/sqlmap/mappers/EventHistory.xml"/>
+>>>>>>> 2e6a79d5471f62917718ddff5c75debf73c1799e
+>>>>>>> 1cdd6702cab83b23a214fd9ec8601e97792e39dd
 	</mappers>
 </configuration>

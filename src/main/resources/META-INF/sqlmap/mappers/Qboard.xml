@@ -18,7 +18,11 @@
     VALUES (QBOARD_SEQ.NEXTVAL, #{mid}, #{qbtitle}, #{qbcontent}, #{qbip})
 	</insert>
 	
+<<<<<<< HEAD
 	<update id="modifyQboard" parameterType="int">
+=======
+	<update id="modifyQboard" parameterType="Qboard">
+>>>>>>> 1cdd6702cab83b23a214fd9ec8601e97792e39dd
 		UPDATE QBOARD SET QBTITLE=#{qbtitle},
                   QBCONTENT=#{qbcontent},
                   QBIP=#{qbip}

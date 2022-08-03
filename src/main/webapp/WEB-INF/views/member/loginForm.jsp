@@ -35,6 +35,7 @@
 	      <tr>
 	        <td colspan="2">
 	          <input type="submit" value="LOGIN">
+<<<<<<< HEAD
 	        </td>
 	      </tr>
 	    </table>
@@ -43,5 +44,14 @@
 	<p>
 		<input type="button" value="임시 그룹게시판 이동 버튼" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=100'">
 	</p>
+=======
+	          <input type="button" value="AMODE" onclick="location='${conPath}/admin/adminloginForm.do'">
+	        </td>
+	      </tr>
+	    </table>
+	    <button onclick="location='${conPath}/qboard/listQboardForMember.do'">QBOARD</button>
+	  </form>
+	</div>
+>>>>>>> 1cdd6702cab83b23a214fd9ec8601e97792e39dd
 </body>
 </html>

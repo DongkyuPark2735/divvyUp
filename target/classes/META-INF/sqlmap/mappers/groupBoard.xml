@@ -55,6 +55,7 @@
 		    WHERE RN = 1
 	</select>
 	
+<<<<<<< HEAD
 	<!-- 그룹게시판 글 mid별 최근글 하나 불러오기 -->
 	<select id="getGroupboardVO" resultMap="GroupBoardResupltMap" parameterType="String">
 		SELECT * 
@@ -64,6 +65,9 @@
 		                    WHERE MID = #{mid} ORDER BY GBID DESC) GB)
 		    WHERE RN = 1
 	</select>
+=======
+	
+>>>>>>> 1cdd6702cab83b23a214fd9ec8601e97792e39dd
 
 </mapper>
 

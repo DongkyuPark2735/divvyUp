@@ -25,8 +25,17 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+<<<<<<< HEAD
 	
+=======
+	<button onclick="location='${conPath}/logout.do'">LOGOUT</button>
+	<p>${mid }</p>
+	<p>${aid }</p>
+>>>>>>> 1cdd6702cab83b23a214fd9ec8601e97792e39dd
 	<h1>메인페이지</h1>
+	<div>
+		<input type="button" value="UNIE" onclick="location.href='${conPath }/main/unieTestMain.do'"/>
+	</div>
 	<div>
 		<p>실시간으로 바뀌면 안되는부분</p>
 		<p id="currenttime"></p>
@@ -39,10 +48,26 @@
 		<p>실시간으로 바뀌면 안되는부분2</p>
 		<p id="currenttime2"></p>
 	</div>
+<<<<<<< HEAD
 	<div>
 		${mid }
 	</div>
 
+=======
+<<<<<<< HEAD
+	<c:if test="${empty member and not empty admin }">
+	  <button onclick="location='${conPath}/qboard/listUncheckedQboardForAdmin.do'">처리대기목록</button>
+	</c:if>
+	
+	
+
+=======
+	<div>
+		${mid }
+	</div>
+	
+>>>>>>> 2e6a79d5471f62917718ddff5c75debf73c1799e
+>>>>>>> 1cdd6702cab83b23a214fd9ec8601e97792e39dd
 
 </body>
 </html>

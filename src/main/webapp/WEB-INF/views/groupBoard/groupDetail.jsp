@@ -16,6 +16,10 @@
 
 div {
 	width: 500px;
+<<<<<<< HEAD
+=======
+	height: 500px;
+>>>>>>> 1cdd6702cab83b23a214fd9ec8601e97792e39dd
 	border: 1px solid black;
 	display: inline-block;
 }
@@ -23,6 +27,7 @@ div {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 		$(document).ready(function(){
+<<<<<<< HEAD
 			/* 타이머 새글 가져오기 */
 			timer = setInterval( function () {
 				console.log('1');
@@ -67,6 +72,28 @@ div {
 				});
 			});
 
+=======
+			 $.ajax({
+       	url : "/groupboard/listPast",
+       	type : "GET",
+       	data : {"startRow" : 21, "endRow":40, "gid":100}, // 검색 키워드
+        success : 
+   	    success: function(data){
+        		   
+   	    },
+   	    error: function (request, status, error){        
+        }
+       
+			 
+			 });
+			
+			
+			
+			
+			
+			
+			
+>>>>>>> 1cdd6702cab83b23a214fd9ec8601e97792e39dd
 			
 			var curDate = new Date();
 			var curTime = curDate.getFullYear() + "-" 
@@ -82,9 +109,12 @@ div {
 </script>
 </head>
 <body>
+<<<<<<< HEAD
 <script >
 	console.log('${pastGrouplist}');
 </script>
+=======
+>>>>>>> 1cdd6702cab83b23a214fd9ec8601e97792e39dd
 
 	<h1>메인페이지</h1>
 	<div>
@@ -95,11 +125,17 @@ div {
 		<p>구분 2</p>
 		<table>
 			<tr>
+<<<<<<< HEAD
 				<td>
 					<input type="button" value="이전글 더보기" id="pastList">
 				</td>
 			</tr>
 						
+=======
+				<td><input type="button" value="이전글 더보기"
+					onclick="location.href='${conPath}/groupboard'"></td>
+			</tr>
+>>>>>>> 1cdd6702cab83b23a214fd9ec8601e97792e39dd
 			<c:if test="${not empty grouplist}">
 				<c:forEach var="glist" items="${grouplist}">
 					<tr>
@@ -111,6 +147,7 @@ div {
 						<td>${glist.gbrdate}</td>
 					</tr>
 				</c:forEach>
+<<<<<<< HEAD
 					<tr id="singleLatestGroupboardResult">
 					</tr>
 					<tr id="insertGroupBoardResult">
@@ -133,6 +170,13 @@ div {
 					</td>
 				</tr>		
 			</table>
+=======
+			</c:if>
+		</table>
+
+
+
+>>>>>>> 1cdd6702cab83b23a214fd9ec8601e97792e39dd
 	</div>
 	<div>
 		<p>실시간으로 바뀌면 안되는부분2</p>

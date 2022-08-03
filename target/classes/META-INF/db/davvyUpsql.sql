@@ -100,6 +100,18 @@ SELECT *
 -- 대화글 하나 가져오기? //주기적으로 대화 최신화 
 -- 대화글 리스트로 받아서 기존글 ID와 비교 ?
 SELECT * FROM GROUPBOARD WHERE GID = 100 ORDER BY GBID DESC;
+<<<<<<< HEAD
+=======
+
+SELECT * 
+    FROM (SELECT ROWNUM RN, GB.*
+            FROM(SELECT * 
+                    FROM GROUPBOARD  
+                    WHERE GID = 100 ORDER BY GBID DESC) GB)
+    WHERE RN = 1;
+     
+-- 그룹별 총 글 갯수 
+>>>>>>> 1cdd6702cab83b23a214fd9ec8601e97792e39dd
 
 SELECT * 
     FROM (SELECT ROWNUM RN, GB.*
