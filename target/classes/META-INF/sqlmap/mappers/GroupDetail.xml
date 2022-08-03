@@ -18,11 +18,12 @@
 	</insert>
 	
 	<!-- STEP 3 OF ADDING EVENT : 새 이벤트 진행시, GROUPDETAIL에 멤버 정보를 업데이트 해준다 -->
-	<update id="updateGroupDetail" parameterType="GroupDetail">
-		UPDATE GROUPDETAIL 
-        	SET GDBALANCE = GDBALANCE + (SELECT EDSHARE FROM EVENTDETAIL WHERE MID= #{mid} AND EID= #{eid})
-        	WHERE MID={mid}
+	<update id="updateGroupDetail">
+		UPDATE GROUPDETAIL GD
+  		SET GDBALANCE = GDBALANCE + (SELECT EDSHARE FROM EVENTDETAIL ED WHERE ED.MID = GD.MID)
 	</update>
+	
+	
 	<select id="groupDetailList" resultType="GroupDetail" parameterType="int">
 		SELECT * FROM GROUPDETAIL WHERE GID=#{gid}
 	</select>

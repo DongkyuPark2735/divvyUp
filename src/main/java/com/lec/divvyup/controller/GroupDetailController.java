@@ -26,4 +26,5 @@ public class GroupDetailController {
 		model.addAttribute("groupDetailList", groupDetailService.groupDetailList(gid));
 		return "groupDetail/groupDetailList";
 	}
+	
 }
