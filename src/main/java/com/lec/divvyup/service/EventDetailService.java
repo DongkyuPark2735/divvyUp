@@ -13,5 +13,7 @@ import com.lec.divvyup.vo.EventDetail;
 
 public interface EventDetailService {
 	public int insertEventDetail(String[] mids);
+	public int insertEventDetailPayer(String mid);
 	public List<Event> printMidList(int gid);
+	public int deleteEventDetail();
 }

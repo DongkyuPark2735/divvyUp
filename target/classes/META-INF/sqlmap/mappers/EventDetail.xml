@@ -13,23 +13,28 @@
 	
 	
 	<!-- 이벤트에 정보 추가 추가 (자기가 냈을때) -->
-	<insert id="insertEventDetailPayer" parameterType="EventDetail">
+	<insert id="insertEventDetailPayer" parameterType="String">
+	<![CDATA[
 		INSERT INTO EVENTDETAIL (EDID, EID, MID, EDSHARE)
-    		VALUES (EVENTDETAIL_SEQ.NEXTVAL, #{eid}, #{mid}, ((SELECT EAMOUNT FROM EVENT WHERE EID=#{eid})/(SELECT ECOUNT FROM EVENT WHERE EID=#{eid})))
+    		VALUES (EVENTDETAIL_SEQ.NEXTVAL, (SELECT MAX(EID) FROM EVENT), #{mid}, ((SELECT EAMOUNT FROM EVENT WHERE EID=(SELECT MAX(EID) FROM EVENT))/(SELECT ECOUNT FROM EVENT WHERE EID=(SELECT MAX(EID) FROM EVENT))))
+    		]]>
     </insert>
+	
 	
 	<!-- 이벤트에 정보 추가 추가 (자기가 안냈을때) -->
 	<insert id="insertEventDetail" parameterType="String">
 		<![CDATA[
 		INSERT INTO EVENTDETAIL (EDID, EID, MID, EDSHARE)
-    		VALUES (EVENTDETAIL_SEQ.NEXTVAL, (SELECT MAX(EID) FROM EVENT),'bbb', -1*((SELECT EAMOUNT FROM EVENT WHERE EID=(SELECT MAX(EID) FROM EVENT))/(SELECT ECOUNT FROM EVENT WHERE EID=(SELECT MAX(EID) FROM EVENT))))
+    		VALUES (EVENTDETAIL_SEQ.NEXTVAL, (SELECT MAX(EID) FROM EVENT), #{mid}, -1*((SELECT EAMOUNT FROM EVENT WHERE EID=(SELECT MAX(EID) FROM EVENT))/(SELECT ECOUNT FROM EVENT WHERE EID=(SELECT MAX(EID) FROM EVENT))))
     	]]>
 	</insert>
 
-	<delete id="deleteEventDetail" parameterType="EventDetail">
-		   DELETE FROM EVENTDETAIL WHERE EID=#{eid}
+	<delete id="deleteEventDetail">
+		   DELETE FROM EVENTDETAIL WHERE EID=(SELECT MAX(EID) FROM EVENT)
 	</delete>
 	<select id="printMidList" parameterType="int" resultMap="EventDetailResult">
 		SELECT M.MID FROM MEMBER M, GROUPDETAIL GD, GROUPS G WHERE M.MID=GD.MID AND G.MID != GD.MID AND GD.GID=G.GID AND GD.GID=#{gid}
 	</select>
+
+	
 </mapper>

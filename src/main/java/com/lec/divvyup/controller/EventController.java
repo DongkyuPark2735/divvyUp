@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.lec.divvyup.service.EventDetailService;
+import com.lec.divvyup.service.EventHistoryService;
 import com.lec.divvyup.service.EventService;
+import com.lec.divvyup.service.GroupDetailService;
 import com.lec.divvyup.vo.Event;
 import com.lec.divvyup.vo.EventDetail;
 
@@ -24,6 +26,10 @@ public class EventController {
 	private EventService eventService;
 	@Autowired
 	private EventDetailService eventDetailService;
+	@Autowired
+	private GroupDetailService groupDetailService;
+	@Autowired
+	private EventHistoryService eventHistoryService;
 	
 	@RequestMapping(value="insertEventForm", method = RequestMethod.GET)
 	public String insertEventForm(Model model, int gid) {
@@ -32,10 +38,15 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="insertEvent", method=RequestMethod.POST)
-	public String insertEvent(MultipartHttpServletRequest mRequest, @ModelAttribute("eDto") Event event, String[] mids, Model model) {
-		model.addAttribute("insertEvent", eventService.insertEvent(event, mRequest));
-		eventDetailService.insertEventDetail(mids);
-		return "event/eventList";
+	public String insertEvent(MultipartHttpServletRequest mRequest, @ModelAttribute("eDto") Event event, String[] mids, String mid, Model model) {
+		model.addAttribute("insertEvent", eventService.insertEvent(event, mRequest)); // STEP A : 새 이벤트 추가
+		eventDetailService.insertEventDetail(mids); // STEP B1 : 돈 안낸사람들 이벤트 정보 추가
+		eventDetailService.insertEventDetailPayer(mid); // STEP B2 :돈 낸사람들 이벤트 정보 추가
+		groupDetailService.updateGroupDetail(); //STEP C : 그룹 디테일에 현이벤트 관련 지출정보 업데이트
+		eventHistoryService.insertEventHistory(); //STEP D :지출 내역에 정보 추가
+		eventDetailService.deleteEventDetail(); //STEP E : 이벤트 디테일 (장바구니) 비움
+		/* return "event/eventList"; */
+		return "main/main";
 	}
 	
 	@RequestMapping(value="eventList", method={RequestMethod.GET, RequestMethod.POST})
@@ -43,8 +54,5 @@ public class EventController {
 		model.addAttribute("eventList", eventService.eventList(gid));
 		return "event/eventList";
 	}
-	
-	
-	
 	
 }

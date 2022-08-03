@@ -6,7 +6,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+	<title></title>
+	<script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
+	<script>
+	   $(document).ready(function(){
+		   var numberOfChecked = 1;
+		   $('.mids').click(function() {
+			   numberOfChecked = $('input:checkbox:checked').length;
+				$('#msg').html(numberOfChecked+1)
+			});
+	   });
+	</script>
+	
+	
 	<meta charset="UTF-8">
 </head>
 <body>
@@ -25,12 +37,13 @@
 			<td>
     			<c:forEach items="${printMidList }" var="mids" >
     				<div>
-    					<input type="checkbox" id="${mids.mid }" name="mids" value="${mids.mid }">
+    					<input type="checkbox" id="${mids.mid }" class="mids" name="mids" value="${mids.mid }">
    					  	<label for="${mids.mid }">${mids.mid }</label>
      				</div>	
 				</c:forEach>
 			</td></tr>
-			<tr><td>ecount</td><td><input type="number" name="ecount"  required="required"></td></tr>
+			<tr><td>ecount<div id="msg" name="ecount" >1</div></td></tr>
+			<tr><td>ecount</td><td><input type="number" name="ecount" id="msg" value= "<div id='msg' name="ecount" >1</div>" required="required"></td></tr>
 			<tr><td>이벤트 생성자</td><td><input type="text" name="mid"  value="${member.mid }" readonly="readonly"></td></tr>
 			<tr><td colspan="2"><input type="submit" value="가입"></td></tr>
 		</table>

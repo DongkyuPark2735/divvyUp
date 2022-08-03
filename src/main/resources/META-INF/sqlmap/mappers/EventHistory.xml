@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="com.lec.divvyup.dao.EventHistoryDao">
-	<resultMap type="EventHistory" id="EventHistorykResult">
+	<resultMap type="EventHistory" id="EventHistoryResult">
 		<result property="edid" column="edid"/>
 		<result property="eid" column="eid"/>
 		<result property="mid" column="mid"/>
@@ -16,7 +16,7 @@
 		    (SELECT  EVENTHISTORY_SEQ.NEXTVAL, E.EID, ED.MID, ED.EDSHARE, E.ERDATE, E.ENAME
 		    FROM EVENTDETAIL ED, EVENT E
 		    WHERE E.EID=ED.EID
-		    AND E.EID=#{eid})
+		    AND E.EID=(SELECT MAX(EID) FROM EVENT))
 	</insert>
 	
 

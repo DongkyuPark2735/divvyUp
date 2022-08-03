@@ -31,11 +31,19 @@ public class EventDetailServiceImpl implements EventDetailService {
 			 }
 		return 1;
 	}
+	@Override
+	public int insertEventDetailPayer(String mid) {
+		return eventDetailDao.insertEventDetailPayer(mid); 
+	}
 	
 	@Override
 	public List<Event> printMidList(int gid) {
 		return eventDetailDao.printMidList(gid);
 	}
-
+	@Override
+	public int deleteEventDetail() {
+		return eventDetailDao.deleteEventDetail();
 	}
+
+}
 

@@ -14,5 +14,7 @@ import com.lec.divvyup.vo.EventDetail;
 @Mapper
 public interface EventDetailDao {
 	public int insertEventDetail(String mid);
+	public int insertEventDetailPayer(String mid);
 	public List<Event> printMidList(int gid);
+	public int deleteEventDetail();
 }

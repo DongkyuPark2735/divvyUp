@@ -16,16 +16,13 @@ private GroupDetailDao groupDetailDao;
 	public int insertGroupDetail(GroupDetail groupDetail) {
 		return groupDetailDao.insertGroupDetail(groupDetail);
 	}
-
-	@Override
-	public int updateGroupDetail(GroupDetail groupDetail) {
-		return groupDetailDao.updateGroupDetail(groupDetail);
-	}
-
 	@Override
 	public List<GroupDetail> groupDetailList(int gid) {
 		return groupDetailDao.groupDetailList(gid);
 	}
-
+	@Override
+	public int updateGroupDetail() {
+		return groupDetailDao.updateGroupDetail();
+	}
 
 }
