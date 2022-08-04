@@ -1,0 +1,69 @@
+-- groupBoaard DummyData
+INSERT INTO GROUPBOARD(GBID, GID, MID, GBCONTENT, GBFILENAME)
+    VALUES(GROUPBOARD_SEQ.NEXTVAL, 1, 'aaa', '대화1', NULL);
+    
+INSERT INTO GROUPBOARD(GBID, GID, MID, GBCONTENT, GBFILENAME)
+    VALUES(GROUPBOARD_SEQ.NEXTVAL, 1, 'bbb', '대화2', NULL);
+        
+INSERT INTO GROUPBOARD(GBID, GID, MID, GBCONTENT, GBFILENAME)
+    VALUES(GROUPBOARD_SEQ.NEXTVAL, 1, 'ccc', '대화3', NULL);
+            
+INSERT INTO GROUPBOARD(GBID, GID, MID, GBCONTENT, GBFILENAME)
+    VALUES(GROUPBOARD_SEQ.NEXTVAL, 1, 'ddd', '대화4', NULL);
+      
+INSERT INTO GROUPBOARD(GBID, GID, MID, GBCONTENT, GBFILENAME)
+    VALUES(GROUPBOARD_SEQ.NEXTVAL, 2, 'hayoon200', '대화4', NULL);
+                  
+SELECT * FROM GROUPS;                  
+SELECT * FROM GROUPDETAIL; 
+
+SELECT * FROM GROUPBOARD; 
+SELECT * FROM MEMBER;
+
+
+-- GroupBoard
+-- 대화 입력 
+INSERT INTO GROUPBOARD(GBID, GID, MID, GBCONTENT, GBFILENAME)
+    VALUES(GROUPBOARD_SEQ.NEXTVAL, 100, 'QER2735', '대화1', NULL);
+
+-- 대화 삭제 
+DELETE FROM GROUPBOARD WHERE GBID = 37;
+
+-- 그룹별 대화 내역 출력(최근 10개 최근게시글 아래로)
+SELECT *
+    FROM(SELECT ROWNUM RN2, GB.* 
+            FROM (SELECT ROWNUM RN, GROUPBOARD.* 
+                    FROM GROUPBOARD 
+                    WHERE GID = 100 ORDER BY GBID DESC)GB
+            ORDER BY RN2 DESC) 
+    WHERE RN2 BETWEEN 1 AND 10;
+
+-- 그룹별 과거 대화내역 가져오기 10개씩 
+-- SERVICE단에서 RN2 BETWEEN 11 AND 20 수정하여 받음 
+-- 클릭할때마다? SESSION값에 과거보기 1 추가
+SELECT *
+    FROM(SELECT ROWNUM RN2, GB.* 
+            FROM (SELECT ROWNUM RN, GROUPBOARD.* 
+                    FROM GROUPBOARD 
+                    WHERE GID = 100 ORDER BY GBID DESC)GB
+            ORDER BY RN2 DESC) 
+    WHERE RN2 BETWEEN 11 AND 20;
+
+-- 대화글 하나 가져오기? //주기적으로 대화 최신화 
+-- 대화글 리스트로 받아서 기존글 ID와 비교 ?
+SELECT * FROM GROUPBOARD WHERE GID = 100 ORDER BY GBID DESC;
+
+commit;
+
+-- 입력한 대화글 하나 가져오기 dto
+SELECT * FROM GROUPBOARD WHERE GBID = 192;
+-- mid 별 입력한 최신글 가져오기
+SELECT * FROM GROUPBOARD WHERE MID = 'aaa' ORDER BY GBID DESC; 
+
+		SELECT * 
+		    FROM (SELECT ROWNUM RN, GB.*
+		            FROM(SELECT * 
+		                    FROM GROUPBOARD  
+		                    WHERE mid='aaa' ORDER BY GBID DESC) GB)
+		    WHERE RN = 1;
+commit;

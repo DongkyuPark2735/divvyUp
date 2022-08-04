@@ -18,7 +18,7 @@
 	<mappers>
 		<mapper resource="META-INF/sqlmap/mappers/Member.xml" />
 		<mapper resource="META-INF/sqlmap/mappers/Qboard.xml" />
-		<mapper resource="META-INF/sqlmap/mappers/groupBoard.xml" />
+		<mapper resource="META-INF/sqlmap/mappers/GroupBoard.xml" />
 		<mapper resource="META-INF/sqlmap/mappers/Aboard.xml" />
 		<mapper resource="META-INF/sqlmap/mappers/Admin.xml" />
 		<mapper resource="META-INF/sqlmap/mappers/Groups.xml" />
