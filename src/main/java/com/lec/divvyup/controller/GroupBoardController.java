@@ -20,7 +20,7 @@ public class GroupBoardController {
 	@RequestMapping(value = "groupDetil")
 	public String listLatest20Groupboard(int gid, Model model) {
 		model.addAttribute("grouplist", groupBoardService.listLatest20Groupboard(gid)); 
-		return "groupBoard/groupDetail";
+		return "groupBoard/groupDetgit ail";
 	}
 
 	@RequestMapping(value = "pastGroupBoardList", method = RequestMethod.GET)
