@@ -12,6 +12,6 @@ public class GroupDetail {
 	private int gdid;
 	private int gid;
 	private String mid;
-	private int gdbalancce;
+	private int gdbalance;
 	private Date gdrdate;
 }

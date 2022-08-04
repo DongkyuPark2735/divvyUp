@@ -8,7 +8,7 @@ import com.lec.divvyup.vo.GroupBoard;
 
 @Mapper
 public interface GroupBoardDao {
-	public int insertGroupboard(GroupBoard groupBoard);
+	public void insertGroupboard(GroupBoard groupBoard);
 	public int deleteGroupboard(int gbid);
 	public List<GroupBoard> listLatest20Groupboard(int gid);
 	public List<GroupBoard> listPast20Groupboard(GroupBoard groupBoard);
