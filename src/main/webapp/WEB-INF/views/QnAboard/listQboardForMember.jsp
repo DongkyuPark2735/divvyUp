@@ -16,13 +16,16 @@
 			var qbid = Number($(this).children().eq(1).text());
 			if(!isNaN(qbid)) {
 				/* alert(qbid); */
- 				location.href='${conPath}/qboard/viewQboard.do?qbid='+qbid+'&pageNum=${pageNum}';
+ 				location.href='${conPath}/qboard/viewQboard.do?qbid='+qbid+'&pageNum=${paging.currentPage}';
 			}
 		});
      });
   </script>
 </head>
 <body>
+	<c:if test="${not empty writeQboardResult }">
+	  <script>alert('문의글 작성 성공');</script>
+	</c:if>
 	<c:set var="iNum" value="${paging.totCnt - paging.startRow + 1 }"/>
 	<table>
 	  <tr>
@@ -75,6 +78,14 @@
 			[ <a href="${conPath }/qboard/listQboardForMember.do?pageNum=${paging.endPage+1}">다음</a> ]
 		</c:if>
 	</div>
-	<button onclick="location='${conPath}/member/loginForm.do'">LOGIN</button>
+	<c:if test="${empty member and empty admin }">
+	  <button onclick="location='${conPath}/member/loginForm.do'">LOGIN</button>
+	</c:if>
+	<c:if test="${not empty member or not empty admin }">
+	  <button onclick="location='${conPath}/main.do'">MAIN</button>
+	</c:if>
+	<c:if test="${not empty member and empty admin }">
+	  <button onclick="location='${conPath}/qboard/writeQboardForm.do?pageNum=${paging.currentPage }'">WRITE_QBOARD</button>
+	</c:if>
 </body>
 </html>

@@ -16,13 +16,16 @@
  			var qbid = Number($(this).children().eq(1).text());
  			if(!isNaN(qbid)) {
  				/* alert(qbid); */
-  				location.href='${conPath}/qboard/viewQboard.do?qbid='+qbid+'&pageNum=${pageNum}';
+  				location.href='${conPath}/qboard/viewQboard.do?qbid='+qbid+'&pageNum=${paging.currentPage}';
  			}
  		});
      });
   </script>
 </head>
 <body>
+	<c:if test="${not empty writeAboardResult}">
+		<script>alert('답변글 작성 성공');</script>
+	</c:if>
 	<c:set var="iNum" value="${paging.totCnt - paging.startRow + 1 }"/>
 	<table>
 	  <tr onclick="trclicked(${qboard.qbid})">
@@ -61,19 +64,22 @@
 	</table>
 	<div class="paging">
 		<c:if test="${paging.startPage > paging.blockSize }">
-			[ <a href="${conPath }/qboard/listQboardForMember.do?pageNum=${paging.startPage-1}">이전</a> ]
+			[ <a href="${conPath }/qboard/listUncheckedQboardForAdmin.do?pageNum=${paging.startPage-1}">이전</a> ]
 		</c:if>
 		<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
 			<c:if test="${i eq paging.currentPage }">
 				[ <b> ${i } </b> ]
 			</c:if>
 			<c:if test="${i != paging.currentPage }">
-				[ <a href="${conPath }/qboard/listQboardForMember.do?pageNum=${i}">${i }</a> ]
+				[ <a href="${conPath }/qboard/listUncheckedQboardForAdmin.do?pageNum=${i}">${i }</a> ]
 			</c:if>
 		</c:forEach>
 		<c:if test="${paging.endPage < paging.pageCnt }">
-			[ <a href="${conPath }/qboard/listQboardForMember.do?pageNum=${paging.endPage+1}">다음</a> ]
+			[ <a href="${conPath }/qboard/listUncheckedQboardForAdmin.do?pageNum=${paging.endPage+1}">다음</a> ]
 		</c:if>
 	</div>
+	<c:if test="${empty member and not empty admin }">
+	  <button onclick="location='${conPath}/main.do'">MAIN</button>
+	</c:if>
 </body>
 </html>

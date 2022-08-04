@@ -53,18 +53,19 @@ public class QboardServiceImpl implements QboardService {
 	}
 
 	@Override
-	public List<Qboard> listQboardForMe(String pageNum) {
+	public List<Qboard> listQboardForMe(String mid, String pageNum) {
 		// TODO Auto-generated method stub
-		Paging paging = new Paging(qboardDao.getQboardTotCntForMe(), pageNum);
+		Paging paging = new Paging(qboardDao.getQboardTotCntForMe(mid), pageNum);
 		qboard.setStartRow(paging.getStartRow());
 		qboard.setEndRow(paging.getEndRow());
+		qboard.setMid(mid);
 		return qboardDao.listQboardForMe(qboard);
 	}
 
 	@Override
-	public int getQboardTotCntForMe() {
+	public int getQboardTotCntForMe(String mid) {
 		// TODO Auto-generated method stub
-		return qboardDao.getQboardTotCntForMe();
+		return qboardDao.getQboardTotCntForMe(mid);
 	}
 
 	@Override

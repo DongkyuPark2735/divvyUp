@@ -23,8 +23,8 @@
   </script>
 </head>
 <body>
-	<c:if test="${not empty modifyAboardResult}">
-		<script>alert('답변글 수정 성공');</script>
+	<c:if test="${not empty modifyQboardResult}">
+		<script>alert('문의글 수정 성공');</script>
 	</c:if>
 	<c:set var="iNum" value="${paging.totCnt - paging.startRow + 1 }"/>
 	<table>
@@ -38,11 +38,11 @@
 	  </tr>
 	  <c:if test="${totCnt eq 0}">
 	    <tr>
-	      <th colspan="6">처리할 문의글이 없습니다</th>
+	      <th colspan="6">작성한 문의글이 없습니다</th>
 	    </tr>
 	  </c:if>
 	  <c:if test="${totCnt != 0 }">
-	    <c:forEach items="${listUncheckedQboardForAdmin }" var="qboard">
+	    <c:forEach items="${listQboardForMe }" var="qboard">
 	      <tr onclick="trclicked(${qboard.qbid})">
 	      	<td>${iNum }</td>
 	        <td>${qboard.qbid }</td>
@@ -64,22 +64,20 @@
 	</table>
 	<div class="paging">
 		<c:if test="${paging.startPage > paging.blockSize }">
-			[ <a href="${conPath }/qboard/listCheckedQboardForAdmin.do?pageNum=${paging.startPage-1}">이전</a> ]
+			[ <a href="${conPath }/qboard/listQboardForMe.do?pageNum=${paging.startPage-1}">이전</a> ]
 		</c:if>
 		<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
 			<c:if test="${i eq paging.currentPage }">
 				[ <b> ${i } </b> ]
 			</c:if>
 			<c:if test="${i != paging.currentPage }">
-				[ <a href="${conPath }/qboard/listCheckedQboardForAdmin.do?pageNum=${i}">${i }</a> ]
+				[ <a href="${conPath }/qboard/listQboardForMe.do?pageNum=${i}">${i }</a> ]
 			</c:if>
 		</c:forEach>
 		<c:if test="${paging.endPage < paging.pageCnt }">
-			[ <a href="${conPath }/qboard/listCheckedQboardForAdmin.do?pageNum=${paging.endPage+1}">다음</a> ]
+			[ <a href="${conPath }/qboard/listQboardForMe.do?pageNum=${paging.endPage+1}">다음</a> ]
 		</c:if>
 	</div>
-	<c:if test="${empty member and not empty admin }">
-	  <button onclick="location='${conPath}/main.do'">MAIN</button>
-	</c:if>
+	<button onclick="location='${conPath}/main.do'">MAIN</button>
 </body>
 </html>
