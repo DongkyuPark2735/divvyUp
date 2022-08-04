@@ -28,6 +28,7 @@
 	   			VALUES (EVENT_SEQ.NEXTVAL, #{ename}, #{econtent}, #{eimage}, #{eamount}, #{eaddress}, #{ecount}, #{mid}, #{gid})
 		</if>
 	</insert>
+	
 	<select id="eventList" resultMap="EventResult" parameterType="int">
 		SELECT * FROM EVENT WHERE GID = #{gid} ORDER BY erdate DESC
 	</select>

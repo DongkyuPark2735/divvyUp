@@ -24,7 +24,8 @@
 			<tr><td>group summary : ${groupInfo.gcontent }</td></tr>
 			<tr><td>group leader : ${groupInfo.mid }</td></tr>
 			<tr><td><input type="button" value="이벤트 목록" onclick="location='${conPath }/event/eventList.do?gid=${groupInfo.gid }'"></td></tr>
-			<tr><td><input type="button" value="이벤트 추기" onclick="location='${conPath }/event/insertEventForm.do?gid=${groupInfo.gid }'"></td></tr>
+			<tr><td><input type="button" value="이벤트 추가" onclick="location='${conPath }/event/selectEventType.do?gid=${groupInfo.gid }'"></td></tr>
+			<tr><td><input type="button" value="이벤트 추가" onclick="location='${conPath }/event/insertEventForm.do?gid=${groupInfo.gid }'"></td></tr>
 	</table>	
 	
 </body>
