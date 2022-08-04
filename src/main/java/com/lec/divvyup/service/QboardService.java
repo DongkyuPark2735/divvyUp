@@ -12,8 +12,8 @@ public interface QboardService {
 	public Qboard viewQboard(int qbid);
 	public List<Qboard> listQboardForMember(String pageNum);
 	public int getQboardTotCntForMember();
-	public List<Qboard> listQboardForMe(String pageNum);
-	public int getQboardTotCntForMe();
+	public List<Qboard> listQboardForMe(String mid, String pageNum);
+	public int getQboardTotCntForMe(String mid);
 	public List<Qboard> listUncheckedQboardForAdmin(String pageNum);
 	public int getUncheckedQboardTotCntForAdmin();
 	public List<Qboard> listCheckedQboardForAdmin(String pageNum);

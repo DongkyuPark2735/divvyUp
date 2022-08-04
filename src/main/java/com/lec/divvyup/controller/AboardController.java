@@ -29,6 +29,19 @@ public class AboardController {
 	@RequestMapping(value="writeAboard", method=RequestMethod.POST)
 	public String writeAboard(Aboard aboard, HttpServletRequest request, Model model) {
 		model.addAttribute("writeAboardResult", aboardService.writeAboard(aboard, request));
-		return "redirect:../QnAboard/viewQboard";
+		return "forward:/qboard/listUncheckedQboardForAdmin.do";
+	}
+	
+	@RequestMapping(value="modifyAboardForm", method=RequestMethod.GET)
+	public String modifyAboardForm(int qbid, int abid, Model model) {
+		model.addAttribute("qboard", qboardService.viewQboard(qbid));
+		model.addAttribute("aboard", aboardService.viewAboard(qbid));
+		return "QnAboard/modfiyAboardForm";
+	}
+	
+	@RequestMapping(value="modifyAboard", method=RequestMethod.POST)
+	public String modifyAboard(Aboard aboard, HttpServletRequest request, Model model) {
+		model.addAttribute("modifyAboardResult", aboardService.modifyAboard(aboard, request));
+		return "forward:/qboard/listCheckedQboardForAdmin.do";
 	}
 }
