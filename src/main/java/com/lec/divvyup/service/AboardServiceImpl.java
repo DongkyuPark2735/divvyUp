@@ -27,7 +27,9 @@ public class AboardServiceImpl implements AboardService {
 	public int modifyAboard(Aboard aboard, HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		aboard.setAbip(request.getRemoteAddr());
-		return aboardDao.modifyAboard(aboard);
+		int result = aboardDao.modifyAboard(aboard);
+		System.out.println(result==1 ? "성공"+aboard:"실패:"+aboard);
+		return result;
 	}
 
 	@Override

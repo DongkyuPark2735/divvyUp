@@ -46,8 +46,8 @@
         WHERE RN BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
-	<select id="getQboardTotCntForMe" parameterType="Qboard" resultType="int">
-		SELECT COUNT(*) FROM QBOARD WHERE MID=#{mid}
+	<select id="getQboardTotCntForMe" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM QBOARD WHERE MID=#{mid, jdbcType=VARCHAR}
 	</select>
 	
 	<select id="listUncheckedQboardForAdmin" parameterType="Qboard" resultMap="QboardResult">

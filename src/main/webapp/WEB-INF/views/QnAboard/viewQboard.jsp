@@ -22,6 +22,9 @@
   </script>
 </head>
 <body>
+	<c:if test="${not empty modifyQboardResult }">
+	  <script>alert('문의글 수정 성공');</script>
+	</c:if>
 	<div>
 	  <table>
 	    <tr>
@@ -52,11 +55,8 @@
 	  ${qboard.qbcontent }
 	  </div>
 	</div>
-	<div></div>
-	<c:if test="${not empty admin and empty member and (qboard.qbreplycheck == 0) }">
-	  <div>
-	    <button onclick="location='${conPath}/aboard/writeAboardForm.do?qbid=${qboard.qbid }'">답변처리</button>
-	  </div>
+	<c:if test="${not empty member and empty admin and (qboard.qbreplycheck eq 0) and (qboard.mid eq mid)}">
+	  <button onclick="location='${conPath}/qboard/modifyQboardForm.do?qbid=${qboard.qbid}&pageNum=${param.pageNum}'">MODIFY_QBOARD</button>
 	</c:if>
 	<c:if test="${not empty aboard }">
 	<div>
@@ -81,9 +81,28 @@
 	  <div>
 	  ${aboard.abcontent }
 	  </div>
-	  
-	  
 	</div>
+	</c:if>
+	
+	<c:if test="${empty admin }">
+		<button onclick="location='${conPath}/qboard/listQboardForMember.do?pageNum=${param.pageNum }'">LIST</button>
+	</c:if>
+	
+	<c:if test="${not empty member and empty admin }">
+		<button onclick="location='${conPath}/qboard/listQboardForMe.do?mid=${mid }'">MYLIST</button>
+	</c:if>
+	
+	<c:if test="${not empty admin and empty member and (qboard.qbreplycheck == 0) }">
+	  <div>
+	    <button onclick="location='${conPath}/aboard/writeAboardForm.do?qbid=${qboard.qbid }&pageNum=${param.pageNum }'">답변처리폼</button>
+	    <button onclick="location='${conPath}/qboard/listUncheckedQboardForAdmin.do?pageNum=${param.pageNum }'">UNCHECKED_LIST</button>
+	  </div>
+	</c:if>
+	<c:if test="${not empty admin and empty member and (qboard.qbreplycheck == 1) }">
+	  <div>
+	    <button onclick="location='${conPath}/aboard/modifyAboardForm.do?qbid=${qboard.qbid }&abid=${aboard.abid }&pageNum=${param.pageNum }'">답변수정폼</button>
+	    <button onclick="location='${conPath}/qboard/listCheckedQboardForAdmin.do?pageNum=${param.pageNum }'">CHECKED_LIST</button>
+	  </div>
 	</c:if>
 </body>
 </html>

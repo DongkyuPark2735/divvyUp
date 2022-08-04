@@ -21,7 +21,8 @@
 	<update id="modifyAboard" parameterType="Aboard">
 		UPDATE ABOARD SET ABTITLE=#{abtitle},
                   ABCONTENT=#{abcontent},
-                  ABIP=#{abip}
+                  ABIP=#{abip},
+                  AID=#{aid}
             WHERE ABID=#{abid}
 	</update>
 	

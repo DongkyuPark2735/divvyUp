@@ -9,14 +9,6 @@
   <meta charset="UTF-8">
   <title>Insert title here</title>
   <link href="${conPath }/css/style.css" rel="stylesheet">
-  <style>
-  	th {
-  		border: 1px solid red;
-  	}
-    td {
-    	border: 1px solid red;
-    }
-  </style>
   <script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
   <script>
      $(document).ready(function(){
@@ -54,32 +46,33 @@
 	  <div>
 	  ${qboard.qbcontent }
 	  </div>
-	</div>
-	<div></div>
-	<div>
-	  <form action="${conPath }/aboard/writeAboard.do" method="post">
-	    <input type="hidden" name="pageNum" value="${param.pageNum }">
-	    <table> <!-- 폼태그 안에 감싸야된다! -->
-	      <tr>
-	        <th colspan="2">제 목<th>
-	        <td colspan="3"><input type="text" name="abtitle"></td>
-	      </tr>
-	      <tr>
-	        <th>작성자</th>
-	        <td><input type="text" name="aid" value="${aid }" readonly="readonly"></td>
-	        <th>해당글</th>
-	        <td><input type="number" name="qbid" value="${qboard.qbid }" readonly="readonly"></td>
-	      </tr>
-	      <tr>
-	        <td colspan="4"><textarea rows="5" cols="20" name="abcontent"></textarea></td>
-	      </tr>
-	      <tr>
-	        <td colspan="4">
-	          <input type="submit" value="작성">
-	        </td>
-	      </tr>
-	    </table>
-	  </form>
-	</div>
+	  
+	  <div>
+	    <form action="${conPath }/aboard/modifyAboard.do" method="post">
+	      <input type="hidden" name="abid" value="${aboard.abid }">
+	      <input type="hidden" name="aid" value="${aid }">
+	      <table>
+	        <tr>
+	          <th>제 목<th>
+	          <td colspan="3"><input type="text" name="abtitle" value="${aboard.abtitle }"></td>
+	        </tr>
+	        <tr>
+	          <th>작성자</th>
+	          <td>${aboard.aid }</td>
+	          <th>해당글</th>
+	          <td>${qboard.qbid }</td>
+	        </tr>
+	        <tr>
+	          <td colspan="4"><textarea rows="5" cols="20" name="abcontent">${aboard.abcontent }</textarea></td>
+	        </tr>
+	        <tr>
+	          <td colspan="4">
+	            <input type="submit" value="작성">
+	          </td>
+	        </tr>
+	      </table>
+	    </form>
+	  </div>
+	</div>  
 </body>
 </html>

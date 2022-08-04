@@ -14,7 +14,7 @@ public interface QboardDao {
 	public List<Qboard> listQboardForMember(Qboard qboard); // 멤버를 위한 문의글 목록
 	public int getQboardTotCntForMember(); // 멤버를 위한 문의글 갯수 얻기
 	public List<Qboard> listQboardForMe(Qboard qboard); // 자신이 작성한 문의글 목록
-	public int getQboardTotCntForMe(); // 자신이 작성한 문의글 갯수 얻기
+	public int getQboardTotCntForMe(String mid); // 자신이 작성한 문의글 갯수 얻기
 	public List<Qboard> listUncheckedQboardForAdmin(Qboard qboard); // 관리자를 위한 답글처리가 안 된 문의글 목록
 	public int getUncheckedQboardTotCntForAdmin();
 	public List<Qboard> listCheckedQboardForAdmin(Qboard qboard); // 관리자를 위한 답글처리가 된 문의글 목록
