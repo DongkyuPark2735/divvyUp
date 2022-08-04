@@ -48,6 +48,7 @@
 	<c:if test="${empty member and not empty admin }">
 	  <button onclick="location='${conPath}/qboard/listUncheckedQboardForAdmin.do'">처리대기목록</button>
 	  <button onclick="location='${conPath}/qboard/listCheckedQboardForAdmin.do'">처리목록</button>
+	  <button onclick="location='${conPath}/qboard/listCheckedQboardForAdmin.do'">검색목록가기</button>
 	</c:if>
 	<c:if test="${not empty member and empty admin }">
 	  <button onclick="location='${conPath}/qboard/listQboardForMember.do'">QBOARD</button>

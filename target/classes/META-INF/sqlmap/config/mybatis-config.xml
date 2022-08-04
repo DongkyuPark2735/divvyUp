@@ -26,5 +26,6 @@
 		<mapper resource="META-INF/sqlmap/mappers/Event.xml" />
 		<mapper resource="META-INF/sqlmap/mappers/EventDetail.xml" />
 		<mapper resource="META-INF/sqlmap/mappers/EventHistory.xml" />
+		<mapper resource="META-INF/sqlmap/mappers/AdminSearch.xml" />
 	</mappers>
 </configuration>

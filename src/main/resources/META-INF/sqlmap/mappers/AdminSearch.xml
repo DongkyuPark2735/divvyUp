@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    
+<mapper namespace="com.lec.divvyup.dao.AdminSearchDao">
+
+	<!-- 회원검색 -->
+	<select id="memberSearch" parameterType="HashMap" resultType="Member">
+		<if test="mSearchItem == 'mname'">
+			SELECT *
+    		FROM(SELECT ROWNUM RN, M.* FROM MEMBER M WHERE M.MNAME LIKE '%'||#{mSearchWord}||'%')
+        WHERE RN BETWEEN 1 AND 10
+		</if>	
+		<if test="mSearchItem == 'mid'">
+			SELECT *
+    		FROM(SELECT ROWNUM RN, M.* FROM MEMBER M WHERE M.MID LIKE '%'||#{mSearchWord}||'%')
+        WHERE RN BETWEEN 1 AND 10
+		</if>	
+		<if test="mSearchItem == 'memail'">
+			SELECT *
+    		FROM(SELECT ROWNUM RN, M.* FROM MEMBER M WHERE M.MEMAIL LIKE '%'||#{mSearchWord}||'%')
+        WHERE RN BETWEEN 1 AND 10
+		</if>	
+		<if test="mOrderByItem == 'orderMnameDESC'">
+			ORDER BY MNAME DESC			
+		</if>					
+		<if test="mOrderByItem == 'orderMnameASC'">
+			ORDER BY MNAME ASC			
+		</if>					
+		<if test="mOrderByItem == 'orderMrdateDESC'">
+			ORDER BY MRDATE DESC			
+		</if>					
+		<if test="mOrderByItem == 'orderMrdateASC'">
+			ORDER BY MRDATE ASC			
+		</if>					
+	</select>
+	<!-- 그룹 검색 -->
+	
+</mapper>
