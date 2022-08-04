@@ -42,13 +42,10 @@
 	  </form>
 	    <button onclick="location='${conPath}/qboard/listQboardForMember.do'">QBOARD</button>
 	  <p>
-<<<<<<< HEAD
 		<input type="button" value="임시 그룹게시판 이동 버튼" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=100'">
 	  </p>
-=======
 		<input type="button" value="임시 그룹게시판 이동 버튼" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=1'">
 	</p>
->>>>>>> fde6df63ae71b7c8c691825615fc62c25ab641eb
 	</div>
 </body>
 </html>

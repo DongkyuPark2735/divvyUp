@@ -19,6 +19,7 @@
 			        count +=1;
 			        if($(this).val() == '' ){
 			        	 count -=1;
+			        	 $('.share').val(0);
 			        }
 			    }); 
 			    if (sum < tot){
@@ -36,7 +37,6 @@
 					return false;
 				}
 			});
-		   
 	   });
 	</script>
 	<meta charset="UTF-8">

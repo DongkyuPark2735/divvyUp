@@ -13,8 +13,17 @@ public class GroupDetailServiceImpl implements GroupDetailService {
 @Autowired
 private GroupDetailDao groupDetailDao;
 	@Override
-	public int insertGroupDetail(GroupDetail groupDetail) {
-		return groupDetailDao.insertGroupDetail(groupDetail);
+	public int insertGroupDetail(String[] mids) {
+		for(int i=0; i < mids.length ; i++) {
+			 System.out.println(mids[i]);
+			 String mid= mids[i];
+			 groupDetailDao.insertGroupDetail(mid); 
+			 }
+		return 1;
+	}
+	@Override
+	public int insertGroupDetail(String mid) {
+		return groupDetailDao.insertGroupDetail(mid);
 	}
 	@Override
 	public List<GroupDetail> groupDetailList(int gid) {

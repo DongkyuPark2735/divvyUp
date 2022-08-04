@@ -29,17 +29,6 @@
 		</if>
 	</insert>
 	
-	<insert id="insertEvent2" parameterType="Event">
-		<if test="eimage==''">
-			INSERT INTO EVENT (EID, ENAME, ECONTENT, EAMOUNT, EADDRESS, ECOUNT, MID, GID)
-	   			VALUES (EVENT_SEQ.NEXTVAL, #{ename}, #{econtent}, #{eamount}, #{eaddress}, #{ecount}, #{mid}, #{gid})
-		</if>
-		<if test="eimage!=''">
-				INSERT INTO EVENT (EID, ENAME, ECONTENT, EIMAGE, EAMOUNT, EADDRESS, ECOUNT, MID, GID)
-	   			VALUES (EVENT_SEQ.NEXTVAL, #{ename}, #{econtent}, #{eimage}, #{eamount}, #{eaddress}, #{ecount}, #{mid}, #{gid})
-		</if>
-	</insert>
-	
 	<select id="eventList" resultMap="EventResult" parameterType="int">
 		SELECT * FROM EVENT WHERE GID = #{gid} ORDER BY erdate DESC
 	</select>

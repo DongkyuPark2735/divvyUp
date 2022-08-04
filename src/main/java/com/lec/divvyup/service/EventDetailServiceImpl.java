@@ -40,7 +40,11 @@ public class EventDetailServiceImpl implements EventDetailService {
 				/* String mid = mids[i]; */
 			 System.out.println(share[i]); 
 				/* int edshare = share[i]; */
-			 eventDetailDao.insertEventDetail2(mids[1], share[1]); 
+			 EventDetail eventDetail = new EventDetail();
+				eventDetail.setMid(mids[i]);
+				eventDetail.setEdshare(share[i]);
+				
+				eventDetailDao.insertEventDetail2(eventDetail); 
 		}
 		return 1;
 	}

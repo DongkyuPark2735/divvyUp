@@ -13,14 +13,16 @@
 	
 	<!-- 그룹에 멤버 추가 -->
 	<insert id="insertGroupDetail" parameterType="GroupDetail">
-		INSERT INTO GROUPDETAIL (GDID, GID, MID)
-    		VALUES (GROUPDETAIL_SEQ.NEXTVAL, #{gid} , #{mid})
+    	<![CDATA[
+			INSERT INTO GROUPDETAIL (GDID, GID, MID, GDBALANCE)
+        		VALUES (GROUPDETAIL_SEQ.NEXTVAL, (SELECT MAX(GID) FROM GROUPS), #{mid}, 0)
+        ]]>
 	</insert>
 	
 	<!-- STEP 3 OF ADDING EVENT : 새 이벤트 진행시, GROUPDETAIL에 멤버 정보를 업데이트 해준다 -->
 	<update id="updateGroupDetail">
 		UPDATE GROUPDETAIL GD
-  		SET GDBALANCE = GDBALANCE + (SELECT EDSHARE FROM EVENTDETAIL ED WHERE ED.MID = GD.MID)
+  		SET GDBALANCE = GDBALANCE + (SELECT EDSHARE FROM EVENTDETAIL ED WHERE ED.MID = GD.MID AND EID=(SELECT MAX(EID) FROM EVENT))
 	</update>
 	
 	

@@ -9,6 +9,5 @@ import com.lec.divvyup.vo.Event;
 
 public interface EventService {
 	public int insertEvent(Event event, MultipartHttpServletRequest mRequest);
-	public int insertEvent2(Event event, MultipartHttpServletRequest mRequest);
 	public List<Event> eventList(int gid);
 }
