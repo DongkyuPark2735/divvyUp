@@ -14,6 +14,7 @@
 		<typeAlias type="com.lec.divvyup.vo.Event" alias="Event" />
 		<typeAlias type="com.lec.divvyup.vo.EventDetail" alias="EventDetail" />
 		<typeAlias type="com.lec.divvyup.vo.EventHistory" alias="EventHistory" />
+		<typeAlias type="com.lec.divvyup.vo.AdminSearchKeyWord" alias="AdminSearchKeyWord" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="META-INF/sqlmap/mappers/Member.xml" />

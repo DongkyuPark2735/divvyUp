@@ -5,35 +5,100 @@
 <mapper namespace="com.lec.divvyup.dao.AdminSearchDao">
 
 	<!-- 회원검색 -->
-	<select id="memberSearch" parameterType="HashMap" resultType="Member">
-		<if test="mSearchItem == 'mname'">
+	<select id="memberSearch" parameterType="AdminSearchKeyWord" resultType="Member">
+		<if test="searchSelectItems == 'mname'">
 			SELECT *
-    		FROM(SELECT ROWNUM RN, M.* FROM MEMBER M WHERE M.MNAME LIKE '%'||#{mSearchWord}||'%')
-        WHERE RN BETWEEN 1 AND 10
+    		FROM(SELECT ROWNUM RN, M.* FROM MEMBER M WHERE M.MNAME LIKE '%'||#{searchWord}||'%')
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
 		</if>	
-		<if test="mSearchItem == 'mid'">
+		<if test="searchSelectItems == 'mid'">
 			SELECT *
-    		FROM(SELECT ROWNUM RN, M.* FROM MEMBER M WHERE M.MID LIKE '%'||#{mSearchWord}||'%')
-        WHERE RN BETWEEN 1 AND 10
+    		FROM(SELECT ROWNUM RN, M.* FROM MEMBER M WHERE M.MID LIKE '%'||#{searchWord}||'%')
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
 		</if>	
-		<if test="mSearchItem == 'memail'">
+		<if test="searchSelectItems == 'memail'">
 			SELECT *
-    		FROM(SELECT ROWNUM RN, M.* FROM MEMBER M WHERE M.MEMAIL LIKE '%'||#{mSearchWord}||'%')
-        WHERE RN BETWEEN 1 AND 10
+    		FROM(SELECT ROWNUM RN, M.* FROM MEMBER M WHERE M.MEMAIL LIKE '%'||#{searchWord}||'%')
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
 		</if>	
-		<if test="mOrderByItem == 'orderMnameDESC'">
+		<if test="searchResultOrderBy == 'orderMnameDESC'">
 			ORDER BY MNAME DESC			
 		</if>					
-		<if test="mOrderByItem == 'orderMnameASC'">
+		<if test="searchResultOrderBy == 'orderMnameASC'">
 			ORDER BY MNAME ASC			
 		</if>					
-		<if test="mOrderByItem == 'orderMrdateDESC'">
+		<if test="searchResultOrderBy == 'orderMrdateDESC'">
 			ORDER BY MRDATE DESC			
 		</if>					
-		<if test="mOrderByItem == 'orderMrdateASC'">
+		<if test="searchResultOrderBy == 'orderMrdateASC'">
 			ORDER BY MRDATE ASC			
 		</if>					
 	</select>
+	
 	<!-- 그룹 검색 -->
+	<select id="groupSearch" parameterType="AdminSearchKeyWord" resultType="Groups">
+		<if test="searchSelectItems == 'gname'">
+			SELECT *
+    		FROM(SELECT ROWNUM RN, G.* FROM GROUPS G WHERE G.GNAME LIKE '%'||#{searchWord}||'%')
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>	
+		<if test="searchSelectItems == 'gid'">
+			SELECT *
+    		FROM(SELECT ROWNUM RN, G.* FROM GROUPS G WHERE G.GID LIKE '%'||#{searchWord}||'%')
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>	
+
+		<if test="searchResultOrderBy == 'orderGnameDESC'">
+			ORDER BY GNAME DESC			
+		</if>					
+		<if test="searchResultOrderBy == 'orderGnameASC'">
+			ORDER BY GNAME ASC			
+		</if>					
+		<if test="searchResultOrderBy == 'orderGrdateDESC'">
+			ORDER BY GRDATE DESC			
+		</if>					
+		<if test="searchResultOrderBy == 'orderGrdateASC'">
+			ORDER BY GRDATE ASC			
+		</if>					
+	</select>
+	
+	<!-- 그룹별 지출 기록 검색  -->
+	<select id="eventSearch" parameterType="AdminSearchKeyWord" resultType="Event">
+		<if test="searchSelectItems == 'ename'">
+			SELECT *
+    		FROM(SELECT ROWNUM RN, E.* FROM EVENT E WHERE E.ENAME LIKE '%'||#{searchWord}||'%')
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>	
+		<if test="searchSelectItems == 'eid'">
+			SELECT *
+    		FROM(SELECT ROWNUM RN, E.* FROM EVENT E WHERE E.EID LIKE '%'||#{searchWord}||'%')
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>	
+		<if test="searchSelectItems == 'gid'">
+			SELECT *
+    		FROM(SELECT ROWNUM RN, E.* FROM EVENT E WHERE E.GID LIKE '%'||#{searchWord}||'%')
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>	
+		<if test="searchSelectItems == 'mid'">
+			SELECT *
+    		FROM(SELECT ROWNUM RN, E.* FROM EVENT E WHERE E.MID LIKE '%'||#{searchWord}||'%')
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>	
+
+		<if test="searchResultOrderBy == 'orderEnameDESC'">
+			ORDER BY ENAME DESC			
+		</if>					
+		<if test="searchResultOrderBy == 'orderEnameASC'">
+			ORDER BY ENAME ASC			
+		</if>					
+		<if test="searchResultOrderBy == 'orderErdateDESC'">
+			ORDER BY ERDATE DESC			
+		</if>					
+		<if test="searchResultOrderBy == 'orderErdateASC'">
+			ORDER BY ERDATE ASC			
+		</if>					
+	</select>
+	
+	
 	
 </mapper>
