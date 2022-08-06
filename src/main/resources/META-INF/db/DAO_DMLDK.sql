@@ -2,6 +2,8 @@
 INSERT INTO GROUPBOARD(GBID, GID, MID, GBCONTENT, GBFILENAME)
     VALUES(GROUPBOARD_SEQ.NEXTVAL, 1, 'aaa', '대화1', NULL);
     
+select last_number from USER_SEQUENCES where SEQUENCE_NAME = 'GROUPBOARD_SEQ';
+
 INSERT INTO GROUPBOARD(GBID, GID, MID, GBCONTENT, GBFILENAME)
     VALUES(GROUPBOARD_SEQ.NEXTVAL, 1, 'bbb', '대화2', NULL);
         
@@ -153,6 +155,11 @@ SELECT *
     FROM(SELECT ROWNUM RN, G.* FROM GROUPS G WHERE G.GID LIKE '%'||'1'||'%')
         WHERE RN BETWEEN 1 AND 10 ORDER BY GRDATE desc;
 
+-- 그룹 생성회원별 검색
+SELECT *
+    FROM(SELECT ROWNUM RN, G.* FROM GROUPS G WHERE G.MID LIKE '%'||''||'%')
+        WHERE RN BETWEEN 1 AND 10 ORDER BY GRDATE desc;
+
 -- 그룹 생성일별 정렬 == 최신순, 오래된순 
 SELECT *
     FROM(SELECT ROWNUM RN, G.* FROM GROUPS G WHERE G.GID LIKE '%'||'1'||'%')
@@ -184,5 +191,6 @@ SELECT *
         WHERE RN BETWEEN 1 AND 10 ORDER BY ERDATE desc;
 
 commit;
-
+select * from groups;
+select * from groupboard;
 

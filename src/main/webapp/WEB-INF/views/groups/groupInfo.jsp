@@ -58,7 +58,7 @@
 		    				</c:if>
 		    				<c:if test="${gMems.gdbalance > 0 }">
 		    					<td><input type="button" value="받기" onclick="location='${conPath }/centralSystem/get.do?gid=${groupInfo.gid }&mid=${member.mid }&gdbalance=${gMems.gdbalance }'"></td>
-		    				</c:if>d
+		    				</c:if>
 		    				<c:if test="${gMems.gdbalance eq 0 }">
 		    					<td  style="color:'green';">정산 할거 없음</td>
 		    				</c:if>

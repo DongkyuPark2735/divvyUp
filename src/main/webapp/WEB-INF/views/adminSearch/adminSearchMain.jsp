@@ -171,9 +171,31 @@
 					</tr>
 				</c:forEach>
 				</table>
+				
+				<!-- 엑셀 다운로드 -->
+				<form action="${conPath}/excel/excelDownload.do" method="post">
+					<c:forEach items="${searchMemberList}" var="memberList">
+						<input type="hidden" name="mids" value="${memberList.mid}">
+						<input type="hidden" name="mnames" value="${memberList.mname}">
+						<input type="hidden" name="memails" value="${memberList.memail}">
+						<input type="hidden" name="mrdates" value="${memberList.mrdate}">
+					</c:forEach>
+						<input type="submit" value="엑셀파일 다운로드">
+				</form>
 			 </c:if>
+			 
+			 <c:if test="${empty searchMemberList}">
+				<c:if test="${searchKeyWord.searchSelectItems eq 'mname'}">
+					<p><b>'회원 이름으로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+				</c:if>
+				<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
+					<p><b>'회원 아이디로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+				</c:if>
+				<c:if test="${searchKeyWord.searchSelectItems eq 'memail'}">
+					<p><b>'회원 이메일로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+				</c:if>
+			</c:if>
 		</div>
-		
 		
 		<!-- 그룹 검색 -->
 		<div class="adminSearchResult">
@@ -263,7 +285,6 @@
 					<p><b>'그룹 생성 회원아이디로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
 				</c:if>
 			</c:if>
-			 
 		</div>
 		
 		<!-- 이벤트 검색 -->
@@ -357,16 +378,16 @@
 			</c:if>
 			<c:if test="${empty searchEventList}">
 				<c:if test="${searchKeyWord.searchSelectItems eq 'ename'}">
-					<p><b>'결제 내역'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+					<p><b>'지출 기록 이름으로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
 				</c:if>
 				<c:if test="${searchKeyWord.searchSelectItems eq 'eid'}">
-					<p><b>'그룹아이디로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+					<p><b>'지출 기록 아이디로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
 				</c:if>
 				<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
-					<p><b>'그룹 생성 회원아이디로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+					<p><b>'지출 기록 생성회원 아이디로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
 				</c:if>
 				<c:if test="${searchKeyWord.searchSelectItems eq 'gid'}">
-					<p><b>'그룹 생성 회원아이디로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+					<p><b>'지출 기록 그룹아이디로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
 				</c:if>
 			</c:if>
 		</div>
