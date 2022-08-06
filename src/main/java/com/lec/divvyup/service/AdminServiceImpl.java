@@ -30,7 +30,6 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Admin getAdmin(String aid) {
-		// TODO Auto-generated method stub
 		return adminDao.getAdmin(aid);
 	}
 

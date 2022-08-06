@@ -79,8 +79,12 @@
 	  <button onclick="location='${conPath}/qboard/listQboardForMember.do'">QBOARD</button>
 	  <p>
 		<input type="button" value="임시 그룹게시판 이동 버튼" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=1'">
+<<<<<<< HEAD
+	</p>
+=======
 	  </p>
 >>>>>>> 57c71005000b85cb335d1f306f0b592c43de22bc
+>>>>>>> 83b6352e2fbbfb3fcf588d64e09a36d86b01dd4a
 	</div>
 </body>
 </html>
