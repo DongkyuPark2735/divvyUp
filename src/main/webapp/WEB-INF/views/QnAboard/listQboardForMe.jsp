@@ -36,12 +36,12 @@
 	    <th>등록일</th>
 	    <th>처리상태</th>
 	  </tr>
-	  <c:if test="${totCnt eq 0}">
+	  <c:if test="${paging.totCnt eq 0}">
 	    <tr>
-	      <th colspan="6">작성한 문의글이 없습니다</th>
+	      <td colspan="6">${member.mid }님이 작성한 문의글이 없습니다</td>
 	    </tr>
 	  </c:if>
-	  <c:if test="${totCnt != 0 }">
+	  <c:if test="${pagig.totCnt != 0 }">
 	    <c:forEach items="${listQboardForMe }" var="qboard">
 	      <tr onclick="trclicked(${qboard.qbid})">
 	      	<td>${iNum }</td>
@@ -78,6 +78,6 @@
 			[ <a href="${conPath }/qboard/listQboardForMe.do?pageNum=${paging.endPage+1}">다음</a> ]
 		</c:if>
 	</div>
-	<button onclick="location='${conPath}/main.do'">MAIN</button>
+	<button onclick="location='${conPath}/main/mainto.do'">MAIN</button>
 </body>
 </html>

@@ -14,4 +14,8 @@ public class Member {
 	private String mname;
 	private String memail;
 	private Date mrdate;
+	private int startRow;
+	private int endRow;
+	private String schItem;
+	private String schWord;
 }
