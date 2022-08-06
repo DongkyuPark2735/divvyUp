@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.divvyup.dao.FollowDao">
+	<resultMap type="Follow" id="FollowResult">
+		<result property="fid" column="fid"/>  
+		<result property="from_mid" column="from_mid"/>  
+		<result property="to_mid" column="to_mid"/> 
+	</resultMap>
+	
+	<insert id="followMember" parameterType="Follow">
+		INSERT INTO FOLLOW(FID, FROM_MID, TO_MID) VALUES (FOLLOW_SEQ.NEXTVAL, #{from_mid}, #{to_mid})
+	</insert>
+	
+	<delete id="unfollowMember" parameterType="Follow">
+		DELETE FROM FOLLOW WHERE FROM_MID=#{from_mid,jdbcType=VARCHAR} AND TO_MID=#{to_mid,jdbcType=VARCHAR}
+	</delete>
+	
+	
+	
+	
+	
+	<select id="myFollowingList" parameterType="String" resultMap="FollowResult">
+		SELECT TO_MID FROM FOLLOW WHERE FROM_MID=#{from_mid,jdbcType=VARCHAR} ORDER BY TO_MID
+	</select>
+	
+	<select id="myFollowerList" parameterType="String" resultMap="FollowResult">
+		SELECT FROM_MID FROM FOLLOW WHERE TO_MID=#{to_mid,jdbcType=VARCHAR} ORDER BY FROM_MID
+	</select>
+</mapper>

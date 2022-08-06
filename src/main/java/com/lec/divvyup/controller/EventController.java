@@ -48,14 +48,13 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="insertEvent", method=RequestMethod.POST)
-	public String insertEvent(MultipartHttpServletRequest mRequest, @ModelAttribute("eDto") Event event, String [] mids, String mid, Model model) {
+	public String insertEvent(MultipartHttpServletRequest mRequest, @ModelAttribute("eDto") Event event, String [] mids, String mid, Model model, int gid) {
 		model.addAttribute("insertEvent", eventService.insertEvent(event, mRequest)); // STEP A : 새 이벤트 추가
 		eventDetailService.insertEventDetail(mids); // STEP B1 : 돈 안낸사람들 이벤트 정보 추가
 		eventDetailService.insertEventDetailPayer(mid); // STEP B2 :돈 낸사람 이벤트 정보 추가
-		groupDetailService.updateGroupDetail(); //STEP C : 그룹 디테일에 현이벤트 관련 지출정보 업데이트
+		groupDetailService.updateGroupDetail(gid); //STEP C : 그룹 디테일에 현이벤트 관련 지출정보 업데이트
 		eventHistoryService.insertEventHistory(); //STEP D :지출 내역에 정보 추가
 		eventDetailService.deleteEventDetail(); //STEP E : 이벤트 디테일 (장바구니) 비움
-		/* return "event/eventList"; */
 		return "main/main";
 	}
 	@RequestMapping(value="insertEventForm2", method = RequestMethod.GET)
@@ -63,18 +62,14 @@ public class EventController {
 		model.addAttribute("printMidList", eventDetailService.printMidList(gid));
 		return "event/insertEventForm2";
 	}
-	@RequestMapping(value="insertEvent2", method=RequestMethod.POST)
-	public String insertEvent2(MultipartHttpServletRequest mRequest, @ModelAttribute("eDto") Event event, String[] mids, String mid, Model model, int[] share) {
-		System.out.println("share : " );
-		System.out.println(Arrays.toString(share));
-		System.out.println(Arrays.toString(mids));
-		model.addAttribute("insertEvent", eventService.insertEvent(event, mRequest)); // STEP A : 새 이벤트 추가
+	@RequestMapping(value="insertEvent2", method=RequestMethod.POST) //집적입력
+	public String insertEvent2(MultipartHttpServletRequest mRequest, @ModelAttribute("eDto") Event event, String[] mids, String mid, Model model, int[] share, int gid) {
+		model.addAttribute("insertEvent2", eventService.insertEvent(event, mRequest)); // STEP A : 새 이벤트 추가
 		eventDetailService.insertEventDetail2(mids, share); // STEP B1 : 돈 안낸사람들 이벤트 정보 추가
 		eventDetailService.insertEventDetailPayer2(mid); // STEP B2 :돈 낸사람 이벤트 정보 추가
-		/*groupDetailService.updateGroupDetail2(); //STEP C : 그룹 디테일에 현이벤트 관련 지출정보 업데이트
-		eventHistoryService.insertEventHistory2(); //STEP D :지출 내역에 정보 추가
-		eventDetailService.deleteEventDetail2(); //STEP E : 이벤트 디테일 (장바구니) 비움
-		/* return "event/eventList"; */  
+		groupDetailService.updateGroupDetail(gid);
+		eventHistoryService.insertEventHistory(); //STEP D :지출 내역에 정보 추가
+		eventDetailService.deleteEventDetail(); //STEP E : 이벤트 디테일 (장바구니) 비움
 		return "main/main";
 	}
 	
