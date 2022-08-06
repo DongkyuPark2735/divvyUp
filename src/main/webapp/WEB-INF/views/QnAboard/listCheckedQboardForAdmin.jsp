@@ -36,12 +36,12 @@
 	    <th>등록일</th>
 	    <th>처리상태</th>
 	  </tr>
-	  <c:if test="${totCnt eq 0}">
+	  <c:if test="${paging.totCnt eq 0}">
 	    <tr>
 	      <th colspan="6">처리할 문의글이 없습니다</th>
 	    </tr>
 	  </c:if>
-	  <c:if test="${totCnt != 0 }">
+	  <c:if test="${paging.totCnt != 0 }">
 	    <c:forEach items="${listUncheckedQboardForAdmin }" var="qboard">
 	      <tr onclick="trclicked(${qboard.qbid})">
 	      	<td>${iNum }</td>
@@ -79,7 +79,7 @@
 		</c:if>
 	</div>
 	<c:if test="${empty member and not empty admin }">
-	  <button onclick="location='${conPath}/main.do'">MAIN</button>
+	  <button onclick="location='${conPath}/main/mainto.do'">MAIN</button>
 	</c:if>
 </body>
 </html>

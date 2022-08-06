@@ -22,7 +22,11 @@
 			alert('${result}');
 		</script>
 	</c:if>
+	<c:if test="${not empty joinResult}">
+		<script>alert('${joinResult}');</script>
+	</c:if>
 	<div>
+<<<<<<< HEAD
 		<form action="${conPath }/member/login.do" method="post">
 			<table>
 				<caption>LOGIN</caption>
@@ -51,6 +55,32 @@
 		<input type="button" value="임시 그룹게시판 이동 버튼"
 			onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=1'">
 		</p>
+=======
+	  <form action="${conPath }/member/login.do" method="post">
+	    <table>
+	      <caption>LOGIN</caption>
+	      <tr>
+	        <th>ID</th>
+	        <td><input type="text" name="mid" required="required" value="${mid }"></td>
+	      </tr>
+	      <tr>
+	        <th>PW</th>
+	        <td><input type="password" name="mpw" required="required" value="${mpw }"></td>
+	      </tr>
+	      <tr>
+	        <td colspan="2">
+	          <input type="submit" value="LOGIN">
+	          <input type="button" value="AMODE" onclick="location='${conPath}/admin/adminloginForm.do'">
+	        </td>
+	      </tr>
+	    </table>
+	  </form>
+	  <button onclick="location='${conPath}/member/joinForm.do'">JOIN</button>
+	  <button onclick="location='${conPath}/qboard/listQboardForMember.do'">QBOARD</button>
+	  <p>
+		<input type="button" value="임시 그룹게시판 이동 버튼" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=1'">
+	  </p>
+>>>>>>> 57c71005000b85cb335d1f306f0b592c43de22bc
 	</div>
 </body>
 </html>

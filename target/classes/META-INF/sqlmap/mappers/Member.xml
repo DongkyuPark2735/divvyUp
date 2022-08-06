@@ -32,7 +32,7 @@
 		SELECT * FROM MEMBER WHERE MID=#{mid}
 	</select>
 	
-	<update id="modifyMember" parameterType="Member"> <!-- 회원정보 수정 -->
+	<update id="modifiyMember" parameterType="Member"> <!-- 회원정보 수정 -->
 		UPDATE MEMBER SET MPW=#{mpw},
                   MNAME=#{mname},
                   MEMAIL=#{memail}
@@ -45,6 +45,20 @@
 	
 	<select id="searchMpw" parameterType="Member" resultType="String"> <!-- 비밀번호 찾기 -->
 		SELECT MPW FROM MEMBER WHERE MID=#{mid} AND MNAME=#{mname} AND MEMAIL=#{memail}
+	</select>
+	
+	<select id="searchMember" parameterType="Member" resultMap="MemberResult">
+		<if test="schItem == 'mid'">
+		  SELECT * FROM (SELECT ROWNUM RN, A.* 
+            FROM (SELECT MID, MNAME FROM MEMBER WHERE NOT MID=#{mid} AND MID LIKE '%'||#{schWord}||'%'ORDER BY MID DESC) A)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>
+		
+		<if test="schItem == 'mname'">
+		  SELECT * FROM (SELECT ROWNUM RN, A.* 
+            FROM (SELECT MID, MNAME FROM MEMBER WHERE NOT MID=#{mid} AND MNAME LIKE '%'||#{schWord}||'%'ORDER BY MID DESC) A)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>
 	</select>
 		
 </mapper>

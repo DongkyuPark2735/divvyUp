@@ -25,7 +25,7 @@ public class AdminController {
 	public String adminlogin(String aid, String apw, Model model, HttpSession session) {
 		String result = adminService.aloginCheck(aid, apw, session);
 		if(result.equals("관리자 로그인 성공")) {
-			return "redirect:../main.do";
+			return "redirect:../main/mainto.do";
 		}else {
 			model.addAttribute("aid", aid);
 			model.addAttribute("apw", apw);
