@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.lec.divvyup.service.CentralSystemService;
 import com.lec.divvyup.service.GroupDetailService;
 import com.lec.divvyup.service.GroupsService;
 import com.lec.divvyup.vo.Event;
@@ -21,6 +22,8 @@ public class GroupsController {
 	private GroupsService groupsService;
 	@Autowired
 	private GroupDetailService groupDetailService;
+	@Autowired
+	private CentralSystemService centralSystemService;
 	
 	@RequestMapping(value="groupList", method = RequestMethod.GET)
 	public String groupList(Model model, Groups groups) {
@@ -31,6 +34,8 @@ public class GroupsController {
 	public String groupInfo(int gid, Model model) {
 		model.addAttribute("groupInfo", groupsService.groupInfo(gid));
 		model.addAttribute("groupDetailList", groupDetailService.groupDetailList(gid));
+		model.addAttribute("check", centralSystemService.checkAddition(gid));
+		System.out.println(centralSystemService.checkAddition(gid));
 		return "groups/groupInfo";
 	}
 	@RequestMapping(value="groupInsertForm", method=RequestMethod.GET)

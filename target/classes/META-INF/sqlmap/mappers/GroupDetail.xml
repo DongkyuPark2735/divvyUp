@@ -19,10 +19,25 @@
         ]]>
 	</insert>
 	
-	<!-- STEP 3 OF ADDING EVENT : 새 이벤트 진행시, GROUPDETAIL에 멤버 정보를 업데이트 해준다 -->
-	<update id="updateGroupDetail">
-		UPDATE GROUPDETAIL GD
-  		SET GDBALANCE = GDBALANCE + (SELECT EDSHARE FROM EVENTDETAIL ED WHERE ED.MID = GD.MID AND EID=(SELECT MAX(EID) FROM EVENT))
+	
+<!-- <update id="updateGroupDetailPayer" parameterType="GroupDetail">
+
+	UPDATE GROUPDETAIL
+    SET GDBALANCE = GDBALANCE + (SELECT EDSHARE FROM EVENTDETAIL WHERE GROUPDETAIL.MID=EVENTDETAIL.MID AND EID=#{eid})
+    WHERE EXISTS (select edshare from eventdetail  WHERE GROUPDETAIL.MID=EVENTDETAIL.MID AND EID=#{eid})
+  		
+	</update> -->
+
+	<update id="updateGroupDetail" parameterType="int">
+
+		UPDATE GROUPDETAIL
+   			SET GDBALANCE = GDBALANCE + (SELECT EDSHARE FROM EVENTDETAIL WHERE GROUPDETAIL.MID=EVENTDETAIL.MID AND GID=#{gid} AND EID=(SELECT MAX(EID) FROM EVENT))
+    		WHERE EXISTS (select edshare from eventdetail  WHERE GROUPDETAIL.MID=EVENTDETAIL.MID AND EID=(SELECT MAX(EID) FROM EVENT) AND GID=#{gid})
+  		
+	</update>
+	
+	<update id="updateBalance" parameterType="String">
+		UPDATE GROUPDETAIL SET GDBALANCE = 0 WHERE MID=#{mid}
 	</update>
 	
 	

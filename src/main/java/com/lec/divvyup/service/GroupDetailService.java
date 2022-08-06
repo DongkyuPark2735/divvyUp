@@ -9,10 +9,8 @@ public interface GroupDetailService {
 	public int insertGroupDetail(String[] mids);
 	public int insertGroupDetail(String mid);
 	public List<GroupDetail> groupDetailList(int gid);
-	public int updateGroupDetail();
-	
-	
-	
-	
-	
+	public int updateGroupDetail(int gid);
+	public int updateBalance(String mid);
+	/* public int updateGroupDetailPayer(int gid, String mid); */
+
 }

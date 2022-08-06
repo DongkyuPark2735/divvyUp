@@ -10,7 +10,8 @@ import com.lec.divvyup.vo.GroupDetail;
 @Mapper
 public interface GroupDetailDao {
 	public int insertGroupDetail(String mid);
-	public int updateGroupDetail(GroupDetail groupDetail);
+	public int updateGroupDetail(int gid);
 	public List<GroupDetail> groupDetailList(int gid);
-	public int updateGroupDetail();
+	public int updateBalance(String mid);
+	
 }

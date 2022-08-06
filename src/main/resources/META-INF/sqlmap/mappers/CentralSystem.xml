@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.lec.divvyup.dao.CentralSystemDao">
+	<resultMap type="CentralSystem" id="CentralSystemResult">
+		<result property="csid" column="csid"/>
+		<result property="csamount" column="csamount"/>
+		<result property="csallpaid" column="csallpaid"/>
+		<result property="gid" column="gid"/>
+	</resultMap>
+	
+	
+	<insert id="insertSplit" parameterType="int">
+		<![CDATA[
+			INSERT INTO CENTRALSYSTEM (CSID, GID)
+ 				VALUES(CENTRALSYSTEM_SEQ.NEXTVAL, #{gid})
+    	]]>
+    </insert>
+    
+    <select id="checkAddition" parameterType="CentralSystem" resultType="int">
+    	SELECT COUNT(*) FROM CENTRALSYSTEM WHERE GID = #{gid}
+    </select>
+    
+    <update id="pay" parameterType="String">
+    	UPDATE CENTRALSYSTEM
+    		SET CSAMOUNT = CSAMOUNT + (SELECT -GDBALANCE PAID FROM GROUPDETAIL WHERE  MID = #{mid})
+    </update>
+    
+    <update id="allPayChk" parameterType="int">
+    	<![CDATA[
+    		UPDATE CENTRALSYSTEM
+    			SET CSALLPAID = 1
+    			WHERE CSAMOUNT=(SELECT SUM(-GDBALANCE) FROM GROUPDETAIL WHERE GDBALANCE < 0 AND GID = #{gid})
+    	]]>
+    </update>
+
+</mapper>
