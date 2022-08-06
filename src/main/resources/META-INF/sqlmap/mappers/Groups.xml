@@ -17,7 +17,28 @@
 	<select id="groupList" resultType="Groups">
 		SELECT * FROM GROUPS ORDER BY GRDATE DESC
 	</select>
+	
 	<select id="groupInfo" parameterType="int" resultType="Groups">
 		SELECT * FROM GROUPS WHERE GID =  #{gid}
 	</select>
+	
+	<select id="nextGid" parameterType="int" resultType="int">
+		SELECT NVL((MAX(GID)+1),1) FROM GROUPS
+	</select>
+	
+	<select id="memberList" parameterType="Member" resultMap="GroupsResult">
+		SELECT * FROM MEMBER
+	</select>
+
+	<insert id="groupInsert" parameterType="Groups">
+		<if test="gimg==''">
+				INSERT INTO GROUPS (GID, GNAME, GCONTENT, MID)
+   					VALUES (GROUPS_SEQ.NEXTVAL, #{gname}, #{gcontent}, #{mid})
+		</if>
+		<if test="gimg!=''">
+				INSERT INTO GROUPS (GID, GNAME, GIMG, GCONTENT, MID)
+   					VALUES (GROUPS_SEQ.NEXTVAL, #{gname}, #{gimg} , #{gcontent}, #{mid})
+		</if>
+	</insert>
+	
 </mapper>

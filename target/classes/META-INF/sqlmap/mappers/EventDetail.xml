@@ -28,19 +28,23 @@
 	
 	<!-- 이벤트에 정보 추가 추가 (자기가 안냈을때) -->
 	<insert id="insertEventDetail" parameterType="EventDetail">
-		<![CDATA[
 			INSERT INTO EVENTDETAIL (EDID, EID, MID, EDSHARE)
     			VALUES (EVENTDETAIL_SEQ.NEXTVAL, (SELECT MAX(EID) FROM EVENT), #{mid}, -1*((SELECT EAMOUNT FROM EVENT WHERE EID=(SELECT MAX(EID) FROM EVENT))/(SELECT ECOUNT FROM EVENT WHERE EID=(SELECT MAX(EID) FROM EVENT))))
-    	]]>
+    				
 	</insert>
 	
 	<insert id="insertEventDetail2" parameterType="EventDetail">
-		<![CDATA[
+		<if test="edshare!=0">
 			INSERT INTO EVENTDETAIL (EDID, EID, MID, EDSHARE)
     			VALUES (EVENTDETAIL_SEQ.NEXTVAL, (SELECT MAX(EID) FROM EVENT), #{mid}, -1*(#{edshare}))
-    	]]>
+    	</if>
+    	<if test="edshare==0">
+			INSERT INTO EVENTDETAIL (EDID, EID, MID, EDSHARE)
+    			VALUES (EVENTDETAIL_SEQ.NEXTVAL, (SELECT MAX(EID) FROM EVENT), #{mid}, 0)
+    	</if>
 	</insert>
-
+	
+	
 	<delete id="deleteEventDetail">
 		   DELETE FROM EVENTDETAIL WHERE EID=(SELECT MAX(EID) FROM EVENT)
 	</delete>
