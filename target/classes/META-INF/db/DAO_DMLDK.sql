@@ -183,6 +183,6 @@ SELECT *
     FROM(SELECT ROWNUM RN, E.* FROM EVENT E WHERE E.MID LIKE '%'||'a'||'%')
         WHERE RN BETWEEN 1 AND 10 ORDER BY ERDATE desc;
 
-
+commit;
 
 

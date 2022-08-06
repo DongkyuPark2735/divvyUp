@@ -73,6 +73,12 @@
 			$('.adminSearchResult:eq(' + num + ')').addClass("current");
 		});
 		
+		/* 검색제한  */
+		
+		
+		
+		/* 무한스크롤 */
+		
 		
 		
 	});
@@ -184,6 +190,10 @@
 							<c:if test="${searchKeyWord.searchSelectItems eq 'gid'}">
 									selected="selected"
 							</c:if>>그룹 아이디로</option>
+					<option value="mid"
+							<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
+									selected="selected"
+							</c:if>>그룹 생성회원 아이디로</option>
 				</select>
 
 				<input type="text" width="400" name="searchWord" value="${searchKeyWord.searchWord}">
@@ -241,9 +251,20 @@
 					</tr>
 				</c:forEach>
 				</table>
-			 </c:if>
+			</c:if>
+			<c:if test="${empty searchGroupList}">
+				<c:if test="${searchKeyWord.searchSelectItems eq 'gname'}">
+					<p><b>'그룹이름으로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+				</c:if>
+				<c:if test="${searchKeyWord.searchSelectItems eq 'gid'}">
+					<p><b>'그룹아이디로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+				</c:if>
+				<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
+					<p><b>'그룹 생성 회원아이디로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+				</c:if>
+			</c:if>
+			 
 		</div>
-		
 		
 		<!-- 이벤트 검색 -->
 		<div class="adminSearchResult">
@@ -333,7 +354,21 @@
 					</tr>
 				</c:forEach>
 				</table>
-			 </c:if>
+			</c:if>
+			<c:if test="${empty searchEventList}">
+				<c:if test="${searchKeyWord.searchSelectItems eq 'ename'}">
+					<p><b>'결제 내역'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+				</c:if>
+				<c:if test="${searchKeyWord.searchSelectItems eq 'eid'}">
+					<p><b>'그룹아이디로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+				</c:if>
+				<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
+					<p><b>'그룹 생성 회원아이디로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+				</c:if>
+				<c:if test="${searchKeyWord.searchSelectItems eq 'gid'}">
+					<p><b>'그룹 생성 회원아이디로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+				</c:if>
+			</c:if>
 		</div>
 	</div>
 </body>

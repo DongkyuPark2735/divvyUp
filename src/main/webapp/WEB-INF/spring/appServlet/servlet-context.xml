@@ -50,7 +50,6 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>
-	<!-- 파일첨부 빈 -->
 	
 	<!-- 파일 첨부 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

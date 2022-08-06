@@ -48,6 +48,12 @@
         WHERE RN BETWEEN #{startRow} AND #{endRow}
 		</if>	
 
+		<if test="searchSelectItems == 'mid'">
+			SELECT *
+    		FROM(SELECT ROWNUM RN, G.* FROM GROUPS G WHERE G.MID LIKE '%'||#{searchWord}||'%')
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+		</if>	
+
 		<if test="searchResultOrderBy == 'orderGnameDESC'">
 			ORDER BY GNAME DESC			
 		</if>					
