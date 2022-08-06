@@ -42,12 +42,23 @@ public class MemberServiceImpl implements MemberService {
 	public int joinMember(final Member member, HttpSession session) {
 		// TODO Auto-generated method stub
 		MimeMessagePreparator message = new MimeMessagePreparator() {
-			String content = "";
+			String content = "<div style=\"width:500px; margin: 0 auto; text-align: center\">\n" + 
+					"	<h1 style=\"color:blue;\">"+ member.getMname() +"님 회원가입 감사합니다</h1>\n" + 
+					"	<div>\n" + 
+					"		<p>아무개 사이트에서만 쓰실 수 있는 감사쿠폰을 드립니다</p>\n" + 
+					"	</div>\n" + 
+					"	<div>\n" + 
+					"		<p style=\"color:red;\">빨간 글씨 부분</p>\n" + 
+					"		<p style=\"color:blue;\">파란 글씨 부분</p>\n" + 
+					"		<img src=\"https://t1.daumcdn.net/daumtop_chanel/op/20200723055344399.png\">\n" + 
+					"	</div>\n" + 
+					"	<p>서울시 어떤구 XX로 00 **빌딩 402</p>\n" + 
+					"</div>";
 			@Override
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				// TODO Auto-generated method stub
 				mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(member.getMemail()));
-				mimeMessage.setFrom(new InternetAddress("시스템 메일"));
+				mimeMessage.setFrom(new InternetAddress("kimbin960826@gamil.com"));
 				mimeMessage.setSubject(member.getMid()+"님 회원가입 감사합니다");
 				mimeMessage.setText(content, "utf-8", "html");
 			}
@@ -82,7 +93,8 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int modifyMember(Member member) {
 		// TODO Auto-generated method stub
-		return memberDao.modfiyMember(member);
+		//System.out.println("수정할 데이터 : "+member);
+		return memberDao.modifiyMember(member);
 	}
 
 	@Override

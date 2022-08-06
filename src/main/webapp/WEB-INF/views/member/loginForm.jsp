@@ -20,6 +20,9 @@
 	<c:if test="${not empty result}">
 		<script>alert('${result}');</script>
 	</c:if>
+	<c:if test="${not empty joinResult}">
+		<script>alert('${joinResult}');</script>
+	</c:if>
 	<div>
 	  <form action="${conPath }/member/login.do" method="post">
 	    <table>
@@ -40,15 +43,11 @@
 	      </tr>
 	    </table>
 	  </form>
-	    <button onclick="location='${conPath}/qboard/listQboardForMember.do'">QBOARD</button>
+	  <button onclick="location='${conPath}/member/joinForm.do'">JOIN</button>
+	  <button onclick="location='${conPath}/qboard/listQboardForMember.do'">QBOARD</button>
 	  <p>
-<<<<<<< HEAD
-		<input type="button" value="임시 그룹게시판 이동 버튼" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=100'">
-	  </p>
-=======
 		<input type="button" value="임시 그룹게시판 이동 버튼" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=1'">
-	</p>
->>>>>>> fde6df63ae71b7c8c691825615fc62c25ab641eb
+	  </p>
 	</div>
 </body>
 </html>
