@@ -194,3 +194,8 @@ commit;
 select * from groups;
 select * from groupboard;
 
+		SELECT TO_MID FROM FOLLOW WHERE FROM_MID='aaa' ORDER BY TO_MID;
+select * from member;
+
+select * from groupdetail where gid =1;
+

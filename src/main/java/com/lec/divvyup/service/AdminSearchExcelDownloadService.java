@@ -20,7 +20,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdminSearchExcelDownloadService {
 
-	public void memberExcelDownload(HttpServletResponse response, String[] mids, String[] mnames, String[] memails,
+	//	회원 엑셀 다운로드
+	public void excelDownloadMember(HttpServletResponse response, String[] mids, String[] mnames, String[] memails,
 			String[] mrdates) throws IOException {
 		XSSFWorkbook wb = new XSSFWorkbook();
 
@@ -34,25 +35,6 @@ public class AdminSearchExcelDownloadService {
 		int rowNum = 0;
 
 		sheet.setDefaultColumnWidth(15); // sheet 전체 기본 너비설정
-
-		// 테이블 헤더용 스타일   
-		CellStyle headStyle = wb.createCellStyle();
-		headStyle.setBorderTop(BorderStyle.THIN);
-		headStyle.setBorderBottom(BorderStyle.THIN);
-		headStyle.setBorderLeft(BorderStyle.THIN);
-		headStyle.setBorderRight(BorderStyle.THIN);
-		
-		//배경   
-		headStyle.setFillForegroundColor(HSSFColorPredefined.GREY_80_PERCENT.getIndex());
-		headStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-		headStyle.setAlignment(HorizontalAlignment.CENTER);
-
-		CellStyle bodyStyle = wb.createCellStyle();
-		bodyStyle.setBorderTop(BorderStyle.THIN);
-		bodyStyle.setBorderBottom(BorderStyle.THIN);
-		bodyStyle.setBorderLeft(BorderStyle.THIN);
-		bodyStyle.setBorderRight(BorderStyle.THIN);
-		bodyStyle.setAlignment(HorizontalAlignment.CENTER);
 		
 		// Header
 		row = sheet.createRow(rowNum++);
@@ -87,6 +69,143 @@ public class AdminSearchExcelDownloadService {
 		response.setContentType("ms-vnd/excel");
 		response.setHeader("Content-Disposition", "attachment;filename="+ excelFileName);
 
+		// Excel File Output
+		wb.write(response.getOutputStream());
+		wb.close();
+	}
+	
+	//	그룹 엑셀 다운로드
+	public void excelDownloadGroup(HttpServletResponse response, 
+		String[] gids, String[] gnames, String[] grdates, String[] gcontents, String[] mids
+			) throws IOException {
+		XSSFWorkbook wb = new XSSFWorkbook();
+		
+		Date nowDate = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm분"); 
+		String strNowDate = simpleDateFormat.format(nowDate); 
+		
+		XSSFSheet sheet = wb.createSheet(strNowDate + " 그룹 정보");
+		Row row = null;
+		Cell cell = null;
+		int rowNum = 0;
+		
+		sheet.setDefaultColumnWidth(15); // sheet 전체 기본 너비설정
+		
+		// Header
+		row = sheet.createRow(rowNum++);
+		row = sheet.createRow(rowNum++);
+		cell = row.createCell(0);
+		cell.setCellValue("");
+		cell = row.createCell(1);
+		cell.setCellValue("그룹 ID");
+		cell = row.createCell(2);
+		cell.setCellValue("그룹 이름");
+		cell = row.createCell(3);
+		cell.setCellValue("그룹 생성일");
+		cell = row.createCell(4);
+		cell.setCellValue("그룹 내용");
+		cell = row.createCell(5);
+		cell.setCellValue("그룹 생성 회원 ID");
+		
+		// Body
+		for (int i = 0; i < gids.length; i++) {
+			row = sheet.createRow(rowNum++);
+			cell = row.createCell(0);
+			cell.setCellValue("");
+			cell = row.createCell(1);
+			cell.setCellValue(gids[i]);
+			cell = row.createCell(2);
+			cell.setCellValue(gnames[i]);
+			cell = row.createCell(3);
+			cell.setCellValue(grdates[i]);
+			cell = row.createCell(4);
+			cell.setCellValue(gcontents[i]);
+			cell = row.createCell(5);
+			cell.setCellValue(mids[i]);
+		}
+		
+		String excelFileName = strNowDate + "groupSearch.xlsx";
+		
+		response.setContentType("ms-vnd/excel");
+		response.setHeader("Content-Disposition", "attachment;filename="+ excelFileName);
+		
+		// Excel File Output
+		wb.write(response.getOutputStream());
+		wb.close();
+	}
+	
+	//	지출 기록 엑셀 다운로드
+	public void excelDownloadEvents(HttpServletResponse response, 
+			String[] eids, String[] enames, String[] econtents, String[] eamounts, String[] eaddresses, 
+			String[] ecounts, String[] erdates, String[] mids, String[] gids
+			) throws IOException {
+		XSSFWorkbook wb = new XSSFWorkbook();
+		
+		Date nowDate = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm분"); 
+		String strNowDate = simpleDateFormat.format(nowDate); 
+		
+		XSSFSheet sheet = wb.createSheet(strNowDate + " 지출 기록 정보");
+		Row row = null;
+		Cell cell = null;
+		int rowNum = 0;
+		
+		sheet.setDefaultColumnWidth(15); // sheet 전체 기본 너비설정
+		
+		// Header
+		row = sheet.createRow(rowNum++);
+		row = sheet.createRow(rowNum++);
+		cell = row.createCell(0);
+		cell.setCellValue("");
+		cell = row.createCell(1);
+		cell.setCellValue("지출 기록 ID");
+		cell = row.createCell(2);
+		cell.setCellValue("지출 기록명");
+		cell = row.createCell(3);
+		cell.setCellValue("지출 기록 내용");
+		cell = row.createCell(4);
+		cell.setCellValue("지출 금액");
+		cell = row.createCell(5);
+		cell.setCellValue("지출 장소");
+		cell = row.createCell(6);
+		cell.setCellValue("지출 기록 회원수");
+		cell = row.createCell(7);
+		cell.setCellValue("지출 기록 생성일");
+		cell = row.createCell(8);
+		cell.setCellValue("지출 기록 생성 회원ID");
+		cell = row.createCell(9);
+		cell.setCellValue("지출 기록 생성 그룹");
+		
+		// Body
+		for (int i = 0; i < eids.length; i++) {
+			row = sheet.createRow(rowNum++);
+			cell = row.createCell(0);
+			cell.setCellValue("");
+			cell = row.createCell(1);
+			cell.setCellValue(eids[i]);
+			cell = row.createCell(2);
+			cell.setCellValue(enames[i]);
+			cell = row.createCell(3);
+			cell.setCellValue(econtents[i]);
+			cell = row.createCell(4);
+			cell.setCellValue(eamounts[i]);
+			cell = row.createCell(5);
+			cell.setCellValue(eaddresses[i]);
+			cell = row.createCell(6);
+			cell.setCellValue(ecounts[i]);
+			cell = row.createCell(7);
+			cell.setCellValue(erdates[i]);
+			cell = row.createCell(8);
+			cell.setCellValue(mids[i]);
+			cell = row.createCell(9);
+			cell.setCellValue(gids[i]);
+		}
+		
+		String excelFileName = strNowDate + "eventsSearch.xlsx";
+		
+		response.setContentType("ms-vnd/excel");
+		response.setHeader("Content-Disposition", "attachment;filename="+ excelFileName);
+		
 		// Excel File Output
 		wb.write(response.getOutputStream());
 		wb.close();

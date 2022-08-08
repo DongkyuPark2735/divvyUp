@@ -18,10 +18,27 @@ public class AdminSearchExcelDownloadController {
 	@Autowired
 	AdminSearchExcelDownloadService adminSearchExcelDownloadService;
 	
-	@RequestMapping(value = "excelDownload", method = RequestMethod.POST)
-	public void excelDownload(HttpServletResponse response,
+	@RequestMapping(value = "excelDownloadMember", method = RequestMethod.POST)
+	public void excelDownloadMember(HttpServletResponse response,
 			String[] mids, String[] mnames, String[] memails, String[] mrdates 
 			) throws IOException {
-		adminSearchExcelDownloadService.memberExcelDownload(response, mids, mnames, memails, mrdates);
+		adminSearchExcelDownloadService.excelDownloadMember(response, mids, mnames, memails, mrdates);
 	}
+
+	@RequestMapping(value = "excelDownloadGroup", method = RequestMethod.POST)
+	public void excelDownloadGroup(HttpServletResponse response,
+			String[] gids, String[] gnames, String[] grdates, String[] gcontents, String[] mids
+			) throws IOException {
+		adminSearchExcelDownloadService.excelDownloadGroup(response, gids, gnames, grdates, gcontents, mids);
+	}
+
+	@RequestMapping(value = "excelDownloadEvents", method = RequestMethod.POST)
+	public void excelDownloadEvents(HttpServletResponse response,
+			String[] eids, String[] enames, String[] econtents, String[] eamounts, String[] eaddresses, 
+			String[] ecounts, String[] erdates, String[] mids, String[] gids
+			) throws IOException {
+		adminSearchExcelDownloadService.excelDownloadEvents
+		(response, eids, enames, econtents, eamounts, eaddresses, ecounts, erdates, mids, gids);
+	}
+	
 }
