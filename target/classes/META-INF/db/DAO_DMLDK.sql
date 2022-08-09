@@ -17,11 +17,11 @@ INSERT INTO GROUPBOARD(GBID, GID, MID, GBCONTENT, GBFILENAME)
     VALUES(GROUPBOARD_SEQ.NEXTVAL, 2, 'hayoon200', '대화4', NULL);
                   
 SELECT * FROM GROUPS;                  
-SELECT * FROM GROUPDETAIL; 
+SELECT * FROM GROUPDETAIL where gid = 2; 
 
-SELECT * FROM GROUPBOARD; 
+SELECT * FROM GROUPs; 
 SELECT * FROM MEMBER;
-
+select * from groupboard;
 
 -- GroupBoard
 -- 대화 입력 
@@ -197,4 +197,5 @@ select * from groupboard;
 		SELECT TO_MID FROM FOLLOW WHERE FROM_MID='aaa' ORDER BY TO_MID;
 select * from member;
 
+select * from groupdetail where gid =1;
 

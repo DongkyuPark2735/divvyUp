@@ -1,5 +1,7 @@
 package com.lec.divvyup.service;
 
+import java.util.List;
+
 import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -107,6 +109,11 @@ public class MemberServiceImpl implements MemberService {
 	public String searchMpw(String mid, String mname, String memail) {
 		// TODO Auto-generated method stub
 		return memberDao.searachMpw(mid, mname, memail);
+	}
+
+	@Override
+	public List<Member> memberListForGroupBoard() {
+		return memberDao.memberListForGroupBoard();
 	}
 
 }

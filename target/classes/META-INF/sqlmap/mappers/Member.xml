@@ -61,4 +61,8 @@
 		</if>
 	</select>
 		
+	<select id="memberListForGroupBoard" resultType="Member"> <!-- 비밀번호 찾기 -->
+		SELECT * FROM MEMBER
+	</select>
+		
 </mapper>

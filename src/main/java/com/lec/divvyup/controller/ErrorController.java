@@ -17,10 +17,7 @@ public class ErrorController {
 	public String error404(HttpServletResponse response, Model model, Exception e){
 		model.addAttribute("errorMSG", e.getMessage()); 
 		model.addAttribute("errorName", e.getClass().getName()); 
-		
-		log.warn("warn log");
-		log.error("error log");
-		log.info("logging");
+
 		return "errorPage/404ErrorPage";
 	}
 	
@@ -28,9 +25,6 @@ public class ErrorController {
 	public String error405(HttpServletResponse response, Model model, Exception e) {
 		model.addAttribute("errorMSG", e.getMessage()); 
 		model.addAttribute("errorName", e.getClass().getName()); 
-		
-		System.out.println(e.getClass().getName());
-		System.out.println(e.getMessage());
 		
 		return "errorPage/404ErrorPage";
 			
@@ -40,9 +34,6 @@ public class ErrorController {
 	public String error500(HttpServletResponse response, Model model, Exception e) {
 		model.addAttribute("errorMSG", e.getMessage()); 
 		model.addAttribute("errorName", e.getClass().getName()); 
-		
-		System.out.println(e.getClass().getName());
-		System.out.println(e.getMessage());
 		
 		return "errorPage/404ErrorPage";
 			

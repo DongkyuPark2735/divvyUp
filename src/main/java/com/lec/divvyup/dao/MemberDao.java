@@ -1,5 +1,8 @@
 package com.lec.divvyup.dao;
 
+
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.lec.divvyup.vo.Member;
@@ -14,4 +17,5 @@ public interface MemberDao {
 	public int modifiyMember(Member member); // 회원정보 수정
 	public String searchMid(String mname, String memail); // 아이디 찾기
 	public String searachMpw(String mid, String mname, String memail); // 비밀번호 찾기 
+	public List<Member> memberListForGroupBoard(); // 모든 회원 리스트
 }

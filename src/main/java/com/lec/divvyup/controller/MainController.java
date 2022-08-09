@@ -1,6 +1,10 @@
 package com.lec.divvyup.controller;
 
 
+import java.util.ArrayList;
+import java.util.Enumeration;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lec.divvyup.service.FollowService;
+import com.lec.divvyup.service.MemberService;
 import com.lec.divvyup.vo.Follow;
+import com.lec.divvyup.vo.GroupDetail;
+import com.lec.divvyup.vo.Member;
 
 @Controller
 
@@ -18,6 +25,12 @@ import com.lec.divvyup.vo.Follow;
 public class MainController {
 	@Autowired
 	private FollowService followService;
+	
+	@Autowired
+	private MemberService memberService;
+	
+	@Autowired
+	ServletContext application;
 	
 	@RequestMapping(value="mainto", method= {RequestMethod.GET, RequestMethod.POST})
 	public String mainView(Model model, HttpSession session) {
@@ -33,7 +46,32 @@ public class MainController {
 	
 	@RequestMapping(value="logout")
 	public String logout(HttpSession session) {
+		application.removeAttribute((String)session.getAttribute("mid"));
+		Enumeration<String> appMlists = application.getAttributeNames();
+		
+		ArrayList<Member> mList = (ArrayList<Member>) memberService.memberListForGroupBoard();
+		
+		ArrayList<String> tempMlist = new ArrayList<String>();
+
+		while(appMlists.hasMoreElements()){
+			String appMid = appMlists.nextElement();
+			Object attrValue = application.getAttribute(appMid);
+			for(Member ml : mList) {
+				if(ml.getMid().equals(attrValue)) {
+					tempMlist.add(ml.getMid());
+				}
+			}
+		}
+		
+		application.setAttribute("sessionMList", tempMlist);
 		session.invalidate();
 		return "redirect:../member/loginForm.do";
 	}
 }
+
+
+
+
+
+
+

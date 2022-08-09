@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="conPath" value="${pageContext.request.contextPath }" />
-<td>${singleLatestGroupboard.gbid }</td>
+<td class="gidClick">${singleLatestGroupboard.gbid }</td>
 <td>${singleLatestGroupboard.gid }</td>
 <td>${singleLatestGroupboard.mid }</td>
 <c:if test="${not empty singleLatestGroupboard.gbfilename}">
@@ -23,3 +23,4 @@
 	<td>${singleLatestGroupboard.gbcontent}</td>
 </c:if>
 <td>${singleLatestGroupboard.gbrdate }</td>
+<td hidden="" class="joinMList">${sessionMList }</td>

@@ -1,5 +1,7 @@
 package com.lec.divvyup.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import com.lec.divvyup.vo.Member;
@@ -14,4 +16,5 @@ public interface MemberService {
 	public int modifyMember(Member member);
 	public String searchMid(String mname, String memail);
 	public String searchMpw(String mid, String mname, String memail);
+	public List<Member> memberListForGroupBoard(); 
 }
