@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lec.divvyup.dao.NotificationHistoryDao">
+	<resultMap type="NotificationHistory" id="NotificationHistoryResult">
+		<result property="nothid" column="nothid"/>
+		<result property="notsender" column="notsender"/>
+		<result property="notreceiver" column="notreceiver"/>
+		<result property="notcontent" column="notcontent"/>
+		<result property="notdate" column="notdate"/>
+		<result property="notkind" column="notkind"/>
+		<result property="notcheck" column="notcheck"/>
+	</resultMap>
+	
+	<insert id="insertFollowNotification" parameterType="NotificationHistory">
+		INSERT INTO NOTIFICATIONHISTORY (NOTHID, NOTSENDER, NOTRECEIVER, NOTCONTENT, NOTKIND) 
+			VALUES (NOTH_SEQ.NEXTVAL, #{notsender}, #{notreceiver}, '님이 회원님을 팔로우하기 시작했습니다', 0)
+	</insert>
+	
+	<insert id="insertGroupNotification" parameterType="NotificationHistory">
+		INSERT INTO NOTIFICATION (NOTHID, NOTSENDER, NOTRECEIVER, NOTCONTENT, NOTKIND) 
+			VALUES (NOTH_SEQ.NEXTVAL, #{notsender}, #{notreceiver}, '님이 회원님을 그룹에 초대했습니다', 1)
+	</insert>
+	
+	<select id="getUncheckdNotificationCnt" parameterType="NotificationHistory" resultType="int">
+		SELECT COUNT(*) FROM NOTIFICATIONHISTORY WHERE NOTRECEIVER=#{notreceiver} AND NOTCHECK=0
+	</select>
+	
+	<select id="getUncheckdNotificationList" parameterType="NotificationHistory" resultMap="NotificationHistoryResult">
+		SELECT * FROM (SELECT ROWNUM RN, A.* 
+            FROM (SELECT * FROM NOTIFICATIONHISTORY WHERE NOTRECEIVER=#{notreceiver} AND NOTCHECK=0 ORDER BY NOTDATE DESC) A)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<update id="updateUncheckNotification">
+		UPDATE NOTIFICATIONHISTORY SET NOTCHECK=1 WHERE NOTRECEIVER=#{notreceiver} AND NOTCHECK=0
+	</update>
+	
+	<select id="getAllNotificationCnt" parameterType="NotificationHistory" resultType="int">
+		SELECT COUNT(*) FROM NOTIFICATIONHISTORY WHERE NOTRECEIVER=#{notreceiver}
+	</select>
+	
+	<select id="getAllNotificationList" parameterType="NotificationHistory" resultMap="NotificationHistoryResult">
+		SELECT * FROM (SELECT ROWNUM RN, A.* 
+            FROM (SELECT * FROM NOTIFICATIONHISTORY WHERE NOTRECEIVER=#{notreceiver} ORDER BY NOTDATE DESC) A)
+        WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+</mapper>

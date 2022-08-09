@@ -17,6 +17,12 @@
 		<typeAlias type="com.lec.divvyup.vo.AdminSearchKeyWord" alias="AdminSearchKeyWord" />
 		<typeAlias type="com.lec.divvyup.vo.CentralSystem" alias="CentralSystem" />
 		<typeAlias type="com.lec.divvyup.vo.Follow" alias="Follow" />
+<<<<<<< HEAD
+		<typeAlias type="com.lec.divvyup.vo.NotificationHistory" alias="NotificationHistory" />
+		
+
+=======
+>>>>>>> b8778de04dd6597c9c983a6c8be5b6d7883532db
 	</typeAliases>
 	<mappers>
 		<mapper resource="META-INF/sqlmap/mappers/Member.xml" />
@@ -32,5 +38,9 @@
 		<mapper resource="META-INF/sqlmap/mappers/AdminSearch.xml" />
 		<mapper resource="META-INF/sqlmap/mappers/CentralSystem.xml" />
 		<mapper resource="META-INF/sqlmap/mappers/Follow.xml" />
+<<<<<<< HEAD
+		<mapper resource="META-INF/sqlmap/mappers/NotificationHistory.xml" />
+=======
+>>>>>>> b8778de04dd6597c9c983a6c8be5b6d7883532db
 	</mappers>
 </configuration>

@@ -12,14 +12,26 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 	$(document).ready(function() {
-
+		
 	});
+</script>
+<script>
 </script>
 </head>
 <body>
 	<c:if test="${not empty result}">
 		<script>
 			alert('${result}');
+		</script>
+	</c:if>
+	<c:if test="${not empty searchMidResult}">
+		<script>
+			alert('${searchMidResult}');
+		</script>
+	</c:if>
+	<c:if test="${not empty searchMpwResult}">
+		<script>
+			alert('${searchMpwResult}');
 		</script>
 	</c:if>
 	<c:if test="${not empty joinResult}">
@@ -46,10 +58,15 @@
 	    </table>
 	  </form>
 	  <button onclick="location='${conPath}/member/joinForm.do'">JOIN</button>
+	  <button onclick="location='${conPath}/member/searchIdPwForm.do'">FIND ID&PW</button>
 	  <button onclick="location='${conPath}/qboard/listQboardForMember.do'">QBOARD</button>
 	  <p>
 		<input type="button" value="임시 그룹게시판 이동 버튼" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=1'">
+<<<<<<< HEAD
+	  </p>
+=======
 	</p>
+>>>>>>> b8778de04dd6597c9c983a6c8be5b6d7883532db
 	</div>
 </body>
 </html>

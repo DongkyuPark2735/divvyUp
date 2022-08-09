@@ -1,6 +1,7 @@
 package com.lec.divvyup.controller;
 
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lec.divvyup.service.FollowService;
+import com.lec.divvyup.service.MemberService;
+import com.lec.divvyup.service.NotificationHistoryService;
 import com.lec.divvyup.vo.Follow;
+import com.lec.divvyup.vo.Member;
+import com.lec.divvyup.vo.NotificationHistory;
 
 @Controller
 
@@ -19,13 +24,26 @@ public class MainController {
 	@Autowired
 	private FollowService followService;
 	
+	@Autowired
+	private NotificationHistoryService notificationHistoryService;
+
+	@Autowired
+	ServletContext application;
+	
 	@RequestMapping(value="mainto", method= {RequestMethod.GET, RequestMethod.POST})
-	public String mainView(Model model, HttpSession session) {
+	public String mainView(Member member, Model model, HttpSession session, NotificationHistory notificationHistory) {
 		model.addAttribute("myFollowingList", followService.myFollowingList(session));
 		model.addAttribute("myFollowerList", followService.myFollowerList(session));
+		model.addAttribute("uncheckdNotificationCnt", notificationHistoryService.getUncheckdNotificationCnt(session, notificationHistory));
 		return "main/main";
 	}
-	
+	@RequestMapping(value="mainforAdmin", method= {RequestMethod.GET, RequestMethod.POST})
+	public String mainViewForAdmin(Member member, Model model, HttpSession session, NotificationHistory notificationHistory) {
+		model.addAttribute("myFollowingList", followService.myFollowingList(session));
+		model.addAttribute("myFollowerList", followService.myFollowerList(session));
+//		model.addAttribute("uncheckdNotificationCnt", notificationHistoryService.getUncheckdNotificationCnt(session, notificationHistory));
+		return "main/main";
+	}
 	@RequestMapping(value="unieTestMain", method= {RequestMethod.GET, RequestMethod.POST})
 	public String unieTestMain() {
 		return "main/unieTestMain";
@@ -33,6 +51,7 @@ public class MainController {
 	
 	@RequestMapping(value="logout")
 	public String logout(HttpSession session) {
+		/* application.removeAttribute((String) session.getAttribute("mid")); */
 		session.invalidate();
 		return "redirect:../member/loginForm.do";
 	}

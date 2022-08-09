@@ -10,26 +10,6 @@
 <title>Insert title here</title>
 <link href="${conPath}/css/style.css" rel="stylesheet">
 <style>
-	/* *{
-		margin : 0 auto;
-		
-	}
-	div{
-		width : 500px;
-		height : 500px;
-		border: 1px solid black;
-		display: inline-block;
-		
-	}
-	#myFollowing {
-		width : 500px;
-		height : 500px;
-	}
-	#myFollower {
-		width : 500px;
-		height : 500px;
-	} */
-	
 	
 	ul.tabs{
   		margin: 0px;
@@ -71,7 +51,17 @@
     		    $(this).addClass('current');
     		    $("#"+tab_id).addClass('current');
     	 })
+    	 
+    	$.ajax({
+    		 url : "${conPath}/notification/uncheckedNotificationList.do",
+    		 type : "GET",
+    		 data : {"startRow" : startRow, "endRow" : endRow},
+    		 success : function(data) {
+				$('#uncheckedNotificationList').prepend(data);
+			}
+    	});
      });
+     
   </script>
 </head>
 <body>
@@ -81,77 +71,107 @@
 	<c:if test="${modifyMemberResult eq 0 }">
 	  <script>alert('회원정보 수정 실패');</script>
 	</c:if>
-	<c:if test="${not empty member and empty admin }">
-		<h1>회원용 메인페이지 : 현재 접속한 ID는 ${mid }</h1>
-	</c:if>
-	<c:if test="${empty member and not empty admin }">
-		<h1>관리자용 메인페이지 : 현재 접속한 ID는 ${aid }</h1>
-	</c:if>
-	<button onclick="location='${conPath}/main/logout.do'">LOGOUT</button>
-	<c:if test="${not empty member and empty admin }">
-	  <button onclick="location='${conPath}/member/modifyMemberForm.do?mid=${mid }'">MODIFY_MEMBER</button>
-	</c:if>
-	<c:if test="${empty member and not empty admin }">
+	<c:if test="${not empty admin or empty member}">
+	  <h1>관리자용 메인페이지 : 현재 접속한 ID는 ${aid }</h1>
 	  <button onclick="location='${conPath}/qboard/listUncheckedQboardForAdmin.do'">처리대기목록</button>
 	  <button onclick="location='${conPath}/qboard/listCheckedQboardForAdmin.do'">처리목록</button>
 	  <button onclick="location='${conPath}/adminSearch/adminSearchMain.do'">검색목록가기</button>
+	  <button onclick="location='${conPath}/main/logout.do'">로그아웃</button>
 	</c:if>
+	
 	<c:if test="${not empty member and empty admin }">
+	  <h1>회원용 메인페이지 : 현재 접속한 ID는 ${mid }, 읽지 않은 알림 갯수 ${uncheckdNotificationCnt }개</h1>
+	  <button onclick="location='${conPath}/member/modifyMemberForm.do?mid=${mid }'">MODIFY_MEMBER</button>
+	  <button onclick="location='${conPath}/notification/notificationConfirmForm.do'">NOTIFICATION</button>
 	  <button onclick="location='${conPath}/qboard/listQboardForMember.do'">QBOARD</button>
 	  <button onclick="location='${conPath}/qboard/listQboardForMe.do?mid=${mid }'">MYQBOARD</button>
-	</c:if>
-	<div>&nbsp;</div>
+	  <button onclick="location='${conPath}/main/logout.do'">로그아웃</button>
+	  <div>&nbsp;</div>
 	<div class="container">
   		<ul class="tabs">
     		<li class="tab-link current" data-tab="tab-1">${myFollowingList.size() }팔로잉</li>
     		<li class="tab-link" data-tab="tab-2">${myFollowerList.size() }팔로워</li>
     		<li class="tab-link" data-tab="tab-3">친구찾기</li>
+    		<li class="tab-link" data-tab="tab-4">알림창</li>
   		</ul>
  
   		<div id="tab-1" class="tab-content current">
-  			<c:if test="${not empty member and empty admin }">
-				<c:forEach items="${myFollowingList }" var="followingMember">
-		  			<table>
-		    			<tr>
-		      				<td>${followingMember.to_mid } </td>
-		      				<td><button onclick="location='${conPath}/follow/unfollowMember.do?from_mid=${mid }&to_mid=${followingMember.to_mid }'">UNFOLLOW</button></td>
-		    			</tr>
-		  			</table>
-				</c:forEach>
-			</c:if>
+			<c:forEach items="${myFollowingList }" var="followingMember">
+		  		<table>
+		    		<tr>
+		      			<td>${followingMember.to_mid } </td>
+		      			<td>&nbsp;</td>
+						<td>&nbsp;</td>
+		      			<td><button onclick="location='${conPath}/follow/unfollowMember.do?from_mid=${mid }&to_mid=${followingMember.to_mid }'">UNFOLLOW</button></td>
+		    		</tr>
+		  		</table>
+			</c:forEach>
   		</div>
   
   		<div id="tab-2" class="tab-content">
-  			<c:if test="${not empty member and empty admin }">
-				<c:forEach items="${myFollowerList }" var="followerMember">
-		  			<table>
-		    			<tr>
-		      				<td>${followerMember.from_mid }</td>
-		    			</tr>
-		  			</table>
-				</c:forEach>
-			</c:if>
+			<c:forEach items="${myFollowerList }" var="followerMember">
+		  		<table>
+		    		<tr>
+		      			<td>${followerMember.from_mid }</td>
+		    		</tr>
+		  		</table>
+			</c:forEach>
   		</div>
-  
+  		
+  		
   		<div id="tab-3" class="tab-content">
-			<form action="${conPath }/member/searchMember.do">
-				<input type="text" name="searchedMid">
-				<input type="submit" value="SEARCH">
+			<div class="adminSearchResult current" >
+				<form action="${conPath}/member/searchMemberList.do?mid=${mid}" method="get" >
+					<input type="hidden" name="startRow" value="1">
+					<input type="hidden" name="endRow" value="10">
+					<select name="schItem" >
+						<option value="mid"
+							<c:if test="${schItem eq 'mid'}">selected="selected"</c:if>>아이디 검색
+						</option>
+						<option value="mname" 
+							<c:if test="${schItem eq 'mname'}">selected="selected"</c:if>>이름 검색
+						</option>
+					</select>
+					<input type="text" name="schWord" value="${schItem.schWord }">
+					<input type="submit" value="검색">
+				</form>
+				
+				<div>&nbsp;</div>
+				
 				<table>
-				  <%-- <c:if test="${empty memberList }">
-				    <b>해당 ID는 존재하지 않습니다</b>
+				<c:forEach items="${searchedMemberList }" var="member">
+				<c:set var="i" value="0"/>
+				  <tr>
+				    <td>${member.mid }</td>
+					<td>&nbsp;&nbsp;${member.mname }</td>
+				    <c:forEach items="${FollowingList }" var="Member">
+					<c:if test="${member.mid eq Member.to_mid }">
+					  <td>
+					    &nbsp; &nbsp;<button onclick="location='${conPath }/follow/unfollowMember.do?from_mid=${mid }&to_mid=${member.mid }'">UNFOLLOW</button>
+					  </td>
+					  <c:set var="i" value="${i + 1 }"/>
+					</c:if>
+				</c:forEach>
+				  <c:if test="${(i eq 0) and (Member.to_mid != member.mid) }">
+				    <td>
+				      &nbsp; &nbsp;<button onclick="location='${conPath}/follow/followMember.do?from_mid=${mid }&to_mid=${member.mid }'">FOLLOW</button>
+				    </td>
 				  </c:if>
-				  <c:if test="${empty memberList }">
-				    <c:forEach items="memerList" var="member">
-				      <tr>
-				        <td></td>
-				      </tr>
-				    </c:forEach>
-				  </c:if> --%>
+				  </tr>
+				</c:forEach>
 				</table>
-			</form>
+			</div>
    		</div>
+   		
+   		<div id="tab-4" class="tab-content">
+   		  <div id="uncheckedNotificationList">
+   		    
+   		  </div>
+   		</div>
+   		
 	</div>
+	</c:if>
+	
 	
 	<div>
 		<input type="button" value="UNIE" onclick="location.href='${conPath }/main/unieTestMain.do'"/>
