@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.lec.divvyup.service.CentralSystemService;
+import com.lec.divvyup.service.EventDetailService;
+import com.lec.divvyup.service.EventHistoryService;
+import com.lec.divvyup.service.EventService;
+import com.lec.divvyup.service.GroupBoardService;
 import com.lec.divvyup.service.GroupDetailService;
 import com.lec.divvyup.service.GroupsService;
-import com.lec.divvyup.vo.Event;
 import com.lec.divvyup.vo.Groups;
 
 
@@ -24,10 +27,19 @@ public class GroupsController {
 	private GroupDetailService groupDetailService;
 	@Autowired
 	private CentralSystemService centralSystemService;
+	@Autowired
+	private GroupBoardService groupBoardService;
+	@Autowired
+	private EventService eventService;
+	@Autowired
+	private EventDetailService eventDetailService;
+	@Autowired
+	private EventHistoryService eventHistoryService;
 	
 	@RequestMapping(value="groupList", method = RequestMethod.GET)
-	public String groupList(Model model, Groups groups) {
-		model.addAttribute("groupList", groupsService.groupList());
+	public String groupList(Model model, Groups groups, String mid) {
+		model.addAttribute("groupList", groupsService.groupList(mid));
+		model.addAttribute("followList", groupsService.followList(mid));
 		return "groups/groupList";
 	}
 	@RequestMapping(value="groupInfo", method = {RequestMethod.GET, RequestMethod.POST})
@@ -35,22 +47,50 @@ public class GroupsController {
 		model.addAttribute("groupInfo", groupsService.groupInfo(gid));
 		model.addAttribute("groupDetailList", groupDetailService.groupDetailList(gid));
 		model.addAttribute("check", centralSystemService.checkAddition(gid));
-		System.out.println(centralSystemService.checkAddition(gid));
+		model.addAttribute("checkAllPaid",  centralSystemService.checkAllPaid(gid));
+		model.addAttribute("done", centralSystemService.checkFinishSplit(gid));
+		/* model.addAttribute("locations", eventService.getAddress(gid)); */
 		return "groups/groupInfo";
 	}
 	@RequestMapping(value="groupInsertForm", method=RequestMethod.GET)
-	public String registerForm(Model model) {
+	public String registerForm(Model model, String mid) {
 		model.addAttribute("nextGid", groupsService.nextGid());
-		model.addAttribute("memberList", groupsService.memberList());
+		model.addAttribute("followList", groupsService.followList(mid));
 		return "groups/groupInsertForm";
 	}
 	@RequestMapping(value="groupInsert", method=RequestMethod.POST)
-	public String register(MultipartHttpServletRequest mRequest, @ModelAttribute("gDto") Groups groups, String [] mids, String mid, Model model) {
+	public String register(MultipartHttpServletRequest mRequest, @ModelAttribute("gDto") Groups groups, String [] fids, String mid, Model model) {
 		model.addAttribute("InsertResult", groupsService.groupInsert(groups, mRequest));
-		groupDetailService.insertGroupDetail(mids);
-		/* groupDetailService.insertGroupDetail(mid); */ //나중에 멤버 아닌 친구에서 뿌려줄때는, 친구 리스트에 내 이름이 없기에, 이걸 따로 추가해애야함
+		groupDetailService.insertGroupDetail(fids);
+		groupDetailService.insertGroupDetail(mid);
 		return "groups/groupList"; 
 	}
+	@RequestMapping(value="modifyForm", method= {RequestMethod.GET, RequestMethod.POST})
+	public String modifyForm(int gid, Model model, String mid) {
+		model.addAttribute("groupInfo", groupsService.groupInfo(gid));
+		model.addAttribute("followList", groupsService.followList(mid));
+		model.addAttribute("groupDetailList", groupDetailService.groupDetailList(gid));
+		return "groups/modifyForm";
+	}
+	@RequestMapping(value="modify", method = RequestMethod.POST)
+		public String modify(MultipartHttpServletRequest mRequest, @ModelAttribute("gDto") Groups groups, Model model, String pageNum, int gid, String [] fids) {
+		groupsService.modify(mRequest, groups);
+		groupDetailService.insertGroupDetailNew(fids, gid);
+		return "redirect:../groups/groupInfo.do?gid="+gid;
+	}
+	@RequestMapping(value="deleteGroup", method = RequestMethod.GET)
+	public String deleteGroup(int gid) {
+		groupBoardService.step1BeforeDeleteGroup(gid);
+		groupDetailService.step2BeforeDeleteGroup(gid);
+		eventHistoryService.step3BeforeDeleteGroup(gid);
+		eventDetailService.step4BeforeDeleteGroup(gid);
+		eventService.step5BeforeDeleteGroup(gid);
+		centralSystemService.step6BeforeDeleteGroup(gid);
+		groupsService.finalStepDeleteGroup(gid);
+	return "groups/groupList";
+}
+	
+	
 	
 
 	

@@ -13,4 +13,5 @@ public interface GroupBoardService {
 	public List<GroupBoard> listPast20Groupboard(GroupBoard groupBoard);
 	public GroupBoard singleLatestGroupboard(int gid);
 	public GroupBoard getGroupboardVO(String mid);
+	public int step1BeforeDeleteGroup(int gid);
 }
