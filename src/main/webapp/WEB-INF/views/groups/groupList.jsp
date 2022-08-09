@@ -14,7 +14,8 @@
 	<c:forEach var="groups" items="${groupList }">
 		<input type="button" value="${groups.gid }" onclick="location='${conPath }/groups/groupInfo.do?gid=${groups.gid }'">
 	</c:forEach>
-	<input type="button" value="그룹 생성" onclick="location='${conPath }/groups/groupInsertForm.do'">
+	<input type="hidden" name=mid value="${member.mid }">
+	<input type="button" value="그룹 생성" onclick="location='${conPath }/groups/groupInsertForm.do?mid=${member.mid }'">
 </body>
 </html>
 

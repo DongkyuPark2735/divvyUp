@@ -22,7 +22,7 @@
     <insert id="insertEventDetailPayer2" parameterType="String">
 		<![CDATA[
 			INSERT INTO EVENTDETAIL (EDID, EID, MID, EDSHARE)
-    			VALUES (EVENTDETAIL_SEQ.NEXTVAL, (SELECT MAX(EID) FROM EVENT), #{mid}, (SELECT EAMOUNT FROM EVENT WHERE EID=(SELECT MAX(EID) FROM EVENT))-(SELECT ABS(SUM(EDSHARE)) OTHERS FROM EVENTDETAIL WHERE EID=(SELECT MAX(EID) FROM EVENT)))
+    			VALUES (EVENTDETAIL_SEQ.NEXTVAL, (SELECT MAX(EID) FROM EVENT), #{mid}, (SELECT -SUM(EDSHARE) FROM EVENTDETAIL WHERE EID = (SELECT MAX(EID) FROM EVENT)))
 		]]>
     </insert>
 	
@@ -30,7 +30,7 @@
 	<insert id="insertEventDetail" parameterType="EventDetail">
 			INSERT INTO EVENTDETAIL (EDID, EID, MID, EDSHARE)
     			VALUES (EVENTDETAIL_SEQ.NEXTVAL, (SELECT MAX(EID) FROM EVENT), #{mid}, -1*((SELECT EAMOUNT FROM EVENT WHERE EID=(SELECT MAX(EID) FROM EVENT))/(SELECT ECOUNT FROM EVENT WHERE EID=(SELECT MAX(EID) FROM EVENT))))
-    				
+ 
 	</insert>
 	
 	<insert id="insertEventDetail2" parameterType="EventDetail">
@@ -46,11 +46,15 @@
 	
 	
 	<delete id="deleteEventDetail">
-		   DELETE FROM EVENTDETAIL WHERE EID=(SELECT MAX(EID) FROM EVENT)
+		DELETE FROM EVENTDETAIL WHERE EID=(SELECT MAX(EID) FROM EVENT)
 	</delete>
-	<select id="printMidList" parameterType="int" resultMap="EventDetailResult">
-		SELECT M.MID FROM MEMBER M, GROUPDETAIL GD, GROUPS G WHERE M.MID=GD.MID AND G.MID != GD.MID AND GD.GID=G.GID AND GD.GID=#{gid}
-	</select>
-
 	
+	<select id="printMidList" parameterType="int" resultMap="EventDetailResult">
+		SELECT MID FROM GROUPDETAIL WHERE GID = #{gid}
+	</select>
+	
+	<delete id="step4BeforeDeleteGroup" parameterType="int">
+		DELETE FROM EVENTDETAIL WHERE EID IN(SELECT EID FROM EVENT WHERE GID=#{gid})
+	</delete>
+
 </mapper>

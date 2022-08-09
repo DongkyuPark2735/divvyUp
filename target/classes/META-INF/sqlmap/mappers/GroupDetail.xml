@@ -18,31 +18,44 @@
         		VALUES (GROUPDETAIL_SEQ.NEXTVAL, (SELECT MAX(GID) FROM GROUPS), #{mid}, 0)
         ]]>
 	</insert>
-	
-	
-<!-- <update id="updateGroupDetailPayer" parameterType="GroupDetail">
-
-	UPDATE GROUPDETAIL
-    SET GDBALANCE = GDBALANCE + (SELECT EDSHARE FROM EVENTDETAIL WHERE GROUPDETAIL.MID=EVENTDETAIL.MID AND EID=#{eid})
-    WHERE EXISTS (select edshare from eventdetail  WHERE GROUPDETAIL.MID=EVENTDETAIL.MID AND EID=#{eid})
-  		
-	</update> -->
+	<insert id="insertGroupDetailNew" parameterType="GroupDetail">
+    	<![CDATA[
+			INSERT INTO GROUPDETAIL (GDID, GID, MID, GDBALANCE)
+        		VALUES (GROUPDETAIL_SEQ.NEXTVAL, #{gid}, #{mid}, 0)
+        ]]>
+	</insert>
 
 	<update id="updateGroupDetail" parameterType="int">
-
 		UPDATE GROUPDETAIL
    			SET GDBALANCE = GDBALANCE + (SELECT EDSHARE FROM EVENTDETAIL WHERE GROUPDETAIL.MID=EVENTDETAIL.MID AND GID=#{gid} AND EID=(SELECT MAX(EID) FROM EVENT))
     		WHERE EXISTS (select edshare from eventdetail  WHERE GROUPDETAIL.MID=EVENTDETAIL.MID AND EID=(SELECT MAX(EID) FROM EVENT) AND GID=#{gid})
-  		
 	</update>
 	
 	<update id="updateBalance" parameterType="String">
 		UPDATE GROUPDETAIL SET GDBALANCE = 0 WHERE MID=#{mid}
 	</update>
 	
-	
 	<select id="groupDetailList" resultType="GroupDetail" parameterType="int">
 		SELECT * FROM GROUPDETAIL WHERE GID=#{gid}
 	</select>
+	
+	<select id="groupCheckMemberExist" resultType="int" parameterType="GroupDetail">
+		SELECT COUNT(*) FROM GROUPDETAIL WHERE MID=#{mid} AND GID=#{gid}
+	</select>
+	
+	<delete id="deleteMember" parameterType="GroupDetail" >
+		DELETE FROM GROUPDETAIL WHERE MID=#{mid} AND GID=#{gid}
+	</delete>
+	
+	<update id="rollbackEventInfo" parameterType="int">
+		UPDATE GROUPDETAIL
+   			SET GDBALANCE = GDBALANCE - (SELECT DISTINCT EDSHARE FROM EVENTHISTORY WHERE GROUPDETAIL.MID=EVENTHISTORY.MID AND EID=#{eid} AND GROUPDETAIL.GID=#{gid})
+    		WHERE EXISTS (SELECT EDSHARE FROM EVENTHISTORY WHERE GROUPDETAIL.MID=EVENTHISTORY.MID AND EID=#{eid})
+            AND GROUPDETAIL.GID= #{gid}
+	</update>
+	
+	<delete id="step2BeforeDeleteGroup" parameterType="int">
+		DELETE FROM GROUPDETAIL WHERE GID = #{gid}
+	</delete>
 	
 </mapper>

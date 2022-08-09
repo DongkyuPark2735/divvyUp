@@ -14,15 +14,9 @@
 		<typeAlias type="com.lec.divvyup.vo.Event" alias="Event" />
 		<typeAlias type="com.lec.divvyup.vo.EventDetail" alias="EventDetail" />
 		<typeAlias type="com.lec.divvyup.vo.EventHistory" alias="EventHistory" />
-<<<<<<< HEAD
 		<typeAlias type="com.lec.divvyup.vo.AdminSearchKeyWord" alias="AdminSearchKeyWord" />
-=======
-<<<<<<< HEAD
 		<typeAlias type="com.lec.divvyup.vo.CentralSystem" alias="CentralSystem" />
-=======
 		<typeAlias type="com.lec.divvyup.vo.Follow" alias="Follow" />
->>>>>>> 57c71005000b85cb335d1f306f0b592c43de22bc
->>>>>>> 83b6352e2fbbfb3fcf588d64e09a36d86b01dd4a
 	</typeAliases>
 	<mappers>
 		<mapper resource="META-INF/sqlmap/mappers/Member.xml" />
@@ -35,14 +29,8 @@
 		<mapper resource="META-INF/sqlmap/mappers/Event.xml" />
 		<mapper resource="META-INF/sqlmap/mappers/EventDetail.xml" />
 		<mapper resource="META-INF/sqlmap/mappers/EventHistory.xml" />
-<<<<<<< HEAD
 		<mapper resource="META-INF/sqlmap/mappers/AdminSearch.xml" />
-=======
-<<<<<<< HEAD
 		<mapper resource="META-INF/sqlmap/mappers/CentralSystem.xml" />
-=======
 		<mapper resource="META-INF/sqlmap/mappers/Follow.xml" />
->>>>>>> 57c71005000b85cb335d1f306f0b592c43de22bc
->>>>>>> 83b6352e2fbbfb3fcf588d64e09a36d86b01dd4a
 	</mappers>
 </configuration>

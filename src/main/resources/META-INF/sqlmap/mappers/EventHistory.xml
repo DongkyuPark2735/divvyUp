@@ -19,5 +19,16 @@
 		    AND E.EID=(SELECT MAX(EID) FROM EVENT))
 	</insert>
 	
-
+	<select id="getEventHistory" resultMap="EventHistoryResult" parameterType="int">
+		SELECT * FROM EVENTHISTORY WHERE EID = #{eid} ORDER BY MID
+	</select>
+	
+	<delete id="deleteEventHistory" parameterType="int">
+		 DELETE FROM EVENTHISTORY WHERE eid=#{eid}
+	</delete>
+	
+	<delete id="step3BeforeDeleteGroup" parameterType="int">
+		DELETE FROM EVENTHISTORY WHERE EID IN(SELECT EID FROM EVENT WHERE GID=#{gid})
+	</delete>
+	
 </mapper>

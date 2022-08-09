@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.lec.divvyup.dao.GroupsDao;
-import com.lec.divvyup.vo.Event;
 import com.lec.divvyup.vo.Groups;
 import com.lec.divvyup.vo.Member;
 
@@ -30,36 +29,35 @@ String backupPath = "C:\\Users\\Unie\\Documents\\DivvyUpTeamUnie\\divvyUp\\src\\
 		return groupsDao.groupInfo(gid);
 	}
 	@Override
-	public List<Groups> groupList() {
-		return groupsDao.groupList();
+	public List<Groups> groupList(String mid) {
+		return groupsDao.groupList(mid);
 	}
 	@Override
 	public int nextGid() {
 		return groupsDao.nextGid();
 	}
 	@Override
-	public List<Member> memberList() {
-		return groupsDao.memberList();
+	public List<Member> followList(String mid) {
+		return groupsDao.followList(mid);
 	}
 	
 	@Override
 	public int groupInsert(Groups groups, MultipartHttpServletRequest mRequest) {
 		String uploadPath = mRequest.getRealPath("groupsImgFileUpload/");
 		boolean isUpload = false;
-		Iterator<String> params = mRequest.getFileNames(); // tempBimg1, tempBimg2
+		Iterator<String> params = mRequest.getFileNames();
 		String[] gimg = new String[1];
 		int idx = 0;
 		while(params.hasNext()) {
 			String param = params.next();
-			MultipartFile mFile = mRequest.getFile(param); // 파라미터에 첨부된 파일 객체
+			MultipartFile mFile = mRequest.getFile(param);
 			gimg[idx] = mFile.getOriginalFilename(); 
-			if(gimg[idx]!=null && !gimg[idx].equals("")) { // 첨부함
+			if(gimg[idx]!=null && !gimg[idx].equals("")) {
 				if(new File(uploadPath + gimg[idx]).exists()) {
-					// 서버에 같은 파일이름이 있을 경우(첨부파일과)
 					gimg[idx] = System.currentTimeMillis() + "_" + gimg[idx];
 				}
 				try {
-					mFile.transferTo(new File(uploadPath+gimg[idx])); // 서버에 저장
+					mFile.transferTo(new File(uploadPath+gimg[idx]));
 					System.out.println("서버파일 : " + uploadPath + gimg[idx]);
 					System.out.println("백업파일 : " + backupPath + gimg[idx]);
 					isUpload = filecopy(uploadPath + gimg[idx], backupPath + gimg[idx]);
@@ -70,8 +68,8 @@ String backupPath = "C:\\Users\\Unie\\Documents\\DivvyUpTeamUnie\\divvyUp\\src\\
 			}
 			idx++;
 		}
-		groups.setGimg(gimg[0]);// 첫번째 첨부한 파일 이름
-		return groupsDao.groupInsert(groups); // DB insert
+		groups.setGimg(gimg[0]);
+		return groupsDao.groupInsert(groups);
 	}
 	private boolean filecopy(String serverFile, String backupFile) {
 		boolean isCopy = false;
@@ -99,5 +97,43 @@ String backupPath = "C:\\Users\\Unie\\Documents\\DivvyUpTeamUnie\\divvyUp\\src\\
 			}
 		}
 		return isCopy;
+	}
+	@Override
+	public int modify(MultipartHttpServletRequest mRequest, Groups groups) {
+		String uploadPath = mRequest.getRealPath("groupsImgFileUpload/");
+		boolean isUpload = false;
+		Iterator<String> params = mRequest.getFileNames();
+		String[] gimg = new String[1];
+		int idx = 0;
+		while(params.hasNext()) {
+			String param = params.next();
+			MultipartFile mFile = mRequest.getFile(param);
+			gimg[idx] = mFile.getOriginalFilename(); 
+			if(gimg[idx]!=null && !gimg[idx].equals("")) {
+				if(new File(uploadPath + gimg[idx]).exists()) {
+					gimg[idx] = System.currentTimeMillis() + "_" + gimg[idx];
+				}
+				try {
+					mFile.transferTo(new File(uploadPath+gimg[idx]));
+					System.out.println("서버파일 : " + uploadPath + gimg[idx]);
+					System.out.println("백업파일 : " + backupPath + gimg[idx]);
+					isUpload = filecopy(uploadPath + gimg[idx], backupPath + gimg[idx]);
+				} catch (IOException e) {
+					System.out.println(e.getMessage());
+				}
+			}else {
+			}
+			idx++;
+		}
+		groups.setGimg(gimg[0]);
+		return groupsDao.modify(groups);
+	}
+	@Override
+	public int finalStepDeleteGroup(int gid) {
+		if (groupsDao.finalStepDeleteGroup(gid) == 1) {
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 }

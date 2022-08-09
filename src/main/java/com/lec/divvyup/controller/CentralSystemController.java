@@ -22,7 +22,8 @@ public class CentralSystemController {
 	
 	@RequestMapping(value="insertSplit" ,  method={RequestMethod.GET, RequestMethod.POST})
 	public String insertSplit(int gid, Model model) {
-		centralSystemService.insertSplit(gid);
+		centralSystemService.insertSplit(gid); //Add data point to central system (indication that splitting has begun)
+		centralSystemService.totalSum(gid); //Sum of total money that needs to be paid by the payers
 		return "redirect:../groups/groupInfo.do?gid="+gid;
 	}
 	@RequestMapping(value="payForm" ,  method={RequestMethod.GET, RequestMethod.POST})
@@ -34,12 +35,25 @@ public class CentralSystemController {
 	}
 	@RequestMapping(value="pay", method={RequestMethod.GET, RequestMethod.POST})
 	public String pay(Model model, HttpSession session, String mid, int gid) {
-		centralSystemService.pay(mid);
+		centralSystemService.pay(mid, gid); //adding the paid amount to CSAMOUNT
 		groupDetailService.updateBalance(mid);  //zero out member's balance within groupdetail
-		centralSystemService.allPayChk(gid);
-		return "main/main";
-		 
+		centralSystemService.allPayChk(); //checking if everyone paid (only updates to 1 is everyone paid)
+		return "centralSystem/temp";
 	}
-	
+	@RequestMapping(value="getForm" ,  method={RequestMethod.GET, RequestMethod.POST})
+	public String getForm(Model model, HttpSession session, int gid, String mid, int gdbalance) {
+		model.addAttribute("gdbalance", gdbalance);
+		model.addAttribute("gid", gid);
+		model.addAttribute("getMemberinfo", centralSystemService.getMember(mid));
+		return "centralSystem/confirmGet";
+	}
+	@RequestMapping(value="get", method={RequestMethod.GET, RequestMethod.POST})
+	public String get(Model model, HttpSession session, String mid, int gid) {
+		centralSystemService.get(mid, gid, session);
+		groupDetailService.updateBalance(mid);  
+		centralSystemService.finishedSplit(gid); //Checking if split has finalized (everyone paid and everyone received)
+		model.addAttribute("done", centralSystemService.checkFinishSplit(gid));
+		return "centralSystem/temp";
+	}
 
 }
