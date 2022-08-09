@@ -7,7 +7,28 @@
 <html>
 <head>
 	<title></title>
-	<script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+	
+	<!-- summernote css/js-->
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+	<script>
+				 $(document).ready(function() {
+					 $('#summernote').summernote({
+					        height: 300,
+					        minHeight: null,
+					        maxHeight: null,
+					        lang : 'ko-KR',
+					        onImageUpload: function(files, editor, welEditable) {
+					                sendFile(files[0], editor, welEditable);
+					            }
+	
+					    });
+				 });
+	</script>
 	<script>
 	   $(document).ready(function(){
 		   var numberOfChecked = 1;
@@ -32,17 +53,16 @@
 			<tr><td>그룹 아이디</td><td><input type="text" name="gid" id="gid" value="${nextGid}" readonly="readonly"></td></tr>
 			<tr><td>그룹 이름</td><td><input type="text" name="gname"></td></tr>
 			<tr><td>그룹 이미지 첨부</td><td><input type="file" name="tempImage" ></td></tr>
-			<tr><td>그룹 설명</td><td><input type="text" name="gcontent"></td></tr>
-			
+			<tr><td>그룹 설명</td><td><textarea name="gcontent" id="summernote"></textarea></td></tr>			
 			<tr><td>그룹 멤버 추가</td>
 			<td>
-    			<c:forEach items="${memberList }" var="mids" >
+    			<c:forEach items="${followList }" var="fids" >
     				<div>
-    					<input type="checkbox" class="mids" name="mids" id="${mids.mid }" value="${mids.mid }" <c:if test="${mids.mid eq member.mid }"> 
+    					<input type="checkbox" class="fids" name="fids" id="${fids}" value="${fids }" <c:if test="${fids eq member.mid }"> 
     																								onclick="return false" checked="checked"
     																								style="accent-color:grey; color:grey;"
     																							</c:if>>
-   					  	<label for="${mids.mid }">${mids.mid }</label>
+   					  	<label for="${fids }">${fids }</label>
      				</div>	
 				</c:forEach>
 			</td></tr>

@@ -1,22 +1,13 @@
 package com.lec.divvyup.service;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.lec.divvyup.dao.EventDetailDao;
 import com.lec.divvyup.vo.Event;
 import com.lec.divvyup.vo.EventDetail;
-import com.lec.divvyup.vo.GroupDetail;
 
 @Service
 public class EventDetailServiceImpl implements EventDetailService {
@@ -24,9 +15,7 @@ public class EventDetailServiceImpl implements EventDetailService {
 	private EventDetailDao eventDetailDao;
 	@Override
 	public int insertEventDetail(String[] mids) {
-		
 		 for(int i=0; i < mids.length ; i++) {
-			 System.out.println(mids[i]);
 			 String mid= mids[i];
 			 eventDetailDao.insertEventDetail(mid); 
 			 }
@@ -34,7 +23,6 @@ public class EventDetailServiceImpl implements EventDetailService {
 	}
 	@Override
 	public int insertEventDetail2(String[] mids, int[] share) {
-		
 		 for(int i=0; i < mids.length ; i++) {
 			 EventDetail eventDetail = new EventDetail();
 			 if(share[i]!=0) {
@@ -59,7 +47,6 @@ public class EventDetailServiceImpl implements EventDetailService {
 		return eventDetailDao.insertEventDetailPayer2(mid); 
 	}
 	
-	
 	@Override
 	public List<Event> printMidList(int gid) {
 		return eventDetailDao.printMidList(gid);
@@ -67,6 +54,14 @@ public class EventDetailServiceImpl implements EventDetailService {
 	@Override
 	public int deleteEventDetail() {
 		return eventDetailDao.deleteEventDetail();
+	}
+	@Override
+	public int step4BeforeDeleteGroup(int gid) {
+		if (eventDetailDao.step4BeforeDeleteGroup(gid) == 1) {
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 
 }

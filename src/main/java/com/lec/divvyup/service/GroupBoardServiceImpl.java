@@ -114,5 +114,14 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 		}
 		return isCopy;
 	}
+
+	@Override
+	public int step1BeforeDeleteGroup(int gid) {
+		if (groupBoardDao.step1BeforeDeleteGroup(gid) == 1) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
 	
 }

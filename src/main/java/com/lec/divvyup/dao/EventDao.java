@@ -10,5 +10,8 @@ import com.lec.divvyup.vo.Event;
 public interface EventDao {
 	public int insertEvent(Event event);
 	public List<Event> eventList(int gid);
-	
+	public Event getEvent(int eid);
+	public int modifyEvent(Event event);
+	public int deleteEvent(int eid);
+	public int step5BeforeDeleteGroup(int gid);
 }

@@ -64,6 +64,10 @@
 		                    WHERE MID = #{mid} ORDER BY GBID DESC) GB)
 		    WHERE RN = 1
 	</select>
+	
+	<delete id="step1BeforeDeleteGroup" parameterType="int">
+		DELETE FROM GROUPBOARD WHERE GID = #{gid}
+	</delete>
 
 </mapper>
 

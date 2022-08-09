@@ -21,13 +21,8 @@
 </style>
 </head>
 <body>
-	<a>${member.mname }님</a>
+	<a>${member.mname }님 (${member.mid})</a>
 	<a href="${conPath }/member/loginForm.do">로그인</a>
-	
-		
-		
-		
-	<a href="${conPath }/groups/groupList.do">그룹보기</a>
-	<a href="${conPath }/groups/groupInfo.do&gid=1">그룹 멤버 리스트 보기</a>
+	<a href="${conPath }/groups/groupList.do?mid=${member.mid}">그룹보기</a>
 </body>
 </html>
