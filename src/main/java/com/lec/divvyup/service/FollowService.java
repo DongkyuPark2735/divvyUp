@@ -11,4 +11,6 @@ public interface FollowService {
 	public int unfollowMember(HttpSession session, Follow follow);
 	public List<Follow> myFollowingList(HttpSession session);
 	public List<Follow> myFollowerList(HttpSession session);
+	public List<Follow> forAdminMyFollowingList(String mid);
+	public List<Follow> forAdminmyFollowerList(String mid);
 }

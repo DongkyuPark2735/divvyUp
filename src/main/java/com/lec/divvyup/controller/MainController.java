@@ -1,6 +1,12 @@
 package com.lec.divvyup.controller;
 
 
+<<<<<<< HEAD
+import java.util.ArrayList;
+import java.util.Enumeration;
+
+=======
+>>>>>>> db5b53a79b086974dde8ec3414e8235705217ebe
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
@@ -12,10 +18,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lec.divvyup.service.FollowService;
 import com.lec.divvyup.service.MemberService;
+<<<<<<< HEAD
+import com.lec.divvyup.vo.Follow;
+import com.lec.divvyup.vo.GroupDetail;
+import com.lec.divvyup.vo.Member;
+=======
 import com.lec.divvyup.service.NotificationHistoryService;
 import com.lec.divvyup.vo.Follow;
 import com.lec.divvyup.vo.Member;
 import com.lec.divvyup.vo.NotificationHistory;
+>>>>>>> db5b53a79b086974dde8ec3414e8235705217ebe
 
 @Controller
 
@@ -25,8 +37,13 @@ public class MainController {
 	private FollowService followService;
 	
 	@Autowired
+<<<<<<< HEAD
+	private MemberService memberService;
+	
+=======
 	private NotificationHistoryService notificationHistoryService;
 
+>>>>>>> db5b53a79b086974dde8ec3414e8235705217ebe
 	@Autowired
 	ServletContext application;
 	
@@ -51,8 +68,36 @@ public class MainController {
 	
 	@RequestMapping(value="logout")
 	public String logout(HttpSession session) {
+<<<<<<< HEAD
+		application.removeAttribute((String)session.getAttribute("mid"));
+		Enumeration<String> appMlists = application.getAttributeNames();
+		
+		ArrayList<Member> mList = (ArrayList<Member>) memberService.memberListForGroupBoard();
+		
+		ArrayList<String> tempMlist = new ArrayList<String>();
+
+		while(appMlists.hasMoreElements()){
+			String appMid = appMlists.nextElement();
+			Object attrValue = application.getAttribute(appMid);
+			for(Member ml : mList) {
+				if(ml.getMid().equals(attrValue)) {
+					tempMlist.add(ml.getMid());
+				}
+			}
+		}
+		
+		application.setAttribute("sessionMList", tempMlist);
+=======
 		/* application.removeAttribute((String) session.getAttribute("mid")); */
+>>>>>>> db5b53a79b086974dde8ec3414e8235705217ebe
 		session.invalidate();
 		return "redirect:../member/loginForm.do";
 	}
 }
+
+
+
+
+
+
+

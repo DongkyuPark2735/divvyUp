@@ -119,6 +119,35 @@
 				<c:if test="${empty groupInfo.gimg }">
 					첨부파일 첨부 안 함
 				</c:if>
+<<<<<<< HEAD
+			</td></tr>
+			<tr><td colspan="3">group summary : ${groupInfo.gcontent }</td></tr>
+			<tr><td colspan="3">group leader : ${groupInfo.mid }</td></tr>
+			<tr><td colspan="3"> 그룸 멤버 리스트 : </td></tr>
+			<th>멤버 아이디</th><th>멤버 balance</th><th>가입일</th>
+    		<c:forEach items="${groupDetailList }" var="gMems">
+    			<tr>
+    				<td style="width:100px;">${gMems.mid }</td>
+    				<td style="width:100px;">${gMems.gdbalance }<input type="hidden" id="gdbalance" value= "${gMems.gdbalance }"/></td>
+    				
+    				<td style="width:100px;">${gMems.gdrdate } </td>
+    				<c:if test="${check eq 1}">
+    					<c:if test="${member.mid eq gMems.mid}">
+		    				<c:if test="${gMems.gdbalance < 0 }">
+		    					<td><input type="button" value="내기" onclick="pay('${gMems.gdbalance }');"></td>
+		    				</c:if>
+		    				<c:if test="${gMems.gdbalance > 0 }">
+		    					<td><input type="button" value="받기" onclick="location='${conPath }/centralSystem/get.do?gid=${groupInfo.gid }&mid=${member.mid }&gdbalance=${gMems.gdbalance }'"></td>
+		    				</c:if>
+		    				<c:if test="${gMems.gdbalance eq 0 }">
+		    					<td  style="color:'green';">정산 할거 없음</td>
+		    				</c:if>
+	    				</c:if>
+    				</c:if>
+    				
+    			</tr>
+    		</c:forEach>
+=======
 			</td>
 		</tr>
 		<tr>
@@ -163,6 +192,7 @@
 					</c:if>
 			</tr>
 		</c:forEach>
+>>>>>>> db5b53a79b086974dde8ec3414e8235705217ebe
 	</table>
 	
 	<table class="mapShow">

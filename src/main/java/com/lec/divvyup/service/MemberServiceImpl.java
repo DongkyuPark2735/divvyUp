@@ -1,6 +1,9 @@
 package com.lec.divvyup.service;
 
+<<<<<<< HEAD
+=======
 import java.util.ArrayList;
+>>>>>>> db5b53a79b086974dde8ec3414e8235705217ebe
 import java.util.List;
 
 import javax.mail.Message;
@@ -188,6 +191,11 @@ public class MemberServiceImpl implements MemberService {
 		member.setMid(mid);
 		searchedMemberList = (ArrayList<Member>) memberDao.searchMember(member);
 		return searchedMemberList;
+	}
+
+	@Override
+	public List<Member> memberListForGroupBoard() {
+		return memberDao.memberListForGroupBoard();
 	}
 
 }
