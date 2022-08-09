@@ -17,10 +17,6 @@
 		DELETE FROM FOLLOW WHERE FROM_MID=#{from_mid,jdbcType=VARCHAR} AND TO_MID=#{to_mid,jdbcType=VARCHAR}
 	</delete>
 	
-	
-	
-	
-	
 	<select id="myFollowingList" parameterType="String" resultMap="FollowResult">
 		SELECT TO_MID FROM FOLLOW WHERE FROM_MID=#{from_mid,jdbcType=VARCHAR} ORDER BY TO_MID
 	</select>

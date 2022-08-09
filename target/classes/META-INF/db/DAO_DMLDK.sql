@@ -17,11 +17,14 @@ INSERT INTO GROUPBOARD(GBID, GID, MID, GBCONTENT, GBFILENAME)
     VALUES(GROUPBOARD_SEQ.NEXTVAL, 2, 'hayoon200', '대화4', NULL);
                   
 SELECT * FROM GROUPS;                  
-SELECT * FROM GROUPDETAIL where gid = 2; 
+SELECT * FROM GROUPDETAIL; 
 
 SELECT * FROM GROUPs; 
 SELECT * FROM MEMBER;
 select * from groupboard;
+
+		SELECT * FROM GROUPDETAIL WHERE GID=1;
+
 
 -- GroupBoard
 -- 대화 입력 
@@ -70,12 +73,8 @@ SELECT * FROM GROUPBOARD WHERE MID = 'aaa' ORDER BY GBID DESC;
 		    WHERE RN = 1;
 commit;
 
-
-
-SELECT *
-FROM ALL_TAB_COLUMNS
-WHERE TABLE_NAME = 'GROUPS';
 select * from groups;
+
 insert into groups(gid, gname, grdate, gcontent, mid)
     VALUES(5, 'testGroup1', '22/08/01', '지우지말아주세요ㅠㅡㅠ', 'H34FI3');
 insert into groups(gid, gname, grdate, gcontent, mid)
@@ -130,6 +129,8 @@ SELECT *
 commit;
 
 select * from groups;
+select * from groupdetail;
+
 select * from follow;
 select * from event;
 select * from eventdetail;

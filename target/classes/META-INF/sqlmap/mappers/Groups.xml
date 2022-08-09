@@ -14,8 +14,8 @@
 	</resultMap>
 
 
-	<select id="groupList" resultType="Groups">
-		SELECT * FROM GROUPS ORDER BY GRDATE DESC
+	<select id="groupList" resultType="Groups" parameterType="String">
+		SELECT * FROM GROUPS WHERE GID IN(SELECT GID FROM GROUPDETAIL WHERE MID=#{mid}) ORDER BY GRDATE DESC
 	</select>
 	
 	<select id="groupInfo" parameterType="int" resultType="Groups">
@@ -26,19 +26,31 @@
 		SELECT NVL((MAX(GID)+1),1) FROM GROUPS
 	</select>
 	
-	<select id="memberList" parameterType="Member" resultMap="GroupsResult">
-		SELECT * FROM MEMBER
+	<select id="followList" parameterType="String" resultType="String">
+		SELECT TO_MID FROM FOLLOW WHERE FROM_MID= #{mid}
 	</select>
 
 	<insert id="groupInsert" parameterType="Groups">
 		<if test="gimg==''">
-				INSERT INTO GROUPS (GID, GNAME, GCONTENT, MID)
-   					VALUES (GROUPS_SEQ.NEXTVAL, #{gname}, #{gcontent}, #{mid})
+			INSERT INTO GROUPS (GID, GNAME, GCONTENT, MID)
+				VALUES (GROUPS_SEQ.NEXTVAL, #{gname}, #{gcontent}, #{mid})
 		</if>
 		<if test="gimg!=''">
-				INSERT INTO GROUPS (GID, GNAME, GIMG, GCONTENT, MID)
-   					VALUES (GROUPS_SEQ.NEXTVAL, #{gname}, #{gimg} , #{gcontent}, #{mid})
+			INSERT INTO GROUPS (GID, GNAME, GIMG, GCONTENT, MID)
+   				VALUES (GROUPS_SEQ.NEXTVAL, #{gname}, #{gimg} , #{gcontent}, #{mid})
 		</if>
 	</insert>
+	
+	<update id="modify" parameterType="Groups">
+		UPDATE GROUPS SET
+			GNAME=#{gname},
+			<if test="gimg != null and gimg!=''">GIMG=#{gimg},</if>
+			GCONTENT=#{gcontent}
+			WHERE GID=#{gid}
+	</update>
+	
+	<delete id="finalStepDeleteGroup" parameterType="int">
+		DELETE FROM GROUPS WHERE GID=#{gid}
+	</delete>
 	
 </mapper>

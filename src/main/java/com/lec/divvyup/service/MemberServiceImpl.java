@@ -1,5 +1,9 @@
 package com.lec.divvyup.service;
 
+<<<<<<< HEAD
+=======
+import java.util.ArrayList;
+>>>>>>> db5b53a79b086974dde8ec3414e8235705217ebe
 import java.util.List;
 
 import javax.mail.Message;
@@ -102,13 +106,91 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String searchMid(String mname, String memail) {
 		// TODO Auto-generated method stub
-		return memberDao.searchMid(mname, memail);
+		Member member = new Member();
+		member.setMname(mname);
+		member.setMemail(memail);
+		final Member memberSearcinId = memberDao.searchMid(member); //db에 담긴놈	
+		MimeMessagePreparator message = new MimeMessagePreparator() {
+			String content = "<div style=\"width:500px; margin: 0 auto; text-align: center\">\n" + 
+					"	<h1 style=\"color:blue;\">"+ memberSearcinId.getMname() +"님의 아이디</h1>\n" + 
+					"	<div>\n" + 
+					"		<p>당신의 ID는"+memberSearcinId.getMid()+"입니다</p>\n" + 
+					"	</div>\n" + 
+					"	<div>\n" + 
+					"		<p style=\"color:red;\">빨간 글씨 부분</p>\n" + 
+					"		<p style=\"color:blue;\">파란 글씨 부분</p>\n" + 
+					"		<img src=\"https://t1.daumcdn.net/daumtop_chanel/op/20200723055344399.png\">\n" + 
+					"	</div>\n" + 
+					"	<p>서울시 어떤구 XX로 00 **빌딩 402</p>\n" + 
+					"</div>";
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				// TODO Auto-generated method stub
+				mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(memberSearcinId.getMemail()));
+				mimeMessage.setFrom(new InternetAddress("kimbin960826@gmail.com"));
+				mimeMessage.setSubject("당신의 아이디");
+				mimeMessage.setText(content, "utf-8", "html");
+			}
+		};
+		String result;
+		if(! memail.equals(memberSearcinId.getMemail())) {
+			result="해당 이메일은 존재하지 않습니다";
+		}else {
+			result="아이디를 해당 메일로 보냈습니다";
+			mailSender.send(message);
+		}
+		return result;
 	}
 
 	@Override
 	public String searchMpw(String mid, String mname, String memail) {
 		// TODO Auto-generated method stub
-		return memberDao.searachMpw(mid, mname, memail);
+		Member member = new Member();
+		member.setMid(mid);
+		member.setMname(mname);
+		member.setMemail(memail);
+		final Member memberSearchingPw = memberDao.searchMpw(member);
+		MimeMessagePreparator message = new MimeMessagePreparator() {
+			String content = "<div style=\"width:500px; margin: 0 auto; text-align: center\">\n" + 
+					"	<h1 style=\"color:blue;\">"+ memberSearchingPw.getMid() +"님</h1>\n" + 
+					"	<div>\n" + 
+					"		<p>당신의 PW는"+memberSearchingPw.getMpw()+"입니다</p>\n" + 
+					"	</div>\n" + 
+					"	<div>\n" + 
+					"		<p style=\"color:red;\">빨간 글씨 부분</p>\n" + 
+					"		<p style=\"color:blue;\">파란 글씨 부분</p>\n" + 
+					"		<img src=\"https://t1.daumcdn.net/daumtop_chanel/op/20200723055344399.png\">\n" + 
+					"	</div>\n" + 
+					"	<p>서울시 어떤구 XX로 00 **빌딩 402</p>\n" + 
+					"</div>";
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+				// TODO Auto-generated method stub
+				mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(memberSearchingPw.getMemail()));
+				mimeMessage.setFrom(new InternetAddress("kimbin960826@gmail.com"));
+				mimeMessage.setSubject("당신의 패스워드");
+				mimeMessage.setText(content, "utf-8", "html");
+			}
+		};
+		String result;
+		if(memberSearchingPw == null) {
+			result="해당 아이디는 존재하지 않습니다";
+		}else if(! memail.equals(memberSearchingPw.getMemail())) {
+			result="해당 아이디와 이메일이 일치하지 않습니다";
+		}else {
+			result="비밀번호를 해당 메일로 보냈습니다";
+			mailSender.send(message);
+		}
+		return result;
+	}
+	
+	@Override
+	public List<Member> searchMember(HttpSession session, Member member) {
+		ArrayList<Member> searchedMemberList = new ArrayList<Member>();
+		String mid = (String)session.getAttribute("mid");
+		member.setMid(mid);
+		searchedMemberList = (ArrayList<Member>) memberDao.searchMember(member);
+		return searchedMemberList;
 	}
 
 	@Override

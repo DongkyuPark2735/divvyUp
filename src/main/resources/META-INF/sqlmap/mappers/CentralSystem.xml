@@ -20,20 +20,70 @@
     </insert>
     
     <select id="checkAddition" parameterType="CentralSystem" resultType="int">
-    	SELECT COUNT(*) FROM CENTRALSYSTEM WHERE GID = #{gid}
+    	<![CDATA[
+    		SELECT COUNT(*) FROM CENTRALSYSTEM WHERE GID = #{gid}
+    	]]>
     </select>
     
-    <update id="pay" parameterType="String">
-    	UPDATE CENTRALSYSTEM
-    		SET CSAMOUNT = CSAMOUNT + (SELECT -GDBALANCE PAID FROM GROUPDETAIL WHERE  MID = #{mid})
+    <update id="pay" parameterType="GroupDetail">
+    	<![CDATA[
+    		UPDATE CENTRALSYSTEM
+    			SET CSAMOUNT = CSAMOUNT + (SELECT -GDBALANCE FROM GROUPDETAIL WHERE  MID = #{mid} and GID=#{gid})
+    			WHERE GID= #{gid}
+    		]]>
+    </update>
+    
+     <update id="get" parameterType="GroupDetail">
+    	 <![CDATA[
+    		UPDATE CENTRALSYSTEM
+    			SET CSAMOUNT = CSAMOUNT - (SELECT GDBALANCE FROM GROUPDETAIL WHERE  MID = #{mid} and GID=#{gid})
+    			WHERE CSALLPAID = 1
+    			AND GID= #{gid}
+    	]]>
     </update>
     
     <update id="allPayChk" parameterType="int">
     	<![CDATA[
     		UPDATE CENTRALSYSTEM
     			SET CSALLPAID = 1
-    			WHERE CSAMOUNT=(SELECT SUM(-GDBALANCE) FROM GROUPDETAIL WHERE GDBALANCE < 0 AND GID = #{gid})
+    			WHERE CSAMOUNT=TOTALSUM
     	]]>
     </update>
+      
+    <update id="totalSum" parameterType="int">
+    	<![CDATA[
+    		UPDATE CENTRALSYSTEM
+    			SET TOTALSUM = (SELECT SUM(-GDBALANCE) FROM GROUPDETAIL WHERE GDBALANCE < 0 AND GID = #{gid})
+    			WHERE CSID = (SELECT MAX(CSID) FROM CENTRALSYSTEM)
+   		]]>
+    </update>
+    
+    <select id="checkAllPaid" parameterType="int" resultType="int"> 	
+		<![CDATA[
+    		SELECT COUNT(*) FROM CENTRALSYSTEM WHERE GID = #{gid} AND CSALLPAID = 1
+    	]]>
+    </select>
 
+	<select id="checkFinishSplit" parameterType="int" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM CENTRALSYSTEM WHERE GID = #{gid} AND CSALLPAID = 1 AND FINISH= 1
+		]]>
+	</select>
+	
+	<update id="finishedSplit" parameterType="int">
+		<![CDATA[
+			UPDATE CENTRALSYSTEM
+				SET FINISH = 1 
+				WHERE CSALLPAID = 1 
+				AND CSAMOUNT = 0 
+				AND GID = #{gid}
+		]]>
+	</update>
+	
+	<delete id="step6BeforeDeleteGroup" parameterType="int">
+		<![CDATA[
+			DELETE FROM CENTRALSYSTEM WHERE GID=#{gid}
+		]]>
+	</delete>
+	
 </mapper>

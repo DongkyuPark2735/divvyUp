@@ -24,6 +24,7 @@ public class GroupBoardController {
 
 //	대화 리스트 20개 출력
 	@RequestMapping(value = "groupDetil")
+<<<<<<< HEAD
 	public String listLatest20Groupboard(int gid, String mid, Model model, HttpSession session) {
 		session.setAttribute("sesiongGid", gid);
 		session.setAttribute("sesiongMid", mid);
@@ -31,6 +32,10 @@ public class GroupBoardController {
 //		model.addAttribute("joinMid", mid);
 		
 		model.addAttribute("grouplist", groupBoardService.listLatest20Groupboard(gid, session)); 
+=======
+	public String listLatest20Groupboard(int gid, Model model) {
+		model.addAttribute("grouplist", groupBoardService.listLatest20Groupboard(gid)); 
+>>>>>>> db5b53a79b086974dde8ec3414e8235705217ebe
 		return "groupBoard/groupDetail";
 	}
 

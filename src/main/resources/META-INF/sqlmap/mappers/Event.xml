@@ -17,7 +17,7 @@
 		<result property="gid" column="gid"/>
 	</resultMap>
 	
-	<!-- 그룹에 새로운 이벤트 추가 -->
+	
 	<insert id="insertEvent" parameterType="Event">
 		<if test="eimage==''">
 			INSERT INTO EVENT (EID, ENAME, ECONTENT, EAMOUNT, EADDRESS, ECOUNT, MID, GID)
@@ -32,5 +32,27 @@
 	<select id="eventList" resultMap="EventResult" parameterType="int">
 		SELECT * FROM EVENT WHERE GID = #{gid} ORDER BY erdate DESC
 	</select>
+	
+	<select id="getEvent" resultMap="EventResult" parameterType="int">
+		SELECT * FROM EVENT WHERE EID = #{eid} ORDER BY erdate DESC
+	</select>
+	
+	<update id="modifyEvent" parameterType="Event">
+		UPDATE EVENT 
+			SET ENAME = #{ename},
+			ECONTENT = #{econtent},
+			<if test="eimage != null and eimage!=''">EIMAGE=#{eimage},</if>
+			EADDRESS = #{eaddress},
+			ERDATE = #{erdate}
+			WHERE EID = #{eid}
+	</update>
+	
+	<delete id="deleteEvent" parameterType="int">
+		 DELETE FROM EVENT WHERE EID=#{eid}
+	</delete>
+	
+	<delete id="step5BeforeDeleteGroup" parameterType="int">
+		DELETE FROM EVENT WHERE GID=#{gid}
+	</delete>
 
 </mapper>
