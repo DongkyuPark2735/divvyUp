@@ -19,6 +19,10 @@
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/js/**" location="/js/" />
 	<resources mapping="/imgFileUpload/**" location="/imgFileUpload/" />
+	<resources mapping="/groupFileBoardUploadFiles/**" location="/groupFileBoardUploadFiles/" />
+	<resources mapping="/eventImgFileUpload/**" location="/eventImgFileUpload/" />
+	<resources mapping="/groupsImgFileUpload/**" location="/groupsImgFileUpload/" />
+
 	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -49,7 +53,6 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>
-	<!-- 파일첨부 빈 -->
 	
 	<!-- 파일 첨부 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

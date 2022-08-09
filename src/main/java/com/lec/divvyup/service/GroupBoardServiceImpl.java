@@ -19,7 +19,7 @@ import com.lec.divvyup.vo.GroupBoard;
 @Service
 public class GroupBoardServiceImpl implements GroupBoardService {
 
-	String backupPath = "C:\\Users\\User\\Desktop\\divvyUpDKBranch\\divvyUp\\src\\main\\webapp\\groupFileBoardUploadFiles";
+	String backupPath = "C:\\Users\\User\\Desktop\\divvyUpDKBranch\\divvyUp\\src\\main\\webapp\\groupFileBoardUploadFiles\\";
 
 	
 	@Autowired
@@ -27,22 +27,20 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 	
 	@Override
 	public void insertGroupboard(GroupBoard groupBoard, MultipartHttpServletRequest mRequest) {
-		String uploadPath = mRequest.getRealPath("bookImgFileUpLoad/");
-		Iterator<String> params = mRequest.getFileNames(); // tempBimg1, tempBimg2
-		String[] bimg = {"",""}; /* new String [2]*/
+		String uploadPath = mRequest.getRealPath("groupFileBoardUploadFiles/");
+		Iterator<String> params = mRequest.getFileNames(); 
+		String[] bimg = {"",""}; 
 		int idx = 0;
 		while(params.hasNext()) {
 			String param = params.next();
-			MultipartFile mFile = mRequest.getFile(param); // 파라미터에 첨부된 파일 객체
+			MultipartFile mFile = mRequest.getFile(param); 
 			bimg[idx] = mFile.getOriginalFilename();
-			if(bimg[idx] != null && !bimg[idx].equals("")) {// 첨부함
+			if(bimg[idx] != null && !bimg[idx].equals("")) {
 				if(new File(uploadPath+bimg[idx]).exists()) {
-					//new file??
-					//첨부한 파일과 같은 이름의 파일이 서버에 이미 저장된 경우					
 					bimg[idx] = System.currentTimeMillis()+"_"+bimg[idx];
 				}
 				try {
-					mFile.transferTo(new File(uploadPath + bimg[idx]));//서버에 저장
+					mFile.transferTo(new File(uploadPath + bimg[idx]));
 					System.out.println("서버파일 : "+uploadPath + bimg[idx]);
 					System.out.println("백업파일 : "+backupPath + bimg[idx]);
 					boolean result = filecopy(uploadPath + bimg[idx], backupPath+bimg[idx]);
@@ -51,8 +49,7 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 					System.out.println(e.getMessage());
 				}
 			}else {
-				//파일첨부 안하면 bimg[idx] = ""
-				bimg[idx] = ""; //안해도됨?
+				bimg[idx] = ""; 
 			}
 			idx++;
 		}//whlie
@@ -63,8 +60,7 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 
 	@Override
 	public int deleteGroupboard(int gbid) {
-		// TODO Auto-generated method stub
-		return 0;
+		return groupBoardDao.deleteGroupboard(gbid);
 	}
 
 	@Override

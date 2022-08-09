@@ -20,7 +20,7 @@
 				   <a href="${conPath }/event/eventDetail.do&eid=${event.eid}">
 				   이벤트 이름:  ${event.ename }<br></a>
 				   이벤트 내용:  ${event.econtent }<br>
-				   이벤트 사진: <img src="${conPath }/imgFileUpload/${event.eimage}"><br>
+				   이벤트 사진: <img src="${conPath }/eventImgFileUpload/${event.eimage}"><br>
 				   이벤트 총지출:  ${event.eamount }<br>
 				   이벤트 주소:  ${event.eaddress }<br>
 				   이벤트 참여 자:  ${event.ecount }<br>

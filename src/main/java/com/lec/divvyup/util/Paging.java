@@ -34,8 +34,8 @@ public class Paging {
 		if(pageNum!=null) {
 			currentPage = Integer.parseInt(pageNum);
 		}
-		this.pageSize  = 10;
-		this.blockSize = 10;
+		this.pageSize  = 5;
+		this.blockSize = 5;
 		startRow = (currentPage-1) * pageSize + 1;
 		endRow = startRow + pageSize - 1;
 		this.totCnt = totCnt;

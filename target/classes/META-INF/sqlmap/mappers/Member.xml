@@ -39,15 +39,15 @@
             WHERE MID=#{mid}
 	</update>
 	
-	<select id="searchMid" parameterType="Member" resultType="String"> <!-- 아이디 찾기 -->
-		SELECT MID FROM MEMBER WHERE MNAME=#{mname} AND MEMAIL=#{memail}
+	<select id="searchMid" parameterType="Member" resultType="Member"> <!-- 아이디 찾기 -->
+		SELECT * FROM MEMBER WHERE MNAME=#{mname} AND MEMAIL=#{memail}
 	</select>
 	
-	<select id="searchMpw" parameterType="Member" resultType="String"> <!-- 비밀번호 찾기 -->
-		SELECT MPW FROM MEMBER WHERE MID=#{mid} AND MNAME=#{mname} AND MEMAIL=#{memail}
+	<select id="searchMpw" parameterType="Member" resultType="Member"> <!-- 비밀번호 찾기 -->
+		SELECT * FROM MEMBER WHERE MID=#{mid} AND MNAME=#{mname} AND MEMAIL=#{memail}
 	</select>
 	
-	<select id="searchMember" parameterType="Member" resultMap="MemberResult">
+	<select id="searchMember" parameterType="Member" resultType="member">
 		<if test="schItem == 'mid'">
 		  SELECT * FROM (SELECT ROWNUM RN, A.* 
             FROM (SELECT MID, MNAME FROM MEMBER WHERE NOT MID=#{mid} AND MID LIKE '%'||#{schWord}||'%'ORDER BY MID DESC) A)

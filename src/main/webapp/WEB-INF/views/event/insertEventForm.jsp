@@ -42,7 +42,7 @@
      				</div>	
 				</c:forEach>
 			</td></tr>
-			<tr><td>ecount</td><td><input type="number" name="ecount" id="msg" required="required"></td></tr>
+			<tr><td>ecount</td><td><input type="number" name="ecount" id="msg" readonly="readonly"></td></tr>
 			<tr><td>이벤트 생성자</td><td><input type="text" name="mid"  value="${member.mid }" readonly="readonly"></td></tr>
 			<tr><td colspan="2"><input type="submit" value="가입"></td></tr>
 		</table>
