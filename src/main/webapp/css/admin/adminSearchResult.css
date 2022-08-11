@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+.groupWrap {
+	width: 250px;
+	text-align: center;
+	display: inline-block;
+}

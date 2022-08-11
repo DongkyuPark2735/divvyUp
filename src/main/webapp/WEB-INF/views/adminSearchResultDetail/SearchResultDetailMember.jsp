@@ -7,23 +7,16 @@
 <head>
    <title>Home</title>
    <meta charset="UTF-8">
-   <link href="${conPath }/css/style.css" rel="stylesheet">
-	 <style>
-	 	.groupWrap{
-	 		width: 250px;
-	 		text-align: center;
-			display: inline-block;
-	 	}
-	 	
-	 </style>   
+	 <link href="${conPath }/css/admin/adminSearchMain.css" rel="stylesheet">
    <script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
    <script>
       $(document).ready(function(){
-         
       });
    </script>
 </head>
 <body>
+	<div id="adminResultDetailWrap">
+	
 		<table>
 			<caption>${memberDetail.mid} 회원 상세정보</caption>
 			<tr>
@@ -97,10 +90,8 @@
 			<h3>해당회원이 팔로잉 하는 회원이 없습니다.</h3>
 		</c:if>
 		
-		
-		
-		
 		<input type="button" value="검색결과 가기" onclick="history.back();">	
+	</div>
 </body>
 </html>
 

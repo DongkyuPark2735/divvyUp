@@ -1,0 +1,296 @@
+@charset "UTF-8";
+
+* {
+	margin: 0 auto;
+}
+
+div {
+	overflow: hidden;
+}
+
+div#tmpheader{
+	width: 100%;
+	background-color: blue;
+	height: 100px;
+}
+
+div#adminSearchWrap{
+	width: 900px;
+	text-align: center;
+	margin-bottom: 100px;
+}
+
+
+/* 검색 바 */
+div#adminSearchBar{
+	width: 100%;
+	height: 50px;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}
+
+#adminSearchWrap h2{
+	margin-top: 80px;
+	margin-bottom: 80px;
+}
+
+#adminSearchBar ul li {
+	list-style: none;
+	display: inline-block;
+	line-height : 50px;
+	width: 33.33333%;
+	height: 50px;
+	float: left;
+}
+
+#adminSearchWrap #adminSearchBar .searchBar.current{
+	background-color: lightgray;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+#adminSearchBar ul li:hover {
+	cursor: pointer;
+	background-color: lightgray;
+}
+
+/* 검색 input  */
+.adminSearchResult.current select{
+	width: 150px;
+	height : 35px;
+	border: none;
+	border-bottom: 2px solid #1DBF73;
+	background-color: lightgray;
+	text-align: center;
+}
+.adminSearchResult.current select:focus{
+	background-color: gray;
+}
+.adminSearchResult.current input[type=text]{
+	width: 400px;
+	height : 30px;
+	border: none;
+	border-bottom: 2px solid #1DBF73;
+	background-color: lightgray;
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+.adminSearchResult.current input[type=text]:focus{
+	background-color: gray;
+}
+.adminSearchResult.current input[type=submit]{
+	width: 100px;
+	height : 35px;
+	border: 2px solid #1DBF73;
+	background-color: black;
+	text-align: center;
+	border-radius: 5px;
+	color : white;
+	font-weight: bold;
+}
+.adminSearchResult.current input[type=submit]:hover{
+	background-color: gray;
+	cursor: pointer;
+}
+
+
+/* 회원 검색결과 */
+.adminSearchResult.current select[name="searchResultOrderBy"]{
+	border : none;
+	float: right;	
+	width: 200px;
+	border-bottom : 2px solid #1DBF73;
+	margin-right: 70px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.adminSearchResult.current select[name="searchResultOrderBy"]:hover{
+	border-radius : 5px;
+	background-color: gray;
+	cursor: pointer;
+}
+div.adminSearchResult.current{
+	text-align: center;
+} 
+
+.adminSearchResult.current table{
+	clear : both;
+	width : 90%;
+	border-collapse: collapse;
+}
+
+.adminSearchResult.current table tr th{
+	font-weight : bolder;
+	width: 200px;
+	padding-bottom: 20px;
+}
+
+.adminSearchResult.current table tr td{
+	padding-bottom: 15px;
+	padding-top: 15px;
+	overflow: hidden;
+	white-space : nowrap;
+	text-overflow: ellipsis;
+}
+
+.adminSearchResult.current table#memberResultTable tr th:nth-child(1)
+,.adminSearchResult.current #memberResultDiv table tr td:nth-child(1){
+	width: 30%;
+}
+.adminSearchResult.current table#memberResultTable tr th:nth-child(2)
+,.adminSearchResult.current #memberResultDiv table tr td:nth-child(2){
+	width: 10%;
+}
+.adminSearchResult.current table#memberResultTable tr th:nth-child(3)
+,.adminSearchResult.current #memberResultDiv table tr td:nth-child(3){
+	width: 40%;
+}
+.adminSearchResult.current table#memberResultTable tr th:nth-child(4)
+,.adminSearchResult.current #memberResultDiv table tr td:nth-child(4){
+	width: 20%;
+}
+
+.adminSearchResult.current input.excelDownload{
+	float : right;
+	width: 300px;
+	margin-top: 20px;
+	margin-right: 70px;	
+}
+/* 회원 스크롤 부분 검색결과 */
+.adminSearchResult.current #memberResultDiv{
+	height: 500px;
+	overflow:auto;
+	margin-right: 5px;
+}
+.adminSearchResult.current #memberResultDiv::-webkit-scrollbar-thumb{
+	height: 50%; 
+	background: black; 
+	border-radius: 10px;
+}
+.adminSearchResult.current #memberResultDiv::-webkit-scrollbar{
+	width: 10px;  
+}
+.adminSearchResult.current #memberResultDiv::-webkit-scrollbar-track{
+	background: #1DBF73;
+}
+
+/* 현재 페이지 보이기 숨기기 */
+.adminSearchResult {
+	display: none;
+	background: lightgray;
+	width: 100%;
+}
+
+.adminSearchResult.current {
+	padding-top : 20px;
+	padding-bottom : 20px;
+	display: inherit;
+}
+
+/* 그룹 검색결과 */
+.adminSearchResult.current table#groupResultTable tr th:nth-child(1)
+,.adminSearchResult.current #groupResultDiv table tr td:nth-child(1){
+	width: 15%;
+}
+.adminSearchResult.current table#groupResultTable tr th:nth-child(2)
+,.adminSearchResult.current #groupResultDiv table tr td:nth-child(2){
+	width: 20%;
+}
+.adminSearchResult.current table#groupResultTable tr th:nth-child(3)
+,.adminSearchResult.current #groupResultDiv table tr td:nth-child(3){
+	width: 15%;
+}
+.adminSearchResult.current table#groupResultTable tr th:nth-child(4)
+,.adminSearchResult.current #groupResultDiv table tr td:nth-child(4){
+	width: 40%;
+}
+.adminSearchResult.current table#groupResultTable tr th:nth-child(5)
+,.adminSearchResult.current #groupResultDiv table tr td:nth-child(5){
+	width: 10%;
+}
+/* 그룹 검색결과 스크롤 */
+.adminSearchResult.current #groupResultDiv{
+	height: 500px;
+	overflow:auto;
+	margin-right: 5px;
+}
+.adminSearchResult.current #groupResultDiv::-webkit-scrollbar-thumb{
+	height: 50%; 
+	background: black; 
+	border-radius: 10px;
+}
+.adminSearchResult.current #groupResultDiv::-webkit-scrollbar{
+	width: 10px;  
+}
+.adminSearchResult.current #groupResultDiv::-webkit-scrollbar-track{
+	background: #1DBF73;
+}
+
+
+
+/* 이벤트 검색 결과 */
+.adminSearchResult.current table#eventsResultTable tr th{
+	font-size: 15px;
+}
+.adminSearchResult.current table#eventsResultTable tr th:nth-child(1)
+,.adminSearchResult.current #eventResultDiv table tr td:nth-child(1){
+	width: 10%;
+}
+.adminSearchResult.current table#eventsResultTable tr th:nth-child(2)
+,.adminSearchResult.current #eventResultDiv table tr td:nth-child(2){
+	width: 10%;
+}
+.adminSearchResult.current table#eventsResultTable tr th:nth-child(3)
+,.adminSearchResult.current #eventResultDiv table tr td:nth-child(3){
+	width: 10%;
+}
+.adminSearchResult.current table#eventsResultTable tr th:nth-child(4)
+,.adminSearchResult.current #eventResultDiv table tr td:nth-child(4){
+	width: 10%;
+}
+.adminSearchResult.current table#eventsResultTable tr th:nth-child(5)
+,.adminSearchResult.current #eventResultDiv table tr td:nth-child(5){
+	width: 20%;
+}
+.adminSearchResult.current table#eventsResultTable tr th:nth-child(6)
+,.adminSearchResult.current #eventResultDiv table tr td:nth-child(5){
+	width: 10%;
+}
+.adminSearchResult.current table#eventsResultTable tr th:nth-child(7)
+,.adminSearchResult.current #eventResultDiv table tr td:nth-child(7){
+	width: 10%;
+}
+.adminSearchResult.current table#eventsResultTable tr th:nth-child(8)
+,.adminSearchResult.current #eventResultDiv table tr td:nth-child(8){
+	width: 10%;
+}
+.adminSearchResult.current table#eventsResultTable tr th:nth-child(9)
+,.adminSearchResult.current #eventResultDiv table tr td:nth-child(9){
+	width: 10%;
+}
+/* 이벤트 검색결과 스크롤 */
+.adminSearchResult.current #eventResultDiv{
+	height: 500px;
+	overflow:auto;
+	margin-right: 5px;
+}
+.adminSearchResult.current #eventResultDiv::-webkit-scrollbar-thumb{
+	height: 50%; 
+	background: black; 
+	border-radius: 10px;
+}
+.adminSearchResult.current #eventResultDiv::-webkit-scrollbar{
+	width: 10px;  
+}
+.adminSearchResult.current #eventResultDiv::-webkit-scrollbar-track{
+	background: #1DBF73;
+}
+
+
+
+
+
+

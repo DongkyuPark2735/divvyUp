@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.lec.divvyup.dao.AdminSearchDao;
 import com.lec.divvyup.service.AdminSearchExcelDownloadService;
+import com.lec.divvyup.vo.AdminSearchKeyWord;
 
 @Controller
 @RequestMapping(value = "excel")
@@ -19,26 +21,20 @@ public class AdminSearchExcelDownloadController {
 	AdminSearchExcelDownloadService adminSearchExcelDownloadService;
 	
 	@RequestMapping(value = "excelDownloadMember", method = RequestMethod.POST)
-	public void excelDownloadMember(HttpServletResponse response,
-			String[] mids, String[] mnames, String[] memails, String[] mrdates 
-			) throws IOException {
-		adminSearchExcelDownloadService.excelDownloadMember(response, mids, mnames, memails, mrdates);
+	public void excelDownloadMember(HttpServletResponse response, AdminSearchKeyWord adminSearchKeyWord) throws IOException {
+		adminSearchExcelDownloadService.excelDownloadMember(response, adminSearchKeyWord);
 	}
 
 	@RequestMapping(value = "excelDownloadGroup", method = RequestMethod.POST)
-	public void excelDownloadGroup(HttpServletResponse response,
-			String[] gids, String[] gnames, String[] grdates, String[] gcontents, String[] mids
-			) throws IOException {
-		adminSearchExcelDownloadService.excelDownloadGroup(response, gids, gnames, grdates, gcontents, mids);
+	public void excelDownloadGroup(HttpServletResponse response, AdminSearchKeyWord adminSearchKeyWord) throws IOException {
+		System.out.println("엑셀" + adminSearchKeyWord);
+		adminSearchExcelDownloadService.excelDownloadGroup(response, adminSearchKeyWord);
 	}
 
 	@RequestMapping(value = "excelDownloadEvents", method = RequestMethod.POST)
-	public void excelDownloadEvents(HttpServletResponse response,
-			String[] eids, String[] enames, String[] econtents, String[] eamounts, String[] eaddresses, 
-			String[] ecounts, String[] erdates, String[] mids, String[] gids
-			) throws IOException {
-		adminSearchExcelDownloadService.excelDownloadEvents
-		(response, eids, enames, econtents, eamounts, eaddresses, ecounts, erdates, mids, gids);
+	public void excelDownloadEvents(HttpServletResponse response,AdminSearchKeyWord adminSearchKeyWord) throws IOException {
+		System.out.println("엑셀" + adminSearchKeyWord);
+		adminSearchExcelDownloadService.excelDownloadEvents(response, adminSearchKeyWord);
 	}
 	
 }

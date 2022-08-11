@@ -30,6 +30,13 @@ public class AdminSearchController {
 		model.addAttribute("searchKeyWord", adminSearchKeyWord);
 		return "forward:adminSearchMain.do";
 	}
+// 	회원검색 스크롤
+	@RequestMapping(value = "scrollSearchMemeber", method = RequestMethod.GET)
+	public String scrollSearchMemeber(AdminSearchKeyWord adminSearchKeyWord, Model model) {
+		System.out.println(adminSearchKeyWord);
+		model.addAttribute("scrollSearchMemberList", adminSearchServiceImpl.memberSearch(adminSearchKeyWord));
+		return "adminSearch/scrollSearchMember";
+	}
 
 //	그룹 검색	
 	@RequestMapping(value = "searchGroup", method = RequestMethod.GET)
@@ -40,6 +47,15 @@ public class AdminSearchController {
 		return "forward:adminSearchMain.do";
 	}
 
+// 	그룹검색 스크롤
+	@RequestMapping(value = "scrollSearchGroup", method = RequestMethod.GET)
+	public String scrollSearchGroup(AdminSearchKeyWord adminSearchKeyWord, Model model) {
+		System.out.println(adminSearchKeyWord);
+		model.addAttribute("scrollSearchGroupList", adminSearchServiceImpl.groupSearch(adminSearchKeyWord));
+		return "adminSearch/scrollSearchGroup";
+	}
+	
+	
 //	지출기록 검색	
 	@RequestMapping(value = "searchEvent", method = RequestMethod.GET)
 	public String searchEvent(AdminSearchKeyWord adminSearchKeyWord, Model model) {
@@ -49,6 +65,12 @@ public class AdminSearchController {
 		return "forward:adminSearchMain.do";
 	}
 	
+// 	지출기록 검색 스크롤
+	@RequestMapping(value = "scrollSearchEvent", method = RequestMethod.GET)
+	public String scrollSearchEvent(AdminSearchKeyWord adminSearchKeyWord, Model model) {
+		model.addAttribute("scrollSearchEventList", adminSearchServiceImpl.eventSearch(adminSearchKeyWord));
+		return "adminSearch/scrollSearchMember";
+	}
 	
 	
 }
