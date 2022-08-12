@@ -22,15 +22,8 @@
 	<resources mapping="/groupFileBoardUploadFiles/**" location="/groupFileBoardUploadFiles/" />
 	<resources mapping="/eventImgFileUpload/**" location="/eventImgFileUpload/" />
 	<resources mapping="/groupsImgFileUpload/**" location="/groupsImgFileUpload/" />
-<<<<<<< HEAD
-<<<<<<< HEAD
 	<resources mapping="/icon/**" location="/icon/" />
-=======
 
->>>>>>> 6bb5051dbb697d01cc69bf8061d978f3b60069f3
-=======
->>>>>>> babeadf72e944c959f5ccb566d2ecbc1c2b1cb4b
-	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
