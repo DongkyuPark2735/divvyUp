@@ -54,8 +54,11 @@
 	</delete>
 	
 	
+<<<<<<< HEAD
+=======
 	<select id="groupListforAdminSearch" resultType="Groups" parameterType="String">
 		SELECT * FROM GROUPS WHERE MID = #{mid} ORDER BY GRDATE DESC
 	</select>
 	
+>>>>>>> babeadf72e944c959f5ccb566d2ecbc1c2b1cb4b
 </mapper>

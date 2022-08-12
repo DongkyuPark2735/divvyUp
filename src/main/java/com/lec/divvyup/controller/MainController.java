@@ -17,21 +17,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lec.divvyup.service.FollowService;
+import com.lec.divvyup.service.GroupsService;
 import com.lec.divvyup.service.MemberService;
 <<<<<<< HEAD
+<<<<<<< HEAD
+import com.lec.divvyup.service.NotificationHistoryServiceImpl;
+=======
+=======
 
 import com.lec.divvyup.vo.GroupDetail;
 import com.lec.divvyup.vo.Member;
 
 =======
 >>>>>>> babeadf72e944c959f5ccb566d2ecbc1c2b1cb4b
+>>>>>>> 6bb5051dbb697d01cc69bf8061d978f3b60069f3
 import com.lec.divvyup.service.NotificationHistoryService;
+>>>>>>> babeadf72e944c959f5ccb566d2ecbc1c2b1cb4b
 import com.lec.divvyup.vo.Member;
 import com.lec.divvyup.vo.NotificationHistory;
 
 @Controller
+<<<<<<< HEAD
+@RequestMapping(value="main")
+=======
 
 @RequestMapping(value = "main")
+>>>>>>> 6bb5051dbb697d01cc69bf8061d978f3b60069f3
 public class MainController {
 	@Autowired
 	private FollowService followService;
@@ -43,18 +54,41 @@ public class MainController {
 	@Autowired
 =======
 	
+<<<<<<< HEAD
+<<<<<<< HEAD
+	@Autowired
+	private NotificationHistoryServiceImpl notificationHistoryService;
+=======
+=======
 >>>>>>> babeadf72e944c959f5ccb566d2ecbc1c2b1cb4b
+>>>>>>> 6bb5051dbb697d01cc69bf8061d978f3b60069f3
 	private NotificationHistoryService notificationHistoryService;
+>>>>>>> babeadf72e944c959f5ccb566d2ecbc1c2b1cb4b
 
 	@Autowired
 	ServletContext application;
 
+<<<<<<< HEAD
+	@Autowired
+	private GroupsService groupsService;
+	
+	@RequestMapping(value="mainto", method= {RequestMethod.GET, RequestMethod.POST})
+	public String mainView(Member member, Model model, HttpSession session,
+			NotificationHistory notificationHistory/* , String mid */) {
+		model.addAttribute("myFollowingList", followService.myFollowingList(session));
+		model.addAttribute("myFollowerList", followService.myFollowerList(session));
+		model.addAttribute("uncheckdNotificationCnt", notificationHistoryService.getUncheckdNotificationCnt(session, notificationHistory));
+		 model.addAttribute("groupList", groupsService.groupList(member.getMid()));
+		 model.addAttribute("followList", groupsService.followList(member.getMid()));
+		
+=======
 	@RequestMapping(value = "mainto", method = { RequestMethod.GET, RequestMethod.POST })
 	public String mainView(Member member, Model model, HttpSession session, NotificationHistory notificationHistory) {
 		model.addAttribute("myFollowingList", followService.myFollowingList(session));
 		model.addAttribute("myFollowerList", followService.myFollowerList(session));
 		model.addAttribute("uncheckdNotificationCnt",
 		notificationHistoryService.getUncheckdNotificationCnt(session, notificationHistory));
+>>>>>>> 6bb5051dbb697d01cc69bf8061d978f3b60069f3
 		return "main/main";
 	}
 
@@ -116,6 +150,12 @@ public class MainController {
 		}
 		
 		application.setAttribute("sessionMList", tempMlist);
+<<<<<<< HEAD
+<<<<<<< HEAD
+		/* application.removeAttribute((String) session.getAttribute("mid")); */
+=======
+=======
+>>>>>>> 6bb5051dbb697d01cc69bf8061d978f3b60069f3
 >>>>>>> babeadf72e944c959f5ccb566d2ecbc1c2b1cb4b
 		session.invalidate();
 		return "redirect:../member/loginForm.do";

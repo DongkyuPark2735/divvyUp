@@ -15,7 +15,7 @@ SELECT * FROM  MEMBER;
 COMMIT;
 
 
-
+select * from user_tables;
 --[2] GROUP TABLE --
 
 SELECT * FROM  GROUPS;

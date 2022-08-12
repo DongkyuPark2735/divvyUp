@@ -23,6 +23,8 @@ public interface MemberService {
 =======
 	public List<Member> memberListForGroupBoard(); 
 	public List<Member> searchMember(HttpSession session, Member member);
+<<<<<<< HEAD
+=======
 
 	
 	

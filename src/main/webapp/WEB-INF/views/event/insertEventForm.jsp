@@ -8,12 +8,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
-	
-	
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script>
+		<script>
 	window.onload = function(){
 	    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
 	        //카카오 지도 발생
@@ -25,12 +22,13 @@
 	    });
 	}
 	</script>
+	
 	<script>
 	   $(document).ready(function(){
 		   var numberOfChecked = 0;
 		   $('.mids').click(function() {
 			   numberOfChecked = $('input:checkbox:checked').length;
-				$('#msg').val(numberOfChecked);
+				$('#msg').val(numberOfChecked+1);
 			});
 	   });
 	</script>
@@ -50,7 +48,7 @@
 					<input type="text" name="eaddress"  class="eaddress" id="address_kakao" readonly="readonly">
 				</td>
 			</tr>
-			
+			<tr><td>image</td><td><input type="file" name="tempImage" ></td></tr>
 			<tr><th>참여 멤버 선택</th>
 			<td>
     			<c:forEach items="${printMidList }" var="mids" >
