@@ -54,6 +54,16 @@
   </script>
 </head>
 <body>
+	<c:if test="${not empty searchMidResult }">
+    	<script>
+    	  alert('${searchMidResult }');
+    	</script>
+    </c:if>
+    <c:if test="${not empty searchMpwResult }">
+    	<script>
+    	  alert('${searchMpwResult }');
+    	</script>
+    </c:if>
 	<div class="container">
 		<ul class="tabs">
     		<li class="tab-link current" data-tab="tab-1">ID 찾기</li>

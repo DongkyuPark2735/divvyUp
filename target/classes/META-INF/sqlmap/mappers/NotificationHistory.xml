@@ -18,8 +18,13 @@
 			VALUES (NOTH_SEQ.NEXTVAL, #{notsender}, #{notreceiver}, '님이 회원님을 팔로우하기 시작했습니다', 0)
 	</insert>
 	
+	<insert id="insertUnfollowNotification" parameterType="NotificationHistory">
+		INSERT INTO NOTIFICATIONHISTORY (NOTHID, NOTSENDER, NOTRECEIVER, NOTCONTENT, NOTKIND) 
+			VALUES (NOTH_SEQ.NEXTVAL, #{notsender}, #{notreceiver}, '님이 회원님을 언팔로우 했습니다', 2)
+	</insert>
+	
 	<insert id="insertGroupNotification" parameterType="NotificationHistory">
-		INSERT INTO NOTIFICATION (NOTHID, NOTSENDER, NOTRECEIVER, NOTCONTENT, NOTKIND) 
+		INSERT INTO NOTIFICATIONHISTORY (NOTHID, NOTSENDER, NOTRECEIVER, NOTCONTENT, NOTKIND) 
 			VALUES (NOTH_SEQ.NEXTVAL, #{notsender}, #{notreceiver}, '님이 회원님을 그룹에 초대했습니다', 1)
 	</insert>
 	

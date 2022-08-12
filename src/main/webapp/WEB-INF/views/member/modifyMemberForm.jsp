@@ -8,14 +8,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Insert title here</title>
-  <link href="${conPath }/css/style.css" rel="stylesheet">
+  <link href="${conPath }/css/member/login.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
   <script>
      $(document).ready(function(){
     	 $('input[name="mpw"], input[name="mpwChk"]').keyup(function(){
     			var mpw = $('input[name="mpw"]').val();
     			var mpwChk = $('input[name="mpwChk"]').val();
-    			if(mpw == mpwChk){
+    			if(!mpw || !mpwChk){
+    				$('#mpwChkResult').html('');
+    			}else if(mpw == mpwChk){
     				$('#mpwChkResult').html('<i>비밀번호 일치</i>');
     			}else{
     				$('#mpwChkResult').html('<b>비밀번호 불일치</b>');
@@ -65,7 +67,48 @@
   </script>
 </head>
 <body>
-	<div>
+
+	<div id="login_wrap">
+		<header>
+		  <h2>MODIFY_MEMBER</h2>
+		</header>
+		
+		<form action="${conPath }/member/modifyMember.do" method="post">
+		
+	     <div class="input-box">
+	       <input id="userid" type="text" name="mid" readonly="readonly" value="${member.mid }" placeholder="아이디">
+           <label for="userid">ID</label>
+           <div id="midConfirmResult"></div>
+	     </div>
+	     
+	     <div class="input-box">
+	       <input id="password" type="password" name="mpw" required="required" placeholder="비밀번호">
+           <label for="password">PW1</label>
+	     </div>
+	     
+	     <div class="input-box">
+	       <input id="passwordCheck" type="password" name="mpwChk" required="required" placeholder="비밀번호">
+           <label for="passwordCheck">PW2</label>
+           <div id="mpwChkResult"></div>
+	     </div>
+	     
+	     <div class="input-box">
+	       <input id="username" type="text" name="mname" required="required" value="${member.mname }" placeholder="이름">
+           <label for="username">NAME</label>
+	     </div>
+	     
+	     <div class="input-box">
+	       <input id="useremail" type="text" name="memail" required="required" value="${member.memail }" placeholder="이메일">
+           <label for="useremail">EMAIL</label>
+           <div id="memailConfirmResult"></div>
+	     </div>
+         <input type="submit" value="정보수정">
+         
+	    </form>
+	 </div>
+
+
+	<%-- <div>
 	  <form action="${conPath }/member/modifyMember.do" method="post">
 	  <table>
 	    <tr>
@@ -130,6 +173,6 @@
 		</tr>
 	  </table>
 	  </form>
-	</div>
+	</div> --%>
 </body>
 </html>

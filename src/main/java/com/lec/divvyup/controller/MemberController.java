@@ -70,16 +70,9 @@ public class MemberController {
 	public String modifyMember(Member member, Model model, HttpSession session) {
 		model.addAttribute("modifyMemberResult", memberService.modifyMember(member));
 		session.setAttribute("member", member);
-		return "forward:../mainto.do";
-	}
-	
-	@RequestMapping(value="searchMemberList", method=RequestMethod.GET)
-	public String searchMemberList(Member member, HttpSession session, Model model) {
-		model.addAttribute("searchedMemberList", memberService.searchMember(session, member));
-		model.addAttribute("FollowingList", followService.myFollowingList(session));
-		model.addAttribute("schItem", member);
 		return "forward:../main/mainto.do";
 	}
+	
 	
 	@RequestMapping(value="searchIdPwForm", method= {RequestMethod.GET, RequestMethod.POST})
 	public String searchIdPwForm() {
@@ -107,7 +100,7 @@ public class MemberController {
 		}else {
 			model.addAttribute("mid", mname);
 			model.addAttribute("mpw", memail);
-			model.addAttribute("result", result);
+			model.addAttribute("searchMidResult", result);
 			return "forward:searchIdPwForm.do";
 		}
 	}
@@ -122,8 +115,16 @@ public class MemberController {
 			model.addAttribute("mid", mid);
 			model.addAttribute("mname", mname);
 			model.addAttribute("memail", memail);
-			model.addAttribute("result", result);
+			model.addAttribute("searchMpwResult", result);
 			return "forward:searchIdPwForm.do";
 		}
+	}
+	
+	@RequestMapping(value="searchMemberList", method=RequestMethod.GET)
+	public String searchMemberList(Member member, HttpSession session, Model model) {
+		model.addAttribute("searchedMemberList", memberService.searchMember(session, member));
+		model.addAttribute("FollowingList", followService.myFollowingList(session));
+		model.addAttribute("schItem", member);
+		return "forward:../main/mainto.do";
 	}
 }

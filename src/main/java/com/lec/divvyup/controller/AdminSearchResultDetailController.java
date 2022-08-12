@@ -30,7 +30,11 @@ public class AdminSearchResultDetailController {
 	@RequestMapping(value = "SearchResultDetailMember", method = RequestMethod.GET)
 	public String SearchResultDetailMember(String mid, Model model) {
 		model.addAttribute("memberDetail", memberService.getMember(mid));
+<<<<<<< HEAD
+		model.addAttribute("groupList", groupsService.groupList(mid));
+=======
 		model.addAttribute("groupList", groupsService.groupListforAdminSearch(mid));
+>>>>>>> babeadf72e944c959f5ccb566d2ecbc1c2b1cb4b
 		model.addAttribute("followerList", followService.forAdminmyFollowerList(mid));
 		model.addAttribute("followingList", followService.forAdminMyFollowingList(mid));
 		return "adminSearchResultDetail/SearchResultDetailMember";

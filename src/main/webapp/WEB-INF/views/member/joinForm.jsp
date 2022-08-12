@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Insert title here</title>
-  <link href="${conPath }/css/style.css" rel="stylesheet">
+  <link href="${conPath }/css/member/login.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
   <script>
      $(document).ready(function(){
@@ -81,71 +81,43 @@
   </script>
 </head>
 <body>
-	<div>
-	  <form action="${conPath }/member/join.do" method="post">
-	  <table>
-	    <tr>
-		  <td>ID <b>*</b></td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>
-			<input type="text" name="mid" required="required">
-		    <div id="midConfirmResult"></div>
-		  </td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>PW1 <b>*</b></td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>
-		    <input type="password" name="mpw" required="required">
-			<div></div>
-		  </td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>PW2 <b>*</b></td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>
-		    <input type="password" name="mpwChk" required="required">
-		    <div id="mpwChkResult"></div>
-		  </td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>NAME <b>*</b></td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>
-			<input type="text" name="mname" required="required">
-		    <div></div>
-		  </td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>EMAIL <b>*</b></td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>
-		    <input type="text" name="memail">
-			<div id="memailConfirmResult"></div>
-		  </td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>
-		    <input type="submit" value="JOIN">
-		  </td>
-		</tr>
-	  </table>
-	  </form>
-	</div>
+	 <div id="login_wrap">
+		<header>
+		  <h2>JOIN</h2>
+		</header>
+		
+		<form action="${conPath }/member/join.do" method="post">
+		
+	     <div class="input-box">
+	       <input id="userid" type="text" name="mid" required="required" placeholder="아이디">
+           <label for="userid">ID</label>
+           <div id="midConfirmResult"></div>
+	     </div>
+	     
+	     <div class="input-box">
+	       <input id="password" type="password" name="mpw" required="required" placeholder="비밀번호">
+           <label for="password">PW1</label>
+	     </div>
+	     
+	     <div class="input-box">
+	       <input id="passwordCheck" type="password" name="mpwChk" required="required" placeholder="비밀번호">
+           <label for="passwordCheck">PW2</label>
+           <div id="mpwChkResult"></div>
+	     </div>
+	     
+	     <div class="input-box">
+	       <input id="username" type="text" name="mname" required="required" placeholder="이름">
+           <label for="username">NAME</label>
+	     </div>
+	     
+	     <div class="input-box">
+	       <input id="useremail" type="text" name="memail" required="required" placeholder="이메일">
+           <label for="useremail">EMAIL</label>
+           <div id="memailConfirmResult"></div>
+	     </div>
+         <input type="submit" value="회원가입">
+         
+	    </form>
+	 </div>  
 </body>
 </html>
