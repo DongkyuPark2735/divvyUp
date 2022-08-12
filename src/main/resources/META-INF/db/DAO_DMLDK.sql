@@ -89,7 +89,8 @@ commit;
 -- admin 검색 기능
 -- MEMBER DUMMY
 INSERT INTO MEMBER(MID, MPW, MNAME, MEMAIL)
-    VALUES('H34FI3', '1', '두길동', 'ALLf9U@naver.com');
+    VALUES('H357FI3', '1', '두길동', 'ALLf9U@naver.com');
+    
 INSERT INTO MEMBER(MID, MPW, MNAME, MEMAIL)
     VALUES('FI31234', '1', '루길동', '22DFF9OD@naver.com');
 INSERT INTO MEMBER(MID, MPW, MNAME, MEMAIL)
@@ -108,14 +109,36 @@ SELECT COUNT(*) FROM MEMBER;
 
 -- 회원 이름별 검색
 SELECT *
-    FROM(SELECT ROWNUM RN, M.* FROM MEMBER M WHERE M.MNAME LIKE '%'||'길'||'%')
-        WHERE RN BETWEEN 1 AND 10 ORDER BY mrdate desc;
+    FROM(SELECT ROWNUM RN, M.* 
+        FROM MEMBER M WHERE M.MNAME LIKE '%'||''||'%'  ORDER BY m.mname desc)
+        WHERE RN BETWEEN 1 AND 20;
 
+-- 수정 
+SELECT *
+    FROM(SELECT ROWNUM RN, M.* 
+        FROM (select * from member ORDER BY mname desc) M WHERE M.MNAME LIKE '%'||''||'%')
+        WHERE RN BETWEEN 1 AND 20;
+        
+SELECT *
+    FROM(SELECT ROWNUM RN, M.* 
+    	FROM (SELECT * FROM MEMBER)m WHERE M.mname LIKE '%'||''||'%')
+        WHERE RN BETWEEN 1 AND 20;
+SELECT *
+    FROM(SELECT ROWNUM RN, M.* 
+    	FROM (SELECT * FROM MEMBER)m WHERE M.MID LIKE '%'||''||'%')
+        WHERE RN BETWEEN 1 AND 20;
+SELECT *
+    FROM(SELECT ROWNUM RN, M.* 
+    	FROM (SELECT * FROM MEMBER)m WHERE M.Memail LIKE '%'||''||'%')
+        WHERE RN BETWEEN 1 AND 20;        
+        
 -- 회원 ID별 검색
 SELECT * FROM MEMBER WHERE MID LIKE '%'||'aa'||'%';
 -- 회원 이메일별 검색  -- 대문자나 소문자 처리 ??? 메일 주소는 자르고 검색해야함 
 SELECT * FROM MEMBER WHERE MEMAIL LIKE '%'||'hong'||'%';
 
+
+select * from member;
 -- 가입일별 정렬 == 최신순, 오래된순 
 SELECT *
     FROM(SELECT ROWNUM RN, M.* FROM MEMBER M WHERE M.MNAME LIKE '%'||'길'||'%')
@@ -127,6 +150,7 @@ SELECT *
             ORDER BY MRDATE;
 
 commit;
+select * from member;
 
 select * from groups;
 select * from groupdetail;
@@ -190,13 +214,26 @@ SELECT *
 SELECT *
     FROM(SELECT ROWNUM RN, E.* FROM EVENT E WHERE E.MID LIKE '%'||'a'||'%')
         WHERE RN BETWEEN 1 AND 10 ORDER BY ERDATE desc;
-
 commit;
 select * from groups;
 select * from groupboard;
 
-		SELECT TO_MID FROM FOLLOW WHERE FROM_MID='aaa' ORDER BY TO_MID;
 select * from member;
 
 select * from groupdetail where gid =1;
+commit;
+SELECT * FROM GROUPS WHERE GID IN(SELECT GID FROM GROUPDETAIL WHERE MID='aaa') ORDER BY GRDATE DESC;
+select * from GROUPS where MID='aaa';
 
+INSERT INTO GROUPS (GID, GNAME, GIMG, GCONTENT, MID)
+    VALUES (GROUPS_SEQ.NEXTVAL, 'Trip to Namhae', 'namhae.jpg' , 'Lets have a lit time', 'aaa');
+    
+INSERT INTO GROUPS (GID, GNAME, GIMG, GCONTENT, MID)
+    VALUES (GROUPS_SEQ.NEXTVAL, '전주식당', '' , '수요일은 돈가쓰가 맛있으니깐', 'bbb');
+commit;
+
+INSERT INTO EVENT (EID, ENAME, ECONTENT, EIMAGE, EAMOUNT, EADDRESS, ECOUNT, MID, GID)
+    VALUES (EVENT_SEQ.NEXTVAL, 'Lunch', 'Pizza near the station', '', 55000, 'london',  2, 'aaa', 1);
+
+INSERT INTO EVENT (EID, ENAME, ECONTENT, EIMAGE, EAMOUNT, EADDRESS, ECOUNT, MID, GID)
+    VALUES (EVENT_SEQ.NEXTVAL, 'Dinner', 'somewhere', '', 20000, 'london',  2, 'aaa', 1);

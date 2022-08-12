@@ -1,9 +1,6 @@
 package com.lec.divvyup.service;
 
-<<<<<<< HEAD
-=======
 import java.util.ArrayList;
->>>>>>> db5b53a79b086974dde8ec3414e8235705217ebe
 import java.util.List;
 
 import javax.mail.Message;

@@ -1,0 +1,226 @@
+@charset "UTF-8";
+* {
+	margin: 0 auto;
+	font-family: 'Open Sans', sans-serif;
+}
+
+#chattingBoardWarp{
+	width: 550px;
+	border-radius: 10px;
+	margin-bottom: 100px;
+	padding-top : 10px;
+	padding-bottom : 10px;
+	background-color: rgba(32, 34, 34, 0.8);
+	
+}
+
+/* 접속회원 리스트 */
+#chattingBoardWarp #chattingHeaderBar{
+	width: 500px;
+	border-radius: 10px;
+	padding: 5px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	text-align: center;
+	background-color: white;
+	
+}
+
+#chattingBoardWarp #chattingHeaderBar p:nth-child(1){
+	color: #1DBF73;
+	font-weight: bold;
+	font-size: 25px;
+}
+#chattingBoardWarp #chattingHeaderBar p:nth-child(2){
+	text-align : right;
+	margin-top : 10px;
+	font-weight: bold;
+	padding-right: 10px;
+}
+
+
+
+/* 기존 대화창 */ /* 이전대화 가져오기 */
+#chattingBoardList{
+	border-radius: 10px;
+	padding: 5px;
+	background:url('../groupFileBoardUploadFiles/GboardImg.png') no-repeat ;
+	background-size: 150px;
+	background-position : center;
+	background-color: white;
+	
+}
+#chattingBoardList table#exsitingList,
+#chattingBoardList table#pastGroupBoardResult{
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#chattingBoardList table#pastGroupBoardResult table{
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#chattingBoardList #exsitingList tr td,
+#chattingBoardList table#pastGroupBoardResult{
+	display: inline-block;
+}
+
+#chattingBoardList table#exsitingList tr td:nth-child(1),
+#chattingBoardList table#exsitingList tr td:nth-child(2),
+#chattingBoardList table#pastGroupBoardResult tr td:nth-child(1),
+#chattingBoardList table#pastGroupBoardResult tr td:nth-child(2){
+	display: none;
+}
+
+#chattingBoardList table#exsitingList tr td:nth-child(3),
+#chattingBoardList table#pastGroupBoardResult tr td:nth-child(3){
+	border-radius: 10px;
+	color : #1DBF73;
+	float: left;
+	height: 10px;
+	font-weight: bold;
+}
+#chattingBoardList table#exsitingList tr td:nth-child(4),
+#chattingBoardList table#pastGroupBoardResult tr td:nth-child(4){
+	clear : both;
+	border: 2px solid black; 
+	border-radius: 0px 20px 20px 20px;
+	max-width: 70%;
+	margin: 10px;
+	margin-bottom :0px;
+	float: left;
+	padding: 10px;
+	background-color: rgba(29, 191, 115, 0.4);
+}
+#chattingBoardList table#exsitingList tr td:nth-child(5),
+#chattingBoardList table#pastGroupBoardResult tr td:nth-child(5){
+	margin-top : 1px;
+	padding-top : 1px;
+	text-align : center;
+	clear : both;
+	font-size: 5px;
+	float: left;
+	margin-bottom: 20px;
+	padding-left: 15px;
+	color : gray;
+}
+/* 내가쓴 대화창 */
+
+
+
+/* 입력창 */
+#chattingBoardInsert {
+	text-align : center;
+	line-height : 10px;
+	margin-bottom : 10px;
+	margin-top : 10px;
+	width : 500px;
+	border-radius: 10px;
+	padding: 5px;
+	background-color: white;
+}
+#chattingBoardInsert input[type='text']{
+	display: inline-block;
+	width: 350px;
+	height: 45px;
+	border: none;
+	border-bottom: 2px solid #1DBF73;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+#chattingBoardInsert input[type='text']:hover{
+	cursor: pointer;
+	box-shadow: 1px 1px 5px 2px #1DBF73 inset;
+}
+#chattingBoardInsert input[type='text']:focus{
+	background-color: #1DBF73;
+	outline: none;
+}
+#chattingBoardInsert label {
+	display: inline-block;
+	float : left;
+	width: 40px;
+	height: 30px;
+	padding: 5px;
+	border-radius: 10px;
+}
+#chattingBoardInsert label:hover{
+	cursor: pointer;
+	background-color: #1DBF73;
+}
+#chattingBoardInsert img#insertGroupBoard{
+	padding: 5px;
+	border-radius: 10px;
+}
+#chattingBoardInsert img#insertGroupBoard:hover{
+	cursor: pointer;
+	background-color: #1DBF73;
+}
+#chattingBoardInsert p#upload-name{
+	padding-left: 10px; 
+	color : lightgray;
+}
+
+
+/* 스크롤 */
+#chattingBoardList::-webkit-scrollbar-thumb{
+	height: auto; 
+	background: black; 
+	border-radius: 10px;
+}
+#chattingBoardList::-webkit-scrollbar{
+	width: 10px;  
+}
+#chattingBoardList::-webkit-scrollbar-track{
+	border-radius: 20px;
+	background: #1DBF73;
+}
+
+
+/* 새로 가져오는 글 */
+#chattingBoardList table#singleLatestGroupboardResult{
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#chattingBoardList table#singleLatestGroupboardResult tr td{
+	display: inline-block;
+}
+
+#chattingBoardList table#singleLatestGroupboardResult tr td:nth-child(1),
+#chattingBoardList table#singleLatestGroupboardResult tr td:nth-child(2),
+#chattingBoardList table#singleLatestGroupboardResult tr td:nth-child(6){
+	display: none;
+}
+
+#chattingBoardList table#singleLatestGroupboardResult tr td:nth-child(3){
+	border-radius: 10px;
+	color : #1DBF73;
+	float: left;
+	height: 10px;
+	font-weight: bold;
+}
+#chattingBoardList table#singleLatestGroupboardResult tr td:nth-child(4){
+	clear : both;
+	border: 2px solid black; 
+	border-radius: 0px 20px 20px 20px;
+	max-width: 70%;
+	margin: 10px;
+	margin-bottom :0px;
+	float: left;
+	padding: 10px;
+	background-color: rgba(29, 191, 115, 0.4);
+}
+#chattingBoardList table#singleLatestGroupboardResult tr td:nth-child(5){
+	margin-top : 1px;
+	padding-top : 1px;
+	text-align : center;
+	clear : both;
+	font-size: 5px;
+	float: left;
+	margin-bottom: 20px;
+	padding-left: 15px;
+	color : gray;
+}
+

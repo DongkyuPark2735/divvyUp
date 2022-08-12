@@ -7,15 +7,7 @@
 <head>
    <title>Home</title>
    <meta charset="UTF-8">
-   <link href="${conPath }/css/style.css" rel="stylesheet">
-	 <style>
-	 	.groupWrap{
-	 		width: 250px;
-	 		text-align: center;
-			display: inline-block;
-	 	}
-	 	
-	 </style>   
+	 <link href="${conPath }/css/admin/adminSearchResult.css" rel="stylesheet">
    <script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
    <script>
       $(document).ready(function(){
@@ -24,8 +16,13 @@
    </script>
 </head>
 <body>
+	<div id="adminResultDetailWrap">
+		<div id="ARDheader">
+			<h2>${groupDetail.gid} 그룹 상세정보</h2>
+		</div>
+		
+		<div id="ARDGroupDetail"> 
 		<table>
-			<caption>${groupDetail.gid} 그룹 상세정보</caption>
 			<tr>
 				<th>그룹명</th>
 				<td>${groupDetail.gname}</td>
@@ -43,58 +40,68 @@
 				<td>${groupDetail.mid}</td>
 			</tr>
 		</table>
+		</div>
+		
+		<!-- 지출기록 -->
+		<div id="ARDGroupEventDetail" style="overflow: auto; height: 600px;">
+			<h3>지출 기록</h3>
+				<c:if test="${not empty evetsList}">
+					<table>
+						<tr>
+							<th>지출 기록 번호</th>
+							<th>지출 기록 이름</th>
+							<th>지출 기록 내용</th>
+							<th>지출 기록 금액</th>
+							<th>지출 기록 장소</th>
+							<th>지출 기록 회원수</th>
+							<th>지출 기록 생성일</th>
+							<th>지출 기록 생성회원</th>
+						</tr>
+					<c:forEach items="${evetsList}" var="eList">
+						<tr>
+							<td>${eList.eid}</td>
+							<td>${eList.ename}</td>
+							<td>${eList.econtent}</td>
+							<td>${eList.eamount}</td>
+							<td>${eList.eaddress}</td>
+							<td>${eList.ecount}</td>
+							<td>${eList.erdate}</td>
+							<td>${eList.mid}</td>
+						</tr>
+					</c:forEach>
+					</table>				
+				</c:if>
+			<c:if test="${empty evetsList}">
+			 	<table>
+					<tr>
+						<th>해당 그룹의 지출 기록이 없습니다.</th>
+					</tr>
+			 	</table>
+			</c:if>
+		</div>
 
 		<!-- 그룹 맴버 리스트 -->
-		<table>
-			<caption>${groupDetail.gid} 그룹 회원 목록</caption>
-			<tr>
-				<th>회원 ID</th>
-				<th>회원 그룹 가입일</th>
-			</tr>
-			<c:forEach items="${groupMemeberList}" var="groupMList">
-			<tr>
-				<td>${groupMList.mid}</td>
-				<td>${groupMList.gdrdate}</td>
-			</tr>
-			</c:forEach>
-		</table>
-		
-		
-		<h2>${groupDetail.gid} 그룹 지출 기록</h2>
-			<c:if test="${not empty evetsList}">
-				<table>
-					<tr>
-						<th>지출 기록 번호</th>
-						<th>지출 기록 이름</th>
-						<th>지출 기록 내용</th>
-						<th>지출 기록 금액</th>
-						<th>지출 기록 장소</th>
-						<th>지출 기록 회원수</th>
-						<th>지출 기록 생성일</th>
-						<th>지출 기록 생성회원</th>
-					</tr>
-				<c:forEach items="${evetsList}" var="eList">
-					<tr>
-						<td>${eList.eid}</td>
-						<td>${eList.ename}</td>
-						<td>${eList.econtent}</td>
-						<td>${eList.eamount}</td>
-						<td>${eList.eaddress}</td>
-						<td>${eList.ecount}</td>
-						<td>${eList.erdate}</td>
-						<td>${eList.mid}</td>
-					</tr>
-				</c:forEach>
-				</table>				
-			</c:if>
-		<c:if test="${empty evetsList}">
-		 	<table>
+		<div id="ARDGroupMList" style="overflow: auto; height: 425px;" >
+			<table>
+				<caption><b>그룹 회원 목록</b></caption>
 				<tr>
-					<th>해당 그룹의 지출 기록이 없습니다.</th>
+					<th>회원 ID</th>
+					<th>회원 그룹 가입일</th>
 				</tr>
-		 	</table>
-		</c:if>
+				<c:forEach items="${groupMemeberList}" var="groupMList">
+				<tr>
+					<td>${groupMList.mid}</td>
+					<td>${groupMList.gdrdate}</td>
+				</tr>
+				</c:forEach>
+			</table>
+		</div>
 		
-		<input type="button" value="검색결과 가기" onclick="history.back();">	
-</body>
+	</div>
+		
+		<p id="ARDBtn">
+			<input type="button" value="검색결과 가기" onclick="history.back();" >	
+		</p>
+	
+	</body>
 </html>

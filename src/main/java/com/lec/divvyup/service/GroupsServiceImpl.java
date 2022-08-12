@@ -136,4 +136,8 @@ String backupPath = "C:\\Users\\Unie\\Documents\\DivvyUpTeamUnie\\divvyUp\\src\\
 			return 0;
 		}
 	}
+	@Override
+	public List<Groups> groupListforAdminSearch(String mid) {
+		return groupsDao.groupListforAdminSearch(mid);
+	}
 }

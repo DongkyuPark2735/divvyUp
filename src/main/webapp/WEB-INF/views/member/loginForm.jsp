@@ -61,21 +61,12 @@
 	  <button onclick="location='${conPath}/member/searchIdPwForm.do'">FIND ID&PW</button>
 	  <button onclick="location='${conPath}/qboard/listQboardForMember.do'">QBOARD</button>
 	  <p>
-<<<<<<< HEAD
 		<input type="button" value="임시 그룹게시판 이동 버튼 그룹 1 회원 aaa" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=1&mid=aaa'">
 		<input type="button" value="임시 그룹게시판 이동 버튼 그룹 1 회원 bbb" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=1&mid=bbb'">
 		<input type="button" value="임시 그룹게시판 이동 버튼 그룹 1 회원 ccc" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=1&mid=ccc'">
 		<input type="button" value="임시 그룹게시판 이동 버튼 그룹 2 회원 aaa" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=2&mid=aaa'">
 		<input type="button" value="임시 그룹게시판 이동 버튼 그룹 2 회원 bbb" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=3&mid=bbb'">
 	  </p>
-=======
-		<input type="button" value="임시 그룹게시판 이동 버튼" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=1'">
-<<<<<<< HEAD
-	  </p>
-=======
-	</p>
->>>>>>> b8778de04dd6597c9c983a6c8be5b6d7883532db
->>>>>>> db5b53a79b086974dde8ec3414e8235705217ebe
 	</div>
 </body>
 </html>
