@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: Unie
 Build-Jdk: 1.8.0_321
-=======
-Built-By: User
-Build-Jdk: 1.8.0_331
->>>>>>> babeadf72e944c959f5ccb566d2ecbc1c2b1cb4b
 Created-By: Maven Integration for Eclipse
 
