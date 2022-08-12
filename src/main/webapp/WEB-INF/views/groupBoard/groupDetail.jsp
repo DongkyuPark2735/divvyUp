@@ -8,27 +8,14 @@
 <head>
 <meta charset="${encoding}">
 <title>Insert title here</title>
-<link href="${conPath}/css/style.css" rel="stylesheet">
-<style>
-* {
-	margin: 0 auto;
-}
-
-div {
-	width: 500px;
-	border: 1px solid black;
-	display: inline-block;
-}
-#GroupBoardWrap{
-	height: 500px;
-}
-</style>
+<link href="${conPath}/css/tempChattCss.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 		$(document).ready(function(){
 			/* 타이머 새글 가져오기 */
 			var sessionGid = ${sesiongGid};
-
+			$('#chattingBoardList').scrollTop($('#chattingBoardList')[0].scrollHeight);
+			
 			timer = setInterval( function () {
 				console.log('새글 가져오기 타이머 작동 중');
 				var exsitingGidByList = $("table#exsitingList tr:last td:nth-child(1)").text();
@@ -48,34 +35,12 @@ div {
 			    	var checkGid = $.trim(data).substring(index2+2, lstIndex2-8);
 			    	if(checkGid != exsitingGidByList && checkGid != exsitingGidByTimer){
 							$('#singleLatestGroupboardResult').append("<tr>"+data+"</tr>");
+							$('#chattingBoardList').scrollTop($('#chattingBoardList')[0].scrollHeight);
 			    	}
 			    }
 				});
 			}, 1000);
 			
-			/* 이전글 가져오기  */
-			var cnt;
-			$('#pastGroupBoardList').click(function(){
-				if(isNaN(cnt)){
-					cnt = 1;
-				}
-				var startRow = (cnt*20)+1;
-				var endRow = (cnt*20)+20;
-				 $.ajax({
-	       	url : "${conPath}/groupboard/pastGroupBoardList.do",
-	       	type : "GET",
-	       	data : {"startRow" : startRow, "endRow":endRow, "gid":1}, 
-	       	success: function(data){
-	       		var tmpData = $.trim(data);
-	       		if(data){
-							$('#pastGroupBoardResult').prepend(data);
-						  cnt = cnt+1;
-	       		}else if(tmpData == ""){
-							$('#pastGroupBoardResult').prepend("<b>이전 대화가 없습니다.</b>");
-	       		}
-	   	    }
-				 });
-			});
 			
 			/* 글 입력 */
 			$('#insertGroupBoard').click(function(){
@@ -105,6 +70,7 @@ div {
 				});
 			});
 			
+						
 			/* 글삭제 */
 			$('.gidClick').click(function(){
 				var gbid = $(this).text();
@@ -122,112 +88,130 @@ div {
 				}
 			});
 			
+			/* 글 불러오기 스크롤  */
+			var cnt;
+			$("#chattingBoardWarp #chattingBoardList").scroll(function() { 
+				var innerHeight = $(this).innerHeight(); // 스크롤 길이
+				var scroll=$(this).scrollTop() + $(this).innerHeight(); //현재 스크롤 마지막 부분
+				var height=$(this)[0].scrollHeight;	//전체 스크롤 마지막 부분
+				console.log("innerHeight : " + innerHeight);
+				console.log("scroll : " + scroll);
+				console.log("height : " + height);
+				
+				if(isNaN(cnt)){
+					cnt = 1;
+				}
+				
+				var startRow = (cnt*20)+1;
+				var endRow = (cnt*20)+20;
+	
+				if(scroll <= (innerHeight+0.4)){
+					$.ajax({
+				       	url : "${conPath}/groupboard/pastGroupBoardList.do",
+				       	type : "GET",
+				       	data : {"startRow" : startRow, "endRow":endRow, "gid":1}, 
+				       	success: function(data){
+				       		var tmpData = $.trim(data);
+				       		if(data){
+										$('#pastGroupBoardResult').prepend(data);
+										$('#chattingBoardList').scrollTop(scroll + 10);
+									  cnt = cnt+1;
+				       		}else if(tmpData == ""){
+										$('#pastGroupBoardResult').prepend("<b>이전 대화가 없습니다.</b>");
+				       		}
+				   	    }
+				  });					
+				}
+			});
 			
-			/* 시간 test */
-			var curDate = new Date();
-			var curTime = curDate.getFullYear() + "-" 
-			+ (curDate.getMonth() + 1) + "-" 
-			+ curDate.getDate() + " " 
-			+ curDate.getHours() + ":" 
-			+ curDate.getMinutes() + ":" 
-			+ curDate.getSeconds();
-			$('#currenttime').text(curTime);
 			
-// 			/* 무한 스크롤 */
-// 			$("#GroupBoardWrap").scroll(function() { 
-
-// 				// 페이징을 위한 변수 ( *무시 해도 되는 부분 )
-// 				var page = $("[name='feed_page']").val(); 
-// 				var last_page = $("[name='feed_last_page']").val(); 
-// 				if(page == last_page) return; 
-
-
-// 				var innerHeight = $(this).innerHeight(); 
-// 				var scroll=$(this).scrollTop() + $(this).innerHeight(); 
-// 				var height=$(this)[0].scrollHeight; 
-
-// 				if(scroll >= height){ 
-// 					// exe 
-// 				} 
-// 			});
+			/* 파일첨부 파일이름 */
+			$("#tempGbfilename").on('change',function(){
+			  var fileName = $("#tempGbfilename").val();
+			  $("#upload-name").html(fileName);
+			});
 		});
-		
 		
 </script>
 </head>
 <body>
+
 	<h1>메인페이지</h1>
-	<div>
-		<p>실시간으로 바뀌면 안되는부분</p>
-		<p id="currenttime"></p>
+	<div id="chattingBoardWarp">
+		<div id="chattingHeaderBar">
+			<p>'파라미터gid' Group Board</p>
+			<p id="currentMemebers"></p>
+		</div>
 		
-		<p>접속 회원 리스트</p>
-		<p id="currentMemebers"></p>
-	</div>
-	
-	<div id="GroupBoardWrap" style="overflow:auto">
-		<!-- 이전대화 더보기 -->
-		<input type="button" value="이전 대화 더보기" id="pastGroupBoardList">
-		<table id="pastGroupBoardResult">
-		</table>
-		
-		<!-- 기존대화 출력 -->
-		<table id="exsitingList">
-			<c:if test="${not empty grouplist}">
-				<c:forEach var="glist" items="${grouplist}">
-					<tr>
-						<td class="gidClick" >${glist.gbid}</td>
-						<td>${glist.gid}</td>
-						<td>${glist.mid}</td>
-						<c:if test="${not empty glist.gbfilename}">
-							<c:if test="${not empty glist.gbcontent}">
+		<div id="chattingBoardList" style="overflow:auto; height: 500px; width: 500px;" >
+			<table id="pastGroupBoardResult">
+			
+			</table>
+			
+			<!-- 기존대화 출력 -->
+			<table id="exsitingList">
+				<c:if test="${not empty grouplist}">
+					<c:forEach var="glist" items="${grouplist}">
+						<tr>
+							<td class="gidClick" >${glist.gbid}</td>
+							<td>${glist.gid}</td>
+							<td>${glist.mid}</td>
+							<c:if test="${not empty glist.gbfilename}">
+								<c:if test="${not empty glist.gbcontent}">
+									<td>
+										<img src="${conPath }/groupFileBoardUploadFiles/${glist.gbfilename}" 
+												 alt="첨부이미지" width="100" height="100"><br>
+										${glist.gbcontent} 
+									</td>
+								</c:if>
+								<c:if test="${empty glist.gbcontent}">
+									<td>
+										<img src="${conPath }/groupFileBoardUploadFiles/${glist.gbfilename}" 
+												 alt="첨부이미지" width="100" height="100"><br>
+									</td>
+								</c:if>
+							</c:if>
+							<c:if test="${empty glist.gbfilename}">
 								<td>
-									<img src="${conPath }/groupFileBoardUploadFiles/${glist.gbfilename}" 
-											 alt="첨부이미지" width="100" height="100"><br>
 									${glist.gbcontent} 
 								</td>
 							</c:if>
-							<c:if test="${empty glist.gbcontent}">
-								<td>
-									<img src="${conPath }/groupFileBoardUploadFiles/${glist.gbfilename}" 
-											 alt="첨부이미지" width="100" height="100"><br>
-								</td>
-							</c:if>
-						</c:if>
-						<c:if test="${empty glist.gbfilename}">
-							<td>
-								${glist.gbcontent} 
+							<td> 
+								<fmt:formatDate value="${glist.gbrdate}" pattern="yy년MM월dd일 hh:mm:ss"/>
 							</td>
-						</c:if>
-						<td></td>
-						<td>${glist.gbrdate} </td>
-					</tr>
-				</c:forEach>
-			</c:if>
-		</table>
+						</tr>
+					</c:forEach>
+				</c:if>
+			</table>
+			
+			<!-- 타이머 새대화 출력-->
+			<table id="singleLatestGroupboardResult">
+			</table>
+		</div>
 		
-		<!-- 타이머 새대화 출력-->
-		<table id="singleLatestGroupboardResult">
-		</table>
-	</div>
-	
-	<div>
-		<!-- 대화 입력 -->
-		<input type="hidden" name="gid" value="1" id="tempGid"> 
-		<input type="hidden" name="mid" value="aaa" id="tempMid">
-		<table>
-			<tr>
-				<td>
-					내용 입력 : <input type="text" name="gbcontent" id="tempGbcontent">
-					   			 <input type="file" name="gbfilename"	id="tempGbfilename">
-				</td>
-				<td>
-					<input type="button" value="입력" id="insertGroupBoard">
-				</td>
-			</tr>
-		</table>
-	</div>
-
+		<div id="chattingBoardInsert" >
+			<!-- 대화 입력 -->
+			<input type="hidden" name="gid" value="1" id="tempGid"> 
+			<input type="hidden" name="mid" value="aaa" id="tempMid">
+			<table>
+				<tr>
+					<td>
+						<label for="tempGbfilename">
+							<img src="${conPath }/groupFileBoardUploadFiles/fileIcon.png" width="40" height="30" >
+						</label>
+						<input type="file" name="gbfilename"	id="tempGbfilename" style="display: none;">
+					</td>
+					<td>
+						<input type="text" name="gbcontent" id="tempGbcontent">
+					</td>
+					<td>
+						<img id="insertGroupBoard" src="${conPath }/groupFileBoardUploadFiles/pngegg.png" width="40" height="30" >
+					</td>
+				</tr>
+			</table>
+			<p id="upload-name"></p>
+		</div>
+	</div>	
 </body>
 </html>
 

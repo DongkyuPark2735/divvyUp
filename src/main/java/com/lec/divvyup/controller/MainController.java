@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.lec.divvyup.service.FollowService;
 import com.lec.divvyup.service.GroupsService;
 import com.lec.divvyup.service.MemberService;
+<<<<<<< HEAD
 import com.lec.divvyup.service.NotificationHistoryServiceImpl;
+=======
+import com.lec.divvyup.service.NotificationHistoryService;
+>>>>>>> babeadf72e944c959f5ccb566d2ecbc1c2b1cb4b
 import com.lec.divvyup.vo.Member;
 import com.lec.divvyup.vo.NotificationHistory;
 
@@ -29,8 +33,12 @@ public class MainController {
 	@Autowired
 	private MemberService memberService;
 	
+<<<<<<< HEAD
 	@Autowired
 	private NotificationHistoryServiceImpl notificationHistoryService;
+=======
+	private NotificationHistoryService notificationHistoryService;
+>>>>>>> babeadf72e944c959f5ccb566d2ecbc1c2b1cb4b
 
 	@Autowired
 	ServletContext application;
@@ -81,7 +89,10 @@ public class MainController {
 		}
 		
 		application.setAttribute("sessionMList", tempMlist);
+<<<<<<< HEAD
 		/* application.removeAttribute((String) session.getAttribute("mid")); */
+=======
+>>>>>>> babeadf72e944c959f5ccb566d2ecbc1c2b1cb4b
 		session.invalidate();
 		return "redirect:../member/loginForm.do";
 	}
