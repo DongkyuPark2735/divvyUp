@@ -39,7 +39,7 @@
 	    <tr>
 	      <th>NO.</th>
 	      <th>글번호</th>
-	      <th>제목</th>
+	      <th>제 목</th>
 	      <th>작성자</th>
 	      <th>등록일</th>
 	      <th>처리상태</th>
@@ -58,7 +58,7 @@
 	        <td>${qboard.qbid }</td>
 	        <td class="tit">${qboard.qbtitle }</td>
 	        <td>${qboard.mid }</td>
-	        <td>${qboard.qbrdate }</td>
+	        <td><fmt:formatDate value="${qboard.qbrdate }" type="date" pattern="yy.MM.dd"/></td>
 	        <td>
 	        <c:if test="${qboard.qbreplycheck == 1 }">
 	            처리완료
@@ -90,16 +90,23 @@
 		<c:if test="${paging.endPage < paging.pageCnt }">
 			<a href="${conPath }/qboard/listQboardForMember.do?pageNum=${paging.endPage+1}" class="btn">></a>
 		</c:if>
+		<div>&nbsp;</div>
+	    <c:if test="${empty member and empty admin }">
+	      <div class="bt_wrap">
+	        <input type="button" value="LOGIN" class="btn" onclick="location='${conPath}/member/loginForm.do'"/>
+	      </div>
+	    </c:if>
 	  </div>
-	</div>
-	<c:if test="${empty member and empty admin }">
-	  <button onclick="location='${conPath}/member/loginForm.do'">LOGIN</button>
-	</c:if>
+	  
 	<c:if test="${not empty member or not empty admin }">
-	  <button onclick="location='${conPath}/main/mainto.do'">MAIN</button>
+	  <div class="bt_wrap">
+	    <input type="button" value="MAIN" class="btn" onclick="location='${conPath}/main/mainto.do'"/>
+	      <c:if test="${not empty member and empty admin }">
+	        <input type="button" value="WRITE_QBOARD" class="btn" onclick="location='${conPath}/qboard/writeQboardForm.do?pageNum=${paging.currentPage }'"/>
+	      </c:if>
+	  </div>
 	</c:if>
-	<c:if test="${not empty member and empty admin }">
-	  <button onclick="location='${conPath}/qboard/writeQboardForm.do?pageNum=${paging.currentPage }'">WRITE_QBOARD</button>
-	</c:if>
+	
+	</div>
 </body>
 </html>

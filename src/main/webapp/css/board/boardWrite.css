@@ -3,6 +3,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Open Sans', sans-serif;
 }
 
 form {
@@ -27,7 +28,7 @@ a {
 .board_wrap {
     width: 1000px;
     margin: 100px auto;
-    font-family: 'Noto Sans KR', sans-serif;
+    /* font-family: 'Noto Sans KR', sans-serif; */
 }
 
 .board_title {
@@ -57,7 +58,7 @@ a {
     border: 1px solid #000;
     border-radius: 2px;
     font-size: 1.4rem;
-    font-family: 'Noto Sans KR', sans-serif;
+    /* font-family: 'Noto Sans KR', sans-serif; */
 }
 .bt_wrap input[type="submit"]{
 	display: inline-block;
@@ -71,7 +72,7 @@ a {
     background-color: #fe881d;
     color: #fff;
     font-weight: bold;
-    font-family: 'Noto Sans KR', sans-serif;
+    /* font-family: 'Noto Sans KR', sans-serif; */
 }
 
 .bt_wrap input[type="button"]{
@@ -86,7 +87,7 @@ a {
     background-color: #fe881d;
     border: none;
     font-weight: bold;
-    font-family: 'Noto Sans KR', sans-serif;
+    /* font-family: 'Noto Sans KR', sans-serif; */
 }
 
 .bt_wrap button{
@@ -101,7 +102,7 @@ a {
     background-color: #fe881d;
     border: none;
     font-weight: bold;
-    font-family: 'Noto Sans KR', sans-serif;
+    /* font-family: 'Noto Sans KR', sans-serif; */
 }
 
 .bt_wrap a:first-child {

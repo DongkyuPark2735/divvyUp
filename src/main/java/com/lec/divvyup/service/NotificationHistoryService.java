@@ -8,7 +8,8 @@ import com.lec.divvyup.vo.NotificationHistory;
 
 public interface NotificationHistoryService {
 	public int insertFollowNotification(HttpSession session, NotificationHistory notificationHistory);
-	public int insertGroupNotification(HttpSession session, NotificationHistory notificationHistory);
+	public int insertUnfollowNotification(HttpSession session, NotificationHistory notificationHistory);
+	public int insertGroupNotification(String mid, String [] fids);
 	public int getUncheckdNotificationCnt(HttpSession session, NotificationHistory notificationHistory);
 	public List<NotificationHistory> getUncheckdNotificationList(NotificationHistory notificationHistory,String pageNum, HttpSession session);
 	public int updateUncheckNotification(HttpSession session, NotificationHistory notificationHistory);

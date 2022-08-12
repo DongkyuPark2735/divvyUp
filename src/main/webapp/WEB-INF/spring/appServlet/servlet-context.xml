@@ -23,7 +23,11 @@
 	<resources mapping="/eventImgFileUpload/**" location="/eventImgFileUpload/" />
 	<resources mapping="/groupsImgFileUpload/**" location="/groupsImgFileUpload/" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<resources mapping="/icon/**" location="/icon/" />
+=======
+
+>>>>>>> 6bb5051dbb697d01cc69bf8061d978f3b60069f3
 =======
 >>>>>>> babeadf72e944c959f5ccb566d2ecbc1c2b1cb4b
 	

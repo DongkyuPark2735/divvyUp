@@ -13,7 +13,6 @@ import com.lec.divvyup.vo.Follow;
 import com.lec.divvyup.vo.NotificationHistory;
 @Service
 public class NotificationHistoryServiceImpl implements NotificationHistoryService {
-	
 	@Autowired
 	private NotificationHistoryDao notificationHistoryDao;
 	@Override
@@ -25,10 +24,23 @@ public class NotificationHistoryServiceImpl implements NotificationHistoryServic
 	}
 	
 	@Override
-	public int insertGroupNotification(HttpSession session, NotificationHistory notificationHistory) {
+	public int insertUnfollowNotification(HttpSession session, NotificationHistory notificationHistory) {
 		// TODO Auto-generated method stub
-		notificationHistory.setNotreceiver((String)session.getAttribute("mid"));
-		return notificationHistoryDao.insertGroupNotification(notificationHistory);
+		notificationHistory.setNotsender((String)session.getAttribute("mid"));
+		notificationHistory.setNotreceiver(notificationHistory.getNotreceiver());
+		return notificationHistoryDao.insertUnfollowNotification(notificationHistory);
+	}
+	
+	@Override
+	public int insertGroupNotification(String mid, String [] fids) {
+		int result = 0;
+		NotificationHistory notificationHistory = new NotificationHistory();
+		for (String fid : fids) {
+			notificationHistory.setNotreceiver(fid);
+			notificationHistory.setNotsender(mid);
+			result = notificationHistoryDao.insertGroupNotification(notificationHistory);
+		}
+		return result;
 	}
 	
 	@Override
@@ -52,7 +64,11 @@ public class NotificationHistoryServiceImpl implements NotificationHistoryServic
 	public int updateUncheckNotification(HttpSession session, NotificationHistory notificationHistory) {
 		// TODO Auto-generated method stub
 		notificationHistory.setNotreceiver((String)session.getAttribute("mid"));
-		return notificationHistoryDao.updateUncheckNotification(notificationHistory);
+		int result = notificationHistoryDao.getUncheckdNotificationCnt(notificationHistory);
+		if(result != 0) {
+			notificationHistoryDao.updateUncheckNotification(notificationHistory);
+		}
+		return result;
 	}
 
 	@Override

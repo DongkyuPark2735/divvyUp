@@ -32,8 +32,10 @@ public class FollowController {
 	}
 	
 	@RequestMapping(value="unfollowMember", method=RequestMethod.GET)
-	public String unfollowMember(Model model, HttpSession session, Follow follow) {
+	public String unfollowMember(Model model, HttpSession session, Follow follow, NotificationHistory notificationHistory) {
 		model.addAttribute("unfollowResult", followService.unfollowMember(session, follow));
+		notificationHistory.setNotreceiver(follow.getTo_mid());
+		notificationHistoryService.insertUnfollowNotification(session, notificationHistory);
 		return "forward:../main/mainto.do";
 	}
 }

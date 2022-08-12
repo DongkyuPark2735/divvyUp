@@ -30,7 +30,7 @@ String backupPath = "C:\\Users\\Unie\\Documents\\DivvyUpTeamUnie\\divvyUp\\src\\
 		Iterator<String> params = mRequest.getFileNames(); // tempBimg1, tempBimg2
 		String[] eimage = new String[1];
 		int idx = 0;
-		while(params.hasNext()) {
+		if(params.hasNext()) {
 			String param = params.next();
 			MultipartFile mFile = mRequest.getFile(param);
 			eimage[idx] = mFile.getOriginalFilename(); 

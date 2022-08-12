@@ -22,7 +22,9 @@ public class NotificationHistoryController {
 	public String notificationConfirmForm(NotificationHistory notificationHistory, String pageNum, Model model, HttpSession session) {
 		model.addAttribute("allNotification", notificationHistoryService.getAllNotificationList(notificationHistory, pageNum, session));
 		model.addAttribute("paging", new Paging(notificationHistoryService.getAllNotificationCnt(session, notificationHistory), pageNum));
-		notificationHistoryService.updateUncheckNotification(session, notificationHistory);
+//		model.addAttribute("uncheckedNotificationList", notificationHistoryService.getUncheckdNotificationList(notificationHistory, pageNum, session));
+//		model.addAttribute("pagig", new Paging(notificationHistoryService.getUncheckdNotificationCnt(session, notificationHistory), pageNum));
+//		notificationHistoryService.updateUncheckNotification(session, notificationHistory);
 		return "notification/notificationConfirmForm";
 	}
 	
@@ -31,5 +33,11 @@ public class NotificationHistoryController {
 		model.addAttribute("uncheckedNotificationList", notificationHistoryService.getUncheckdNotificationList(notificationHistory, pageNum, session));
 		model.addAttribute("pagig", new Paging(notificationHistoryService.getUncheckdNotificationCnt(session, notificationHistory), pageNum));
 		return "notification/uncheckedNotificationList";
+	}
+	
+	@RequestMapping(value="updateUncheckNotification", method=RequestMethod.GET)
+	public String updateUncheckNotification(NotificationHistory notificationHistory, HttpSession session) {
+		notificationHistoryService.updateUncheckNotification(session, notificationHistory);
+		return "redirect:../main/mainto.do";
 	}
 }
