@@ -1,7 +1,10 @@
 package com.lec.divvyup.service;
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> babeadf72e944c959f5ccb566d2ecbc1c2b1cb4b
 import java.util.ArrayList;
 import java.util.List;
 

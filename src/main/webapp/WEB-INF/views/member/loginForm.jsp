@@ -221,7 +221,22 @@
 	        </td>
 	      </tr>
 	    </table>
+<<<<<<< HEAD
 	  </form> --%>
 	  <%-- <button onclick="location='${conPath}/member/searchIdPwForm.do'">FIND ID&PW</button> --%>
+=======
+	  </form>
+	  <button onclick="location='${conPath}/member/joinForm.do'">JOIN</button>
+	  <button onclick="location='${conPath}/member/searchIdPwForm.do'">FIND ID&PW</button>
+	  <button onclick="location='${conPath}/qboard/listQboardForMember.do'">QBOARD</button>
+	  <p>
+		<input type="button" value="임시 그룹게시판 이동 버튼 그룹 1 회원 aaa" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=1&mid=aaa'">
+		<input type="button" value="임시 그룹게시판 이동 버튼 그룹 1 회원 bbb" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=1&mid=bbb'">
+		<input type="button" value="임시 그룹게시판 이동 버튼 그룹 1 회원 ccc" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=1&mid=ccc'">
+		<input type="button" value="임시 그룹게시판 이동 버튼 그룹 2 회원 aaa" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=2&mid=aaa'">
+		<input type="button" value="임시 그룹게시판 이동 버튼 그룹 2 회원 bbb" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=3&mid=bbb'">
+	  </p>
+	</div>
+>>>>>>> babeadf72e944c959f5ccb566d2ecbc1c2b1cb4b
 </body>
 </html>

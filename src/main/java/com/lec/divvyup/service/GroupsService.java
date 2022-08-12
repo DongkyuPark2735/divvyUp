@@ -17,4 +17,5 @@ public interface GroupsService {
 	public int groupInsert(Groups group, MultipartHttpServletRequest mRequest);
 	public int modify(MultipartHttpServletRequest mRequest, Groups groups);
 	public int finalStepDeleteGroup(int gid);	
+	public List<Groups> groupListforAdminSearch(String mid);
 }

@@ -1,0 +1,186 @@
+@charset "UTF-8";
+
+*{
+	margin: 0 auto;
+}
+#adminResultDetailWrap{
+	width: 900px;
+	text-align: center;
+}
+#ARDheader{
+	border-bottom: 3px solid #1DBF73; 
+	text-align: center;
+	margin-top: 100px;
+	margin-bottom: 50px;
+	color : #1DBF73;
+	padding-bottom: 20px;
+}
+
+#ARDMemberGroupDetail, #ARDMemberFollowDetail, #ARDMemberDetail {
+	text-align: center;
+	display: inline-block;
+}
+/* 회원정보 */
+#ARDMemberDetail {
+	width : 510px;
+	height : 150px;
+	border: 2px solid #1DBF73;
+	border-radius: 10px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	margin-bottom: 10px;
+	float: left;
+}
+#ARDMemberDetail table tr th{
+	line-height: 35px;
+	padding-right: 50px;
+	color: #1DBF73;
+}
+/* 그룹 정보 */
+#ARDGroupDetail {
+	width : 300px;
+	height : 150px;
+	border: 2px solid #1DBF73;
+	border-radius: 10px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	margin-bottom: 10px;
+	float: left;
+}
+#ARDGroupDetail table tr th{
+	line-height: 35px;
+	padding-right: 10px;
+	color: #1DBF73;
+}
+
+
+/* 생성그룹 */
+#ARDMemberGroupDetail{
+	text-align : center;
+	width : 480px;
+	border: 2px solid #1DBF73;
+	border-radius: 10px;
+	float: left;
+	padding: 15px;
+	overflow: hidden;
+	margin-right: 5px;
+}
+
+#ARDMemberGroupDetail h3{
+	color : #1DBF73;
+	margin-bottom: 10px;
+}
+
+#ARDMemberGroupDetail{
+	text-align: center;
+}
+#ARDMemberGroupDetail .ARDGroupWrap{
+	width : 45%;
+	border-bottom: 2px solid #1DBF73; 
+	display: inline-block;
+	float: left;
+	font-size: 14px;
+	margin-bottom: 20px;
+	margin-left: 10px;
+	margin-right: 10px; 
+}
+
+/* 지출기록 */
+#ARDGroupEventDetail{
+	text-align : center;
+	width : 550px;
+	border: 2px solid #1DBF73;
+	border-radius: 10px;
+	float: right;
+	padding: 15px;
+	overflow: hidden;
+	margin-right: 5px;
+	font-size: 14px;
+}
+#ARDGroupEventDetail h3{
+	color : #1DBF73;
+	margin-bottom: 10px;
+}
+
+
+/* 팔로워 *//* 그룹 회원 리스트 */
+#ARDMemberFollowDetail{
+	padding : 10px;
+	width: 350px;
+	border: 2px solid #1DBF73;
+	border-radius: 10px;
+	float: right;
+	overflow: hidden;
+	height: 500px;
+}
+#ARDGroupMList{
+	padding : 10px;
+	width: 278px;
+	border: 2px solid #1DBF73;
+	border-radius: 10px;
+	float: left;
+	overflow: hidden;
+	height: 500px;
+}
+#ARDMemberFollowDetail table{
+	width: 50%;
+	float: right;
+}
+#ARDGroupMList table{
+		
+}
+#ARDMemberFollowDetail table caption,
+#ARDGroupMList table caption{
+	font-weight: bold;
+	font-size: 20px;
+	color: #1DBF73;
+	margin-bottom: 10px;
+}
+#ARDMemberFollowDetail table tr td,
+#ARDGroupMList table tr td{
+	line-height: auto;
+}
+
+#ARDBtn{
+	clear : both;
+	text-align : center;
+	padding-top : 50px;
+	margin-bottom: 150px;
+}
+#ARDBtn input{
+	width: 200px;
+	height: 40px;
+	border: none;
+	background-color: #1DBF73;
+	color : white;
+	font-weight: bold;
+	border-radius: 10px;
+}
+#ARDBtn input:hover{
+	cursor: pointer;
+	background-color: green;
+	
+}
+/* 스크롤바 */
+#ARDMemberGroupDetail::-webkit-scrollbar-thumb,
+#ARDMemberFollowDetail::-webkit-scrollbar-thumb,
+#ARDGroupEventDetail::-webkit-scrollbar-thumb,
+#ARDGroupEventDetail::-webkit-scrollbar-thumb{
+	height: 50%; 
+	background: black; 
+	border-radius: 10px;
+}
+#ARDMemberGroupDetail::-webkit-scrollbar,
+#ARDMemberFollowDetail::-webkit-scrollbar,
+#ARDGroupEventDetail::-webkit-scrollbar,
+#ARDGroupEventDetail::-webkit-scrollbar{
+	width: 10px;  
+}
+#ARDMemberGroupDetail::-webkit-scrollbar-track,
+#ARDMemberFollowDetail::-webkit-scrollbar-track,
+#ARDGroupEventDetail::-webkit-scrollbar-track,
+#ARDGroupEventDetail::-webkit-scrollbar-track{
+	border-radius: 20px;
+	background: #1DBF73;
+}
+
