@@ -23,4 +23,4 @@
 	<td>${singleLatestGroupboard.gbcontent}</td>
 </c:if>
 <td>${singleLatestGroupboard.gbrdate }</td>
-<td hidden="" class="joinMList">${sessionMList }</td>
+<td hidden="" class="joinMList">접속 회원 : ${sessionMList }</td>

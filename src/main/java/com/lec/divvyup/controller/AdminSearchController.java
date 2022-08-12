@@ -33,7 +33,6 @@ public class AdminSearchController {
 // 	회원검색 스크롤
 	@RequestMapping(value = "scrollSearchMemeber", method = RequestMethod.GET)
 	public String scrollSearchMemeber(AdminSearchKeyWord adminSearchKeyWord, Model model) {
-		System.out.println(adminSearchKeyWord);
 		model.addAttribute("scrollSearchMemberList", adminSearchServiceImpl.memberSearch(adminSearchKeyWord));
 		return "adminSearch/scrollSearchMember";
 	}
@@ -50,7 +49,6 @@ public class AdminSearchController {
 // 	그룹검색 스크롤
 	@RequestMapping(value = "scrollSearchGroup", method = RequestMethod.GET)
 	public String scrollSearchGroup(AdminSearchKeyWord adminSearchKeyWord, Model model) {
-		System.out.println(adminSearchKeyWord);
 		model.addAttribute("scrollSearchGroupList", adminSearchServiceImpl.groupSearch(adminSearchKeyWord));
 		return "adminSearch/scrollSearchGroup";
 	}
@@ -69,7 +67,7 @@ public class AdminSearchController {
 	@RequestMapping(value = "scrollSearchEvent", method = RequestMethod.GET)
 	public String scrollSearchEvent(AdminSearchKeyWord adminSearchKeyWord, Model model) {
 		model.addAttribute("scrollSearchEventList", adminSearchServiceImpl.eventSearch(adminSearchKeyWord));
-		return "adminSearch/scrollSearchMember";
+		return "adminSearch/scrollSearchEvent";
 	}
 	
 	

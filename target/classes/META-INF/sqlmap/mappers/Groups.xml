@@ -53,4 +53,9 @@
 		DELETE FROM GROUPS WHERE GID=#{gid}
 	</delete>
 	
+	
+	<select id="groupListforAdminSearch" resultType="Groups" parameterType="String">
+		SELECT * FROM GROUPS WHERE MID = #{mid} ORDER BY GRDATE DESC
+	</select>
+	
 </mapper>

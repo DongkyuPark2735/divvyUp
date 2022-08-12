@@ -214,7 +214,6 @@ SELECT *
 SELECT *
     FROM(SELECT ROWNUM RN, E.* FROM EVENT E WHERE E.MID LIKE '%'||'a'||'%')
         WHERE RN BETWEEN 1 AND 10 ORDER BY ERDATE desc;
-
 commit;
 select * from groups;
 select * from groupboard;
@@ -222,8 +221,9 @@ select * from groupboard;
 select * from member;
 
 select * from groupdetail where gid =1;
-
+commit;
 SELECT * FROM GROUPS WHERE GID IN(SELECT GID FROM GROUPDETAIL WHERE MID='aaa') ORDER BY GRDATE DESC;
+select * from GROUPS where MID='aaa';
 
 INSERT INTO GROUPS (GID, GNAME, GIMG, GCONTENT, MID)
     VALUES (GROUPS_SEQ.NEXTVAL, 'Trip to Namhae', 'namhae.jpg' , 'Lets have a lit time', 'aaa');

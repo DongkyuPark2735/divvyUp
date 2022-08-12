@@ -45,22 +45,23 @@
 		});
 
 		/* 클릭시 상세보기 */
-		$("#memberResultTable tr").click(function () {
+		$("#memberResultDiv tr").click(function () {
 		 	var mid = $(this).children().eq(0).text();
 			location.href="${conPath}/AdminSearchResultDetail/SearchResultDetailMember.do?mid="+mid;
 		});
-		$("#groupResultTable tr").click(function () {
+		$("#groupResultDiv tr").click(function () {
 		 	var gid = $(this).children().eq(0).text();
 			location.href="${conPath}/AdminSearchResultDetail/SearchResultDetailGroup.do?gid="+gid;
 		});
 		
-		$("#eventsResultTable tr").click(function () {
+		$("#eventResultDiv tr").click(function () {
 		 	var eid = $(this).children().eq(0).text();
 			location.href="${conPath}/AdminSearchResultDetail/SearchResuaaaltDetailEvents.do?eid="+eid;
 		});
 		
 		var tempStartRow = Number($(".adminSearchResult.current input[name='startRow']").val())+20;
 		var tempEndRow = Number($(".adminSearchResult.current input[name='endRow']").val())+20;
+	
 		/*회원 검색 무한스크롤 */
 		$(".adminSearchResult.current #memberResultDiv").scroll(function() { 
 			var innerHeight = $(this).innerHeight(); // 스크롤 길이
@@ -150,7 +151,6 @@
 						tempStartRow = tempStartRow + 20;
 			    	tempEndRow = tempEndRow + 20;
 			    	$('#eventResultDiv table').append(data);
-			    	
 			    }
 				});			
 			}
@@ -359,13 +359,11 @@
 				
 				<!-- 그룹 엑셀 다운로드 -->
 				<form action="${conPath}/excel/excelDownloadGroup.do" method="post" class="gExcelDownFrm">
-					<c:forEach items="${searchGroupList}" var="groupsList">
 						<input type="hidden" name="startRow" value="1">
 						<input type="hidden" name="endRow" value="">
 						<input type="hidden" name="searchSelectItems" value="${searchKeyWord.searchSelectItems}">
 						<input type="hidden" name="searchWord" value="${searchKeyWord.searchWord}">	
 						<input type="hidden" name="searchResultOrderBy" value="${searchKeyWord.searchResultOrderBy}">
-					</c:forEach>
 						<input type="submit" value="검색결과 엑셀파일 다운로드" class="excelDownload">
 				</form>
 				
@@ -476,13 +474,11 @@
 				
 				<!-- 지출 기록 엑셀 다운로드 -->
 				<form action="${conPath}/excel/excelDownloadEvents.do" method="post" class="eExcelDownFrm">
-					<c:forEach items="${searchEventList}" var="eventList">
 						<input type="hidden" name="startRow" value="1">
 						<input type="hidden" name="endRow" value="">
 						<input type="hidden" name="searchSelectItems" value="${searchKeyWord.searchSelectItems}">
 						<input type="hidden" name="searchWord" value="${searchKeyWord.searchWord}">	
 						<input type="hidden" name="searchResultOrderBy" value="${searchKeyWord.searchResultOrderBy}">
-					</c:forEach>
 						<input type="submit" value="검색결과 엑셀파일 다운로드" class="excelDownload">
 				</form>
 				

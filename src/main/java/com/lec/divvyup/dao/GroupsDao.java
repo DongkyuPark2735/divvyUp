@@ -16,4 +16,5 @@ public interface GroupsDao {
 	public int groupInsert(Groups group);
 	public int modify(Groups group);
 	public int finalStepDeleteGroup(int gid);	
+	public List<Groups> groupListforAdminSearch(String mid);
 }

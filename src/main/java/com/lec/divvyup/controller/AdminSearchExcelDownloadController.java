@@ -27,13 +27,11 @@ public class AdminSearchExcelDownloadController {
 
 	@RequestMapping(value = "excelDownloadGroup", method = RequestMethod.POST)
 	public void excelDownloadGroup(HttpServletResponse response, AdminSearchKeyWord adminSearchKeyWord) throws IOException {
-		System.out.println("엑셀" + adminSearchKeyWord);
 		adminSearchExcelDownloadService.excelDownloadGroup(response, adminSearchKeyWord);
 	}
 
 	@RequestMapping(value = "excelDownloadEvents", method = RequestMethod.POST)
 	public void excelDownloadEvents(HttpServletResponse response,AdminSearchKeyWord adminSearchKeyWord) throws IOException {
-		System.out.println("엑셀" + adminSearchKeyWord);
 		adminSearchExcelDownloadService.excelDownloadEvents(response, adminSearchKeyWord);
 	}
 	
