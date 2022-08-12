@@ -10,58 +10,65 @@
 <title>Insert title here</title>
 <link href="${conPath}/css/style.css" rel="stylesheet">
 <style>
-	
-	ul.tabs{
-  		margin: 0px;
-  		padding: 0px;
-  		list-style: none;
-	}
-	ul.tabs li{
-  		background: none;
- 		color: #222;
-  		display: inline-block;
-  		padding: 10px 15px;
-  		cursor: pointer;
-	}
-
-	ul.tabs li.current{
-  		background: #ededed;
-  		color: #222;
-		}
-
-	.tab-content{
-  		display: none;  
-  		padding: 15px 0;
-  		border-top:3px solid #eee;
-	}
-
-	.tab-content.current{
-  		display: inherit;
-	}
+.container2 {
+  /* width: 200px;
+  height: 200px; */
+  position: relative;
+  /* background: black; */
+  overflow: hidden;
+}
+.container2:before {
+  /* content: "ddd"; */
+  display: block;
+  position: relative;
+  top:0;
+  left:0;
+  /* width: 200px;
+  height: 200px; */
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
+  opacity: 0.7;
+}
+.modal {
+	position: absolute;
+}
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-     $(document).ready(function(){
-    	 $('ul.tabs li').click(function(){
-    		    var tab_id = $(this).attr('data-tab');
-    		 
-    		    $('ul.tabs li').removeClass('current');
-    		    $('.tab-content').removeClass('current');
-    		 
-    		    $(this).addClass('current');
-    		    $("#"+tab_id).addClass('current');
-    	 })
-    	 
-    	$.ajax({
-    		 url : "${conPath}/notification/uncheckedNotificationList.do",
-    		 type : "GET",
-    		 data : {"startRow" : startRow, "endRow" : endRow},
-    		 success : function(data) {
-				$('#uncheckedNotificationList').prepend(data);
-			}
-    	});
-     });
-     
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css"> 
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#tabs" ).tabs({
+    	active: 2,
+    	activate:  function( event, ui ){
+    		var tabIdx = $("#tabs").tabs('option', 'active');
+    		if(tabIdx==3){
+    			alert('읽은 거로 처리'); 
+    		}
+    	}
+    });
+  });
+  
+  $(document).ready(function(){
+	 $modal = $(".modal"); 
+ 	 $(".modalOpen").click(function(){
+ 		  $modal.show();
+		  $.ajax({
+			  url : '${conPath}/notification/notificationConfirmForm.do',
+			  type : 'get',
+			  dataType : 'html',
+			  success : function(data){
+					$('.layerpop').html(data);
+			  }
+		   });
+ 	   return false;
+	   });
+ 	 
+ 	 $(".modalClose").click(function(){
+ 	    $modal.hide();
+ 	 });
+  });
   </script>
 </head>
 <body>
@@ -87,16 +94,37 @@
 	  <button onclick="location='${conPath}/qboard/listQboardForMe.do?mid=${mid }'">MYQBOARD</button>
 	  <button onclick="location='${conPath}/main/logout.do'">로그아웃</button>
 	  <div>&nbsp;</div>
-	<div class="container">
-  		<ul class="tabs">
-    		<li class="tab-link current" data-tab="tab-1">${myFollowingList.size() }팔로잉</li>
-    		<li class="tab-link" data-tab="tab-2">${myFollowerList.size() }팔로워</li>
-    		<li class="tab-link" data-tab="tab-3">친구찾기</li>
-    		<li class="tab-link" data-tab="tab-4">알림창</li>
-  		</ul>
- 
-  		<div id="tab-1" class="tab-content current">
-			<c:forEach items="${myFollowingList }" var="followingMember">
+	  
+	<div class="modal">
+  		<div class="screen">
+    		<div class="layerpop">
+      			<!-- <p class="layerpop__container">
+      				레이어팝업입니다.<br />
+      				레이어팝업입니다.<br />
+      				레이어팝업입니다.<br />
+      				레이어팝업입니다.
+      			</p> -->
+    		</div>
+      		<button type="button" value="close" class="modalClose" onclick="location='${conPath}/notification/updateUncheckNotification.do'">Close</button>
+  		</div>
+	</div>
+
+	<div class="container2">
+  		<button type="button" value="open" class="modalOpen">팝업창 열기</button>
+	</div>  
+	  
+	  
+	  
+	  
+	<%-- <div class="container">
+		<div id="tabs">
+  		  <ul>
+    		<li><a href="#tabs-1">${myFollowingList.size() }팔로잉</a></li>
+    		<li><a href="#tabs-2">${myFollowerList.size() }팔로워</a></li>
+    		<li><a href="#tabs-3">친구찾기</a></li>
+  		  </ul>
+  		  <div id="tabs-1">
+  		    <c:forEach items="${myFollowingList }" var="followingMember">
 		  		<table>
 		    		<tr>
 		      			<td>${followingMember.to_mid } </td>
@@ -106,31 +134,29 @@
 		    		</tr>
 		  		</table>
 			</c:forEach>
-  		</div>
-  
-  		<div id="tab-2" class="tab-content">
-			<c:forEach items="${myFollowerList }" var="followerMember">
+  		  </div>
+  		  <div id="tabs-2">
+  		    <c:forEach items="${myFollowerList }" var="followerMember">
 		  		<table>
 		    		<tr>
 		      			<td>${followerMember.from_mid }</td>
 		    		</tr>
 		  		</table>
 			</c:forEach>
-  		</div>
-  		
-  		
-  		<div id="tab-3" class="tab-content">
-			<div class="adminSearchResult current" >
-				<form action="${conPath}/member/searchMemberList.do?mid=${mid}" method="get" >
+  		  </div>
+  		  <div id="tabs-3">
+  		    <form action="${conPath}/member/searchMemberList.do?mid=${mid}" method="get" >
 					<input type="hidden" name="startRow" value="1">
 					<input type="hidden" name="endRow" value="10">
 					<select name="schItem" >
 						<option value="mid"
-							<c:if test="${schItem eq 'mid'}">selected="selected"</c:if>>아이디 검색
-						</option>
+							<c:if test="${schItem.mid eq 'mid'}">
+								selected="selected"
+							</c:if>>아이디 검색</option>
 						<option value="mname" 
-							<c:if test="${schItem eq 'mname'}">selected="selected"</c:if>>이름 검색
-						</option>
+							<c:if test="${schItem.mname eq 'mname'}">
+								selected="selected"
+							</c:if>>이름 검색</option>
 					</select>
 					<input type="text" name="schWord" value="${schItem.schWord }">
 					<input type="submit" value="검색">
@@ -160,21 +186,15 @@
 				  </tr>
 				</c:forEach>
 				</table>
-			</div>
-   		</div>
-   		
-   		<div id="tab-4" class="tab-content">
-   		  <div id="uncheckedNotificationList">
-   		    
-   		  </div>
-   		</div>
-   		
+  		  </div>
 	</div>
+   		
+	</div>  --%> 
 	</c:if>
 	
 	
 	<div>
 		<input type="button" value="UNIE" onclick="location.href='${conPath }/main/unieTestMain.do'"/>
-	</div>
+	</div> 
 </body>
 </html>

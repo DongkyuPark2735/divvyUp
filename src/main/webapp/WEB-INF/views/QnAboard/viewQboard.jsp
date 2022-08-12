@@ -105,17 +105,24 @@
 	<c:if test="${not empty member and empty admin and (qboard.qbreplycheck eq 0) and (qboard.mid eq mid)}">
 	  <div class="bt_wrap">
 	    <button onclick="location='${conPath}/qboard/modifyQboardForm.do?qbid=${qboard.qbid}&pageNum=${param.pageNum}'">MODIFY_QBOARD</button>
+		<button onclick="location='${conPath}/qboard/listQboardForMe.do?mid=${mid }'">MYLIST</button>
 	  </div>
 	</c:if>
-	<c:if test="${empty admin }">
+	
+	<c:if test="${(empty admin) and (mid != qboard.mid) }">
 	  <div class="bt_wrap">
 		<button onclick="location='${conPath}/qboard/listQboardForMember.do?pageNum=${param.pageNum }'">LIST</button>
 	  </div>
 	</c:if>
 	
-	<c:if test="${not empty member and empty admin }">
+	<c:if test="${(empty admin) and (mid eq qboard.mid) and (qboard.qbreplycheck eq 1)  }">
 	  <div class="bt_wrap">
 		<button onclick="location='${conPath}/qboard/listQboardForMe.do?mid=${mid }'">MYLIST</button>
+	  </div>
+	</c:if>
+	
+	<c:if test="${not empty member and empty admin }">
+	  <div class="bt_wrap">
 	  </div>
 	</c:if>
 	

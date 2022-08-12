@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Insert title here</title>
-  <link href="${conPath }/css/style.css" rel="stylesheet">
+  <link href="${conPath }/css/board/boardWrite.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
   <script>
      $(document).ready(function(){
@@ -17,7 +17,45 @@
   </script>
 </head>
 <body>
-	<div>
+	<form action="${conPath }/qboard/modifyQboard.do" method="post">
+      <input type="hidden" name="qbid" value="${qboard.qbid }">
+	  <input type="hidden" name="pageNum" value="${param.pageNum }">
+	  <div class="board_write_wrap">
+	    <div class="board_title">
+          <strong>문의글 수정</strong>
+        </div>
+        <div class="board_write_wrap">
+          <div class="board_write">
+            <div class="title">
+              <dl>
+                <dt>제목</dt>
+                <dd><input type="text" name="qbtitle" value="${qboard.qbtitle }"></dd>
+              </dl>
+            </div>
+            <div class="info">
+              <dl>
+                <dt>작성자</dt>
+                <dd>${mid }</dd>
+              </dl>
+              <dl>
+                <dt>해당글</dt>
+                <dd>${qboard.qbid }</dd>
+              </dl>
+            </div>
+            <div class="cont">
+              <textarea name="qbcontent" >${qboard.qbcontent }</textarea>
+            </div>
+          </div>
+  	    </div>
+        <div class="bt_wrap">
+  	      <input type="submit" value="글 수정" class="on">
+  	      <input type="button" value="뒤로가기" class="btn" onclick="location='${conPath}/qboard/viewQboard.do?qbid=${qboard.qbid }&pageNum=${param.pageNum }'"/>
+  	    </div>
+      </div>
+    </form>
+    
+    
+	<%-- <div>
 	    <form action="${conPath }/qboard/modifyQboard.do" method="post">
 	      <input type="hidden" name="qbid" value="${qboard.qbid }">
 	      <input type="hidden" name="pageNum" value="${param.pageNum }">
@@ -42,6 +80,6 @@
 	        </tr>
 	      </table>
 	    </form>
-	  </div>
+	  </div> --%>
 </body>
 </html>

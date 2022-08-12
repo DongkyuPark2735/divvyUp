@@ -1,5 +1,7 @@
 package com.lec.divvyup.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +17,9 @@ import com.lec.divvyup.service.EventService;
 import com.lec.divvyup.service.GroupBoardService;
 import com.lec.divvyup.service.GroupDetailService;
 import com.lec.divvyup.service.GroupsService;
+import com.lec.divvyup.service.NotificationHistoryService;
 import com.lec.divvyup.vo.Groups;
+import com.lec.divvyup.vo.NotificationHistory;
 
 
 @Controller
@@ -35,6 +39,8 @@ public class GroupsController {
 	private EventDetailService eventDetailService;
 	@Autowired
 	private EventHistoryService eventHistoryService;
+	@Autowired
+	private NotificationHistoryService notificationHistoryService;
 	
 	@RequestMapping(value="groupList", method = RequestMethod.GET)
 	public String groupList(Model model, Groups groups, String mid) {
@@ -59,10 +65,11 @@ public class GroupsController {
 		return "groups/groupInsertForm";
 	}
 	@RequestMapping(value="groupInsert", method=RequestMethod.POST)
-	public String register(MultipartHttpServletRequest mRequest, @ModelAttribute("gDto") Groups groups, String [] fids, String mid, Model model) {
+	public String register(MultipartHttpServletRequest mRequest, @ModelAttribute("gDto") Groups groups, String mid, String [] fids, Model model) {
 		model.addAttribute("InsertResult", groupsService.groupInsert(groups, mRequest));
 		groupDetailService.insertGroupDetail(fids);
 		groupDetailService.insertGroupDetail(mid);
+		notificationHistoryService.insertGroupNotification(mid, fids);
 		return "groups/groupList"; 
 	}
 	@RequestMapping(value="modifyForm", method= {RequestMethod.GET, RequestMethod.POST})

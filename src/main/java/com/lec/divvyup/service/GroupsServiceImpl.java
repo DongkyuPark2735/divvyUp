@@ -48,8 +48,9 @@ String backupPath = "C:\\Users\\Unie\\Documents\\DivvyUpTeamUnie\\divvyUp\\src\\
 		Iterator<String> params = mRequest.getFileNames();
 		String[] gimg = new String[1];
 		int idx = 0;
-		while(params.hasNext()) {
+		if(params.hasNext()) {
 			String param = params.next();
+			System.out.println(idx+"번째 파라미터 명 : " + param);
 			MultipartFile mFile = mRequest.getFile(param);
 			gimg[idx] = mFile.getOriginalFilename(); 
 			if(gimg[idx]!=null && !gimg[idx].equals("")) {
@@ -66,7 +67,6 @@ String backupPath = "C:\\Users\\Unie\\Documents\\DivvyUpTeamUnie\\divvyUp\\src\\
 				}
 			}else {
 			}
-			idx++;
 		}
 		groups.setGimg(gimg[0]);
 		return groupsDao.groupInsert(groups);
