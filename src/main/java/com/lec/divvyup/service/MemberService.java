@@ -16,5 +16,6 @@ public interface MemberService {
 	public int modifyMember(Member member);
 	public String searchMid(String mname, String memail);
 	public String searchMpw(String mid, String mname, String memail);
+	public List<Member> memberListForGroupBoard(); 
 	public List<Member> searchMember(HttpSession session, Member member);
 }

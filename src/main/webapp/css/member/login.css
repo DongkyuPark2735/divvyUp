@@ -1,0 +1,204 @@
+ @charset "UTF-8";
+/*	
+	*{
+		margin:0;
+		padding:0;
+	}
+	#loginForm_wrap1 {
+		width:100%; 
+		margin: 50px auto;
+		padding:30px;
+		text-align: center; 
+		float:left;
+		display: inline-block;
+		border: 0.5px solid red;
+		font-size:0.9em;
+	}
+	
+	#loginForm_wrap1 caption{         	
+		margin:20px auto;	
+		font-size:3em;
+		text-align:center;
+	}
+	
+	#loginForm_wrap1 table {
+		width:600px; 
+		margin: 0 auto;
+		padding:50px;
+		text-align: center; 
+		display: inline-block;
+		border: 0.5px solid black;
+		justify-content:center;
+	}
+	#loginForm_wrap1 table tr{
+		height: 60px;
+		
+	}
+	#loginForm_wrap1 table th{
+		width: 80px;
+		text-align: center;
+	}
+	#loginForm_wrap1 table td {
+		width:600px; 
+		padding:10px;
+	}
+	#loginForm_wrap1 .loginBtn_style{
+	    background-color: #83AFA2;
+	   	height:20px;	
+		width:60%; 
+		padding:3px;
+		border: none;
+		margin: 0 auto;
+	    display: flex;
+	    display: flex;
+	    display: -webkit-box;
+	    display: -moz-box;
+	    display: -ms-flexbox;
+	    display: -webkit-flex;
+	    margin-bottom: 5px;
+	    padding: 10px 20px;
+	    border-radius: 35px;
+	    -webkit-border-radius: 35px;
+	    -moz-border-radius: 35px;
+	    -ms-border-radius: 35px;
+	    -o-border-radius: 35px;
+	     border:1px solid black;
+	}
+	#loginForm_wrap1 .loginBtn_style:HOVER{
+		cursor: pointer;
+	}
+	#loginForm_wrap1 .mid, #loginForm_wrap1 .mpw{
+
+	    background: rgba(255, 255, 255, 0.15);
+	   	height:20px;	
+		width:60%; 
+		padding:3px;
+		border: none;
+		margin: 0 auto;
+	    display: flex;
+	    display: flex;
+	    display: -webkit-box;
+	    display: -moz-box;
+	    display: -ms-flexbox;
+	    display: -webkit-flex;
+	    margin-bottom: 5px;
+	    padding: 10px 20px;
+	    border-radius: 35px;
+	    -webkit-border-radius: 35px;
+	    -moz-border-radius: 35px;
+	    -ms-border-radius: 35px;
+	    -o-border-radius: 35px;
+	    
+	    border:1px solid black;
+}
+	}
+	input:focus{
+    	outline: none;
+	}
+	
+	#login_findIdPw a{
+		font-size: 0.8em;
+		font-weight: bold;
+		color:black;
+		text-align:left;
+		text-decoration: none;
+	}
+	#login_findIdPw a:HOVER{
+		opacity:60%;
+	} */
+	
+	
+	@charset "UTF-8";
+/* * {
+    margin: 0;
+    padding: 0;
+} */
+
+a {
+    text-decoration: none;
+    color: #aaa;
+    font-size: 0.7em;
+}
+
+header{
+   display:flex;
+   justify-content: center;
+}
+
+#login_wrap{
+   width: 300px;
+   margin: 0 auto;
+}
+
+form{
+   padding:10px;
+}
+.input-box{
+   position:relative;
+   margin:10px 0;
+}
+
+.input-box > input{
+   background:transparent;
+   border:none;
+   border-bottom: solid 1px #ccc;
+   padding:20px 0px 5px 0px;
+   width:100%;
+}
+
+input::placeholder{
+   color:transparent;
+}
+
+input:placeholder-shown + label{
+   color:#aaa;
+   font-size:14pt;
+   top:15px;
+}
+
+input:focus + label, label{
+   color:#8aa1a1;
+   font-size:10pt;
+   pointer-events: none;
+   position: absolute;
+   left:0px;
+   top:0px;
+   transition: all 0.2s ease ;
+   -webkit-transition: all 0.2s ease;
+   -moz-transition: all 0.2s ease;
+   -o-transition: all 0.2s ease;
+}
+
+input:focus, input:not(:placeholder-shown){
+   border-bottom: solid 1px #8aa1a1;
+   outline:none;
+}
+
+input[type=submit]{
+   background-color: #8aa1a1;
+   border:none;
+   color:white;
+   border-radius: 5px;
+   width:100%;
+   height:35px;
+   font-size: 14pt;
+   margin-top:50px
+}
+
+#midConfirmResult b, #mpwChkResult b, #memailConfirmResult b{
+   font-size: 0.7em;
+   color: red;
+}
+
+#midConfirmResult i, #mpwChkResult i, #memailConfirmResult i{
+   font-size: 0.7em;
+   color: #26C602;
+   font-weight: bold;
+}
+
+#forgot{
+   text-align: right;
+   font-size:12pt;
+   color:rgb(164, 164, 164);
+   margin:10px 0px;
+}

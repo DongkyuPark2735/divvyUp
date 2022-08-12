@@ -75,12 +75,23 @@
 		
 		/* 검색제한  */
 		
-		
-		
 		/* 무한스크롤 */
 		
+		/* 클릭시 상세보기 */
+		$("#memberResultTable tr").click(function () {
+		 	var mid = $(this).children().eq(0).text();
+			location.href="${conPath}/AdminSearchResultDetail/SearchResultDetailMember.do?mid="+mid;
+		});
+		$("#groupResultTable tr").click(function () {
+		 	var gid = $(this).children().eq(0).text();
+			location.href="${conPath}/AdminSearchResultDetail/SearchResultDetailGroup.do?gid="+gid;
+		});
 		
-		
+		$("#eventsResultTable tr").click(function () {
+		 	var eid = $(this).children().eq(0).text();
+			location.href="${conPath}/AdminSearchResultDetail/SearchResuaaaltDetailEvents.do?eid="+eid;
+		});
+				
 	});
 	
 </script>
@@ -155,7 +166,7 @@
 							>회원 가입일내림차순 정렬</option>
 					</select>
 				</form>
-				<table>
+				<table id="memberResultTable">
 					<tr>
 						<th>회원 아이디</th>
 						<th>회원 이름</th>
@@ -171,9 +182,31 @@
 					</tr>
 				</c:forEach>
 				</table>
+				
+				<!-- 회원 엑셀 다운로드 -->
+				<form action="${conPath}/excel/excelDownloadMember.do" method="post">
+					<c:forEach items="${searchMemberList}" var="memberList">
+						<input type="hidden" name="mids" value="${memberList.mid}">
+						<input type="hidden" name="mnames" value="${memberList.mname}">
+						<input type="hidden" name="memails" value="${memberList.memail}">
+						<input type="hidden" name="mrdates" value="${memberList.mrdate}">
+					</c:forEach>
+						<input type="submit" value="검색결과 엑셀파일 다운로드">
+				</form>
 			 </c:if>
+			 
+			 <c:if test="${empty searchMemberList}">
+				<c:if test="${searchKeyWord.searchSelectItems eq 'mname'}">
+					<p><b>'회원 이름으로'검색하신 '${searchKeyWord.searchWord}'에 대한 해당 검색결과가 없습니다.</b></p>
+				</c:if>
+				<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
+					<p><b>'회원 아이디로'검색하신 '${searchKeyWord.searchWord}'에 대한 해당 검색결과가 없습니다.</b></p>
+				</c:if>
+				<c:if test="${searchKeyWord.searchSelectItems eq 'memail'}">
+					<p><b>'회원 이메일로'검색하신 '${searchKeyWord.searchWord}'에 대한 해당 검색결과가 없습니다.</b></p>
+				</c:if>
+			</c:if>
 		</div>
-		
 		
 		<!-- 그룹 검색 -->
 		<div class="adminSearchResult">
@@ -233,7 +266,7 @@
 					</select>
 				</form>
 				
-				<table>
+				<table id="groupResultTable">
 					<tr>
 						<th>그룹 아이디</th>
 						<th>그룹명</th>
@@ -251,19 +284,31 @@
 					</tr>
 				</c:forEach>
 				</table>
+				
+				<!-- 그룹 엑셀 다운로드 -->
+				<form action="${conPath}/excel/excelDownloadGroup.do" method="post">
+					<c:forEach items="${searchGroupList}" var="groupsList">
+						<input type="hidden" name="gids" value="${groupsList.gid}">
+						<input type="hidden" name="gnames" value="${groupsList.gname}">
+						<input type="hidden" name="grdates" value="${groupsList.grdate}">
+						<input type="hidden" name="gcontents" value="${groupsList.gcontent}">
+						<input type="hidden" name="mids" value="${groupsList.mid}">
+					</c:forEach>
+						<input type="submit" value="검색결과 엑셀파일 다운로드">
+				</form>
+				
 			</c:if>
 			<c:if test="${empty searchGroupList}">
 				<c:if test="${searchKeyWord.searchSelectItems eq 'gname'}">
-					<p><b>'그룹이름으로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+					<p><b>'그룹이름으로'검색하신 '${searchKeyWord.searchWord}'에 대한 해당 검색결과가 없습니다.</b></p>
 				</c:if>
 				<c:if test="${searchKeyWord.searchSelectItems eq 'gid'}">
-					<p><b>'그룹아이디로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+					<p><b>'그룹아이디로'검색하신 '${searchKeyWord.searchWord}'에 대한 해당 검색결과가 없습니다.</b></p>
 				</c:if>
 				<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
-					<p><b>'그룹 생성 회원아이디로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+					<p><b>'그룹 생성 회원아이디로'검색하신 '${searchKeyWord.searchWord}'에 대한 해당 검색결과가 없습니다.</b></p>
 				</c:if>
 			</c:if>
-			 
 		</div>
 		
 		<!-- 이벤트 검색 -->
@@ -328,11 +373,11 @@
 					</select>
 				</form>
 				
-				<table>
+				<table id="eventsResultTable">
 					<tr>
 						<th>지출 기록 아이디</th>
-						<th>지출기록 이름</th>
-						<th>지출기록 내용</th>
+						<th>지출 기록명</th>
+						<th>지출 기록 내용</th>
 						<th>지출 금액</th>
 						<th>지출 장소</th>
 						<th>지출 기록 회원수</th>
@@ -354,19 +399,36 @@
 					</tr>
 				</c:forEach>
 				</table>
+				
+				<!-- 지출 기록 엑셀 다운로드 -->
+				<form action="${conPath}/excel/excelDownloadEvents.do" method="post">
+					<c:forEach items="${searchEventList}" var="eventList">
+						<input type="hidden" name="eids" value="${eventList.eid}">
+						<input type="hidden" name="enames" value="${eventList.ename}">
+						<input type="hidden" name="econtents" value="${eventList.econtent}">
+						<input type="hidden" name="eamounts" value="${eventList.eamount}">
+						<input type="hidden" name="eaddresses" value="${eventList.eaddress}">
+						<input type="hidden" name="ecounts" value="${eventList.ecount}">
+						<input type="hidden" name="erdates" value="${eventList.erdate}">
+						<input type="hidden" name="mids" value="${eventList.mid}">
+						<input type="hidden" name="gids" value="${eventList.gid}">
+					</c:forEach>
+						<input type="submit" value="검색결과 엑셀파일 다운로드">
+				</form>
+				
 			</c:if>
 			<c:if test="${empty searchEventList}">
 				<c:if test="${searchKeyWord.searchSelectItems eq 'ename'}">
-					<p><b>'결제 내역'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+					<p><b>'지출 기록 이름으로'검색하신 '${searchKeyWord.searchWord}'에 대한 해당 검색결과가 없습니다.</b></p>
 				</c:if>
 				<c:if test="${searchKeyWord.searchSelectItems eq 'eid'}">
-					<p><b>'그룹아이디로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+					<p><b>'지출 기록 아이디로'검색하신 '${searchKeyWord.searchWord}'에 대한 해당 검색결과가 없습니다.</b></p>
 				</c:if>
 				<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
-					<p><b>'그룹 생성 회원아이디로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+					<p><b>'지출 기록 생성회원 아이디로'검색하신 '${searchKeyWord.searchWord}'에 대한 해당 검색결과가 없습니다.</b></p>
 				</c:if>
 				<c:if test="${searchKeyWord.searchSelectItems eq 'gid'}">
-					<p><b>'그룹 생성 회원아이디로'검색하신 ${searchKeyWord.searchWord}에 대한 해당 검색결과가 없습니다.</b></p>
+					<p><b>'지출 기록 그룹아이디로'검색하신 '${searchKeyWord.searchWord}'에 대한 해당 검색결과가 없습니다.</b></p>
 				</c:if>
 			</c:if>
 		</div>

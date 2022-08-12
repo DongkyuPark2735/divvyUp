@@ -160,7 +160,7 @@ public class MemberServiceImpl implements MemberService {
 					"	</div>\n" + 
 					"	<p>서울시 어떤구 XX로 00 **빌딩 402</p>\n" + 
 					"</div>";
-			@Override
+		@Override
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 				// TODO Auto-generated method stub
 				mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(memberSearchingPw.getMemail()));
@@ -188,6 +188,11 @@ public class MemberServiceImpl implements MemberService {
 		member.setMid(mid);
 		searchedMemberList = (ArrayList<Member>) memberDao.searchMember(member);
 		return searchedMemberList;
+	}
+
+	@Override
+	public List<Member> memberListForGroupBoard() {
+		return memberDao.memberListForGroupBoard();
 	}
 
 }

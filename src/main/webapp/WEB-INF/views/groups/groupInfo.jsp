@@ -7,6 +7,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+   <style>
+.customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
+.customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
+.customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #d95050;background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
+.customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
+.customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+</style>
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script>
 		function confirmAction() {
@@ -39,62 +46,7 @@
 		}
 	</script>
 	
-	<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=26f1ae0031a1d23227e6b9c730b8c47a&libraries=services"></script>
-	<script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	    mapOption = {
-	        center: new kakao.maps.LatLng(37.56575216993657  , 126.97951280073256), // 지도의 중심좌표
-	        level: 8 // 지도의 확대 레벨
-	    };  
-	// 지도를 생성합니다    
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
 	
-	// 주소-좌표 변환 객체를 생성합니다
-	var geocoder = new kakao.maps.services.Geocoder();
-	
-	// 주소로 좌표를 검색합니다
-	
-		$(document).ready(function(){
-	 		list = ${locationLists };
-	 		$.each(list, function (idx, item) {
-	 			geocoder.addressSearch(item, function(result, status) {
-	
-	 		    // 정상적으로 검색이 완료됐으면 
-	 		     if (status === kakao.maps.services.Status.OK) {
-	
-	 		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-	
-	 		        // 결과값으로 받은 위치를 마커로 표시합니다
-	 		        var marker = new kakao.maps.Marker({
-	 		            map: map,
-	 		            position: coords
-	 		        });
-						
-	 		       	var iwContent = '<div style="width:150px;text-align:center;padding:6px 0;">'+item+'</div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-	 		      	var infowindow = new kakao.maps.InfoWindow({
-	 		    	    content : iwContent
-	 		      	});
-	 		    	   
-	 		    	
-	 		        
-					
-	 		      kakao.maps.event.addListener(marker, 'mouseover', function() {
-	 		    	  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
-	 		    	    infowindow.open(map, marker);
-	 		    	   
-	 		    	});
-	 		    	// 마커에 마우스아웃 이벤트를 등록합니다
-	 		    	kakao.maps.event.addListener(marker, 'mouseout', function() {
-	 		    	    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
-	 		    	    infowindow.close();
-	 		    	});
-	 		    
-	 		     }
-	 		});
-		});
-	 		
-	});
-	</script>
 </head>
 <body>
 	<c:if test="${done eq 1 }">
@@ -164,11 +116,6 @@
 			</tr>
 		</c:forEach>
 	</table>
-	
-	<table class="mapShow">
-				<tr><td><div id="map" ></div></td></tr>
-	</table>
-	
 	
 	<table>
 		<c:if test="${member.mid eq groupInfo.mid }">

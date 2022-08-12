@@ -44,6 +44,15 @@ public class FollowServiceImpl implements FollowService {
 		String mid = (String)session.getAttribute("mid");
 		return followDao.myFollowerList(mid);
 	}
+	@Override
+	public List<Follow> forAdminMyFollowingList(String mid) {
+		return followDao.myFollowingList(mid);
+	}
+	@Override
+	public List<Follow> forAdminmyFollowerList(String mid) {
+		return followDao.myFollowerList(mid);
+	}
+	
 
 
 }

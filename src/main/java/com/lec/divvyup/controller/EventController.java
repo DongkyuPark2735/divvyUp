@@ -46,12 +46,19 @@ public class EventController {
 	//[1] Spliting money equally between members
 	@RequestMapping(value="insertEvent", method=RequestMethod.POST) 
 	public String insertEvent(MultipartHttpServletRequest mRequest, @ModelAttribute("eDto") Event event, String [] mids, String mid, Model model, int gid) {
+		System.out.println(1);
 		model.addAttribute("insertEvent", eventService.insertEvent(event, mRequest)); // STEP A : Insert new event
+		System.out.println(2);
 		eventDetailService.insertEventDetail(mids); // STEP B1 : Adding info of participating members
+		System.out.println(3);
 		eventDetailService.insertEventDetailPayer(mid); // STEP B2 : Adding info of payer
+		System.out.println(4);
 		groupDetailService.updateGroupDetail(gid); //STEP C : updating each stakeholder's balance on group detail
+		System.out.println(5);
 		eventHistoryService.insertEventHistory(); //STEP D :adding all info to event history
+		System.out.println(6);
 		eventDetailService.deleteEventDetail(); //STEP E : empty event detail (cart)
+		System.out.println(7);
 		return "main/main";
 	}
 	@RequestMapping(value="insertEventForm2", method = RequestMethod.GET)

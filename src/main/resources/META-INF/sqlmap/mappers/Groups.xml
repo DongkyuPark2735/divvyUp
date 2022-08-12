@@ -53,4 +53,5 @@
 		DELETE FROM GROUPS WHERE GID=#{gid}
 	</delete>
 	
+	
 </mapper>

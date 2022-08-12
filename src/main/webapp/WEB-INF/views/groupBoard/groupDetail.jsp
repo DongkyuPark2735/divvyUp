@@ -27,6 +27,8 @@ div {
 <script>
 		$(document).ready(function(){
 			/* 타이머 새글 가져오기 */
+			var sessionGid = ${sesiongGid};
+
 			timer = setInterval( function () {
 				console.log('새글 가져오기 타이머 작동 중');
 				var exsitingGidByList = $("table#exsitingList tr:last td:nth-child(1)").text();
@@ -34,20 +36,22 @@ div {
 				$.ajax({
 					url : "${conPath}/groupboard/singleLatestGroupboard.do",
 			    type : "GET",
-			    data : {"gid" : 1}, 
+			    data : {"gid" : sessionGid}, 
 			    success: function(data){
-				    	var checkGid = $.trim(data).substring(4, 7);
-				    	console.log(data.indexOf("<"));
-				    	console.log("입력한 글번호 :"+checkGid);
-				    	console.log("접속하자마자 맨 마지막 뜨는 글번호 "+exsitingGidByList);
-				    	console.log("뿌리는 맨마지막 번호: "+exsitingGidByTimer);
+			    	var result = data.trim();
+			    	var index = result.indexOf('joinMList">');
+			    	var lstIndex = result.lastIndexOf('</td>');
+			    	$('#currentMemebers').html(result.substring(index+11, lstIndex));
+			    	
+			    	var index2 = data.indexOf('gidClick">');
+			    	var lstIndex2 = data.indexOf('</td>');
+			    	var checkGid = $.trim(data).substring(index2+2, lstIndex2-8);
 			    	if(checkGid != exsitingGidByList && checkGid != exsitingGidByTimer){
 							$('#singleLatestGroupboardResult').append("<tr>"+data+"</tr>");
 			    	}
 			    }
 				});
-			}, 500);
-			
+			}, 1000);
 			
 			/* 이전글 가져오기  */
 			var cnt;
@@ -102,17 +106,17 @@ div {
 			});
 			
 			/* 글삭제 */
-			$('.exsitingGid').click(function(){
+			$('.gidClick').click(function(){
 				var gbid = $(this).text();
-				console.log(gbid);
 				var deleteCheck = confirm("해당 글을 삭제하시겠습니까?");
 				if(deleteCheck){
 					$.ajax({
 		       	url : "${conPath}/groupboard/deleteGroupBoard.do",
-		       	type : "POST",
+		       	type : "GET",
 		       	data : {"gbid" : gbid}, 
 		       	success: function(data){
-		       		  $('#GroupBoardWrap').load(location.href+' #GroupBoardWrap');
+		       			console.log($('#GroupBoardWrap').text());
+		       		  $('div#GroupBoardWrap').load(location.href+' #GroupBoardWrap');
 		       	}
 					});
 				}
@@ -156,6 +160,9 @@ div {
 	<div>
 		<p>실시간으로 바뀌면 안되는부분</p>
 		<p id="currenttime"></p>
+		
+		<p>접속 회원 리스트</p>
+		<p id="currentMemebers"></p>
 	</div>
 	
 	<div id="GroupBoardWrap" style="overflow:auto">
@@ -169,7 +176,7 @@ div {
 			<c:if test="${not empty grouplist}">
 				<c:forEach var="glist" items="${grouplist}">
 					<tr>
-						<td class="exsitingGid" >${glist.gbid}</td>
+						<td class="gidClick" >${glist.gbid}</td>
 						<td>${glist.gid}</td>
 						<td>${glist.mid}</td>
 						<c:if test="${not empty glist.gbfilename}">

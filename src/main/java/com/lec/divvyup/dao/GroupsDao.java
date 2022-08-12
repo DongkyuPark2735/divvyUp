@@ -15,5 +15,5 @@ public interface GroupsDao {
 	public List<Member> followList(String mid);
 	public int groupInsert(Groups group);
 	public int modify(Groups group);
-	public int finalStepDeleteGroup(int gid);	
+	public int finalStepDeleteGroup(int gid);
 }

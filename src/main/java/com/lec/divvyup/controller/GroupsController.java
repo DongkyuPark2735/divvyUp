@@ -49,7 +49,6 @@ public class GroupsController {
 		model.addAttribute("check", centralSystemService.checkAddition(gid));
 		model.addAttribute("checkAllPaid",  centralSystemService.checkAllPaid(gid));
 		model.addAttribute("done", centralSystemService.checkFinishSplit(gid));
-		/* model.addAttribute("locations", eventService.getAddress(gid)); */
 		return "groups/groupInfo";
 	}
 	@RequestMapping(value="groupInsertForm", method=RequestMethod.GET)

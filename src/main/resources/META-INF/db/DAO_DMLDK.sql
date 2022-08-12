@@ -2,6 +2,8 @@
 INSERT INTO GROUPBOARD(GBID, GID, MID, GBCONTENT, GBFILENAME)
     VALUES(GROUPBOARD_SEQ.NEXTVAL, 1, 'aaa', '대화1', NULL);
     
+select last_number from USER_SEQUENCES where SEQUENCE_NAME = 'GROUPBOARD_SEQ';
+
 INSERT INTO GROUPBOARD(GBID, GID, MID, GBCONTENT, GBFILENAME)
     VALUES(GROUPBOARD_SEQ.NEXTVAL, 1, 'bbb', '대화2', NULL);
         
@@ -17,8 +19,11 @@ INSERT INTO GROUPBOARD(GBID, GID, MID, GBCONTENT, GBFILENAME)
 SELECT * FROM GROUPS;                  
 SELECT * FROM GROUPDETAIL; 
 
-SELECT * FROM GROUPBOARD; 
+SELECT * FROM GROUPs; 
 SELECT * FROM MEMBER;
+select * from groupboard;
+
+		SELECT * FROM GROUPDETAIL WHERE GID=1;
 
 
 -- GroupBoard
@@ -68,12 +73,8 @@ SELECT * FROM GROUPBOARD WHERE MID = 'aaa' ORDER BY GBID DESC;
 		    WHERE RN = 1;
 commit;
 
-
-
-SELECT *
-FROM ALL_TAB_COLUMNS
-WHERE TABLE_NAME = 'GROUPS';
 select * from groups;
+
 insert into groups(gid, gname, grdate, gcontent, mid)
     VALUES(5, 'testGroup1', '22/08/01', '지우지말아주세요ㅠㅡㅠ', 'H34FI3');
 insert into groups(gid, gname, grdate, gcontent, mid)
@@ -128,6 +129,8 @@ SELECT *
 commit;
 
 select * from groups;
+select * from groupdetail;
+
 select * from follow;
 select * from event;
 select * from eventdetail;
@@ -151,6 +154,11 @@ SELECT *
 -- 그룹 ID별 검색
 SELECT *
     FROM(SELECT ROWNUM RN, G.* FROM GROUPS G WHERE G.GID LIKE '%'||'1'||'%')
+        WHERE RN BETWEEN 1 AND 10 ORDER BY GRDATE desc;
+
+-- 그룹 생성회원별 검색
+SELECT *
+    FROM(SELECT ROWNUM RN, G.* FROM GROUPS G WHERE G.MID LIKE '%'||''||'%')
         WHERE RN BETWEEN 1 AND 10 ORDER BY GRDATE desc;
 
 -- 그룹 생성일별 정렬 == 최신순, 오래된순 
@@ -184,5 +192,11 @@ SELECT *
         WHERE RN BETWEEN 1 AND 10 ORDER BY ERDATE desc;
 
 commit;
+select * from groups;
+select * from groupboard;
 
+		SELECT TO_MID FROM FOLLOW WHERE FROM_MID='aaa' ORDER BY TO_MID;
+select * from member;
+
+select * from groupdetail where gid =1;
 

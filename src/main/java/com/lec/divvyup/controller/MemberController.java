@@ -16,6 +16,7 @@ import com.lec.divvyup.vo.Member;
 @Controller
 @RequestMapping(value="member")
 public class MemberController {
+	Member member = new Member();
 	@Autowired
 	private MemberService memberService;
 	
@@ -88,8 +89,11 @@ public class MemberController {
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	public String login(String mid, String mpw, Model model, HttpSession session) {
 		String result = memberService.loginCheck(mid, mpw, session);
+		member = memberService.getMember(mid);
+		System.out.println(member);
 		if(result.equals("로그인 성공")) {
-			return "redirect:../main/mainto.do";
+			model.addAttribute("person", member);
+			return "forward:../main/mainto.do";
 		}else {
 			model.addAttribute("mid", mid);
 			model.addAttribute("mpw", mpw);
