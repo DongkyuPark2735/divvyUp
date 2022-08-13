@@ -16,4 +16,6 @@ public class Groups {
 	private String gimg;
 	private String gcontent;
 	private String mid;
+	private int startRow;
+	private int endRow;
 }

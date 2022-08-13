@@ -83,7 +83,6 @@ public class MemberController {
 	public String login(String mid, String mpw, Model model, HttpSession session) {
 		String result = memberService.loginCheck(mid, mpw, session);
 		member = memberService.getMember(mid);
-		System.out.println(member);
 		if(result.equals("로그인 성공")) {
 			model.addAttribute("person", member);
 			return "forward:../main/mainto.do";

@@ -18,8 +18,16 @@ COMMIT;
 select * from user_tables;
 --[2] GROUP TABLE --
 
-SELECT * FROM  GROUPS;
+SELECT * FROM  GROUPS where mid='aaa';
 
+		SELECT * FROM (SELECT ROWNUM RN, A.* 
+            FROM (SELECT * FROM GROUPS WHERE (GID IN(SELECT GID FROM GROUPDETAIL WHERE MID='aaa')) OR (GID IN(SELECT GID FROM GROUPS WHERE MID='aaa'))	 ORDER BY GRDATE DESC) A)
+            WHERE RN BETWEEN 1 AND 10;
+        
+        
+        (GID IN(SELECT GID FROM GROUPDETAIL WHERE MID=#{mid})) OR (GID IN(SELECT GID FROM GROUPS WHERE MID=#{mid}))	
+        
+        
 INSERT INTO GROUPS (GID, GNAME, GIMG, GCONTENT, MID)
     VALUES (GROUPS_SEQ.NEXTVAL, 'Trip to Namhae', 'namhae.jpg' , 'Lets have a lit time', 'aaa');
     

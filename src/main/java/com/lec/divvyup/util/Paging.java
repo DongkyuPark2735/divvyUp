@@ -47,4 +47,22 @@ public class Paging {
 			endPage = pageCnt;
 		}
 	}
+	public Paging(String pageNum, int totCnt) {
+		if(pageNum!=null) {
+			currentPage = Integer.parseInt(pageNum);
+		}
+		this.pageSize  = 5;
+		this.blockSize = 3;
+		startRow = (currentPage-1) * pageSize + 1;
+		endRow = startRow + pageSize - 1;
+		this.totCnt = totCnt;
+		pageCnt = (int)Math.ceil((double)totCnt / pageSize);
+		startPage = ((currentPage-1) / blockSize ) * blockSize + 1;
+		startPage = currentPage - (currentPage-1) % blockSize;
+		endPage = startPage + blockSize - 1;
+		if(endPage > pageCnt) {
+			endPage = pageCnt;
+		}
+	}
+	
 }

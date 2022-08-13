@@ -137,7 +137,23 @@
    <c:if test="${not empty joinResult}">
       <script>alert('${joinResult}');</script>
    </c:if>
-     <div class="modal">
+   
+   
+   
+    <nav class="header">
+		<div class="container">
+			<h1 class="logo">
+				<a href="${conPath}/main/main.jsp">D<span>U</span></a>
+			</h1>
+			<ul>
+				<li><a href="${conPath}/member/loginForm.do">로그인</a></li>
+				<li><a href="${conPath}/member/joinForm.do">회원가입</a></li>
+				<li><a href="${conPath}/qboard/listQboardForMember.do">Q&A</a></li>
+			</ul>
+		</div>
+	</nav>
+	
+     <div class="modal" style="display:none;">
         <div class="modal_content" title="클릭하면 창이 닫힙니다.">
        <header><h2>JOIN</h2></header>
       
@@ -177,51 +193,25 @@
        </form>
         </div>
      </div>
+   <div class="mainSection">
    <div id="login_wrap">
-      <header>
         <h2>LOGIN</h2>
-      </header>
       <form action="${conPath }/member/login.do" method="post">
         <div class="input-box">
-          <input id="username" type="text" name="mid" required="required" placeholder="아이디" value="${mid }">
-           <label for="username">ID</label>
+          <input id="username" class="login_btn" type="text" name="mid" required="required" placeholder="아이디" value="${mid }">
+           <label for="username" style="top:5px; padding-left:15px; ">아이디</label>
         </div>
         
         <div class="input-box">
-          <input id="password" type="password" name="mpw" required="required" placeholder="비밀번호" value="${mpw }">
-           <label for="password">PW</label>
+          <input id="password" class="login_btn" type="password" name="mpw" required="required" placeholder="비밀번호" value="${mpw }">
+           <label for="password" style="top:5px;  padding-left:5px;">비밀번호</label>
         </div>
         <div id="forgot"><a href="${conPath}/member/searchIdPwForm.do">ID/PW 찾기</a></div>
          <input type="submit" value="로그인">
      </form>
    </div>
-     <button class="joinBtn">JOIN</button>
-<%--      <button onclick="location='${conPath}/member/joinForm.do'" class="joinBtn">JOIN</button> --%>
-     
-     
-     
-     
-     <button onclick="location='${conPath}/admin/adminloginForm.do'">AMODE</button>
-     <button onclick="location='${conPath}/qboard/listQboardForMember.do'">QBOARD</button>
-
-    <%--  <form action="${conPath }/member/login.do" method="post">
-       <table>
-         <caption>LOGIN</caption>
-         <tr>
-           <th>ID</th>
-           <td><input type="text" name="mid" required="required" value="${mid }"></td>
-         </tr>
-         <tr>
-           <th>PW</th>
-           <td><input type="password" name="mpw" required="required" value="${mpw }"></td>
-         </tr>
-         <tr>
-           <td colspan="2">
-             <input type="submit" value="LOGIN">
-           </td>
-         </tr>
-       </table>
-     </form> --%>
-     <%-- <button onclick="location='${conPath}/member/searchIdPwForm.do'">FIND ID&PW</button> --%>
+</div>
+<jsp:include page="../main/footer.jsp"/>
 </body>
+
 </html>
