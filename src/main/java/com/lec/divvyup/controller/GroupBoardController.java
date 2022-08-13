@@ -22,34 +22,14 @@ public class GroupBoardController {
    @Autowired
    GroupBoardService groupBoardService;
 
-<<<<<<< HEAD
 //   대화 리스트 20개 출력
    @RequestMapping(value = "groupDetil")
    public String listLatest20Groupboard(int gid, String mid, Model model, HttpSession session) {
-      session.setAttribute("sesiongGid", gid);
-      session.setAttribute("sesiongMid", mid);
+      session.setAttribute("sesionGBgid", gid);
+      session.setAttribute("sesionGBmid", mid);
       model.addAttribute("grouplist", groupBoardService.listLatest20Groupboard(gid, session));
       return "groupBoard/groupDetail";
    }
-=======
-//	대화 리스트 20개 출력
-<<<<<<< HEAD
-	@RequestMapping(value="groupDetil", method = RequestMethod.GET)
-	public String listLatest20Groupboard(int gid, String mid, Model model, HttpSession session) {
-	      session.setAttribute("sesiongGid", gid);
-	      session.setAttribute("sesiongMid", mid);
-	      model.addAttribute("grouplist", groupBoardService.listLatest20Groupboard(gid, session)); 
-	      return "groupBoard/groupDetail";
-=======
-	@RequestMapping(value = "groupDetil")
-	public String listLatest20Groupboard(int gid, String mid, Model model, HttpSession session) {
-		session.setAttribute("sesiongGid", gid);
-		session.setAttribute("sesiongMid", mid);
-		model.addAttribute("grouplist", groupBoardService.listLatest20Groupboard(gid, session)); 
-		return "groupBoard/groupDetail";
->>>>>>> babeadf72e944c959f5ccb566d2ecbc1c2b1cb4b
-	}
->>>>>>> babeadf72e944c959f5ccb566d2ecbc1c2b1cb4b
 
 //   지난 대화20개 가져오기
    @RequestMapping(value = "pastGroupBoardList", method = RequestMethod.GET)

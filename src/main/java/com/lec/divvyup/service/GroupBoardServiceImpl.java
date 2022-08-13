@@ -79,7 +79,7 @@ public class GroupBoardServiceImpl implements GroupBoardService {
 	@Override
 	public List<GroupBoard> listLatest20Groupboard(int gid, HttpSession session) {
 		mlist = new ArrayList<String>();
-		String mid = (String)session.getAttribute("sesiongMid");
+		String mid = (String)session.getAttribute("sesionGBmid");
 		
 		//그룹 디테일 들어온 회원 application에 입력
 		String tempMid = (String)application.getAttribute(mid);

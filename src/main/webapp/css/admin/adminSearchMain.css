@@ -10,7 +10,6 @@ div {
 
 div#tmpheader{
 	width: 100%;
-	background-color: blue;
 	height: 100px;
 }
 
@@ -45,14 +44,14 @@ div#adminSearchBar{
 }
 
 #adminSearchWrap #adminSearchBar .searchBar.current{
-	background-color: lightgray;
+	background-color : rgba(0, 0, 0, 0.6);
 	font-weight: bold;
 	font-size: 18px;
 }
 
 #adminSearchBar ul li:hover {
 	cursor: pointer;
-	background-color: lightgray;
+	background-color : rgba(0, 0, 0, 0.6);
 }
 
 /* 검색 input  */
@@ -61,7 +60,7 @@ div#adminSearchBar{
 	height : 35px;
 	border: none;
 	border-bottom: 2px solid #1DBF73;
-	background-color: lightgray;
+	background-color : rgba(0, 0, 0, 0.6);
 	text-align: center;
 }
 .adminSearchResult.current select:focus{

@@ -22,5 +22,10 @@
 <c:if test="${empty singleLatestGroupboard.gbfilename}">
 	<td>${singleLatestGroupboard.gbcontent}</td>
 </c:if>
-<td>${singleLatestGroupboard.gbrdate }</td>
+<td>
+	<img class="imgForDelete" alt="글삭제" src="${conPath }/groupFileBoardUploadFiles/pngwing.png" width="10" height="10">
+</td>
+<td>
+	<fmt:formatDate value="${singleLatestGroupboard.gbrdate }" pattern="yy년MM월dd일 HH:mm:ss"/>
+</td>
 <td hidden="" class="joinMList">접속 회원 : ${sessionMList }</td>
