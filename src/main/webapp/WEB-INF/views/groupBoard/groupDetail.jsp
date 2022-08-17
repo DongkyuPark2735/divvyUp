@@ -12,11 +12,13 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 		$(document).ready(function(){
-			/* 타이머 새글 가져오기 */
+			/* 대화입력창 포커스 */
 			$('#chattingBoardWarp #chattingBoardInsert #tempGbcontent').focus();
 			var sessionGid = ${sesionGBgid}; /*세션 gid셋팅*/
+			/* 스크롤 아래로 시작 */
 			$('#chattingBoardList').scrollTop($('#chattingBoardList')[0].scrollHeight);
 			
+			/* 타이머 새글 가져오기 */
 			timer = setInterval( function () {
 				console.log('새글 가져오기 타이머 작동 중');
 				var exsitingGidByList = $("table#exsitingList tr:last td:nth-child(1)").text();
@@ -35,6 +37,7 @@
 			    	var lstIndex2 = data.indexOf('</td>');
 			    	var checkGid = $.trim(data).substring(index2+2, lstIndex2-8);
 			    	if(checkGid != exsitingGidByList && checkGid != exsitingGidByTimer){
+			    		
 							$('#singleLatestGroupboardResult').append("<tr>"+data+"</tr>");
 							$('#chattingBoardList').scrollTop($('#chattingBoardList')[0].scrollHeight);
 							var midforfloatRight = $("#chattingBoardList table#singleLatestGroupboardResult tr:last td:nth-child(3)").text();
@@ -51,10 +54,23 @@
 							$("#chattingBoardList table#singleLatestGroupboardResult tr:last td:nth-child(5)").hide();
 			    	}
 			    }
-				});
+				}).done(function () {
+					  /* 타이머 글 삭제 버튼 생성 */
+					  $('#chattingBoardList table#singleLatestGroupboardResult tr').mouseover(function () {
+							deleteImgShow(this);
+						});
+					  /* 타이머 글 삭제버튼 제거 */
+					  $('#chattingBoardList table#singleLatestGroupboardResult tr').mouseleave(function () {
+							deleteImgHide(this);
+						});
+					  /* 방금쓴 타이머 글 삭제 */
+					  $("#chattingBoardList table#singleLatestGroupboardResult img[class='imgForDelete']").click(function(){
+							deleteGrouBoardFcn(this);
+						});
+					});
 			}, 1000);
 			
-			/* 글입력 함수 */
+			/* 글입력 함수 선언 */
 			function insertGrouBoardFcn(){
 			  const tempGbfilename = $("#tempGbfilename")[0].files[0];
 				var gid = $('#tempGid').val();
@@ -83,6 +99,39 @@
 				});
 			};
 			
+			/* 글삭제 버튼 생성 함수선언 */
+			function deleteImgShow(trOver) {
+				var tempGdidforDelete = $(trOver).children('td:nth-child(1)').text();
+				var tempMidforDelete = $(trOver).children('td:nth-child(3)').text();
+				if(tempMidforDelete == sessionMid){
+					$(trOver).children("td:nth-child(5)").show();
+				}
+			};
+			
+			/* 글삭제 버튼 숨김 함수선언 */
+			function deleteImgHide(trOver) {
+				var tempGdidforDelete = $(trOver).children('td:nth-child(1)').text();
+				var tempMidforDelete = $(trOver).children('td:nth-child(3)').text();
+				if(tempMidforDelete == sessionMid){
+					$(trOver).children("td:nth-child(5)").hide();
+				}
+			};
+			
+			/* 글 삭제 함수 선언*/
+			function deleteGrouBoardFcn(deleteGbid){
+				var gbid = $(deleteGbid).parent('td').siblings('.gidClick').text();
+				if(confirm("해당 글을 삭제하시겠습니까?")){
+					$.ajax({
+		       	url : "${conPath}/groupboard/deleteGroupBoard.do",
+		       	type : "GET",
+		       	data : {"gbid" : gbid}, 
+		       	success: function(data){
+							location.reload();
+		       	}
+					});
+				};
+			};
+			
 			/* 글 입력 */
 			$('#tempGbcontent').keydown(function (key) {
 		    if (key.keyCode == 13) {
@@ -93,24 +142,9 @@
 					insertGrouBoardFcn();
 			});
 
-			/* 글삭제 */
+			/* 기존글삭제 */
 			$("img[class='imgForDelete']").click(function(){
-				
-// 				var gbid = $(this).parents('td#gidClick').text();
-				
-// 				console.log(gbid);
-				var deleteCheck = confirm("해당 글을 삭제하시겠습니까?");
-				if(deleteCheck){
-					$.ajax({
-		       	url : "${conPath}/groupboard/deleteGroupBoard.do",
-		       	type : "GET",
-		       	data : {"gbid" : gbid}, 
-		       	success: function(data){
-		       			console.log($('#GroupBoardWrap').text());
-		       		  $('div#GroupBoardWrap').load(location.href+' #GroupBoardWrap');
-		       	}
-					});
-				}
+				deleteGrouBoardFcn(this);
 			});
 			
 			/* 글 불러오기 스크롤  */
@@ -153,13 +187,28 @@
 								$('#pastGroupBoardResult').prepend("<h2>이전 대화가 없습니다.</h2h>");
 				      }
 				   	}
-				  });					
-				}
+				  }).done(function () {
+					  /* 이전글 삭제 버튼 생성 */
+					  $('#chattingBoardList table#pastGroupBoardResult tr').mouseover(function () {
+							deleteImgShow(this);
+						});
+					  /* 이전글 삭제버튼 제거 */
+					  $('#chattingBoardList table#pastGroupBoardResult tr').mouseleave(function () {
+							deleteImgHide(this);
+						});
+					  /* 이전글 삭제 */
+					  $("#chattingBoardList table#pastGroupBoardResult img[class='imgForDelete']").click(function(){
+							deleteGrouBoardFcn(this);
+						});
+					});	
+				};	
 			});
+			
 			/* 파일첨부 파일이름 */
 			$("#tempGbfilename").on('change',function(){
 			  var fileName = $("#tempGbfilename").val();
 			  $("#upload-name").html(fileName);
+			  
 			});
 			
 			/* 세션 mid글 오른쪽 정렬  */
@@ -174,44 +223,18 @@
 				} 
 			}	
 			
-			/* 글삭제 버튼 생성, 삭제 */
+			/* 모든 삭제IMG 숨기기 */
 			$("img[class='imgForDelete']").parents('td').hide();
-			$('#chattingBoardList table tr').mouseover(function () {
-				console.log(1);
-				var tempGdidforDelete = $(this).children('td:nth-child(1)').text();
-				var tempMidforDelete = $(this).children('td:nth-child(3)').text();
-				if(tempMidforDelete == sessionMid){
-					$(this).children("td:nth-child(5)").show();
-				}
-			});
-				/*이전글 삭제 버튼 생성*/
-// 			$('#chattingBoardList table#pastGroupBoardResult tr').mouseover(function () {
-// 				console.log(1);
-// 				var tempGdidforDelete = $(this).children('td:nth-child(1)').text();
-// 				var tempMidforDelete = $(this).children('td:nth-child(3)').text();
-// 				if(tempMidforDelete == sessionMid){
-// 					$(this).children("td:nth-child(5)").show();
-// 				}
-// 			});
 
-// 			/* 방금쓴글 삭제 버튼 생성*/
-// 			$('#chattingBoardList table#singleLatestGroupboardResult tr').mouseover(function () {
-// 				console.log(1);
-// 				var tempGdidforDelete = $(this).children('td:nth-child(1)').text();
-// 				var tempMidforDelete = $(this).children('td:nth-child(3)').text();
-// 				if(tempMidforDelete == sessionMid){
-// 					$(this).children("td:nth-child(5)").show();
-// 				}
-// 			});
-				
-			$('#chattingBoardList table tr').mouseleave(function () {
-				var tempGdidforDelete = $(this).children('td:nth-child(1)').text();
-				var tempMidforDelete = $(this).children('td:nth-child(3)').text();
-				if(tempMidforDelete == sessionMid){
-					$(this).children("td:nth-child(5)").hide();
-				}
+			/* 기존글 삭제 버튼 생성 */
+			$('#chattingBoardList table#exsitingList tr').mouseover(function () {
+				deleteImgShow(this);
 			});
 			
+			/* 기존글 삭제 버튼 숨김*/
+			$('#chattingBoardList table#exsitingList tr').mouseleave(function () {
+				deleteImgHide(this);
+			});
 		});
 </script>
 </head>

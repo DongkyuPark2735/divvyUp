@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.lec.divvyup.service.GroupBoardService;
@@ -54,9 +55,10 @@ public class GroupBoardController {
    }
 
 //   글 삭제
-   @RequestMapping(value = "deleteGroupBoard", method = { RequestMethod.POST, RequestMethod.GET })
+   @RequestMapping(value = "deleteGroupBoard", method = RequestMethod.GET)
+   @ResponseBody
    public void deleteGroupBoard(int gbid, Model model) {
-      groupBoardService.deleteGroupboard(gbid);
+     groupBoardService.deleteGroupboard(gbid);
    }
 }
 

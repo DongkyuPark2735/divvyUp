@@ -9,6 +9,8 @@
 <title>Home</title>
 <meta charset="UTF-8">
 <link href="${conPath }/css/admin/adminSearchMain.css" rel="stylesheet">
+<link href="${conPath }/css/main/main.css" rel="stylesheet">
+
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 	$(document).ready(function() {
@@ -162,343 +164,405 @@
 </script>
 </head>
 <body>
-	<div id="tmpheader">
-		<h1>임시 헤더</h1></div>
-	
-	<!-- 검색 전체 -->
-	<div id="adminSearchWrap">
-		<h2>검색하기 게시판</h2>
-		
-		<!-- 검색 탭 -->
-		<div id="adminSearchBar">
-			<ul style="padding-left: 0">
-				<li class="searchBar current">회원 검색</li>
-				<li class="searchBar">그룹 검색</li>
-				<li class="searchBar">지출기록 검색	</li>
+	<!-- 헤더 -->
+	<nav class="header">
+		<div class="container">
+			<h1 class="logo">
+				<a href="${conPath}/main/main.jsp">D<span>U</span></a>
+			</h1>
+
+			<c:if test="${param.windowType eq 0}">
+				<div style="left: 350px; align-items: left; position: absolute;"
+					class="section mt-5">
+					<div class="row">
+						<div class="col-12">
+							<div id="switch">
+								<div id="circle"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</c:if>
+			<c:if test="${empty param.windowType}">
+				<div style="left: 350px; align-items: left; position: absolute;"
+					class="section mt-5">
+					<div class="row">
+						<div class="col-12">
+							<div id="switch">
+								<div id="circle"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</c:if>
+			<c:if test="${param.windowType eq 1}">
+				<div style="left: 350px; align-items: left; position: absolute;"
+					class="section mt-5">
+					<div class="row">
+						<div class="col-12">
+							<div id="switch" class="switched">
+								<div id="circle"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</c:if>
+
+			<ul>
+				<li><a href="${conPath}/member/modifyMemberForm.do?mid=${mid }">${mid }님
+						▶</a></li>
+				<li><a
+					href="${conPath}/notification/notificationConfirmForm.do"
+					class="notification"> <img src="${conPath}/icon/noti.png"
+						class="imgNoti" />
+						<div class="badge">${uncheckdNotificationCnt }</div>
+				</a></li>
+				<li><a href="#">공지사항</a></li>
+				<li><a href="${conPath}/main/logout.do"> <img
+						src="${conPath}/icon/logout.png" class="imgLogout" />
+				</a></li>
 			</ul>
 		</div>
-		
-		<!-- 회원 검색 -->
-		<div class="adminSearchResult current" >
-			<form action="${conPath}/adminSearch/searchMemeber.do" method="get" name="mSubmitfrm">
-				<input type="hidden" name="startRow" value="1">
-				<input type="hidden" name="endRow" value="20">
-				<select name="searchSelectItems" >
-					<option value="mname" 
-							<c:if test="${searchKeyWord.searchSelectItems eq 'mname'}">
-									selected="selected"
-							</c:if>>회원 이름</option>
-					<option value="mid"
-							<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
-									selected="selected"
-							</c:if>>회원 아이디</option>
-					<option value="memail" 
-							<c:if test="${searchKeyWord.searchSelectItems eq 'memail'}">
-									selected="selected"
-							</c:if>>회원 이메일</option>
-				</select>
-				<input type="text" name="searchWord" value="${searchKeyWord.searchWord}">
-
-				<input type="submit" value="검색">
-			</form>
+	</nav>
+	
+	
+	<!-- 검색 전체 -->
+	<div id="backIMG">
+		<div id="adminSearchWrap">
+			<h2>검색하기 게시판</h2>
 			
-			<c:if test="${not empty searchMemberList}">
-				<form action="${conPath}/adminSearch/searchMemeber.do" method="get">
+			<!-- 검색 탭 -->
+			<div id="adminSearchBar">
+				<ul style="padding-left: 0">
+					<li class="searchBar current">회원 검색</li>
+					<li class="searchBar">그룹 검색</li>
+					<li class="searchBar">지출기록 검색	</li>
+				</ul>
+			</div>
+			
+			<!-- 회원 검색 -->
+			<div class="adminSearchResult current" >
+				<form action="${conPath}/adminSearch/searchMemeber.do" method="get" name="mSubmitfrm">
 					<input type="hidden" name="startRow" value="1">
 					<input type="hidden" name="endRow" value="20">
-					<input type="hidden" name="searchSelectItems" value="${searchKeyWord.searchSelectItems}">
-					<input type="hidden" name="searchWord" value="${searchKeyWord.searchWord}">
-					<select onchange="this.form.submit()" name="searchResultOrderBy">
-						<option disabled="disabled" selected="selected">정렬 기준 선택</option>
-						<option class="searchResultOrderBy" value="orderMnameDESC"  
-							<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderMnameDESC'}">
-								selected="selected"
-							</c:if>
-							> 회원 이름오름차순 정렬</option>
-						<option class="searchResultOrderBy" value="orderMnameASC"
-							<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderMnameASC'}">
-								selected="selected"
-							</c:if>
-							>회원 이름내림차순 정렬</option>
-						<option class="searchResultOrderBy" value="orderMrdateDESC"
-							<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderMrdateDESC'}">
-								selected="selected"
-							</c:if>
-							>회원 가입일오름차순 정렬</option>
-						<option class="searchResultOrderBy" value="orderMrdateASC"
-							<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderMrdateASC'}">
-								selected="selected"
-							</c:if>
-							>회원 가입일내림차순 정렬</option>
+					<select name="searchSelectItems" >
+						<option value="mname" 
+								<c:if test="${searchKeyWord.searchSelectItems eq 'mname'}">
+										selected="selected"
+								</c:if>>회원 이름</option>
+						<option value="mid"
+								<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
+										selected="selected"
+								</c:if>>회원 아이디</option>
+						<option value="memail" 
+								<c:if test="${searchKeyWord.searchSelectItems eq 'memail'}">
+										selected="selected"
+								</c:if>>회원 이메일</option>
 					</select>
+					<input type="text" name="searchWord" value="${searchKeyWord.searchWord}">
+	
+					<input type="submit" value="검색">
 				</form>
-				<table id="memberResultTable">
-					<tr>
-						<th>회원 아이디</th>
-						<th>회원 이름</th>
-						<th>회원 이메일</th>
-						<th>회원 가입일</th>
-					</tr>
-				</table>
-				<!-- 스크롤 부분  -->
-				<div id="memberResultDiv">
-					<table>
-					<c:forEach items="${searchMemberList}" var="memberList">
+				
+				<c:if test="${not empty searchMemberList}">
+					<form action="${conPath}/adminSearch/searchMemeber.do" method="get">
+						<input type="hidden" name="startRow" value="1">
+						<input type="hidden" name="endRow" value="20">
+						<input type="hidden" name="searchSelectItems" value="${searchKeyWord.searchSelectItems}">
+						<input type="hidden" name="searchWord" value="${searchKeyWord.searchWord}">
+						<select onchange="this.form.submit()" name="searchResultOrderBy">
+							<option disabled="disabled" selected="selected">정렬 기준 선택</option>
+							<option class="searchResultOrderBy" value="orderMnameDESC"  
+								<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderMnameDESC'}">
+									selected="selected"
+								</c:if>
+								> 회원 이름오름차순 정렬</option>
+							<option class="searchResultOrderBy" value="orderMnameASC"
+								<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderMnameASC'}">
+									selected="selected"
+								</c:if>
+								>회원 이름내림차순 정렬</option>
+							<option class="searchResultOrderBy" value="orderMrdateDESC"
+								<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderMrdateDESC'}">
+									selected="selected"
+								</c:if>
+								>회원 가입일오름차순 정렬</option>
+							<option class="searchResultOrderBy" value="orderMrdateASC"
+								<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderMrdateASC'}">
+									selected="selected"
+								</c:if>
+								>회원 가입일내림차순 정렬</option>
+						</select>
+					</form>
+					<table id="memberResultTable">
 						<tr>
-							<td>${memberList.mid}</td>
-							<td>${memberList.mname}</td>
-							<td>${memberList.memail}</td>
-							<td>${memberList.mrdate}</td>
+							<th>회원 아이디</th>
+							<th>회원 이름</th>
+							<th>회원 이메일</th>
+							<th>회원 가입일</th>
 						</tr>
-					</c:forEach>
 					</table>
-				</div>
-				
-				<!-- 회원 엑셀 다운로드 -->
-				<form action="${conPath}/excel/excelDownloadMember.do" method="post" class="mExcelDownFrm">
-					<input type="hidden" name="startRow" value="1">
-					<input type="hidden" name="endRow" value="">
-					<input type="hidden" name="searchSelectItems" value="${searchKeyWord.searchSelectItems}">
-					<input type="hidden" name="searchWord" value="${searchKeyWord.searchWord}">	
-					<input type="hidden" name="searchResultOrderBy" value="${searchKeyWord.searchResultOrderBy}">
-					<input type="submit" value="검색결과 엑셀파일 다운로드" class="excelDownload">
-				</form>
-			 </c:if>
-			 
-			 <c:if test="${empty searchMemberList}">
-				<c:if test="${searchKeyWord.searchSelectItems eq 'mname'}">
-					<p><b>'회원 이름으로' 검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
-				</c:if>
-				<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
-					<p><b>'회원 아이디로' 검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
-				</c:if>
-				<c:if test="${searchKeyWord.searchSelectItems eq 'memail'}">
-					<p><b>'회원 이메일로' 검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
-				</c:if>
-			</c:if>
-		</div>
-		
-		<!-- 그룹 검색 -->
-		<div class="adminSearchResult">
-			<form action="${conPath}/adminSearch/searchGroup.do" method="get" >
-				<input type="hidden" name="startRow" value="1">
-				<input type="hidden" name="endRow" value="20">
-				<select name="searchSelectItems" >
-					<option value="gname" 
-							<c:if test="${searchKeyWord.searchSelectItems eq 'gname'}">
-									selected="selected"
-							</c:if>>그룹 이름</option>
-					<option value="gid"
-							<c:if test="${searchKeyWord.searchSelectItems eq 'gid'}">
-									selected="selected"
-							</c:if>>그룹 아이디</option>
-					<option value="mid"
-							<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
-									selected="selected"
-							</c:if>>그룹 생성회원 아이디</option>
-				</select>
-
-				<input type="text" name="searchWord" value="${searchKeyWord.searchWord}">
-				<input type="submit" value="검색">
-			</form>
-			
-			<c:if test="${not empty searchGroupList}">
-				<form action="${conPath}/adminSearch/searchGroup.do" method="get">
-					<input type="hidden" name="startRow" value="1">
-					<input type="hidden" name="endRow" value="20">
-					<input type="hidden" name="searchSelectItems" value="${searchKeyWord.searchSelectItems}">
-					<input type="hidden" name="searchWord" value="${searchKeyWord.searchWord}">
-					<select onchange="this.form.submit()" name="searchResultOrderBy">
-						<option disabled="disabled" selected="selected">정렬 기준 선택</option>
-						<option class="searchResultOrderBy" value="orderGnameDESC"  
-							<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderGnameDESC'}">
-								selected="selected"
-							</c:if>
-							> 그룹 이름오름차순 정렬</option>
-						<option class="searchResultOrderBy" value="orderGnameASC"
-							<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderGnameASC'}">
-								selected="selected"
-							</c:if>
-							>그룹 이름내림차순 정렬</option>
-						<option class="searchResultOrderBy" value="orderGrdateDESC"
-							<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderGrdateDESC'}">
-								selected="selected"
-							</c:if>
-							>그룹 생성일오름차순 정렬</option>
-						<option class="searchResultOrderBy" value="orderGrdateASC"
-							<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderGrdateASC'}">
-								selected="selected"
-							</c:if>
-							>그룹 생성일내림차순 정렬</option>
-					</select>
-				</form>
-				
-				<table id="groupResultTable">
-					<tr>
-						<th>그룹 아이디</th>
-						<th>그룹 이름</th>
-						<th>그룹 생성일</th>
-						<th>그룹 설명</th>
-						<th>그룹 생성회원</th>
-					</tr>
-				</table>
-				<!-- 스크롤 결과 -->
-				<div id="groupResultDiv">
-					<table>
-					<c:forEach items="${searchGroupList}" var="groupsList">
-						<tr>
-							<td>${groupsList.gid}</td>
-							<td>${groupsList.gname}</td>
-							<td>${groupsList.grdate}</td>
-							<td>${groupsList.gcontent}</td>
-							<td>${groupsList.mid}</td>
-						</tr>
-					</c:forEach>
-					</table>
-				</div>
-				
-				<!-- 그룹 엑셀 다운로드 -->
-				<form action="${conPath}/excel/excelDownloadGroup.do" method="post" class="gExcelDownFrm">
+					<!-- 스크롤 부분  -->
+					<div id="memberResultDiv">
+						<table>
+						<c:forEach items="${searchMemberList}" var="memberList">
+							<tr>
+								<td>${memberList.mid}</td>
+								<td>${memberList.mname}</td>
+								<td>${memberList.memail}</td>
+								<td>${memberList.mrdate}</td>
+							</tr>
+						</c:forEach>
+						</table>
+					</div>
+					
+					<!-- 회원 엑셀 다운로드 -->
+					<form action="${conPath}/excel/excelDownloadMember.do" method="post" class="mExcelDownFrm">
 						<input type="hidden" name="startRow" value="1">
 						<input type="hidden" name="endRow" value="">
 						<input type="hidden" name="searchSelectItems" value="${searchKeyWord.searchSelectItems}">
 						<input type="hidden" name="searchWord" value="${searchKeyWord.searchWord}">	
 						<input type="hidden" name="searchResultOrderBy" value="${searchKeyWord.searchResultOrderBy}">
 						<input type="submit" value="검색결과 엑셀파일 다운로드" class="excelDownload">
-				</form>
-				
-			</c:if>
-			<c:if test="${empty searchGroupList}">
-				<c:if test="${searchKeyWord.searchSelectItems eq 'gname'}">
-					<p><b>'그룹이름으로' 검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
+					</form>
+				 </c:if>
+				 
+				 <c:if test="${empty searchMemberList}">
+					<c:if test="${searchKeyWord.searchSelectItems eq 'mname'}">
+						<p><b>'회원 이름으로' 검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
+					</c:if>
+					<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
+						<p><b>'회원 아이디로' 검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
+					</c:if>
+					<c:if test="${searchKeyWord.searchSelectItems eq 'memail'}">
+						<p><b>'회원 이메일로' 검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
+					</c:if>
 				</c:if>
-				<c:if test="${searchKeyWord.searchSelectItems eq 'gid'}">
-					<p><b>'그룹아이디로' 검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
-				</c:if>
-				<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
-					<p><b>'그룹 생성 회원아이디로' 검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
-				</c:if>
-			</c:if>
-		</div>
-		
-		<!-- 이벤트 검색 -->
-		<div class="adminSearchResult">
-			<form action="${conPath}/adminSearch/searchEvent.do" method="get" >
-				<input type="hidden" name="startRow" value="1">
-				<input type="hidden" name="endRow" value="20">
-<%-- 				<input type="hidden" name="searchWord" value="${searchKeyWord.searchResultOrderBy}"> --%>
-				<select name="searchSelectItems" >
-					<option value="ename" 
-							<c:if test="${searchKeyWord.searchSelectItems eq 'ename'}">
-									selected="selected"
-							</c:if>>지출 기록명</option>
-					<option value="eid"
-							<c:if test="${searchKeyWord.searchSelectItems eq 'eid'}">
-									selected="selected"
-							</c:if>>지출 기록 아이디</option>
-					<option value="mid"
-							<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
-									selected="selected"
-							</c:if>>지출 기록 생성회원 아이디</option>
-					<option value="gid"
-							<c:if test="${searchKeyWord.searchSelectItems eq 'gid'}">
-									selected="selected"
-							</c:if>>지출 기록 그룹아이디</option>
-				</select>
-
-				<input type="text" name="searchWord" value="${searchKeyWord.searchWord}">
-				<input type="submit" value="검색">
-			</form>
+			</div>
 			
-			<c:if test="${not empty searchEventList}">
-				<form action="${conPath}/adminSearch/searchEvent.do" method="get">
+			<!-- 그룹 검색 -->
+			<div class="adminSearchResult">
+				<form action="${conPath}/adminSearch/searchGroup.do" method="get" >
 					<input type="hidden" name="startRow" value="1">
 					<input type="hidden" name="endRow" value="20">
-					<input type="hidden" name="searchSelectItems" value="${searchKeyWord.searchSelectItems}">
-					<input type="hidden" name="searchWord" value="${searchKeyWord.searchWord}">
-					<select onchange="this.form.submit()" name="searchResultOrderBy">
-						<option disabled="disabled" selected="selected">정렬 기준 선택</option>
-						<option class="searchResultOrderBy" value="orderEnameDESC"  
-							<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderEnameDESC'}">
-								selected="selected"
-							</c:if>
-							> 지출 기록 이름 오름차순 정렬</option>
-						<option class="searchResultOrderBy" value="orderEnameASC"
-							<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderEnameASC'}">
-								selected="selected"
-							</c:if>
-							>지출 기록 이름 내림차순 정렬</option>
-						<option class="searchResultOrderBy" value="orderErdateDESC"
-							<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderErdateDESC'}">
-								selected="selected"
-							</c:if>
-							>지출 기록 생성일 오름차순 정렬</option>
-						<option class="searchResultOrderBy" value="orderErdateASC"
-							<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderErdateASC'}">
-								selected="selected"
-							</c:if>
-							>지출 지록 생성일 내림차순 정렬</option>
+					<select name="searchSelectItems" >
+						<option value="gname" 
+								<c:if test="${searchKeyWord.searchSelectItems eq 'gname'}">
+										selected="selected"
+								</c:if>>그룹 이름</option>
+						<option value="gid"
+								<c:if test="${searchKeyWord.searchSelectItems eq 'gid'}">
+										selected="selected"
+								</c:if>>그룹 아이디</option>
+						<option value="mid"
+								<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
+										selected="selected"
+								</c:if>>그룹 생성회원 아이디</option>
 					</select>
+	
+					<input type="text" name="searchWord" value="${searchKeyWord.searchWord}">
+					<input type="submit" value="검색">
 				</form>
 				
-				<table id="eventsResultTable">
-					<tr>
-						<th>지출 기록 아이디</th>
-						<th>지출 기록명</th>
-						<th>지출 기록 내용</th>
-						<th>지출 금액</th>
-						<th>지출 장소</th>
-						<th>지출 기록 회원수</th>
-						<th>지출 기록 생성일</th>
-						<th>지출 기록 생성 회원아이디</th>
-						<th>지출 기록 생성 그룹</th>
-					</tr>
-				</table>	
-				<div id="eventResultDiv">
-					<table>
-					<c:forEach items="${searchEventList}" var="eventList">
-						<tr>
-							<td>${eventList.eid}</td>
-							<td>${eventList.ename}</td>
-							<td>${eventList.econtent}</td>
-							<td>${eventList.eamount}</td>
-							<td>${eventList.eaddress}</td>
-							<td>${eventList.ecount}</td>
-							<td>${eventList.erdate}</td>
-							<td>${eventList.mid}</td>
-							<td>${eventList.gid}</td>
-						</tr>
-					</c:forEach>
-					</table>
-				</div>
-				
-				<!-- 지출 기록 엑셀 다운로드 -->
-				<form action="${conPath}/excel/excelDownloadEvents.do" method="post" class="eExcelDownFrm">
+				<c:if test="${not empty searchGroupList}">
+					<form action="${conPath}/adminSearch/searchGroup.do" method="get">
 						<input type="hidden" name="startRow" value="1">
-						<input type="hidden" name="endRow" value="">
+						<input type="hidden" name="endRow" value="20">
 						<input type="hidden" name="searchSelectItems" value="${searchKeyWord.searchSelectItems}">
-						<input type="hidden" name="searchWord" value="${searchKeyWord.searchWord}">	
-						<input type="hidden" name="searchResultOrderBy" value="${searchKeyWord.searchResultOrderBy}">
-						<input type="submit" value="검색결과 엑셀파일 다운로드" class="excelDownload">
+						<input type="hidden" name="searchWord" value="${searchKeyWord.searchWord}">
+						<select onchange="this.form.submit()" name="searchResultOrderBy">
+							<option disabled="disabled" selected="selected">정렬 기준 선택</option>
+							<option class="searchResultOrderBy" value="orderGnameDESC"  
+								<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderGnameDESC'}">
+									selected="selected"
+								</c:if>
+								> 그룹 이름오름차순 정렬</option>
+							<option class="searchResultOrderBy" value="orderGnameASC"
+								<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderGnameASC'}">
+									selected="selected"
+								</c:if>
+								>그룹 이름내림차순 정렬</option>
+							<option class="searchResultOrderBy" value="orderGrdateDESC"
+								<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderGrdateDESC'}">
+									selected="selected"
+								</c:if>
+								>그룹 생성일오름차순 정렬</option>
+							<option class="searchResultOrderBy" value="orderGrdateASC"
+								<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderGrdateASC'}">
+									selected="selected"
+								</c:if>
+								>그룹 생성일내림차순 정렬</option>
+						</select>
+					</form>
+					
+					<table id="groupResultTable">
+						<tr>
+							<th>그룹 아이디</th>
+							<th>그룹 이름</th>
+							<th>그룹 생성일</th>
+							<th>그룹 설명</th>
+							<th>그룹 생성회원</th>
+						</tr>
+					</table>
+					<!-- 스크롤 결과 -->
+					<div id="groupResultDiv">
+						<table>
+						<c:forEach items="${searchGroupList}" var="groupsList">
+							<tr>
+								<td>${groupsList.gid}</td>
+								<td>${groupsList.gname}</td>
+								<td>${groupsList.grdate}</td>
+								<td>${groupsList.gcontent}</td>
+								<td>${groupsList.mid}</td>
+							</tr>
+						</c:forEach>
+						</table>
+					</div>
+					
+					<!-- 그룹 엑셀 다운로드 -->
+					<form action="${conPath}/excel/excelDownloadGroup.do" method="post" class="gExcelDownFrm">
+							<input type="hidden" name="startRow" value="1">
+							<input type="hidden" name="endRow" value="">
+							<input type="hidden" name="searchSelectItems" value="${searchKeyWord.searchSelectItems}">
+							<input type="hidden" name="searchWord" value="${searchKeyWord.searchWord}">	
+							<input type="hidden" name="searchResultOrderBy" value="${searchKeyWord.searchResultOrderBy}">
+							<input type="submit" value="검색결과 엑셀파일 다운로드" class="excelDownload">
+					</form>
+					
+				</c:if>
+				<c:if test="${empty searchGroupList}">
+					<c:if test="${searchKeyWord.searchSelectItems eq 'gname'}">
+						<p><b>'그룹이름으로' 검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
+					</c:if>
+					<c:if test="${searchKeyWord.searchSelectItems eq 'gid'}">
+						<p><b>'그룹아이디로' 검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
+					</c:if>
+					<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
+						<p><b>'그룹 생성 회원아이디로' 검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
+					</c:if>
+				</c:if>
+			</div>
+			
+			<!-- 이벤트 검색 -->
+			<div class="adminSearchResult">
+				<form action="${conPath}/adminSearch/searchEvent.do" method="get" >
+					<input type="hidden" name="startRow" value="1">
+					<input type="hidden" name="endRow" value="20">
+	<%-- 				<input type="hidden" name="searchWord" value="${searchKeyWord.searchResultOrderBy}"> --%>
+					<select name="searchSelectItems" >
+						<option value="ename" 
+								<c:if test="${searchKeyWord.searchSelectItems eq 'ename'}">
+										selected="selected"
+								</c:if>>지출 기록명</option>
+						<option value="eid"
+								<c:if test="${searchKeyWord.searchSelectItems eq 'eid'}">
+										selected="selected"
+								</c:if>>지출 기록 아이디</option>
+						<option value="mid"
+								<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
+										selected="selected"
+								</c:if>>지출 기록 생성회원 아이디</option>
+						<option value="gid"
+								<c:if test="${searchKeyWord.searchSelectItems eq 'gid'}">
+										selected="selected"
+								</c:if>>지출 기록 그룹아이디</option>
+					</select>
+	
+					<input type="text" name="searchWord" value="${searchKeyWord.searchWord}">
+					<input type="submit" value="검색">
 				</form>
 				
-			</c:if>
-			<c:if test="${empty searchEventList}">
-				<c:if test="${searchKeyWord.searchSelectItems eq 'ename'}">
-					<p><b>'지출 기록 이름으로 '검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
+				<c:if test="${not empty searchEventList}">
+					<form action="${conPath}/adminSearch/searchEvent.do" method="get">
+						<input type="hidden" name="startRow" value="1">
+						<input type="hidden" name="endRow" value="20">
+						<input type="hidden" name="searchSelectItems" value="${searchKeyWord.searchSelectItems}">
+						<input type="hidden" name="searchWord" value="${searchKeyWord.searchWord}">
+						<select onchange="this.form.submit()" name="searchResultOrderBy">
+							<option disabled="disabled" selected="selected">정렬 기준 선택</option>
+							<option class="searchResultOrderBy" value="orderEnameDESC"  
+								<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderEnameDESC'}">
+									selected="selected"
+								</c:if>
+								> 지출 기록 이름 오름차순 정렬</option>
+							<option class="searchResultOrderBy" value="orderEnameASC"
+								<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderEnameASC'}">
+									selected="selected"
+								</c:if>
+								>지출 기록 이름 내림차순 정렬</option>
+							<option class="searchResultOrderBy" value="orderErdateDESC"
+								<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderErdateDESC'}">
+									selected="selected"
+								</c:if>
+								>지출 기록 생성일 오름차순 정렬</option>
+							<option class="searchResultOrderBy" value="orderErdateASC"
+								<c:if test="${searchKeyWord.searchResultOrderBy eq 'orderErdateASC'}">
+									selected="selected"
+								</c:if>
+								>지출 지록 생성일 내림차순 정렬</option>
+						</select>
+					</form>
+					
+					<table id="eventsResultTable">
+						<tr>
+							<th>지출 기록 아이디</th>
+							<th>지출 기록명</th>
+							<th>지출 기록 내용</th>
+							<th>지출 금액</th>
+							<th>지출 장소</th>
+							<th>지출 기록 회원수</th>
+							<th>지출 기록 생성일</th>
+							<th>지출 기록 생성 회원아이디</th>
+							<th>지출 기록 생성 그룹</th>
+						</tr>
+					</table>	
+					<div id="eventResultDiv">
+						<table>
+						<c:forEach items="${searchEventList}" var="eventList">
+							<tr>
+								<td>${eventList.eid}</td>
+								<td>${eventList.ename}</td>
+								<td>${eventList.econtent}</td>
+								<td>${eventList.eamount}</td>
+								<td>${eventList.eaddress}</td>
+								<td>${eventList.ecount}</td>
+								<td>${eventList.erdate}</td>
+								<td>${eventList.mid}</td>
+								<td>${eventList.gid}</td>
+							</tr>
+						</c:forEach>
+						</table>
+					</div>
+					
+					<!-- 지출 기록 엑셀 다운로드 -->
+					<form action="${conPath}/excel/excelDownloadEvents.do" method="post" class="eExcelDownFrm">
+							<input type="hidden" name="startRow" value="1">
+							<input type="hidden" name="endRow" value="">
+							<input type="hidden" name="searchSelectItems" value="${searchKeyWord.searchSelectItems}">
+							<input type="hidden" name="searchWord" value="${searchKeyWord.searchWord}">	
+							<input type="hidden" name="searchResultOrderBy" value="${searchKeyWord.searchResultOrderBy}">
+							<input type="submit" value="검색결과 엑셀파일 다운로드" class="excelDownload">
+					</form>
+					
 				</c:if>
-				<c:if test="${searchKeyWord.searchSelectItems eq 'eid'}">
-					<p><b>'지출 기록 아이디로 '검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
+				<c:if test="${empty searchEventList}">
+					<c:if test="${searchKeyWord.searchSelectItems eq 'ename'}">
+						<p><b>'지출 기록 이름으로 '검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
+					</c:if>
+					<c:if test="${searchKeyWord.searchSelectItems eq 'eid'}">
+						<p><b>'지출 기록 아이디로 '검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
+					</c:if>
+					<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
+						<p><b>'지출 기록 생성회원 아이디로 '검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
+					</c:if>
+					<c:if test="${searchKeyWord.searchSelectItems eq 'gid'}">
+						<p><b>'지출 기록 그룹아이디로 '검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
+					</c:if>
 				</c:if>
-				<c:if test="${searchKeyWord.searchSelectItems eq 'mid'}">
-					<p><b>'지출 기록 생성회원 아이디로 '검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
-				</c:if>
-				<c:if test="${searchKeyWord.searchSelectItems eq 'gid'}">
-					<p><b>'지출 기록 그룹아이디로 '검색하신 '${searchKeyWord.searchWord}' 에 대한 해당 검색결과가 없습니다.</b></p>
-				</c:if>
-			</c:if>
+			</div>
 		</div>
 	</div>
+	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>
 

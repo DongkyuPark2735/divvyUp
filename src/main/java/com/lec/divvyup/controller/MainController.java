@@ -79,7 +79,7 @@ public class MainController {
 			}
 		}
 		application.setAttribute("sessionMList", tempMlist);
-		/* application.removeAttribute((String) session.getAttribute("mid")); */
+		application.removeAttribute((String) session.getAttribute("mid")); 
 		session.invalidate();
 		return "redirect:../member/loginForm.do";
 	}

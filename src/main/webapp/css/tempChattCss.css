@@ -229,20 +229,22 @@ body{
 	float: left;
 	height: 10px;
 	font-weight: bold;
+	font-size: 20px;
+	margin-bottom: 5px;
+	color : rgba(0, 0, 0, 0.7);
 }
 #chattingBoardList table#singleLatestGroupboardResult tr td:nth-child(4){
 	clear : both;
-	border: 2px solid black; 
 	border-radius: 0px 20px 20px 20px;
 	max-width: 70%;
 	margin: 10px;
 	margin-bottom :0px;
 	float: left;
 	padding: 10px;
-	background-color: rgba(29, 191, 115, 0.4);
+	background-color: rgba(0, 0, 0, 0.2);
 	word-break:break-all;
 	margin-left: 0px;
-	
+	color : white;
 }
 
 #chattingBoardList table#singleLatestGroupboardResult tr td:nth-child(5){

@@ -5,7 +5,7 @@
 <c:set var="conPath" value="${pageContext.request.contextPath }" />
 <c:forEach var="plist" items="${pastList }">
 		<tr>
-			<td>${plist.gbid }</td>
+			<td class="gidClick">${plist.gbid }</td>
 			<td>${plist.gid }</td>
 			<td>${plist.mid }</td>
 			<c:if test="${not empty plist.gbfilename}">
