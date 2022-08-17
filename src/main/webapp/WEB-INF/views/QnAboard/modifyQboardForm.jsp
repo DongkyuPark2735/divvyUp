@@ -17,12 +17,46 @@
   </script>
 </head>
 <body>
+	<nav class="header">
+	  <div class="container">
+			<h1 class="logo">
+				<a href="${conPath}/main/mainto.do">D<span>U</span></a>
+			</h1>
+		<ul>
+          <li>
+            <a href="#">${mid }님 ▶</a>
+            <ul class="submenu">
+              <li><a href="${conPath}/member/modifyMemberForm.do?mid=${mid }">회원 정보 관리</a></li>
+          	  <li><a href="${conPath}/qboard/listQboardForMe.do?mid=${mid }">나의 문의 내역</a></li>
+              <!-- <li><a href="#">#</a></li> -->
+            </ul>
+          </li>
+          <li>
+            <%-- <a href="${conPath}/notification/notificationConfirmForm.do" class="notification"> --%>
+            <a href="#" class="notification">
+              <img src= "${conPath}/icon/noti.png" class="imgNoti" />
+              <div class="badge">${uncheckdNotificationCnt }</div>
+            </a>
+          </li>
+          <!-- <li>
+            <a href="#">공지사항</a>
+          </li> -->
+          <li>
+            <a href="${conPath}/main/logout.do">
+              <img src= "${conPath}/icon/logout.png" class="imgLogout"/>
+            </a>
+          </li>
+        </ul>
+	  </div>
+	</nav>
+<!---------------------------------------------------- 여기까지 헤더 --------------------------------------------------------->
+	<div class="board_list_wrap">
 	<form action="${conPath }/qboard/modifyQboard.do" method="post">
       <input type="hidden" name="qbid" value="${qboard.qbid }">
 	  <input type="hidden" name="pageNum" value="${param.pageNum }">
 	  <div class="board_write_wrap">
 	    <div class="board_title">
-          <strong>문의글 수정</strong>
+          <strong>문의글 수정하기</strong>
         </div>
         <div class="board_write_wrap">
           <div class="board_write">
@@ -49,37 +83,10 @@
   	    </div>
         <div class="bt_wrap">
   	      <input type="submit" value="글 수정" class="on">
-  	      <input type="button" value="뒤로가기" class="btn" onclick="location='${conPath}/qboard/viewQboard.do?qbid=${qboard.qbid }&pageNum=${param.pageNum }'"/>
   	    </div>
       </div>
     </form>
-    
-    
-	<%-- <div>
-	    <form action="${conPath }/qboard/modifyQboard.do" method="post">
-	      <input type="hidden" name="qbid" value="${qboard.qbid }">
-	      <input type="hidden" name="pageNum" value="${param.pageNum }">
-	      <table>
-	        <tr>
-	          <th>제 목<th>
-	          <td colspan="3"><input type="text" name="qbtitle" value="${qboard.qbtitle }"></td>
-	        </tr>
-	        <tr>
-	          <th>작성자</th>
-	          <td>${mid }</td>
-	          <th>해당글</th>
-	          <td>${qboard.qbid }</td>
-	        </tr>
-	        <tr>
-	          <td colspan="4"><textarea rows="5" cols="20" name="qbcontent">${qboard.qbcontent }</textarea></td>
-	        </tr>
-	        <tr>
-	          <td colspan="4">
-	            <input type="submit" value="작성">
-	          </td>
-	        </tr>
-	      </table>
-	    </form>
-	  </div> --%>
+    </div>
+    <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

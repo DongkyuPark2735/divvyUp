@@ -148,6 +148,11 @@ String backupPath = "C:\\Users\\Unie\\Documents\\DivvyUpTeamUnie\\divvyUp\\src\\
 	}
 	@Override
 	public int countGroups(String mid) {
+<<<<<<< HEAD
 		return groupsDao.countGroups(mid);
+=======
+		// TODO Auto-generated method stub
+		return 0;
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 	}
 }

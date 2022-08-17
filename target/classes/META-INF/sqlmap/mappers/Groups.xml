@@ -20,9 +20,12 @@
             FROM (SELECT * FROM GROUPS WHERE (GID IN(SELECT GID FROM GROUPDETAIL WHERE MID=#{mid})) OR (GID IN(SELECT GID FROM GROUPS WHERE MID=#{mid}))	 ORDER BY GRDATE DESC) A)
             WHERE RN BETWEEN #{startRow} AND #{endRow}
             ]]>
+<<<<<<< HEAD
            
 			
             
+=======
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 	</select>
 	
 	<select id="countGroups" parameterType="String" resultType="int">
@@ -64,10 +67,18 @@
 	<delete id="finalStepDeleteGroup" parameterType="int">
 		DELETE FROM GROUPS WHERE GID=#{gid}
 	</delete>
+<<<<<<< HEAD
+
+	<select id="groupListforAdminSearch" resultType="Groups" parameterType="String">
+		SELECT * FROM GROUPS WHERE MID = #{mid} ORDER BY GRDATE DESC
+	</select>
+
+=======
 	
 	
 	<select id="groupListforAdminSearch" resultType="Groups" parameterType="String">
 		SELECT * FROM GROUPS WHERE MID = #{mid} ORDER BY GRDATE DESC
 	</select>
 	
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063
 </mapper>

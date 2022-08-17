@@ -1,6 +1,8 @@
 package com.lec.divvyup.controller;
 
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.lec.divvyup.service.FollowService;
 import com.lec.divvyup.service.MemberService;
 import com.lec.divvyup.vo.Member;
+import com.lec.divvyup.vo.NotificationHistory;
 
 @Controller
 @RequestMapping(value="member")
@@ -79,6 +82,7 @@ public class MemberController {
 	public String searchIdPwForm() {
 		return "member/searchIdPwForm";
 	}
+	
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	public String login(String mid, String mpw, Model model, HttpSession session) {
 		String result = memberService.loginCheck(mid, mpw, session);
@@ -99,7 +103,8 @@ public class MemberController {
 		String result = memberService.searchMid(mname, memail);
 		if(result.equals("아이디를 해당 메일로 보냈습니다")) {
 			model.addAttribute("searchMidResult",result);
-			return "forward:loginForm.do";
+//			return "forward:loginForm.do";
+			return "member/temp2";
 		}else {
 			model.addAttribute("mid", mname);
 			model.addAttribute("mpw", memail);

@@ -100,7 +100,7 @@ input:focus, input:not(:placeholder-shown){
 }
 
 input[type=submit]{
-	background-color: #8aa1a1;
+	background-color: #1DBF73;
 	border:none;
 	color:white;
 	border-radius: 5px;
@@ -141,6 +141,7 @@ button .joinBtn{
   	line-height:15px; cursor:pointer;
 }
 
+<<<<<<< HEAD
 	*{
 		box-sizing: border-box;
 		margin: 0;
@@ -252,3 +253,34 @@ button .joinBtn{
 
 	
 	
+=======
+ul.tabs{
+  		margin: 0px;
+  		padding: 0px;
+  		list-style: none;
+	}
+	ul.tabs li{
+  		background: none;
+ 		color: #222;
+  		display: inline-block;
+  		padding: 10px 15px;
+  		cursor: pointer;
+  		font-weight: bold;
+	}
+
+	ul.tabs li.current{
+  		background: #1DBF73;
+  		color: white;
+  		font-weight: bold;
+	}
+
+	.tab-content{
+  		display: none;  
+  		padding: 15px 0;
+  		border-top:3px solid #eee;
+	}
+
+	.tab-content.current{
+  		display: inherit;
+	}
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d

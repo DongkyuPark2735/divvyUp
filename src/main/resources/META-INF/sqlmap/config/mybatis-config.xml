@@ -18,7 +18,10 @@
 		<typeAlias type="com.lec.divvyup.vo.CentralSystem" alias="CentralSystem" />
 		<typeAlias type="com.lec.divvyup.vo.Follow" alias="Follow" />
 		<typeAlias type="com.lec.divvyup.vo.NotificationHistory" alias="NotificationHistory" />
+<<<<<<< HEAD
+=======
 
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063
 	</typeAliases>
 	<mappers>
 		<mapper resource="META-INF/sqlmap/mappers/Member.xml" />

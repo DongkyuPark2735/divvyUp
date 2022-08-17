@@ -16,9 +16,26 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
 import com.lec.divvyup.dao.MemberDao;
+import com.lec.divvyup.dao.NotificationHistoryDao;
 import com.lec.divvyup.vo.Member;
 @Service
 public class MemberServiceImpl implements MemberService {
+<<<<<<< HEAD
+	@Autowired
+	private MemberDao memberDao;
+	
+	@Autowired
+	private NotificationHistoryDao notificationDao;
+	
+	@Autowired
+	private JavaMailSender mailSender;
+	
+	@Override
+	public Member loginMember(String mid) { // loginCheck로 가능하기 때문에 테스트 후에 지울것
+		// TODO Auto-generated method stub
+		return memberDao.loginMember(mid);
+	}
+=======
    @Autowired
    private MemberDao memberDao;
    @Autowired
@@ -29,6 +46,7 @@ public class MemberServiceImpl implements MemberService {
       // TODO Auto-generated method stub
       return memberDao.loginMember(mid);
    }
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063
 
    @Override
    public int confirmMid(String mid) {
@@ -136,6 +154,56 @@ public class MemberServiceImpl implements MemberService {
       return result;
    }
 
+<<<<<<< HEAD
+	@Override
+	public String searchMpw(String mid, String mname, String memail) {
+		// TODO Auto-generated method stub
+		String result;
+		Member member = new Member();
+		member.setMid(mid);
+		member.setMname(mname);
+		member.setMemail(memail);
+		final Member memberSearchingPw = memberDao.searchMpw(member);
+		if(memberSearchingPw!= null) {
+			MimeMessagePreparator message = new MimeMessagePreparator() {
+				String content = "<div style=\"width:500px; margin: 0 auto; text-align: center\">\n" + 
+						"	<h1 style=\"color:blue;\">"+ memberSearchingPw.getMid() +"님</h1>\n" + 
+						"	<div>\n" + 
+						"		<p>당신의 PW는"+memberSearchingPw.getMpw()+"입니다</p>\n" + 
+						"	</div>\n" + 
+						"	<div>\n" + 
+						"		<p style=\"color:red;\">빨간 글씨 부분</p>\n" + 
+						"		<p style=\"color:blue;\">파란 글씨 부분</p>\n" + 
+						"		<img src=\"https://t1.daumcdn.net/daumtop_chanel/op/20200723055344399.png\">\n" + 
+						"	</div>\n" + 
+						"	<p>서울시 어떤구 XX로 00 **빌딩 402</p>\n" + 
+						"</div>";
+				@Override
+				public void prepare(MimeMessage mimeMessage) throws Exception {
+					// TODO Auto-generated method stub
+					mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(memberSearchingPw.getMemail()));
+					mimeMessage.setFrom(new InternetAddress("kimbin960826@gmail.com"));
+					mimeMessage.setSubject("당신의 패스워드");
+					mimeMessage.setText(content, "utf-8", "html");
+				}
+			};
+			mailSender.send(message);
+			result="비밀번호를 해당 메일로 보냈습니다";
+		}else {
+			result = "해당 아이디와 이름 그리고 이메일이 일치하지 않습니다";
+		}
+		return result;
+	}
+	
+	@Override
+	public List<Member> searchMember(HttpSession session, Member member) {
+		ArrayList<Member> searchedMemberList = new ArrayList<Member>();
+		String mid = (String)session.getAttribute("mid");
+		member.setMid(mid);
+		searchedMemberList = (ArrayList<Member>) memberDao.searchMember(member);
+		return searchedMemberList;
+	}
+=======
    @Override
    public String searchMpw(String mid, String mname, String memail) {
       // TODO Auto-generated method stub
@@ -184,6 +252,7 @@ public class MemberServiceImpl implements MemberService {
       searchedMemberList = (ArrayList<Member>) memberDao.searchMember(member);
       return searchedMemberList;
    }
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063
 
    @Override
    public List<Member> memberListForGroupBoard() {

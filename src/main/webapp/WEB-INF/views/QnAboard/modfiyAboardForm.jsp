@@ -17,6 +17,28 @@
   </script>
 </head>
 <body>
+	<nav class="header">
+	  <div class="container">
+      	  <h1 class="logo"><a href="${conPath}/main/mainforAdmin.do">D<span>U</span></a></h1>
+      	  <ul>
+      	    <li>
+      	      <a href="#">${aid }님 ▶</a>
+      	        <ul class="submenu">
+               	  <li><a href="${conPath}/qboard/listUncheckedQboardForAdmin.do">처리 대기 목록</a></li>
+          	   	  <li><a href="${conPath}/qboard/listCheckedQboardForAdmin.do">처리 완료 목록</a></li>
+                  <li><a href="${conPath}/adminSearch/adminSearchMain.do">회원검색목록</a></li>
+             	</ul>
+      	    </li>
+      	    <li>
+      	      <a href="${conPath}/main/logoutForAdmin.do">
+                <img src= "${conPath}/icon/logout.png" class="imgLogout"/>
+              </a>
+      	    </li>
+      	  </ul>
+      	</div>
+	</nav>
+<!---------------------------------------------------- 여기까지 헤더 --------------------------------------------------------->	
+
 	<div class="board_wrap">
 	  <div class="board_title">
         <strong>${qboard.qbid }번 글 상세보기</strong>
@@ -57,6 +79,7 @@
 	    </div>
 	  </div>
 	</div>
+	<div class="board_list_wrap">
 	<form action="${conPath }/aboard/modifyAboard.do" method="post">
 	  <input type="hidden" name="abid" value="${aboard.abid }">
 	  <input type="hidden" name="aid" value="${aid }">
@@ -64,7 +87,7 @@
 	  <input type="hidden" name="pageNum" value="${param.pageNum }">
 	  <div class="board_write_wrap">
 	    <div class="board_title">
-          <strong>답변수정</strong>
+          <strong>답변글 수정하기</strong>
         </div>
         <div class="board_write_wrap">
           <div class="board_write">
@@ -88,36 +111,13 @@
               <textarea name="abcontent">${aboard.abcontent }</textarea>
             </div>
           </div>
-        </div>
-        <div class="bt_wrap">
-          <input type="submit" value="작성" class="on">
-	      <input type="button" value="뒤로가기" class="btn" onclick="location.href='${conPath }/qboard/viewQboard.do?qbid=${qboard.qbid }&pageNum=${param.pageNum }'">
+          <div class="bt_wrap">
+            <input type="submit" value="글 수정" class="on">
+          </div>
         </div>
 	  </div>
 	</form>
-        
-        
-	      <%-- <table>
-	        <tr>
-	          <th>제목<th>
-	          <td colspan="3"><input type="text" name="abtitle" value="${aboard.abtitle }"></td>
-	        </tr>
-	        <tr>
-	          <th>작성자</th>
-	          <td>${aboard.aid }</td>
-	          <th>해당글</th>
-	          <td>${qboard.qbid }</td>
-	        </tr>
-	        <tr>
-	          <td colspan="4"><textarea rows="5" cols="20" name="abcontent">${aboard.abcontent }</textarea></td>
-	        </tr>
-	        <tr>
-	          <td colspan="4">
-	            <input type="submit" value="작성">
-	            <input type="button" value="뒤로가기" class="btn" onclick="location.href='${conPath }/qboard/viewQboard.do?qbid=${qboard.qbid }&pageNum=${param.pageNum }'">
-	          </td>
-	        </tr>
-	      </table> --%>
-	
+    </div>    
+	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

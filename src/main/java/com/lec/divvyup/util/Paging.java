@@ -64,5 +64,8 @@ public class Paging {
 			endPage = pageCnt;
 		}
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 }
