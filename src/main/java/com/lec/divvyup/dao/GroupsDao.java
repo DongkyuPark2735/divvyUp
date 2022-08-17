@@ -17,5 +17,8 @@ public interface GroupsDao {
 	public int modify(Groups group);
 	public int finalStepDeleteGroup(int gid);	
 	public List<Groups> groupListforAdminSearch(String mid);
+<<<<<<< HEAD
 	public int countGroups(String mid);
+=======
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063
 }

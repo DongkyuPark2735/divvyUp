@@ -8,6 +8,7 @@
 <head>
 <meta charset="${encoding}">
 <title>Insert title here</title>
+<<<<<<< HEAD
 <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"> -->
 <style>
 
@@ -22,6 +23,12 @@
 } */
 </style>
 
+=======
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link href="${conPath}/css/style.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/resources/demos/style.css"> 
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
   
@@ -65,8 +72,25 @@
   <link href="${conPath }/css/main/main2.css" rel="stylesheet">
   </head>
   <body>
+<<<<<<< HEAD
    <c:if test="${modifyMemberResult eq 1 }">
      <script>alert('회원정보 수정 성공');</script>
+=======
+
+	<c:if test="${modifyMemberResult eq 1 }">
+	<script>alert('회원정보 수정 성공');</script>
+	</c:if>
+	
+	<c:if test="${modifyMemberResult eq 0 }">
+	<script>alert('회원정보 수정 실패');</script>
+	</c:if>
+	 <c:if test="${not empty admin or empty member}">
+     <h1>관리자용 메인페이지 : 현재 접속한 ID는 ${aid }</h1>
+     <button onclick="location='${conPath}/qboard/listUncheckedQboardForAdmin.do'">처리대기목록</button>
+     <button onclick="location='${conPath}/qboard/listCheckedQboardForAdmin.do'">처리목록</button>
+     <button onclick="location='${conPath}/adminSearch/adminSearchMain.do'">검색목록가기</button>
+     <button onclick="location='${conPath}/main/logout.do'">로그아웃</button>
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063
    </c:if>
    
    <c:if test="${modifyMemberResult eq 0 }">
@@ -235,6 +259,7 @@
               <input type="submit" value="검색" class="searchBtn" onclick="return showResult()">
             </form>
             
+<<<<<<< HEAD
             <div class="scrollable">
               <table>
             	<c:forEach items="${searchedMemberList }" var="member">
@@ -306,6 +331,58 @@
 			<input type="hidden" name=mid value="${mid }"> 
 			<input type="button" value="그룹 생성" onclick="location='${conPath }/groups/groupInsertForm.do?mid=${mid}'">
 		</div>
+=======
+             <div class="scrollable">
+            <table>
+            <c:forEach items="${searchedMemberList }" var="member">
+            <c:set var="i" value="0"/>
+              <tr>
+                <td style="font-weight:bold;">${member.mid }</td>
+                <c:forEach items="${FollowingList }" var="Member">
+               <c:if test="${member.mid eq Member.to_mid }">
+                 <td rowspan="2">
+                 	<button style="color: red; margin-left:3px;"  class="friendsButton2" onclick="location='${conPath }/follow/unfollowMember.do?from_mid=${mid }&to_mid=${member.mid }&windowType=${param.windowType }'">-</button> 
+                 </td>
+               <c:set var="i" value="${i + 1 }"/>
+               </c:if>
+            </c:forEach>
+              <c:if test="${(i eq 0) and (Member.to_mid != member.mid) }">
+                <td rowspan="2">
+                  <button style="color:#1DBF73;" class="friendsButton2" onclick="location='${conPath}/follow/followMember.do?from_mid=${mid }&to_mid=${member.mid }&windowType=${param.windowType }'">+</button>
+                </td>
+              </c:if>
+          
+              </tr>
+              <tr>
+               <td style="color:grey; font-size:0.8em;">&nbsp; &nbsp;${member.mname }</td>
+               </tr>
+             </c:forEach>
+            </table>
+             </div>
+             
+      </div>
+     <div id="groups">
+    	<c:forEach var="groups" items="${groupList }">
+			<input type="button" value="${groups.gid }" onclick="location='${conPath }/groups/groupInfo.do?gid=${groups.gid }'">
+		</c:forEach>
+		<input type="hidden" name=mid value="${mid }">
+		<input type="button" value="그룹 생성" onclick="location='${conPath }/groups/groupInsertForm.do?mid=${mid}'">
+      </div>
+      	
+		</div> <!-- new -->
+      </div>
+    <div id="buttons">
+    	<input type="button" value="MY GROUPS" onclick="location='${conPath }/groups/groupList.do?mid=${mid}'" class="btn1">
+      	<input type="button" value="FAQ" onclick="location='${conPath}/qboard/listQboardForMember.do'" class="btn2">
+    </div>
+      <div style="z-index:100">
+		<input type="button" value="UNIE" onclick="location.href='${conPath }/main/unieTestMain.do'"/>
+	</div> 
+ 
+
+     
+ 
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063
 
 		</div>
 		<!-- new -->
@@ -388,5 +465,14 @@
       });  
     })(jQuery); 
    </script>
+<<<<<<< HEAD
 </body>
 </html>
+=======
+   
+
+	
+	
+</body>
+</html>
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063

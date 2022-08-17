@@ -27,7 +27,11 @@ public class AdminSearchResultDetailController {
 	@Autowired
 	GroupDetailService groupDetailService; 
 
+<<<<<<< HEAD
 	
+=======
+	   
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063
 	@RequestMapping(value = "SearchResultDetailMember", method = RequestMethod.GET)
 	public String SearchResultDetailMember(String mid, Model model) {
 		model.addAttribute("memberDetail", memberService.getMember(mid));
@@ -45,9 +49,12 @@ public class AdminSearchResultDetailController {
 		model.addAttribute("groupMemeberList", groupDetailService.groupDetailList(gid));
 		return "adminSearchResultDetail/SearchResultDetailGroup";
 	}
+<<<<<<< HEAD
 	
 	
 	
 	
 
+=======
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063
 }
