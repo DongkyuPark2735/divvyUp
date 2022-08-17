@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Insert title here</title>
-  <link href="${conPath }/css/member/login.css" rel="stylesheet">
+  <link href="${conPath }/css/member/join2.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
   <script>
      $(document).ready(function(){
@@ -67,10 +67,87 @@
   </script>
 </head>
 <body>
-
-	<div id="login_wrap">
+	<nav class="header">
+      <div class="container">
+      <h1 class="logo"><a href="${conPath}/main/mainto.do">D<span>U</span></a></h1>
+                 
+                
+              <c:if test="${param.windowType eq 0}">
+                 <div style="left:350px; align-items: left; position:absolute;" class="section mt-5">
+               <div class="row" >
+                  <div class="col-12" >
+                     <div id="switch" >
+                        <div id="circle"></div>
+                     </div>
+                  </div>   
+            </div>         
+         </div>  
+         </c:if>
+           <c:if test="${empty param.windowType}">
+                    <div style="left:350px; align-items: left; position:absolute;" class="section mt-5">
+               <div class="row" >
+                  <div class="col-12" >
+                     <div id="switch" >
+                        <div id="circle"></div>
+                     </div>
+                  </div>   
+            </div>         
+         </div>  
+         </c:if>
+          <c:if test="${param.windowType eq 1}">
+             <div style="left:350px; align-items: left; position:absolute;" class="section mt-5">
+               <div class="row" >
+                  <div class="col-12" >
+                     <div id="switch" class="switched" >
+                        <div id="circle"></div>
+                     </div>
+                  </div>   
+            </div>         
+         </div>  
+         </c:if>
+        
+        <ul>
+         <c:if test="${not empty member and empty admin }">
+           <li>
+             <a href="#">${mid }님 ▶</a>
+             <ul class="submenu">
+               <li><a href="${conPath}/member/modifyMemberForm.do?mid=${mid }">회원정보 관리</a></li>
+          	   <li><a href="${conPath}/qboard/listQboardForMe.do?mid=${mid }">나의 문의 내역</a></li>
+               <li><a href="#">#</a></li>
+             </ul>
+           </li>
+         </c:if>
+         <c:if test="${empty member }">
+           <li>
+             ${aid }님 ▶
+           </li> 
+         </c:if>
+         <li>
+           <%--  <a href="${conPath}/notification/notificationConfirmForm.do" class="notification"> --%>
+            <a href="#" class="notification">
+               <img src= "${conPath}/icon/noti.png" class="imgNoti" />
+               <div class="badge">${uncheckdNotificationCnt }</div>
+            </a>
+         </li>
+         <!-- <li>
+            <a href="#">공지사항</a>
+         </li> -->
+         <li>
+            <a href="${conPath}/main/logout.do">
+               <img src= "${conPath}/icon/logout.png" class="imgLogout"/>
+            </a>
+         </li>
+        </ul>
+      </div>
+    </nav>
+	
+	
+	
+	
+	<div class="mainSection3">
+	  <div id="login_wrap">
 		<header>
-		  <h2>MODIFY_MEMBER</h2>
+		  <h2>회원정보 관리</h2>
 		</header>
 		
 		<form action="${conPath }/member/modifyMember.do" method="post">
@@ -105,74 +182,8 @@
          <input type="submit" value="정보수정">
          
 	    </form>
+	   </div>
 	 </div>
-
-
-	<%-- <div>
-	  <form action="${conPath }/member/modifyMember.do" method="post">
-	  <table>
-	    <tr>
-		  <td>ID <b>*</b></td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>
-			<input type="text" name="mid" readonly="readonly" value="${member.mid }">
-		    <div></div>
-		  </td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>PW1 <b>*</b></td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>
-		    <input type="password" name="mpw" required="required">
-			<div></div>
-		  </td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>PW2 <b>*</b></td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>
-		    <input type="password" name="mpwChk" required="required">
-		    <div id="mpwChkResult"></div>
-		  </td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>NAME <b>*</b></td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>
-			<input type="text" name="mname" required="required" value="${member.mname }">
-		    <div></div>
-		  </td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>EMAIL <b>*</b></td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>
-		    <input type="text" name="memail">
-			<div id="memailConfirmResult"></div>
-		  </td>
-		  <td></td>
-		</tr>
-		<tr>
-		  <td>
-		    <input type="submit" value="MODIFY">
-		  </td>
-		</tr>
-	  </table>
-	  </form>
-	</div> --%>
+	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

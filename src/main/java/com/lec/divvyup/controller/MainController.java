@@ -12,12 +12,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.lec.divvyup.service.FollowService;
 import com.lec.divvyup.service.GroupsService;
 import com.lec.divvyup.service.MemberService;
 import com.lec.divvyup.service.NotificationHistoryServiceImpl;
+<<<<<<< HEAD
+import com.lec.divvyup.util.Paging;
+import com.lec.divvyup.vo.Admin;
+=======
 
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063
 import com.lec.divvyup.vo.GroupDetail;
 import com.lec.divvyup.vo.Member;
 import com.lec.divvyup.service.NotificationHistoryService;
@@ -25,17 +29,29 @@ import com.lec.divvyup.vo.Member;
 import com.lec.divvyup.vo.NotificationHistory;
 
 @Controller
+<<<<<<< HEAD
+
 @RequestMapping(value = "main")
+
+=======
+@RequestMapping(value = "main")
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063
 public class MainController {
 	@Autowired
 	private FollowService followService;
 
 	@Autowired
 	private MemberService memberService;
+<<<<<<< HEAD
+	
+	@Autowired
+	private NotificationHistoryServiceImpl notificationHistoryService;
+=======
 
 	@Autowired
 	private NotificationHistoryServiceImpl notificationHistoryService;
 
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063
 
 	@Autowired
 	ServletContext application;
@@ -45,6 +61,19 @@ public class MainController {
 	
 	@RequestMapping(value="mainto", method= {RequestMethod.GET, RequestMethod.POST})
 	public String mainView(Member member, Model model, HttpSession session,
+<<<<<<< HEAD
+			NotificationHistory notificationHistory, String pageNum) {
+			model.addAttribute("myFollowingList", followService.myFollowingList(session));
+			model.addAttribute("myFollowerList", followService.myFollowerList(session));
+			model.addAttribute("uncheckdNotificationCnt", notificationHistoryService.getUncheckdNotificationCnt(session, notificationHistory));
+			String mid = (String)session.getAttribute("mid");
+			model.addAttribute("groupList", groupsService.groupList(pageNum, mid));
+			model.addAttribute("paging", new Paging(pageNum, groupsService.countGroups(mid)));
+			model.addAttribute("followList", groupsService.followList(mid));
+			member = memberService.getMember(mid);
+			model.addAttribute("person", member);
+			return "main/main";
+=======
 			NotificationHistory notificationHistory/* , String mid */) {
 		model.addAttribute("myFollowingList", followService.myFollowingList(session));
 		model.addAttribute("myFollowerList", followService.myFollowerList(session));
@@ -52,13 +81,13 @@ public class MainController {
 		 model.addAttribute("groupList", groupsService.groupList(member.getMid()));
 		 model.addAttribute("followList", groupsService.followList(member.getMid()));
 		return "main/main";
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063
 	}
 
 	@RequestMapping(value = "mainforAdmin", method = { RequestMethod.GET, RequestMethod.POST })
-	public String mainViewForAdmin(Member member, Model model, HttpSession session,
+	public String mainViewForAdmin(Admin admin, Model model, HttpSession session,
 			NotificationHistory notificationHistory) {
 		model.addAttribute("myFollowingList", followService.myFollowingList(session));
-		model.addAttribute("myFollowerList", followService.myFollowerList(session));
 //		model.addAttribute("uncheckdNotificationCnt", notificationHistoryService.getUncheckdNotificationCnt(session, notificationHistory));
 		return "main/main";
 	}
@@ -69,8 +98,11 @@ public class MainController {
 	}
 
 
+<<<<<<< HEAD
+=======
 
 	
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063
 	@RequestMapping(value="logout")
 	public String logout(HttpSession session) {
 		application.removeAttribute((String)session.getAttribute("mid"));
@@ -92,7 +124,17 @@ public class MainController {
 		
 		application.setAttribute("sessionMList", tempMlist);
 
+<<<<<<< HEAD
+		application.removeAttribute((String) session.getAttribute("mid"));
+		session.invalidate();
+		return "redirect:../member/loginForm.do";
+	}
+	
+	@RequestMapping(value="logoutForAdmin")
+	public String logoutForAdmin(HttpSession session) {
+=======
 		/* application.removeAttribute((String) session.getAttribute("mid")); */
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063
 		session.invalidate();
 		return "redirect:../member/loginForm.do";
 	}

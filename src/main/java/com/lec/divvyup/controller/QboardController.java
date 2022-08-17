@@ -1,6 +1,7 @@
 package com.lec.divvyup.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lec.divvyup.service.AboardService;
+import com.lec.divvyup.service.NotificationHistoryService;
 import com.lec.divvyup.service.QboardService;
 import com.lec.divvyup.util.Paging;
 import com.lec.divvyup.vo.Aboard;
+import com.lec.divvyup.vo.NotificationHistory;
 import com.lec.divvyup.vo.Qboard;
 
 @Controller
@@ -21,11 +24,16 @@ public class QboardController {
 	private QboardService qboardService;
 	@Autowired
 	private AboardService aboardService;
+	@Autowired
+	private NotificationHistoryService notificationHistoryService;
 	
 	@RequestMapping(value="listQboardForMember", method={RequestMethod.GET, RequestMethod.POST})
-	public String listQboardForMember(String pageNum, Model model) {
+	public String listQboardForMember(String pageNum, Model model, HttpSession session, NotificationHistory notificationHistory) {
 		model.addAttribute("listQboardForMember", qboardService.listQboardForMember(pageNum));
 		model.addAttribute("paging", new Paging(qboardService.getQboardTotCntForMember(), pageNum));
+//		if(session != null && notificationHistory != null) {
+//			model.addAttribute("uncheckdNotificationCnt", notificationHistoryService.getUncheckdNotificationCnt(session, notificationHistory));
+//		}
 		return "QnAboard/listQboardForMember";
 	}
 	

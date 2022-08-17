@@ -29,10 +29,61 @@
 	<c:if test="${not empty writeQboardResult }">
 	  <script>alert('문의글 작성 성공');</script>
 	</c:if>
+	
+	<c:if test="${(empty member) and (empty admin) }"><!-- 회원과 관리자가 아무도 안들어 왔을 때 -->
+	  <nav class="header">
+		<div class="container">
+			<h1 class="logo">
+				<a href="${conPath}/member/loginForm.do">D<span>U</span></a>
+			</h1>
+			<ul>
+				<li><a href="${conPath}/member/loginForm.do">로그인</a></li>
+				<li class="joinBtn"><a href="#" >회원가입</a></li>
+				<li><a href="${conPath}/qboard/listQboardForMember.do">Q&A</a></li>
+			</ul>
+		</div>
+	  </nav>
+	</c:if><!-- 회원과 관리자가 아무도 안들어 왔을 때 -->
+	
+	<c:if test="${not empty mid }"><!-- 회원만 들어왔을 때 -->
+	  <nav class="header">
+		<div class="container">
+			<h1 class="logo">
+				<a href="${conPath}/main/mainto.do">D<span>U</span></a>
+			</h1>
+			<ul>
+              <li>
+                <a href="#">${mid }님 ▶</a>
+                <ul class="submenu">
+                  <li><a href="${conPath}/member/modifyMemberForm.do?mid=${mid }">회원 정보 관리</a></li>
+          	      <li><a href="${conPath}/qboard/listQboardForMe.do?mid=${mid }">나의 문의 내역</a></li>
+                  <!-- <li><a href="#">#</a></li> -->
+                </ul>
+              </li>
+              <li>
+            	<%-- <a href="${conPath}/notification/notificationConfirmForm.do" class="notification"> --%>
+            	<a href="#" class="notification">
+               	  <img src= "${conPath}/icon/noti.png" class="imgNoti" />
+               	  <div class="badge">${uncheckdNotificationCnt }</div>
+                </a>
+           	  </li>
+           	  <!-- <li>
+                <a href="#">공지사항</a>
+              </li> -->
+              <li>
+            	<a href="${conPath}/main/logout.do">
+                  <img src= "${conPath}/icon/logout.png" class="imgLogout"/>
+            	</a>
+         	  </li>
+            </ul>
+		</div>
+	  </nav>
+	</c:if><!-- 회원만 들어왔을 떄 -->
+<!---------------------------------------------------- 여기까지 헤더 --------------------------------------------------------->	
 	<c:set var="iNum" value="${paging.totCnt - paging.startRow + 1 }"/>
 	
 	<div class="board_list_wrap">
-	<div class="main_title"><h1>Question Board</h1></div>
+	<div class="main_title"><h1>고객 센터</h1></div>
 	<table class ="board_list">
 	  <caption>문의 게시판</caption>
 	  <thead>
@@ -93,20 +144,19 @@
 		<div>&nbsp;</div>
 	    <c:if test="${empty member and empty admin }">
 	      <div class="bt_wrap">
-	        <input type="button" value="LOGIN" class="btn" onclick="location='${conPath}/member/loginForm.do'"/>
 	      </div>
 	    </c:if>
 	  </div>
 	  
 	<c:if test="${not empty member or not empty admin }">
 	  <div class="bt_wrap">
-	    <input type="button" value="MAIN" class="btn" onclick="location='${conPath}/main/mainto.do'"/>
 	      <c:if test="${not empty member and empty admin }">
-	        <input type="button" value="WRITE_QBOARD" class="btn" onclick="location='${conPath}/qboard/writeQboardForm.do?pageNum=${paging.currentPage }'"/>
+	        <input type="button" value="문의글 작성" class="btn" onclick="location='${conPath}/qboard/writeQboardForm.do?pageNum=${paging.currentPage }'"/>
 	      </c:if>
 	  </div>
 	</c:if>
 	
 	</div>
+	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>
