@@ -18,6 +18,8 @@ public interface GroupsDao {
 	public int finalStepDeleteGroup(int gid);	
 	public List<Groups> groupListforAdminSearch(String mid);
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 	public int countGroups(String mid);
 =======
 <<<<<<< HEAD

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.lec.divvyup.service.GroupBoardService;
@@ -22,12 +23,15 @@ public class GroupBoardController {
    @Autowired
    GroupBoardService groupBoardService;
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 //   대화 리스트 20개 출력
    @RequestMapping(value = "groupDetil")
    public String listLatest20Groupboard(int gid, String mid, Model model, HttpSession session) {
-      session.setAttribute("sesiongGid", gid);
-      session.setAttribute("sesiongMid", mid);
+      session.setAttribute("sesionGBgid", gid);
+      session.setAttribute("sesionGBmid", mid);
       model.addAttribute("grouplist", groupBoardService.listLatest20Groupboard(gid, session));
       return "groupBoard/groupDetail";
    }
@@ -55,9 +59,10 @@ public class GroupBoardController {
    }
 
 //   글 삭제
-   @RequestMapping(value = "deleteGroupBoard", method = { RequestMethod.POST, RequestMethod.GET })
+   @RequestMapping(value = "deleteGroupBoard", method = RequestMethod.GET)
+   @ResponseBody
    public void deleteGroupBoard(int gbid, Model model) {
-      groupBoardService.deleteGroupboard(gbid);
+     groupBoardService.deleteGroupboard(gbid);
    }
 }
 

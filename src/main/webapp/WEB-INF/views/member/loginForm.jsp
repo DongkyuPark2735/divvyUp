@@ -9,12 +9,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
 <link href="${conPath }/css/member/join2.css" rel="stylesheet">
 
+>>>>>>> 4da87254d69c96dc6462e4d49fb510a98bf99c4a
 =======
 <<<<<<< HEAD
 <link href="${conPath }/css/member/join3.css" rel="stylesheet">
 =======
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 <link href="${conPath }/css/member/join.css" rel="stylesheet">
 >>>>>>> 6046d284dcb394365a7690681b38d38763173063
 <style>
@@ -22,6 +26,8 @@
 >>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
 	$(document).ready(function() {
 		$('.joinBtn').click(function(){
@@ -115,6 +121,7 @@
 	    	});
 	});
 =======
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
    $(document).ready(function() {
       $('.joinBtn').click(function(){
           $('.modal').fadeIn();
@@ -206,7 +213,10 @@
                }
           });
    });
+<<<<<<< HEAD
+=======
 >>>>>>> 6046d284dcb394365a7690681b38d38763173063
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 </script>
 <script>
 function openPop(){
@@ -224,6 +234,8 @@ function openPop(){
 </script>
 </head>
 <body>
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
 	<c:if test="${not empty result}">
 		<script>
@@ -290,6 +302,7 @@ function openPop(){
            <div id="memailConfirmResult"></div>
 	     </div>
 =======
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
    <c:if test="${not empty result}">
       <script>
          alert('${result}');
@@ -355,11 +368,16 @@ function openPop(){
            <label for="useremail">이메일</label>
            <div id="memailConfirmResult"></div>
         </div>
+<<<<<<< HEAD
+=======
 >>>>>>> 6046d284dcb394365a7690681b38d38763173063
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
          <!-- <div class="input_submit"> -->
            <input type="submit" value="회원가입">
          <!-- </div> -->
          
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
 	    </form>
   		</div>
@@ -387,6 +405,7 @@ function openPop(){
 <!-- 빈이가 만든 로그인 ------------------------------------------------------------------------------------------------------------------------------>	  
 	<jsp:include page="../main/footer.jsp"/>
 =======
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
        </form>
         </div>
      </div>
@@ -439,6 +458,8 @@ function openPop(){
        </table>
      </form> --%>
      <%-- <button onclick="location='${conPath}/member/searchIdPwForm.do'">FIND ID&PW</button> --%>
+<<<<<<< HEAD
+=======
 >>>>>>> 6046d284dcb394365a7690681b38d38763173063
 >>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 </body>

@@ -1,6 +1,9 @@
 package com.lec.divvyup.controller;
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -17,6 +20,8 @@ import com.lec.divvyup.service.GroupsService;
 import com.lec.divvyup.service.MemberService;
 import com.lec.divvyup.service.NotificationHistoryServiceImpl;
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 import com.lec.divvyup.util.Paging;
 =======
 <<<<<<< HEAD
@@ -29,10 +34,14 @@ import com.lec.divvyup.vo.Admin;
 import com.lec.divvyup.vo.GroupDetail;
 import com.lec.divvyup.vo.Member;
 import com.lec.divvyup.service.NotificationHistoryService;
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 import com.lec.divvyup.vo.Member;
 import com.lec.divvyup.vo.NotificationHistory;
 
 @Controller
+<<<<<<< HEAD
+@RequestMapping(value = "main")
+=======
 <<<<<<< HEAD
 
 @RequestMapping(value = "main")
@@ -40,6 +49,7 @@ import com.lec.divvyup.vo.NotificationHistory;
 =======
 @RequestMapping(value = "main")
 >>>>>>> 6046d284dcb394365a7690681b38d38763173063
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 public class MainController {
 	@Autowired
 	private FollowService followService;
@@ -47,6 +57,11 @@ public class MainController {
 	@Autowired
 	private MemberService memberService;
 <<<<<<< HEAD
+
+	@Autowired
+	private NotificationHistoryServiceImpl notificationHistoryService;
+=======
+<<<<<<< HEAD
 	
 	@Autowired
 	private NotificationHistoryServiceImpl notificationHistoryService;
@@ -56,14 +71,15 @@ public class MainController {
 	private NotificationHistoryServiceImpl notificationHistoryService;
 
 >>>>>>> 6046d284dcb394365a7690681b38d38763173063
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 
 	@Autowired
 	ServletContext application;
 
 	@Autowired
 	private GroupsService groupsService;
-	
-	@RequestMapping(value="mainto", method= {RequestMethod.GET, RequestMethod.POST})
+
+	@RequestMapping(value = "mainto", method = { RequestMethod.GET, RequestMethod.POST })
 	public String mainView(Member member, Model model, HttpSession session,
 <<<<<<< HEAD
 		NotificationHistory notificationHistory, String pageNum) {
@@ -100,9 +116,16 @@ public class MainController {
 			NotificationHistory notificationHistory/* , String mid */) {
 		model.addAttribute("myFollowingList", followService.myFollowingList(session));
 		model.addAttribute("myFollowerList", followService.myFollowerList(session));
+<<<<<<< HEAD
+		model.addAttribute("uncheckdNotificationCnt",
+				notificationHistoryService.getUncheckdNotificationCnt(session, notificationHistory));
+		model.addAttribute("groupList", groupsService.groupList(member.getMid()));
+		model.addAttribute("followList", groupsService.followList(member.getMid()));
+=======
 		model.addAttribute("uncheckdNotificationCnt", notificationHistoryService.getUncheckdNotificationCnt(session, notificationHistory));
 		 model.addAttribute("groupList", groupsService.groupList(member.getMid()));
 		 model.addAttribute("followList", groupsService.followList(member.getMid()));
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 		return "main/main";
 >>>>>>> 6046d284dcb394365a7690681b38d38763173063
 >>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
@@ -121,6 +144,11 @@ public class MainController {
 		return "main/unieTestMain";
 	}
 
+<<<<<<< HEAD
+	@RequestMapping(value = "logout")
+	public String logout(HttpSession session) {
+		application.removeAttribute((String) session.getAttribute("mid"));
+=======
 
 <<<<<<< HEAD
 =======
@@ -130,23 +158,23 @@ public class MainController {
 	@RequestMapping(value="logout")
 	public String logout(HttpSession session) {
 		application.removeAttribute((String)session.getAttribute("mid"));
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 		Enumeration<String> appMlists = application.getAttributeNames();
-		
 		ArrayList<Member> mList = (ArrayList<Member>) memberService.memberListForGroupBoard();
-		
 		ArrayList<String> tempMlist = new ArrayList<String>();
-
-		while(appMlists.hasMoreElements()){
+		while (appMlists.hasMoreElements()) {
 			String appMid = appMlists.nextElement();
 			Object attrValue = application.getAttribute(appMid);
-			for(Member ml : mList) {
-				if(ml.getMid().equals(attrValue)) {
+			for (Member ml : mList) {
+				if (ml.getMid().equals(attrValue)) {
 					tempMlist.add(ml.getMid());
 				}
 			}
 		}
-		
 		application.setAttribute("sessionMList", tempMlist);
+<<<<<<< HEAD
+		application.removeAttribute((String) session.getAttribute("mid")); 
+=======
 
 <<<<<<< HEAD
 		application.removeAttribute((String) session.getAttribute("mid"));
@@ -159,6 +187,7 @@ public class MainController {
 =======
 		/* application.removeAttribute((String) session.getAttribute("mid")); */
 >>>>>>> 6046d284dcb394365a7690681b38d38763173063
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 		session.invalidate();
 		return "redirect:../member/loginForm.do";
 	}

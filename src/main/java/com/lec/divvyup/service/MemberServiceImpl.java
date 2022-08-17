@@ -21,6 +21,8 @@ import com.lec.divvyup.vo.Member;
 @Service
 public class MemberServiceImpl implements MemberService {
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 	@Autowired
 	private MemberDao memberDao;
 	
@@ -36,6 +38,7 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.loginMember(mid);
 	}
 =======
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
    @Autowired
    private MemberDao memberDao;
    @Autowired
@@ -46,7 +49,10 @@ public class MemberServiceImpl implements MemberService {
       // TODO Auto-generated method stub
       return memberDao.loginMember(mid);
    }
+<<<<<<< HEAD
+=======
 >>>>>>> 6046d284dcb394365a7690681b38d38763173063
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 
    @Override
    public int confirmMid(String mid) {
@@ -155,6 +161,8 @@ public class MemberServiceImpl implements MemberService {
    }
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 	@Override
 	public String searchMpw(String mid, String mname, String memail) {
 		// TODO Auto-generated method stub
@@ -204,6 +212,7 @@ public class MemberServiceImpl implements MemberService {
 		return searchedMemberList;
 	}
 =======
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
    @Override
    public String searchMpw(String mid, String mname, String memail) {
       // TODO Auto-generated method stub
@@ -252,7 +261,10 @@ public class MemberServiceImpl implements MemberService {
       searchedMemberList = (ArrayList<Member>) memberDao.searchMember(member);
       return searchedMemberList;
    }
+<<<<<<< HEAD
+=======
 >>>>>>> 6046d284dcb394365a7690681b38d38763173063
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 
    @Override
    public List<Member> memberListForGroupBoard() {

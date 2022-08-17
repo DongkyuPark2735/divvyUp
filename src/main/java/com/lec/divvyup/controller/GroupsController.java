@@ -1,7 +1,5 @@
 package com.lec.divvyup.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +18,6 @@ import com.lec.divvyup.service.GroupsService;
 import com.lec.divvyup.service.NotificationHistoryService;
 import com.lec.divvyup.util.Paging;
 import com.lec.divvyup.vo.Groups;
-import com.lec.divvyup.vo.NotificationHistory;
 
 
 @Controller

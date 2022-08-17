@@ -1,18 +1,31 @@
 @charset "UTF-8";
 
-*{
-	margin: 0 auto;
+div#backIMG{
+	width : 100%;
+	height : 1000px;
+	background: 
+		linear-gradient(rgba(255, 255, 255, 0.2),
+		rgba(255, 255, 255, 0.2)),
+		url('https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTN8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: bottom center;
+	
 }
-#adminResultDetailWrap{
+
+#adminResultDetailWrap {
 	width: 900px;
 	text-align: center;
+	margin: 0 auto;
 }
-#ARDheader{
-	border-bottom: 3px solid #1DBF73; 
+
+#ARDheader {
+	border-bottom: 3px solid rgba(32, 34, 34, 0.8);
 	text-align: center;
-	margin-top: 100px;
+	margin-top : 80px;
+	padding-top : 100px;
 	margin-bottom: 50px;
-	color : #1DBF73;
+	color: rgba(32, 34, 34, 0.8);
 	padding-bottom: 20px;
 }
 
@@ -22,165 +35,234 @@
 }
 /* 회원정보 */
 #ARDMemberDetail {
-	width : 510px;
-	height : 150px;
-	border: 2px solid #1DBF73;
+	width: 530px;
+	height: 170px;
+	border: 3px solid rgba(32, 34, 34, 0.8);
 	border-radius: 10px;
-	padding-bottom: 10px;
-	padding-top: 10px;
-	margin-bottom: 10px;
+	padding: 10px;
+	padding-left : 20px;
+	margin-bottom : 10px;
 	float: left;
+	background-color: rgba(32, 34, 34, 0.4);
 }
-#ARDMemberDetail table tr th{
+
+#ARDMemberDetail table tr th {
 	line-height: 35px;
 	padding-right: 50px;
-	color: #1DBF73;
+	color: rgba(32, 34, 34, 0.8);
 }
+#ARDMemberDetail table tr td {
+	color: rgba(255,255,255, 0.8);
+	font-weight: bold;
+}
+
 /* 그룹 정보 */
 #ARDGroupDetail {
-	width : 300px;
-	height : 150px;
-	border: 2px solid #1DBF73;
+	width: 320px;
+	height: 165px;
+	border: 3px solid rgba(32, 34, 34, 0.8);
 	border-radius: 10px;
-	padding-bottom: 10px;
-	padding-top: 10px;
+	padding : 10px;
+	padding-left : 20px;
 	margin-bottom: 10px;
 	float: left;
+	background-color: rgba(32, 34, 34, 0.4);
+	overflow: auto;
 }
-#ARDGroupDetail table tr th{
+
+#ARDGroupDetail table tr th {
+	color : rgba(32, 34, 34, 0.8);
 	line-height: 35px;
 	padding-right: 10px;
-	color: #1DBF73;
+	width: 120px;
+}
+#ARDGroupDetail table tr td {
+	color: rgba(255,255,255, 0.8);
+	font-weight: bold;
+	
+	
 }
 
-
 /* 생성그룹 */
-#ARDMemberGroupDetail{
-	text-align : center;
-	width : 480px;
-	border: 2px solid #1DBF73;
+#ARDMemberGroupDetail {
+	text-align: center;
+	width: 530px;
+	border: 3px solid rgba(32, 34, 34, 0.8);
 	border-radius: 10px;
 	float: left;
 	padding: 15px;
 	overflow: hidden;
 	margin-right: 5px;
+	background-color: rgba(32, 34, 34, 0.4);
 }
 
-#ARDMemberGroupDetail h3{
-	color : #1DBF73;
+#ARDMemberGroupDetail h3 {
+	color: #1DBF73;
 	margin-bottom: 10px;
 }
+#ARDMemberGroupDetail .ARDGroupWrap table th {
+	width : 70px;
+	padding-bottom : 5px;
+	color: rgba(32, 34, 34, 0.8);
+	font-size: 13px;
+	text-align: left;
+}
+#ARDMemberGroupDetail .ARDGroupWrap table caption{
+	color : rgba(255,255,255, 0.8);
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+#ARDMemberGroupDetail .ARDGroupWrap table td {
+	padding-bottom : 5px;
+	color: rgba(255,255,255, 0.8);
+	text-align: left;
+	padding-left: 10px;	
+}
 
-#ARDMemberGroupDetail{
+
+#ARDMemberGroupDetail {
 	text-align: center;
 }
-#ARDMemberGroupDetail .ARDGroupWrap{
-	width : 45%;
-	border-bottom: 2px solid #1DBF73; 
+
+#ARDMemberGroupDetail .ARDGroupWrap {
+	width: 45%;
+	border-bottom: 3px solid rgba(32, 34, 34, 0.8);
 	display: inline-block;
 	float: left;
 	font-size: 14px;
 	margin-bottom: 20px;
 	margin-left: 10px;
-	margin-right: 10px; 
+	margin-right: 10px;
 }
 
 /* 지출기록 */
-#ARDGroupEventDetail{
-	text-align : center;
-	width : 550px;
-	border: 2px solid #1DBF73;
+#ARDGroupEventDetail {
+	text-align: center;
+	width: 565px;
+	border: 3px solid rgba(32, 34, 34, 0.8);
 	border-radius: 10px;
 	float: right;
 	padding: 15px;
 	overflow: hidden;
 	margin-right: 5px;
 	font-size: 14px;
+	background-color: rgba(32, 34, 34, 0.4);
+	
 }
-#ARDGroupEventDetail h3{
-	color : #1DBF73;
+
+#ARDGroupEventDetail h3 {
+	color: #1DBF73;
 	margin-bottom: 10px;
 }
 
+#ARDGroupEventDetail table{
+	text-align : center;
+}
 
-/* 팔로워 *//* 그룹 회원 리스트 */
-#ARDMemberFollowDetail{
-	padding : 10px;
-	width: 350px;
-	border: 2px solid #1DBF73;
+/* 팔로워 */ /* 그룹 회원 리스트 */
+#ARDMemberFollowDetail {
+	padding: 10px;
+	width: 360px;
+	border: 3px solid rgba(32, 34, 34, 0.8);
 	border-radius: 10px;
 	float: right;
 	overflow: hidden;
 	height: 500px;
+	background-color: rgba(32, 34, 34, 0.4);
 }
-#ARDGroupMList{
-	padding : 10px;
-	width: 278px;
-	border: 2px solid #1DBF73;
+
+#ARDGroupMList {
+	padding: 10px;
+	width: 320px;
+	border: 3px solid rgba(32, 34, 34, 0.8);
+	background-color: rgba(32, 34, 34, 0.4);
 	border-radius: 10px;
 	float: left;
 	overflow: hidden;
 	height: 500px;
 }
-#ARDMemberFollowDetail table{
+
+#ARDMemberFollowDetail table {
 	width: 50%;
 	float: right;
 }
-#ARDGroupMList table{
-		
+
+#ARDMemberFollowDetail table tr td {
+	color : rgba(255,255,255, 0.8);
+	font-weight: bold;
 }
-#ARDMemberFollowDetail table caption,
-#ARDGroupMList table caption{
+
+#ARDMemberFollowDetail table caption {
+	color: rgba(32, 34, 34, 0.8);
+}
+
+
+#ARDMemberFollowDetail table caption, #ARDGroupMList table caption {
 	font-weight: bold;
 	font-size: 20px;
 	color: #1DBF73;
 	margin-bottom: 10px;
 }
-#ARDMemberFollowDetail table tr td,
-#ARDGroupMList table tr td{
+#ARDGroupMList table{
+	width: 270px;
+}
+
+#ARDGroupMList table tr th{
+	color: rgba(32, 34, 34, 0.8);
+	width: 150px;
+}
+#ARDGroupMList table tr td {
+	color : rgba(255,255,255, 0.8);
+}
+	
+
+
+#ARDMemberFollowDetail table tr td, #ARDGroupMList table tr td {
 	line-height: auto;
 }
 
-#ARDBtn{
-	clear : both;
-	text-align : center;
-	padding-top : 50px;
+#ARDBtn {
+	clear: both;
+	text-align: center;
+	padding-top: 50px;
 	margin-bottom: 150px;
 }
-#ARDBtn input{
+
+#ARDBtn input {
 	width: 200px;
 	height: 40px;
 	border: none;
-	background-color: #1DBF73;
-	color : white;
+	background-color: rgba(32, 34, 34, 0.8);
+	color: rgba(255,255,255, 0.8);
 	font-weight: bold;
 	border-radius: 10px;
 }
-#ARDBtn input:hover{
+
+#ARDBtn input:hover {
 	cursor: pointer;
-	background-color: green;
-	
+	background-color: rgba(32, 34, 34, 0.4);
 }
 /* 스크롤바 */
-#ARDMemberGroupDetail::-webkit-scrollbar-thumb,
-#ARDMemberFollowDetail::-webkit-scrollbar-thumb,
-#ARDGroupEventDetail::-webkit-scrollbar-thumb,
-#ARDGroupEventDetail::-webkit-scrollbar-thumb{
-	height: 50%; 
-	background: black; 
+#ARDMemberGroupDetail::-webkit-scrollbar-thumb, #ARDMemberFollowDetail::-webkit-scrollbar-thumb,
+	#ARDGroupEventDetail::-webkit-scrollbar-thumb, #ARDGroupEventDetail::-webkit-scrollbar-thumb,
+	#ARDGroupDetail::-webkit-scrollbar-thumb
+	{
+	height: auto; 
+	background-color: rgba(0, 0, 0, 0.8); 
 	border-radius: 10px;
 }
-#ARDMemberGroupDetail::-webkit-scrollbar,
-#ARDMemberFollowDetail::-webkit-scrollbar,
-#ARDGroupEventDetail::-webkit-scrollbar,
-#ARDGroupEventDetail::-webkit-scrollbar{
+
+#ARDMemberGroupDetail::-webkit-scrollbar, #ARDMemberFollowDetail::-webkit-scrollbar,
+	#ARDGroupEventDetail::-webkit-scrollbar, #ARDGroupEventDetail::-webkit-scrollbar, #ARDGroupDetail::-webkit-scrollbar
+	{
 	width: 10px;  
-}
-#ARDMemberGroupDetail::-webkit-scrollbar-track,
-#ARDMemberFollowDetail::-webkit-scrollbar-track,
-#ARDGroupEventDetail::-webkit-scrollbar-track,
-#ARDGroupEventDetail::-webkit-scrollbar-track{
-	border-radius: 20px;
-	background: #1DBF73;
+	opacity: 0.4;
 }
 
+#ARDMemberGroupDetail::-webkit-scrollbar-track, #ARDMemberFollowDetail::-webkit-scrollbar-track,
+	#ARDGroupEventDetail::-webkit-scrollbar-track, #ARDGroupEventDetail::-webkit-scrollbar-track,
+	#ARDGroupDetail::-webkit-scrollbar-track
+	{
+	border-radius: 20px;
+	background-color: rgba(0, 0, 0, 0.5); 
+}
