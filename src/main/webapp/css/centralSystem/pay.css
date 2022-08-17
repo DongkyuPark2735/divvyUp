@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+*{
+	margin:0;
+	padding:0;
+	font-family: 'Open Sans', sans-serif;
+}
+#wrap{
+	width:400px;
+	text-align:center;
+	margin: 0 auto;
+}
+
+table{
+	margin: 0 auto;
+	content-align:center;
+	width:300px;
+	text-align:center;
+	padding:30px;
+}
+table td{
+	height:30px;
+}
+img{
+	height:150px;
+	margin:0 auto;
+}
+#pay{
+	font-size:1.5em;
+	font-weight:bold;
+	padding:10px 0;
+}
+.btnPay{
+		width:150px;
+		height:50px;
+		color: black;
+		background-color: #D5D8DC;
+		border: 0;
+		outline: none;
+		padding: 10px;
+		border-radius: 4px;
+		margin: 0 auto;
+	}
+	
+	.btnPay:HOVER{
+		color: #494949;
+		background-color: rgba(213, 216, 220, 0.7);
+		cursor:pointer;
+	}

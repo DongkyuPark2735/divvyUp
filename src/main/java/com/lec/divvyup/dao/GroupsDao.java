@@ -22,6 +22,9 @@ public interface GroupsDao {
 <<<<<<< HEAD
 	public int countGroups(String mid);
 =======
+<<<<<<< HEAD
+	public int countGroups(String mid);
+=======
 >>>>>>> 6046d284dcb394365a7690681b38d38763173063
 >>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 }

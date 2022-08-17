@@ -9,6 +9,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<link href="${conPath }/css/member/join2.css" rel="stylesheet">
+
+>>>>>>> 4da87254d69c96dc6462e4d49fb510a98bf99c4a
 =======
 <<<<<<< HEAD
 <link href="${conPath }/css/member/join3.css" rel="stylesheet">
@@ -18,6 +23,7 @@
 >>>>>>> 6046d284dcb394365a7690681b38d38763173063
 <style>
 </style>
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 <<<<<<< HEAD
@@ -119,6 +125,7 @@
    $(document).ready(function() {
       $('.joinBtn').click(function(){
           $('.modal').fadeIn();
+          $('.modal_content').fadeIn();
           $('#login_wrap').fadeOut();
         });
       
@@ -137,16 +144,6 @@
              $('#login_wrap').fadeIn();
          }
       });
-      /* $("div#login_wrap button").click(function(){
-          alert(1);
-        });
-      $('p').click(function(){
-         alert(2);
-      });
-      
-      $(".close-area").click(function(){
-          $(".modal").fadeOut();
-      }); */
       
       $('input[name="mid"]').keyup(function(){
               var mid = $('input[name="mid"]').val();
@@ -223,12 +220,16 @@
 </script>
 <script>
 function openPop(){
+<<<<<<< HEAD
+  var popup = window.open('${conPath}/member/searchIdPwForm.do', '아이디/패스워드 찾기', 'width=300px,height=200px,scrollbars=yes');
+=======
   var width = '500px';
   var height = '400px';
   var left = Math.ceil((window.screen.width - width)/2);
   /* var top = Math.ceil((window.screen.height - height)); */
  /*  var popup = window.open('${conPath}/member/searchIdPwForm.do', '아이디/패스워드 찾기', 'width='+width+',height='+height+',left='+left+',top='+top+',scrollbars=yes'); */
   var popup = window.open('${conPath}/member/searchIdPwForm.do', '아이디/패스워드 찾기', 'width='+width+',height='+height+',left='+left+', scrollbars=yes');
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 }
 </script>
 </head>
@@ -320,6 +321,20 @@ function openPop(){
    <c:if test="${not empty joinResult}">
       <script>alert('${joinResult}');</script>
    </c:if>
+     <nav class="header">
+      <div class="container">
+         <h1 class="logo">
+            <a href="${conPath}/member/loginForm.do">D<span>U</span></a>
+         </h1>
+         <ul>
+            <li><a href="${conPath}/member/loginForm.do">로그인</a></li>
+            <li class="joinBtn"><a href="#" >회원가입</a></li>
+<%--             <li class="joinBtn"><a href="${conPath}/member/joinForm.do" >회원가입</a></li> --%>
+            <li><a href="${conPath}/qboard/listQboardForMember.do">Q&A</a></li>
+         </ul>
+      </div>
+     </nav>
+   
      <div class="modal">
         <div class="modal_content" title="클릭하면 창이 닫힙니다.">
        <header><h2>JOIN</h2></header>
@@ -328,29 +343,29 @@ function openPop(){
       
         <div class="input-box">
           <input id="userid" type="text" name="mid" required="required" placeholder="아이디">
-           <label for="userid">ID</label>
+           <label for="userid">아이디</label>
            <div id="midConfirmResult"></div>
         </div>
         
         <div class="input-box">
           <input id="password" type="password" name="mpw" required="required" placeholder="비밀번호">
-           <label for="password">PW1</label>
+           <label for="password">비밀번호</label>
         </div>
         
         <div class="input-box">
           <input id="passwordCheck" type="password" name="mpwChk" required="required" placeholder="비밀번호">
-           <label for="passwordCheck">PW2</label>
+           <label for="passwordCheck">비밀번호</label>
            <div id="mpwChkResult"></div>
         </div>
         
         <div class="input-box">
           <input id="username" type="text" name="mname" required="required" placeholder="이름">
-           <label for="username">NAME</label>
+           <label for="username">이름</label>
         </div>
         
         <div class="input-box">
           <input id="useremail" type="text" name="memail" required="required" placeholder="이메일">
-           <label for="useremail">EMAIL</label>
+           <label for="useremail">이메일</label>
            <div id="memailConfirmResult"></div>
         </div>
 <<<<<<< HEAD
@@ -394,24 +409,27 @@ function openPop(){
        </form>
         </div>
      </div>
-   <div id="login_wrap">
-      <header>
-        <h2>LOGIN</h2>
-      </header>
-      <form action="${conPath }/member/login.do" method="post">
-        <div class="input-box">
-          <input id="username" type="text" name="mid" required="required" placeholder="아이디" value="${mid }">
-           <label for="username">ID</label>
-        </div>
+   <div class="mainSection">
+         <div id="login_wrap">
+           <h2>LOGIN</h2>
+            <form action="${conPath }/member/login.do" method="post">
+              <div class="input-box">
+                   <input id="username" class="login_btn" type="text" name="mid" required="required" placeholder="아이디" value="${mid }">
+                    <label for="username" style="top:5px; padding-left:14.5px;">아이디</label>
+              </div>
         
-        <div class="input-box">
-          <input id="password" type="password" name="mpw" required="required" placeholder="비밀번호" value="${mpw }">
-           <label for="password">PW</label>
-        </div>
-        <div id="forgot"><a href="${conPath}/member/searchIdPwForm.do">ID/PW 찾기</a></div>
-         <input type="submit" value="로그인">
-     </form>
+              <div class="input-box">
+                   <input id="password" class="login_btn" type="password" name="mpw" required="required" placeholder="비밀번호" value="${mpw }">
+                    <label for="password" style="top:5.5px;  padding-left:14px;">비밀번호</label>
+              </div>
+              <div id="forgot"><a href="${conPath}/member/searchIdPwForm.do">ID/PW 찾기</a></div>
+               <input type="submit" value="로그인">
+           </form>
+         </div>
    </div>
+<<<<<<< HEAD
+   <jsp:include page="../main/footer.jsp"/>
+=======
      <button class="joinBtn">JOIN</button>
 <%--      <button onclick="location='${conPath}/member/joinForm.do'" class="joinBtn">JOIN</button> --%>
      

@@ -9,7 +9,7 @@
 <head>
 <title></title>
 <meta charset="UTF-8">
-<link href="${conPath }/css/style.css" rel="stylesheet">
+<link href="${conPath }/css/centralSystem/pay.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 	$(document).ready(function() {
@@ -28,30 +28,47 @@
 				alert('비밀번호 화인 후 진행 가능합니다');
 				return false;
 			}
-			
-			
 		});
 	});
 </script>
 
 </head>
 <body>
-	<form action="${conPath}/centralSystem/get.do?mid=${member.mid }&gid=${gid }" method="post">
-		<table>
-			<caption>${getMemberinfo.mname }님 개인정보인증</caption>
-			<tr>
-				<th>받을 금액 확인 :</th>
-				<td >${gdbalance}</td>
-			</tr>
-			<tr>
-				<th>비밀번호</th>
-				<td><input type="password" name="mpw" required="required" />
-					<div id="pwChkResult">&nbsp;</div></td>
-			</tr>
-			<tr colspan="2">
-				<td><input type="submit" value="받기" size="8" ></td>
-			</tr>
-		</table>
-	</form>
+	<div id="wrap">
+		<form
+			action="${conPath}/centralSystem/get.do?mid=${member.mid }&gid=${gid }"
+			method="post">
+			<table>
+				<tr>
+					<td colspan="2"><img
+						src="https://cdn.logojoy.com/wp-content/uploads/2018/05/30160306/447.png">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div id="pay">${member.mid }님결제진행</div>
+					</td>
+				</tr>
+				<tr>
+					<td>받을 금액 확인 :</td>
+					<td><b>${gdbalance}</b></td>
+				</tr>
+				<tr>
+					<td>비밀번호</td>
+					<td>
+						<input type="password" name="mpw" required="required" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div id="pwChkResult">&nbsp;</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit" value="받기" size="8" class="btnPay" ></td>
+				</tr>
+			</table>
+		</form>
+	</div>
 </body>
 </html>

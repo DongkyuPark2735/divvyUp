@@ -1,0 +1,336 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	color: #222;
+}
+
+span {
+	color: #1DBF73;
+	font-size: 50px;
+}
+
+span:hover {
+	color: #fff;
+	transition: 0.5s;
+}
+
+.container {
+	max-width: 90%;
+	margin: 0 auto;
+}
+
+.logo {
+	font-size: 46px;
+	color: #fff'
+}
+
+.header {
+	position: fixed;
+	background-color: #222;
+	top: 0;
+	left: 0;
+	right: 0;
+	transition: all 0.3s ease-in-out;
+	z-index: 100;
+}
+
+.header .container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 80px;
+	line-height: 80px;
+	transition: all 0.3s ease-in-out;
+	z-index: -3;
+}
+
+.header .container:nth-child(1) {
+	left: 0;
+}
+
+.header ul {
+	display: flex;
+	list-style-type: none;
+	align-items: center;
+	justify-content: center;
+}
+
+.header a {
+	color: #fff;
+	text-decoration: none;
+	padding: 7px 15px;
+	transition: all 0.3s ease-in-out;
+}
+
+.header.active {
+	background-color: #fff;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.header.active a {
+	color: #000;
+}
+
+.header.active .container {
+	padding: 10px 0;
+}
+
+.header a.current, .header a:hover {
+	color: #1DBF73;
+	font-weight: bold;
+}
+
+.header .imgNoti {
+	margin-top: 30px;
+	height: 30px;
+	-webkit-filter: invert(100%);
+	filter: invert(100%);
+}
+
+.header .imgNoti:hover {
+	filter: sepia(100%);
+}
+
+.header .imgLogout {
+	margin-top: 30px;
+	height: 25px;
+}
+
+.header .imgLogout:hover {
+	-webkit-filter: invert(1);
+}
+
+.header .container .notification:hover {
+	color: red;
+}
+
+.header .container .notification {
+	position: relative;
+}
+
+.header .container .notification .badge {
+	position: absolute;
+	top: -7px;
+	right: 11px;
+	border-radius: 80%;
+	background: red;
+	color: white;
+	height: 17px;
+	line-height: 15px;
+	width: 17px;
+	text-align: center;
+	justify-content: center;
+	font-weight: bold;
+}
+
+#totalWrap {
+	background: linear-gradient(rgba(255, 255, 255, 0.3),
+		rgba(255, 255, 255, 0.3)),
+		url('https://img.freepik.com/premium-vector/abstract-grey-white-tech-geometric-corporate-design-background-eps-10-vector-illustration_73729-217.jpg?w=2000');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: bottom center;
+	margin: 0 auto;
+	margin-top: 80px;
+	height: 100vh;
+	color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	width: 100vw;
+	display: inline-block;
+}
+
+#totalWrap #content {
+	width: 40%;
+	height: 90%;
+	margin: 50px auto;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+	margin-bottom: 50px;
+}
+
+.eventDetail table {
+	content-align: center;
+	text-align: left;
+	margin: 0 auto;
+	width: 80%;
+	height: 35%;
+	border-collapse: collapse;
+	margin-bottom: 10px;
+}
+
+
+#totalWrap #content .eventDetail table td:NOT(h1) {
+	width: 50%;
+	padding: 5px;
+}
+
+#totalWrap #content .eventDetail table td:last-child {
+	content-align: right;
+	text-align: right;
+}
+#totalWrap #content .eventDetail table h1 {
+	text-align: left;
+	font-size: 3em;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+textarea{
+		font-family: 'Open Sans', sans-serif;
+		background-color: transparent;
+		border:lightgrey;
+		outline:none;
+		width:70% ;
+	}
+.values {
+	height: 20px;
+	padding: 10px;
+	border: none;
+	text-align: left;
+	background-color: transparent;
+	width: 300px;
+}
+	
+
+#totalWrap #content .eventDetail table th {
+	text-align: center;
+}
+
+table .titles {
+	font-weight: bold;
+}
+
+.groupModifyBtn {
+	color: black;
+	background-color: #D5D8DC;
+	border: 0;
+	outline: none;
+	padding: 10px;
+	border-radius: 4px;
+	margin: 10px auto;
+	text-align: center;
+	width: 120px;
+	height: 40px;
+}
+
+.groupModifyBtn:HOVER {
+	color: #494949;
+	background-color: rgba(213, 216, 220, 0.7);
+	cursor: pointer;
+}
+
+.btn3 {
+	color: white;
+	background-color: #4F967B;
+	border: 0;
+	outline: none;
+	padding: 7px;
+	border-radius: 3px;
+	margin: 0 auto;
+	text-align: center;
+	margin-right: 10px;
+}
+
+.btn3:HOVER {
+	background-color: rgba(79, 150, 123, 0.7);
+	cursor: pointer;
+}
+
+.eventMember {
+	content-align: center;
+	text-align: left;
+	margin: 0 auto;
+	width: 80%;
+	height: 35%;
+	border-collapse: collapse;
+	margin-bottom: 10px;
+}
+
+.eventMember table {
+	content-align: center;
+	text-align: left;
+	margin: 0 auto;
+	width: 100%;
+	height: 35%;
+	border-collapse: collapse;
+	margin-bottom: 10px;
+}
+
+.scrollable {
+	overflow: scroll;
+	overflow-x: hidden;
+	scrollbar-color: dark;
+	display: inline-block;
+	background-color: transparent;
+}
+
+#totalWrap #content .eventMember table td {
+	width: 350px;
+	text-align: center;
+	padding: 5px 10px 5px 10px;
+}
+
+#totalWrap #content .eventMember table td:nth-child(4) {
+	padding: 0;
+}
+
+#totalWrap #content .eventMember h1 {
+	text-align: left;
+	font-size: 3em;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	width: 100%;
+}
+
+}
+.eventMember .titles {
+	border-bottom: 1px solid #E5E5E5;
+}
+
+#totalWrap #content .buttons {
+	text-align: center;
+	margin: 0 auto;
+	width: 80%;
+	margin-top: 20px;
+	padding: 10px;
+}
+
+.groupInfoBtn {
+	color: black;
+	background-color: #D5D8DC;
+	border: 0;
+	outline: none;
+	padding: 10px;
+	border-radius: 4px;
+	margin: 0 auto;
+	width: 120px;
+	height: 50px;
+}
+
+.groupInfoBtn:HOVER {
+	color: #494949;
+	background-color: rgba(213, 216, 220, 0.7);
+	cursor: pointer;
+}
+
+.groupFinishBtn {
+	color: black;
+	background-color: rgb(97, 42, 37);
+	border: 0;
+	outline: none;
+	padding: 10px;
+	border-radius: 4px;
+	margin: 0 auto;
+	width: 150px;
+	height: 50px;
+}
