@@ -18,10 +18,14 @@ import com.lec.divvyup.service.MemberService;
 import com.lec.divvyup.service.NotificationHistoryServiceImpl;
 <<<<<<< HEAD
 import com.lec.divvyup.util.Paging;
+=======
+<<<<<<< HEAD
+import com.lec.divvyup.util.Paging;
 import com.lec.divvyup.vo.Admin;
 =======
 
 >>>>>>> 6046d284dcb394365a7690681b38d38763173063
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 import com.lec.divvyup.vo.GroupDetail;
 import com.lec.divvyup.vo.Member;
 import com.lec.divvyup.service.NotificationHistoryService;
@@ -62,6 +66,25 @@ public class MainController {
 	@RequestMapping(value="mainto", method= {RequestMethod.GET, RequestMethod.POST})
 	public String mainView(Member member, Model model, HttpSession session,
 <<<<<<< HEAD
+		NotificationHistory notificationHistory, String pageNum) {
+		model.addAttribute("myFollowingList", followService.myFollowingList(session));
+		model.addAttribute("myFollowerList", followService.myFollowerList(session));
+		model.addAttribute("uncheckdNotificationCnt", notificationHistoryService.getUncheckdNotificationCnt(session, notificationHistory));
+		String mid = (String)session.getAttribute("mid");
+		
+		
+		
+		model.addAttribute("groupList", groupsService.groupList(pageNum, mid));
+		model.addAttribute("paging", new Paging(pageNum, groupsService.countGroups(mid)));
+		
+		
+		
+		model.addAttribute("followList", groupsService.followList(mid));
+		member = memberService.getMember(mid);
+		model.addAttribute("person", member);
+		 return "main/main";
+=======
+<<<<<<< HEAD
 			NotificationHistory notificationHistory, String pageNum) {
 			model.addAttribute("myFollowingList", followService.myFollowingList(session));
 			model.addAttribute("myFollowerList", followService.myFollowerList(session));
@@ -82,6 +105,7 @@ public class MainController {
 		 model.addAttribute("followList", groupsService.followList(member.getMid()));
 		return "main/main";
 >>>>>>> 6046d284dcb394365a7690681b38d38763173063
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 	}
 
 	@RequestMapping(value = "mainforAdmin", method = { RequestMethod.GET, RequestMethod.POST })

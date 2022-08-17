@@ -18,7 +18,9 @@ COMMIT;
 select * from user_tables;
 --[2] GROUP TABLE --
 
-SELECT * FROM  GROUPS;
+SELECT * FROM  GROUPS where mid='aaa';
+
+	SELECT COUNT(*) FROM GROUPS WHERE (GID IN(SELECT GID FROM GROUPDETAIL WHERE MID='aaa')) OR (GID IN(SELECT GID FROM GROUPS WHERE MID='aaa'));
 
 INSERT INTO GROUPS (GID, GNAME, GIMG, GCONTENT, MID)
     VALUES (GROUPS_SEQ.NEXTVAL, 'Trip to Namhae', 'namhae.jpg' , 'Lets have a lit time', 'aaa');

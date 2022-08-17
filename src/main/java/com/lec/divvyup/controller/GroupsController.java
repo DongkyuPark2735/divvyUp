@@ -51,13 +51,20 @@ public class GroupsController {
 		return "groups/groupList";
 	}
 	@RequestMapping(value="groupInfo", method = {RequestMethod.GET, RequestMethod.POST})
-	public String groupInfo(int gid, Model model) {
+	public String groupInfo(int gid, Model model, String mid, HttpSession session) {
 		model.addAttribute("groupInfo", groupsService.groupInfo(gid));
 		model.addAttribute("groupDetailList", groupDetailService.groupDetailList(gid));
 		model.addAttribute("check", centralSystemService.checkAddition(gid));
 		model.addAttribute("checkAllPaid",  centralSystemService.checkAllPaid(gid));
 		model.addAttribute("done", centralSystemService.checkFinishSplit(gid));
-		return "groups/groupInfo";
+		/*
+		 * System.out.println(5); session.setAttribute("sesionGBgid", gid);
+		 * System.out.println(6); session.setAttribute("sesionGBmid", mid);
+		 * System.out.println(7); model.addAttribute("grouplist",
+		 * groupBoardService.listLatest20Groupboard(gid, session));
+		 * System.out.println(8);
+		 */
+	    return "groups/groupInfo";
 	}
 	@RequestMapping(value="groupInsertForm", method=RequestMethod.GET)
 	public String registerForm(Model model, String mid) {
@@ -66,12 +73,12 @@ public class GroupsController {
 		return "groups/groupInsertForm";
 	}
 	@RequestMapping(value="groupInsert", method=RequestMethod.POST)
-	public String register(MultipartHttpServletRequest mRequest, @ModelAttribute("gDto") Groups groups, String mid, String [] fids, Model model) {
+	public String register(MultipartHttpServletRequest mRequest, @ModelAttribute("gDto") Groups groups, String mid, String [] fids, Model model, int windowType) {
 		model.addAttribute("InsertResult", groupsService.groupInsert(groups, mRequest));
 		groupDetailService.insertGroupDetail(fids);
 		groupDetailService.insertGroupDetail(mid);
 		notificationHistoryService.insertGroupNotification(mid, fids);
-		return "groups/groupList"; 
+		return "redirect:../main/mainto.do";
 	}
 	@RequestMapping(value="modifyForm", method= {RequestMethod.GET, RequestMethod.POST})
 	public String modifyForm(int gid, Model model, String mid) {
@@ -82,27 +89,24 @@ public class GroupsController {
 	}
 	@RequestMapping(value="modify", method = RequestMethod.POST)
 		public String modify(MultipartHttpServletRequest mRequest, @ModelAttribute("gDto") Groups groups, Model model, String pageNum, int gid, String [] fids) {
-		groupsService.modify(mRequest, groups);
-		groupDetailService.insertGroupDetailNew(fids, gid);
+		model.addAttribute("modifyResult", groupsService.modify(mRequest, groups));
+		model.addAttribute("modifyResult2", groupDetailService.insertGroupDetailNew(fids, gid));
 		return "redirect:../groups/groupInfo.do?gid="+gid;
 	}
 	@RequestMapping(value="deleteGroup", method = RequestMethod.GET)
 	public String deleteGroup(int gid) {
+		System.out.println(0);
 		groupBoardService.step1BeforeDeleteGroup(gid);
+		System.out.println(1);
 		groupDetailService.step2BeforeDeleteGroup(gid);
-		eventHistoryService.step3BeforeDeleteGroup(gid);
-		eventDetailService.step4BeforeDeleteGroup(gid);
-		eventService.step5BeforeDeleteGroup(gid);
-		centralSystemService.step6BeforeDeleteGroup(gid);
-		groupsService.finalStepDeleteGroup(gid);
+		System.out.println(2);
+		eventHistoryService.step3BeforeDeleteGroup(gid); System.out.println(3);
+		eventDetailService.step4BeforeDeleteGroup(gid); System.out.println(4);
+		eventService.step5BeforeDeleteGroup(gid); System.out.println(5);
+		centralSystemService.step6BeforeDeleteGroup(gid); System.out.println(6);
+		groupsService.finalStepDeleteGroup(gid); System.out.println(7);
 	return "groups/groupList";
 }
-	
-	
-	
-
-	
-	
 	
 
 }

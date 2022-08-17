@@ -1,0 +1,250 @@
+@charset "UTF-8";
+
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+	
+	body {
+		font-family: 'Open Sans', sans-serif;
+		color: #222;
+	}
+	span{
+		color: #1DBF73;
+		font-size: 50px;
+	}
+	span:hover{
+		color: #fff;
+		transition: 0.5s;
+	}
+	.container {
+		max-width: 90%;
+		margin: 0 auto;
+	}	
+	.logo{
+		font-size: 46px;
+		color: #fff'
+	}
+	.header {
+		position: fixed;
+		background-color: #222;
+		top: 0;
+		left: 0;
+		right: 0;
+		transition: all 0.3s ease-in-out;
+		z-index: 100;
+	}
+	.header .container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 80px;
+		line-height: 80px;
+		transition: all 0.3s ease-in-out;
+		z-index: -3;
+	}
+	
+	.header .container:nth-child(1) {
+		left:0;
+	}
+ 
+	.header ul {
+		display: flex;
+		list-style-type: none;
+		align-items: center;
+		justify-content: center;
+	}
+ 
+	.header a {
+		color: #fff;
+		text-decoration: none;
+		padding: 7px 15px;
+		transition: all 0.3s ease-in-out;
+	}
+ 
+	.header.active {
+		background-color: #fff;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+	}
+ 
+	.header.active a {
+		color: #000;
+	}
+ 
+	.header.active .container {
+		padding: 10px 0;
+	}
+ 
+	.header a.current, .header a:hover {
+		color: #1DBF73;
+		font-weight: bold;
+	}
+	.header .imgNoti{
+		margin-top:30px;
+		height:30px; 
+		-webkit-filter: invert(100%);  
+		filter: invert(100%);
+	}
+	.header .imgNoti:hover{
+		 filter: sepia(100%);   
+	}
+	.header .imgLogout{
+		margin-top:30px;
+		height:25px; 
+	}
+	.header .imgLogout:hover{
+		-webkit-filter: invert(1); 
+	}
+
+	.header .container .notification:hover {
+		color: red;
+	}
+	.header .container .notification{
+		position: relative;
+	}
+	.header .container .notification .badge {
+	  position: absolute;
+	  top: -7px;
+	  right:11px;
+	  border-radius: 80%;
+	  background: red;
+	  color: white;
+	  height:17px;
+	  line-height:15px;
+	  width:17px;
+	  text-align:center;
+	  justify-content:center;
+	  font-weight:bold;
+	} 
+	
+	#totalWrap {
+			background: linear-gradient(
+          rgba(255,255,255, 0.3), 
+          rgba(255,255,255, 0.3)
+        ), url('https://img.freepik.com/premium-vector/abstract-grey-white-tech-geometric-corporate-design-background-eps-10-vector-illustration_73729-217.jpg?w=2000');
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: bottom center; 
+		margin: 0 auto;
+		margin-top:80px;
+		height: 100vh;
+		color: black;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		width:100vw;
+		display: inline-block;
+		overflow:hidden
+	}
+	#totalWrap #content{
+		width:45%;
+		padding:30px;
+		text-align: center; 
+		height:100%;
+		float:left;
+		margin-left:5%;
+	}
+	#totalWrap #content table{
+		width:40vw;
+		margin: 10px auto;
+		padding:10px;
+		text-align: center; 
+		background-color:  rgba(255,255,255, 0.4);
+		box-shadow: 0 0 20px rgba(0,0,0,0.1);
+		height:60vh;
+	}
+	#totalWrap #content h1{      	
+		margin: 20px auto;
+		font-size:3em;
+		text-align:center; 
+		font-weight:bold;
+	}
+	#totalWrap #content table tr{
+		justify-content:center;
+		margin:5px auto;
+		
+	}
+	#totalWrap #content table td{
+		padding:5px 0;
+		
+	}
+		.gid, .gname, .mid, .grdate{
+		width:70% ;
+		border: none;
+		border-bottom:1px solid lightgrey;
+		background-color: transparent;
+	}
+	textarea:focus, input:focus{
+    	outline: none;
+    	text-align:center; 
+	}
+	.mid, .gcontent {
+		height:20px;	
+		padding:3px;
+		border: none;
+		text-align:center;
+	}
+	textarea{
+		font-family: 'Open Sans', sans-serif;
+		background-color: transparent;
+		border:lightgrey;
+		outline:none;
+		width:70% ;
+	}
+	
+	.btn_style{
+		color: white;        	
+		background: black;
+		border:0;              
+		outline: none;         
+		padding:20px;
+		margin: 20px auto;
+		text-align:center;
+		justify-content:center;
+		width:150px;
+	}
+		
+	.btn_style:HOVER{
+		background-color: rgba(0,0,0, 0.8);
+	}
+	b {
+		color: red;
+	}
+	
+	#totalWrap #content2  {
+		width:45%;
+		padding:30px;
+		text-align: center; 
+		height:100%;
+		line-height:100%;
+		float:right;
+		margin-right:5%;
+	}
+	#totalWrap #content2 img{
+		text-align:center;
+		width:400px;
+		margin: 50px auto;
+		
+	}
+
+	.scrollable {
+     	 width:70% ;
+		height:15vh;
+		overflow: scroll;
+		overflow-x: hidden;
+		border:1px solid grey;
+		scrollbar-color: dark;
+		display: inline-block;
+		background-color: transparent;
+		text-align:left;
+		padding: 5px 50px;
+    }
+    .fids{
+     	padding:10px;
+    }
+    .titles{
+    	font-weight:bold;
+    	padding-left:20px;
+    }
