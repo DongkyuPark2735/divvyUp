@@ -15,12 +15,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.lec.divvyup.dao.GroupsDao;
+import com.lec.divvyup.util.Paging;
 import com.lec.divvyup.vo.Groups;
 import com.lec.divvyup.vo.Member;
+import com.lec.divvyup.vo.Qboard;
 
 @Service
 public class GroupsServiceImpl implements GroupsService {
-
+	Groups groups = new Groups();
 @Autowired
 private GroupsDao groupsDao;
 String backupPath = "C:\\Users\\Unie\\Documents\\DivvyUpTeamUnie\\divvyUp\\src\\main\\webapp\\groupsImgFileUpload\\";
@@ -29,8 +31,12 @@ String backupPath = "C:\\Users\\Unie\\Documents\\DivvyUpTeamUnie\\divvyUp\\src\\
 		return groupsDao.groupInfo(gid);
 	}
 	@Override
-	public List<Groups> groupList(String mid) {
-		return groupsDao.groupList(mid);
+	public List<Groups> groupList(String pageNum, String mid) {
+		Paging paging = new Paging(pageNum, groupsDao.countGroups(mid));
+		groups.setStartRow(paging.getStartRow());
+		groups.setEndRow(paging.getEndRow());
+		groups.setMid(mid);
+		return groupsDao.groupList(groups);
 	}
 	@Override
 	public int nextGid() {
@@ -139,5 +145,10 @@ String backupPath = "C:\\Users\\Unie\\Documents\\DivvyUpTeamUnie\\divvyUp\\src\\
 	@Override
 	public List<Groups> groupListforAdminSearch(String mid) {
 		return groupsDao.groupListforAdminSearch(mid);
+	}
+	@Override
+	public int countGroups(String mid) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

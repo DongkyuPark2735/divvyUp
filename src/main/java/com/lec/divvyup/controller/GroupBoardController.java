@@ -23,6 +23,10 @@ public class GroupBoardController {
    @Autowired
    GroupBoardService groupBoardService;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 //   대화 리스트 20개 출력
    @RequestMapping(value = "groupDetil")
    public String listLatest20Groupboard(int gid, String mid, Model model, HttpSession session) {

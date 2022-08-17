@@ -14,16 +14,34 @@
 	</resultMap>
 	
 	<insert id="writeAboard" parameterType="Aboard">
-		INSERT INTO ABOARD (ABID, AID, ABTITLE, ABCONTENT, ABIP, QBID)
-    VALUES (ABOARD_SEQ.NEXTVAL, #{aid}, #{abtitle}, #{abcontent}, #{abip}, #{qbid})
+		INSERT INTO ABOARD 
+		(
+			  ABID
+			, AID
+			, ABTITLE
+			, ABCONTENT
+			, ABIP
+			, QBID
+		)
+    	VALUES 
+    	(
+    		ABOARD_SEQ.NEXTVAL
+	    	, #{aid}
+	    	, #{abtitle}
+	    	, #{abcontent}
+	    	, #{abip}
+	    	, #{qbid}
+    	)
 	</insert>
 	
 	<update id="modifyAboard" parameterType="Aboard">
-		UPDATE ABOARD SET ABTITLE=#{abtitle},
-                  ABCONTENT=#{abcontent},
-                  ABIP=#{abip},
-                  AID=#{aid}
-            WHERE ABID=#{abid}
+		UPDATE ABOARD 
+		SET 
+			 ABTITLE	=#{abtitle}
+            ,ABCONTENT	=#{abcontent}
+            ,ABIP		=#{abip}
+            ,AID		=#{aid}
+       	WHERE ABID = #{abid}
 	</update>
 	
 	<select id="viewAboard" parameterType="Aboard" resultType="Aboard">

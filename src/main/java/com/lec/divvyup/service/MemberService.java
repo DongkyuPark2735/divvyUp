@@ -18,5 +18,13 @@ public interface MemberService {
 	public String searchMpw(String mid, String mname, String memail);
 	public List<Member> searchMember(HttpSession session, Member member);
 	public List<Member> memberListForGroupBoard(); 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+
+	
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 }

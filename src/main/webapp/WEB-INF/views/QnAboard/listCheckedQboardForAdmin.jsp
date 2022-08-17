@@ -29,15 +29,33 @@
 	<c:if test="${not empty modifyAboardResult}">
 		<script>alert('답변글 수정 성공');</script>
 	</c:if>
-	<c:if test="${empty member and not empty admin }">
-	  <div class="bt_wrap">
-	    <button onclick="location='${conPath}/main/mainforAdmin.do'">MAIN</button>
-	  </div>
-	</c:if>
+	
+	<nav class="header">
+	  <div class="container">
+      	  <h1 class="logo"><a href="${conPath}/main/mainforAdmin.do">D<span>U</span></a></h1>
+      	  <ul>
+      	    <li>
+      	      <a href="#">${aid }님 ▶</a>
+      	        <ul class="submenu">
+               	  <li><a href="${conPath}/qboard/listUncheckedQboardForAdmin.do">처리 대기 목록</a></li>
+          	   	  <li><a href="${conPath}/qboard/listCheckedQboardForAdmin.do">처리 완료 목록</a></li>
+                  <li><a href="${conPath}/adminSearch/adminSearchMain.do">회원검색목록</a></li>
+             	</ul>
+      	    </li>
+      	    <li>
+      	      <a href="${conPath}/main/logoutForAdmin.do">
+                <img src= "${conPath}/icon/logout.png" class="imgLogout"/>
+              </a>
+      	    </li>
+      	  </ul>
+      	</div>
+	</nav>
+<!---------------------------------------------------- 여기까지 헤더 ------------------ㄴ--------------------------------------->
+	
 	<c:set var="iNum" value="${paging.totCnt - paging.startRow + 1 }"/>
 	
 	<div class="board_list_wrap">
-	<div class="main_title"><h1>Checked Question Board</h1></div>
+	<div class="main_title"><h1>문의글 처리 완료 목록</h1></div>
 	<table class ="board_list">
 	  <caption>처리된 문의글 게시판</caption>
 	  <thead>
@@ -98,61 +116,6 @@
 	  
 	</div> <!-- board_list_wrap  -->
 	
-	
-	
-	<%-- <table>
-	  <tr>
-	    <th>NO.</th>
-	    <th>글번호</th>
-	    <th>제목</th>
-	    <th>작성자</th>
-	    <th>등록일</th>
-	    <th>처리상태</th>
-	  </tr>
-	  <c:if test="${paging.totCnt eq 0}">
-	    <tr>
-	      <th colspan="6">처리할 문의글이 없습니다</th>
-	    </tr>
-	  </c:if>
-	  <c:if test="${paging.totCnt != 0 }">
-	    <c:forEach items="${listUncheckedQboardForAdmin }" var="qboard">
-	      <tr onclick="trclicked(${qboard.qbid})">
-	      	<td>${iNum }</td>
-	        <td>${qboard.qbid }</td>
-	        <td>${qboard.qbtitle }</td>
-	        <td>${qboard.mid }</td>
-	        <td>${qboard.qbrdate }</td>
-	        <td>
-	          <c:if test="${qboard.qbreplycheck == 1 }">
-	            처리완료
-	          </c:if>
-	          <c:if test="${qboard.qbreplycheck == 0 }">
-	            접수
-	          </c:if>
-	        </td>
-	      </tr>
-	      <c:set var="iNum" value="${iNum-1 }"/>
-	    </c:forEach>
-	  </c:if>
-	</table>
-	<div class="paging">
-		<c:if test="${paging.startPage > paging.blockSize }">
-			[ <a href="${conPath }/qboard/listCheckedQboardForAdmin.do?pageNum=${paging.startPage-1}">이전</a> ]
-		</c:if>
-		<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
-			<c:if test="${i eq paging.currentPage }">
-				[ <b> ${i } </b> ]
-			</c:if>
-			<c:if test="${i != paging.currentPage }">
-				[ <a href="${conPath }/qboard/listCheckedQboardForAdmin.do?pageNum=${i}">${i }</a> ]
-			</c:if>
-		</c:forEach>
-		<c:if test="${paging.endPage < paging.pageCnt }">
-			[ <a href="${conPath }/qboard/listCheckedQboardForAdmin.do?pageNum=${paging.endPage+1}">다음</a> ]
-		</c:if>
-	</div>
-	<c:if test="${empty member and not empty admin }">
-	  <button onclick="location='${conPath}/main/mainforAdmin.do'">MAIN</button>
-	</c:if> --%>
+	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

@@ -38,8 +38,8 @@
         WHERE RN BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
-	<update id="updateUncheckNotification">
-		UPDATE NOTIFICATIONHISTORY SET NOTCHECK=1 WHERE NOTRECEIVER=#{notreceiver} AND NOTCHECK=0
+	<update id="updateUncheckNotification" parameterType="NotificationHistory">
+		UPDATE NOTIFICATIONHISTORY SET NOTCHECK=1 WHERE NOTRECEIVER=#{notreceiver, jdbcType=VARCHAR} AND NOTCHECK=0
 	</update>
 	
 	<select id="getAllNotificationCnt" parameterType="NotificationHistory" resultType="int">

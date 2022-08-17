@@ -25,6 +25,27 @@
   </script>
 </head>
 <body>
+	<nav class="header">
+	  <div class="container">
+      	  <h1 class="logo"><a href="${conPath}/main/mainforAdmin.do">D<span>U</span></a></h1>
+      	  <ul>
+      	    <li>
+      	      <a href="#">${aid }님 ▶</a>
+      	        <ul class="submenu">
+               	  <li><a href="${conPath}/qboard/listUncheckedQboardForAdmin.do">처리 대기 목록</a></li>
+          	   	  <li><a href="${conPath}/qboard/listCheckedQboardForAdmin.do">처리 완료 목록</a></li>
+                  <li><a href="${conPath}/adminSearch/adminSearchMain.do">회원검색목록</a></li>
+             	</ul>
+      	    </li>
+      	    <li>
+      	      <a href="${conPath}/main/logoutForAdmin.do">
+                <img src= "${conPath}/icon/logout.png" class="imgLogout"/>
+              </a>
+      	    </li>
+      	  </ul>
+      	</div>
+	</nav>
+<!---------------------------------------------------- 여기까지 헤더 --------------------------------------------------------->	
 	<div class="board_wrap">
 	  <div class="board_title">
         <strong>${qboard.qbid }번 글 상세보기</strong>
@@ -65,13 +86,15 @@
 	    </div>
 	  </div>
 	</div>
+	
+	<div class="board_list_wrap">
     <form action="${conPath }/aboard/writeAboard.do" method="post">
       <input type="hidden" name="pageNum" value="${param.pageNum }">
       <input type="hidden" name="aid" value="${aid }">
       <input type="hidden" name="qbid" value="${qboard.qbid }">
 	  <div class="board_write_wrap">
 	    <div class="board_title">
-          <strong>답변달기</strong>
+          <strong>답변글 작성하기</strong>
         </div>
         <div class="board_write_wrap">
           <div class="board_write">
@@ -95,12 +118,13 @@
               <textarea name="abcontent" placeholder="내용 입력"></textarea>
             </div>
           </div>
-  	    </div>
-        <div class="bt_wrap">
-  	      <input type="submit" value="글쓰기" class="on">
-  	      <input type="button" value="뒤로가기" class="btn" onclick="location.href='${conPath }/qboard/viewQboard.do?qbid=${qboard.qbid }&pageNum=${param.pageNum }'">
+          <div class="bt_wrap">
+  	        <input type="submit" value="글 작성" class="on">
+  	      </div>
   	    </div>
       </div>
     </form>
+    </div>
+    <jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

@@ -14,8 +14,17 @@
 	</resultMap>
 
 
-	<select id="groupList" resultType="Groups" parameterType="String">
-		SELECT * FROM GROUPS WHERE GID IN(SELECT GID FROM GROUPDETAIL WHERE MID=#{mid}) ORDER BY GRDATE DESC
+	<select id="groupList" resultType="Groups" parameterType="Groups">
+            <![CDATA[
+            SELECT * FROM (SELECT ROWNUM RN, A.* 
+            FROM (SELECT * FROM GROUPS WHERE (GID IN(SELECT GID FROM GROUPDETAIL WHERE MID=#{mid})) OR (GID IN(SELECT GID FROM GROUPS WHERE MID=#{mid}))	 ORDER BY GRDATE DESC) A)
+            WHERE RN BETWEEN #{startRow} AND #{endRow}
+            ]]>
+	</select>
+	
+	<select id="countGroups" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM GROUPS WHERE (GID IN(SELECT GID FROM GROUPDETAIL WHERE MID=#{mid})) OR (GID IN(SELECT GID FROM GROUPS WHERE MID=#{mid}))		
+
 	</select>
 	
 	<select id="groupInfo" parameterType="int" resultType="Groups">
@@ -52,10 +61,24 @@
 	<delete id="finalStepDeleteGroup" parameterType="int">
 		DELETE FROM GROUPS WHERE GID=#{gid}
 	</delete>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+	<select id="groupListforAdminSearch" resultType="Groups" parameterType="String">
+		SELECT * FROM GROUPS WHERE MID = #{mid} ORDER BY GRDATE DESC
+	</select>
+
+=======
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 	
 	
 	<select id="groupListforAdminSearch" resultType="Groups" parameterType="String">
 		SELECT * FROM GROUPS WHERE MID = #{mid} ORDER BY GRDATE DESC
 	</select>
 	
+<<<<<<< HEAD
+=======
+>>>>>>> 6046d284dcb394365a7690681b38d38763173063
+>>>>>>> 49ab70f5ed70f4880e0940d619e7a6f61843319d
 </mapper>

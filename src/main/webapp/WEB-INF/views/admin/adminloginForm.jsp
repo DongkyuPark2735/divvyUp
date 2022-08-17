@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Insert title here</title>
-  <link href="${conPath }/css/member/login.css" rel="stylesheet">
+  <link href="${conPath }/css/member/join2.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
   <script>
      $(document).ready(function(){
@@ -21,45 +21,38 @@
 		<script>alert('${adminloginResult}');</script>
 	</c:if>
 	
-	<div id="login_wrap">
-		<header>
-		  <h2>LOGIN</h2>
-		</header>
-		<form action="${conPath }/admin/adminlogin.do" method="post">
-	     <div class="input-box">
-	       <input id="username" type="text" name="aid" required="required" placeholder="아이디" value="${aid }">
-           <label for="username">ID</label>
-	     </div>
-	     
-	     <div class="input-box">
-	       <input id="password" type="password" name="apw" required="required" placeholder="비밀번호" value="${apw }">
-           <label for="password">PW</label>
-	     </div>
-	     <div>&nbsp;</div>
-         <input type="submit" value="로그인">
-	  </form>
+	<nav class="header">
+		<div class="container">
+			<h1 class="logo">
+				<a href="${conPath}/member/loginForm.do">D<span>U</span></a>
+			</h1>
+			<ul>
+				<li><a href="${conPath}/member/loginForm.do">로그인</a></li>
+				<li class="joinBtn"><a href="#" >회원가입</a></li>
+				<li><a href="${conPath}/qboard/listQboardForMember.do">Q&A</a></li>
+			</ul>
+		</div>
+	</nav>
+	
+	<div class="mainSection2">
+   		<div id="login_wrap">
+        	<h2>관리자 모드</h2>
+      		<form action="${conPath }/admin/adminlogin.do" method="post">
+        		<div class="input-box">
+          			<input id="username" class="login_btn" type="text" name="aid" required="required" placeholder="아이디" value="${aid }">
+           			<label for="username" style="top:5px; padding-left:13px;">아이디</label>
+        		</div>
+        
+        		<div class="input-box">
+          			<input id="password" class="login_btn" type="password" name="apw" required="required" placeholder=" 비밀번호" value="${apw }">
+           			<label for="password" style="top:5px;  padding-left:12px;">비밀번호</label>
+        		</div>
+        		<div id="forgot"></div>
+         		<input type="submit" value="로그인">
+     		</form>
+   		</div>
 	</div>
+	<jsp:include page="../main/footer.jsp"/>
 	
-	
-	<%-- <div>
-	  <form action="${conPath }/admin/adminlogin.do" method="post">
-	    <table>
-	      <caption>ALOGIN</caption>
-	      <tr>
-	        <th>ID</th>
-	        <td><input type="text" name="aid" required="required" value="${aid }"></td>
-	      </tr>
-	      <tr>
-	        <th>PW</th>
-	        <td><input type="password" name="apw" required="required" value="${apw }"></td>
-	      </tr>
-	      <tr>
-	        <td colspan="2">
-	          <input type="submit" value="ALOGIN"> 
-	        </td>
-	      </tr>
-	    </table>
-	  </form>
-	</div> --%>
 </body>
 </html>
