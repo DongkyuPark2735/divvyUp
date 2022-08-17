@@ -60,7 +60,7 @@
 	<nav class="header">
 		<div class="container">
 			<h1 class="logo">
-				<a href="${conPath}/main/main.jsp">D<span>U</span></a>
+				<a href="${conPath }/main/mainto.do">D<span>U</span></a>
 			</h1>
 
 
@@ -215,50 +215,56 @@
 
 			</div>
 			<div id="groups">
-			
-					<c:forEach var="groups" items="${groupList }">
-						<table>
-						<tr onclick="location='${conPath }/groups/groupInfo.do?gid=${groups.gid }'">
+
+				<c:forEach var="groups" items="${groupList }">
+					<table style="height: 10%;">
+						<tr
+							onclick="location='${conPath }/groups/groupInfo.do?gid=${groups.gid }&mid=${member.mid}'">
+							<td>${groups.gid }</td>
 							<td>
-								${groups.gid }
+								<p class="groupTitle">${groups.gname }</p>
+								<p class="groupContent">${groups.gcontent }
 							</td>
+
 							<td>
-								<p class="groupTitle">${groups.gname }</p><br>
-								<p class="groupContent">${groups.gcontent }<br>
-								생성자 : ${groups.mid }</p><br>
-							</td>
-							
-							<td>
-								<p class="groupDate">${groups.grdate}<p>
+								<p class="groupDate">${groups.grdate}
+								<p>
 							</td>
 						</tr>
-						</table>
+					</table>
+				</c:forEach>
+
+				<div class="paging">
+					<c:if test="${paging.startPage > paging.blockSize }">
+						<a
+							href="${conPath }/main/mainto.do?pageNum=${paging.startPage-1}&windowType=${1}"
+							class="btn">이전</a>
+					</c:if>
+					<c:forEach var="i" begin="${paging.startPage }"
+						end="${paging.endPage }">
+						<c:if test="${i eq paging.currentPage }">
+							<a class="num2"> ${i } </a>
+						</c:if>
+						<c:if test="${i != paging.currentPage }">
+							<a href="${conPath }/main/mainto.do?pageNum=${i}&windowType=${1}"
+								class="num">${i }</a>
+						</c:if>
 					</c:forEach>
-				
-				<div class="paging" >
-		<c:if test="${paging.startPage > paging.blockSize }">
-			<a href="${conPath }/main/mainto.do?pageNum=${paging.startPage-1}&windowType=${1}" class="btn">이전</a>
-		</c:if>
-		<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
-			<c:if test="${i eq paging.currentPage }">
-				<a class="num2"> ${i } </a>
-			</c:if>
-			<c:if test="${i != paging.currentPage }">
-				<a href="${conPath }/main/mainto.do?pageNum=${i}&windowType=${1}" class="num">${i }</a>
-			</c:if>
-		</c:forEach>
-		<c:if test="${paging.endPage < paging.pageCnt }">
-			<a href="${conPath }/main/mainto.do?pageNum=${paging.endPage+1}&windowType=${1}" class="btn">다음</a>
-		</c:if>
-		<div>&nbsp;</div>
-	    <c:if test="${empty member and empty admin }">
-	      <div class="bt_wrap">
-	        <input type="button" value="LOGIN" class="btn" onclick="location='${conPath}/member/loginForm.do'"/>
-	      </div>
-	    </c:if>
-	  </div>
+					<c:if test="${paging.endPage < paging.pageCnt }">
+						<a
+							href="${conPath }/main/mainto.do?pageNum=${paging.endPage+1}&windowType=${1}"
+							class="btn">다음</a>
+					</c:if>
+					<div>&nbsp;</div>
+					<c:if test="${empty member and empty admin }">
+						<div class="bt_wrap">
+							<input type="button" value="LOGIN" class="btn"
+								onclick="location='${conPath}/member/loginForm.do'" />
+						</div>
+					</c:if>
+				</div>
 				<input type="hidden" name=mid value="${mid }"> <input
-					type="button" value="그룹 생성"
+					type="button" value="그룹 생성" class="makeGroup"
 					onclick="location='${conPath }/groups/groupInsertForm.do?mid=${mid}'">
 			</div>
 
@@ -274,9 +280,25 @@
 	</div>
 
 
-
-
-
+	<c:if test="${param.windowType eq 0}">
+		<jsp:include page="../main/footer.jsp" />
+	</c:if>
+	<c:if test="${empty param.windowType}">
+		<jsp:include page="../main/footer.jsp" />
+	</c:if>
+	<c:if test="${param.windowType eq 1}">
+		<nav class="footer">
+			<div class="container">
+				<p>
+					서울시 XX구 XX로 000 XXX빌딩 8F | TEL : 02-999-9999 | FAX : 02-999-9998
+					사업자등록번호 : 000-12-00000 | 통신판매업신로 : 종로 제0000호 | <a
+						href="${conPath}/admin/adminloginForm.do">관리자모드</a> <br>좋은시스템
+					문의 메일 : webmaster@joeun.com <br>ⓒ2022 JOEUNSYSTEM.Co.,Ltd. All
+					Rights Reserved.
+				</p>
+			</div>
+		</nav>
+	</c:if>
 
 </body>
 <script>
@@ -299,11 +321,12 @@
 			}
 			if ($(".header").hasClass("change")) {
 				$(".header").removeClass("change");
+				$(".footer").removeClass("change");
 				$("#switch").removeClass("switched");
-				$(".header").removeClass("change");
 
 			} else {
 				$(".header").addClass("change");
+				$(".footer").addClass("change");
 				$("#switch").addClass("switched");
 			}
 			if ($("#switch").hasClass("switched")) {

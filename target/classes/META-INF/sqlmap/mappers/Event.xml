@@ -20,8 +20,8 @@
 	
 	<insert id="insertEvent" parameterType="Event">
 		<if test="eimage==''">
-			INSERT INTO EVENT (EID, ENAME, ECONTENT, EAMOUNT, EADDRESS, ECOUNT, MID, GID)
-	   			VALUES (EVENT_SEQ.NEXTVAL, #{ename}, #{econtent}, #{eamount}, #{eaddress}, #{ecount}, #{mid}, #{gid})
+			INSERT INTO EVENT (EID, ENAME, ECONTENT, EIMAGE, EAMOUNT, EADDRESS, ECOUNT, MID, GID)
+	   			VALUES (EVENT_SEQ.NEXTVAL, #{ename}, #{econtent}, 'dummySpend.jpg', #{eamount}, #{eaddress}, #{ecount}, #{mid}, #{gid})
 		</if>
 		<if test="eimage!=''">
 				INSERT INTO EVENT (EID, ENAME, ECONTENT, EIMAGE, EAMOUNT, EADDRESS, ECOUNT, MID, GID)

@@ -8,14 +8,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${conPath }/css/member/join.css" rel="stylesheet">
-<style>
-</style>
+<link href="${conPath }/css/member/join2.css" rel="stylesheet">
+
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
    $(document).ready(function() {
       $('.joinBtn').click(function(){
           $('.modal').fadeIn();
+          $('.modal_content').fadeIn();
           $('#login_wrap').fadeOut();
         });
       
@@ -34,16 +34,6 @@
              $('#login_wrap').fadeIn();
          }
       });
-      /* $("div#login_wrap button").click(function(){
-          alert(1);
-        });
-      $('p').click(function(){
-         alert(2);
-      });
-      
-      $(".close-area").click(function(){
-          $(".modal").fadeOut();
-      }); */
       
       $('input[name="mid"]').keyup(function(){
               var mid = $('input[name="mid"]').val();
@@ -115,6 +105,9 @@
    });
 </script>
 <script>
+function openPop(){
+  var popup = window.open('${conPath}/member/searchIdPwForm.do', '아이디/패스워드 찾기', 'width=300px,height=200px,scrollbars=yes');
+}
 </script>
  <!-- <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0"> -->
 </head>
@@ -137,23 +130,21 @@
    <c:if test="${not empty joinResult}">
       <script>alert('${joinResult}');</script>
    </c:if>
+     <nav class="header">
+      <div class="container">
+         <h1 class="logo">
+            <a href="${conPath}/member/loginForm.do">D<span>U</span></a>
+         </h1>
+         <ul>
+            <li><a href="${conPath}/member/loginForm.do">로그인</a></li>
+            <li class="joinBtn"><a href="#" >회원가입</a></li>
+<%--             <li class="joinBtn"><a href="${conPath}/member/joinForm.do" >회원가입</a></li> --%>
+            <li><a href="${conPath}/qboard/listQboardForMember.do">Q&A</a></li>
+         </ul>
+      </div>
+     </nav>
    
-   
-   
-    <nav class="header">
-		<div class="container">
-			<h1 class="logo">
-				<a href="${conPath}/main/main.jsp">D<span>U</span></a>
-			</h1>
-			<ul>
-				<li><a href="${conPath}/member/loginForm.do">로그인</a></li>
-				<li><a href="${conPath}/member/joinForm.do">회원가입</a></li>
-				<li><a href="${conPath}/qboard/listQboardForMember.do">Q&A</a></li>
-			</ul>
-		</div>
-	</nav>
-	
-     <div class="modal" style="display:none;">
+     <div class="modal">
         <div class="modal_content" title="클릭하면 창이 닫힙니다.">
        <header><h2>JOIN</h2></header>
       
@@ -161,29 +152,29 @@
       
         <div class="input-box">
           <input id="userid" type="text" name="mid" required="required" placeholder="아이디">
-           <label for="userid">ID</label>
+           <label for="userid">아이디</label>
            <div id="midConfirmResult"></div>
         </div>
         
         <div class="input-box">
           <input id="password" type="password" name="mpw" required="required" placeholder="비밀번호">
-           <label for="password">PW1</label>
+           <label for="password">비밀번호</label>
         </div>
         
         <div class="input-box">
           <input id="passwordCheck" type="password" name="mpwChk" required="required" placeholder="비밀번호">
-           <label for="passwordCheck">PW2</label>
+           <label for="passwordCheck">비밀번호</label>
            <div id="mpwChkResult"></div>
         </div>
         
         <div class="input-box">
           <input id="username" type="text" name="mname" required="required" placeholder="이름">
-           <label for="username">NAME</label>
+           <label for="username">이름</label>
         </div>
         
         <div class="input-box">
           <input id="useremail" type="text" name="memail" required="required" placeholder="이메일">
-           <label for="useremail">EMAIL</label>
+           <label for="useremail">이메일</label>
            <div id="memailConfirmResult"></div>
         </div>
          <!-- <div class="input_submit"> -->
@@ -194,24 +185,23 @@
         </div>
      </div>
    <div class="mainSection">
-   <div id="login_wrap">
-        <h2>LOGIN</h2>
-      <form action="${conPath }/member/login.do" method="post">
-        <div class="input-box">
-          <input id="username" class="login_btn" type="text" name="mid" required="required" placeholder="아이디" value="${mid }">
-           <label for="username" style="top:5px; padding-left:15px; ">아이디</label>
-        </div>
+         <div id="login_wrap">
+           <h2>LOGIN</h2>
+            <form action="${conPath }/member/login.do" method="post">
+              <div class="input-box">
+                   <input id="username" class="login_btn" type="text" name="mid" required="required" placeholder="아이디" value="${mid }">
+                    <label for="username" style="top:5px; padding-left:14.5px;">아이디</label>
+              </div>
         
-        <div class="input-box">
-          <input id="password" class="login_btn" type="password" name="mpw" required="required" placeholder="비밀번호" value="${mpw }">
-           <label for="password" style="top:5px;  padding-left:5px;">비밀번호</label>
-        </div>
-        <div id="forgot"><a href="${conPath}/member/searchIdPwForm.do">ID/PW 찾기</a></div>
-         <input type="submit" value="로그인">
-     </form>
+              <div class="input-box">
+                   <input id="password" class="login_btn" type="password" name="mpw" required="required" placeholder="비밀번호" value="${mpw }">
+                    <label for="password" style="top:5.5px;  padding-left:14px;">비밀번호</label>
+              </div>
+              <div id="forgot"><a href="${conPath}/member/searchIdPwForm.do">ID/PW 찾기</a></div>
+               <input type="submit" value="로그인">
+           </form>
+         </div>
    </div>
-</div>
-<jsp:include page="../main/footer.jsp"/>
+   <jsp:include page="../main/footer.jsp"/>
 </body>
-
 </html>
