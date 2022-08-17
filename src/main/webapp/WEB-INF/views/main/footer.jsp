@@ -8,24 +8,72 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link href="${conPath }/css/footer.css" rel="stylesheet">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;400&display=swap" rel="stylesheet">
+<style>
+.footer {
+		position: fixed;
+		background-color: rgba(34, 34, 34, 0.2);
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 100;
+}
+.footer .container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 80px;
+}
+	
+.footer .container {
+		left:0;
+		width:100%;
+}
+ 
+.footer p {
+		font-size:0.7em;
+		text-align:center;
+		color:white;
+		list-style: none;
+		margin:0 auto;
+		width:70%;
+}
+.footer a:hover {
+		opacity:0.5;
+}
+</style>	
 </head>
 <body>
-	<footer>
-			<ul>
-				<br><br><br>
-				<li><img src="${conPath }/img/logoWhite.png" ></li>
-				<br>
-				<li>서울시 XX구 XX로 000 XXX빌딩 8F | TEL : 02-999-9999 | FAX : 02-999-9998</li>
-				<li>사업자등록번호 : 000-12-00000 | 통신판매업신로 : 종로 제0000호 | <a href="${conPath }/adminLoginView.do">관리자모드</a></li>
-				<li>좋은시스템 문의 메일 : webmaster@joeun.com</li>
-				<li>ⓒ2022 JOEUNSYSTEM.Co.,Ltd. All Rights Reserved.</li>
-			</ul>
-		</div>
-	</footer>
+<!-- 빈이가 만든 푸터 ------------------------------------------------------------------------------------------------------------------>
+	<c:if test="${empty admin and empty member }">
+	  <nav class="footer">
+		  <div class="container">
+			  <p>서울시 XX구 XX로 000 XXX빌딩 8F | TEL : 02-999-9999 | FAX : 02-999-9998
+				  사업자등록번호 : 000-12-00000 | 통신판매업신로 : 종로 제0000호 | <a href="${conPath}/admin/adminloginForm.do">관리자모드</a>
+				  <br>좋은시스템 문의 메일 : webmaster@joeun.com
+				  <br>ⓒ2022 JOEUNSYSTEM.Co.,Ltd. All Rights Reserved.</p>
+		  </div>
+	  </nav>
+	</c:if>
+	<c:if test="${empty admin and not empty member}">
+	  <nav class="footer">
+		  <div class="container">
+			  <p>서울시 XX구 XX로 000 XXX빌딩 8F | TEL : 02-999-9999 | FAX : 02-999-9998
+				  사업자등록번호 : 000-12-00000 | 통신판매업신로 : 종로 제0000호
+				  <br>좋은시스템 문의 메일 : webmaster@joeun.com
+				  <br>ⓒ2022 JOEUNSYSTEM.Co.,Ltd. All Rights Reserved.</p>
+		  </div>
+	  </nav>
+	</c:if>
+	<c:if test="${not empty admin and empty member}">
+	  <nav class="footer">
+		  <div class="container">
+			  <p>서울시 XX구 XX로 000 XXX빌딩 8F | TEL : 02-999-9999 | FAX : 02-999-9998
+				  사업자등록번호 : 000-12-00000 | 통신판매업신로 : 종로 제0000호 | <strong style="color: #1DBF73;">관리자모드 접속 중</strong>
+				  <br>좋은시스템 문의 메일 : webmaster@joeun.com
+				  <br>ⓒ2022 JOEUNSYSTEM.Co.,Ltd. All Rights Reserved.</p>
+		  </div>
+	  </nav>
+	</c:if>
+<!-- 빈이가 만든 푸터 ------------------------------------------------------------------------------------------------------------------>
 </body>
 </html>

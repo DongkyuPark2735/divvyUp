@@ -10,7 +10,7 @@ import com.lec.divvyup.vo.Member;
 
 
 public interface GroupsService {
-	public List<Groups> groupList(String mid);
+	public List<Groups> groupList(String pageNum, String mid);
 	public Groups groupInfo(int gid);
 	public int nextGid();
 	public List<Member> followList(String mid);
@@ -18,4 +18,5 @@ public interface GroupsService {
 	public int modify(MultipartHttpServletRequest mRequest, Groups groups);
 	public int finalStepDeleteGroup(int gid);	
 	public List<Groups> groupListforAdminSearch(String mid);
+	public int countGroups(String mid);
 }

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="conPath" value="${pageContext.request.contextPath }" />
@@ -8,18 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<<<<<<< HEAD
-<link href="${conPath }/css/member/login.css" rel="stylesheet">
-<style>
-   
-</style>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script>
-   $(document).ready(function() {
-     
-   });
-=======
-<link href="${conPath }/css/member/join.css" rel="stylesheet">
+<link href="${conPath }/css/member/join3.css" rel="stylesheet">
 <style>
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -27,6 +16,7 @@
 	$(document).ready(function() {
 		$('.joinBtn').click(function(){
 		    $('.modal').fadeIn();
+		    $('.modal_content').fadeIn();
 		    $('#login_wrap').fadeOut();
 		  });
 		
@@ -45,16 +35,6 @@
 		    	$('#login_wrap').fadeIn();
 			}
 		});
-		/* $("div#login_wrap button").click(function(){
-		    alert(1);
-		  });
-		$('p').click(function(){
-			alert(2);
-		});
-		
-		$(".close-area").click(function(){
-		    $(".modal").fadeOut();
-		}); */
 		
 		$('input[name="mid"]').keyup(function(){
 	   		  var mid = $('input[name="mid"]').val();
@@ -124,80 +104,19 @@
 	  		    }
 	    	});
 	});
->>>>>>> 6bb5051dbb697d01cc69bf8061d978f3b60069f3
 </script>
 <script>
+function openPop(){
+  var width = '500px';
+  var height = '400px';
+  var left = Math.ceil((window.screen.width - width)/2);
+  /* var top = Math.ceil((window.screen.height - height)); */
+ /*  var popup = window.open('${conPath}/member/searchIdPwForm.do', '아이디/패스워드 찾기', 'width='+width+',height='+height+',left='+left+',top='+top+',scrollbars=yes'); */
+  var popup = window.open('${conPath}/member/searchIdPwForm.do', '아이디/패스워드 찾기', 'width='+width+',height='+height+',left='+left+', scrollbars=yes');
+}
 </script>
- <!-- <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0"> -->
 </head>
 <body>
-<<<<<<< HEAD
-   <c:if test="${not empty result}">
-      <script>
-         alert('${result}');
-      </script>
-   </c:if>
-   <c:if test="${not empty searchMidResult}">
-      <script>
-         alert('${searchMidResult}');
-      </script>
-   </c:if>
-   <c:if test="${not empty searchMpwResult}">
-      <script>
-         alert('${searchMpwResult}');
-      </script>
-   </c:if>
-   <c:if test="${not empty joinResult}">
-      <script>alert('${joinResult}');</script>
-   </c:if>
-     
-   <div id="login_wrap">
-      <header>
-        <h2>LOGIN</h2>
-      </header>
-      <form action="${conPath }/member/login.do" method="post">
-        <div class="input-box">
-          <input id="username" type="text" name="mid" required="required" placeholder="아이디" value="${mid }">
-           <label for="username">ID</label>
-        </div>
-        
-        <div class="input-box">
-          <input id="password" type="password" name="mpw" required="required" placeholder="비밀번호" value="${mpw }">
-           <label for="password">PW</label>
-        </div>
-        <div id="forgot"><a href="${conPath}/member/searchIdPwForm.do">ID/PW 찾기</a></div>
-         <input type="submit" value="로그인">
-     </form>
-   </div>
-     <button class="joinBtn">JOIN</button>
-<%--      <button onclick="location='${conPath}/member/joinForm.do'" class="joinBtn">JOIN</button> --%>
-     
-     
-     
-     
-     <button onclick="location='${conPath}/admin/adminloginForm.do'">AMODE</button>
-     <button onclick="location='${conPath}/qboard/listQboardForMember.do'">QBOARD</button>
-
-    <%--  <form action="${conPath }/member/login.do" method="post">
-       <table>
-         <caption>LOGIN</caption>
-         <tr>
-           <th>ID</th>
-           <td><input type="text" name="mid" required="required" value="${mid }"></td>
-         </tr>
-         <tr>
-           <th>PW</th>
-           <td><input type="password" name="mpw" required="required" value="${mpw }"></td>
-         </tr>
-         <tr>
-           <td colspan="2">
-             <input type="submit" value="LOGIN">
-           </td>
-         </tr>
-       </table>
-     </form> --%>
-     <%-- <button onclick="location='${conPath}/member/searchIdPwForm.do'">FIND ID&PW</button> --%>
-=======
 	<c:if test="${not empty result}">
 		<script>
 			alert('${result}');
@@ -216,37 +135,50 @@
 	<c:if test="${not empty joinResult}">
 		<script>alert('${joinResult}');</script>
 	</c:if>
-	  <div class="modal">
-  		<div class="modal_content" title="클릭하면 창이 닫힙니다.">
-    	<header><h2>JOIN</h2></header>
+	  <nav class="header">
+		<div class="container">
+			<h1 class="logo">
+				<a href="${conPath}/member/loginForm.do">D<span>U</span></a>
+			</h1>
+			<ul>
+				<li><a href="${conPath}/member/loginForm.do">로그인</a></li>
+				<li class="joinBtn"><a href="#" >회원가입</a></li>
+				<li><a href="${conPath}/qboard/listQboardForMember.do">Q&A</a></li>
+			</ul>
+		</div>
+	  </nav>
+	
+     <div class="modal">
+        <div class="modal_content" title="클릭하면 창이 닫힙니다.">
+       <header><h2>JOIN</h2></header>
 		
 		<form action="${conPath }/member/join.do" method="post" class="form">
 		
 	     <div class="input-box">
 	       <input id="userid" type="text" name="mid" required="required" placeholder="아이디">
-           <label for="userid">ID</label>
+           <label for="userid">아이디</label>
            <div id="midConfirmResult"></div>
 	     </div>
 	     
 	     <div class="input-box">
 	       <input id="password" type="password" name="mpw" required="required" placeholder="비밀번호">
-           <label for="password">PW1</label>
+           <label for="password">비밀번호</label>
 	     </div>
 	     
 	     <div class="input-box">
 	       <input id="passwordCheck" type="password" name="mpwChk" required="required" placeholder="비밀번호">
-           <label for="passwordCheck">PW2</label>
+           <label for="passwordCheck">비밀번호</label>
            <div id="mpwChkResult"></div>
 	     </div>
 	     
 	     <div class="input-box">
 	       <input id="username" type="text" name="mname" required="required" placeholder="이름">
-           <label for="username">NAME</label>
+           <label for="username">이름</label>
 	     </div>
 	     
 	     <div class="input-box">
 	       <input id="useremail" type="text" name="memail" required="required" placeholder="이메일">
-           <label for="useremail">EMAIL</label>
+           <label for="useremail">이메일</label>
            <div id="memailConfirmResult"></div>
 	     </div>
          <!-- <div class="input_submit"> -->
@@ -256,66 +188,27 @@
 	    </form>
   		</div>
 	  </div>
-	<div id="login_wrap">
-		<header>
-		  <h2>LOGIN</h2>
-		</header>
-		<form action="${conPath }/member/login.do" method="post">
-	     <div class="input-box">
-	       <input id="username" type="text" name="mid" required="required" placeholder="아이디" value="${mid }">
-           <label for="username">ID</label>
-	     </div>
-	     
-	     <div class="input-box">
-	       <input id="password" type="password" name="mpw" required="required" placeholder="비밀번호" value="${mpw }">
-           <label for="password">PW</label>
-	     </div>
-	     <div id="forgot"><a href="${conPath}/member/searchIdPwForm.do">ID/PW 찾기</a></div>
-         <input type="submit" value="로그인">
-	  </form>
+	  
+<!-- 빈이가 만든 로그인 ------------------------------------------------------------------------------------------------------------------------------>	  
+	<div class="mainSection">
+   		<div id="login_wrap">
+        	<h2>LOGIN</h2>
+      		<form action="${conPath }/member/login.do" method="post">
+        		<div class="input-box">
+          			<input id="username" class="login_btn" type="text" name="mid" required="required" placeholder="아이디" value="${mid }">
+           			<label for="username" style="top:5px; padding-left:13px;">아이디</label>
+        		</div>
+        
+        		<div class="input-box">
+          			<input id="password" class="login_btn" type="password" name="mpw" required="required" placeholder=" 비밀번호" value="${mpw }">
+           			<label for="password" style="top:5px;  padding-left:12px;">비밀번호</label>
+        		</div>
+        		<div id="forgot"><a href="#" onclick="openPop();">ID/PW 찾기</a></div>
+         		<input type="submit" value="로그인">
+     		</form>
+   		</div>
 	</div>
-	  <button class="joinBtn">JOIN</button>
-<%-- 	  <button onclick="location='${conPath}/member/joinForm.do'" class="joinBtn">JOIN</button> --%>
-	  
-	  
-	  
-	  
-	  <button onclick="location='${conPath}/admin/adminloginForm.do'">AMODE</button>
-	  <button onclick="location='${conPath}/qboard/listQboardForMember.do'">QBOARD</button>
-
-	 <%--  <form action="${conPath }/member/login.do" method="post">
-	    <table>
-	      <caption>LOGIN</caption>
-	      <tr>
-	        <th>ID</th>
-	        <td><input type="text" name="mid" required="required" value="${mid }"></td>
-	      </tr>
-	      <tr>
-	        <th>PW</th>
-	        <td><input type="password" name="mpw" required="required" value="${mpw }"></td>
-	      </tr>
-	      <tr>
-	        <td colspan="2">
-	          <input type="submit" value="LOGIN">
-	        </td>
-	      </tr>
-	    </table>
-<<<<<<< HEAD
-	  </form> --%>
-	  <%-- <button onclick="location='${conPath}/member/searchIdPwForm.do'">FIND ID&PW</button> --%>
-=======
-	  </form>
-	  <button onclick="location='${conPath}/member/joinForm.do'">JOIN</button>
-	  <button onclick="location='${conPath}/member/searchIdPwForm.do'">FIND ID&PW</button>
-	  <button onclick="location='${conPath}/qboard/listQboardForMember.do'">QBOARD</button>
-	  <p>
-		<input type="button" value="임시 그룹게시판 이동 버튼 그룹 1 회원 aaa" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=1&mid=aaa'">
-		<input type="button" value="임시 그룹게시판 이동 버튼 그룹 1 회원 bbb" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=1&mid=bbb'">
-		<input type="button" value="임시 그룹게시판 이동 버튼 그룹 1 회원 ccc" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=1&mid=ccc'">
-		<input type="button" value="임시 그룹게시판 이동 버튼 그룹 2 회원 aaa" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=2&mid=aaa'">
-		<input type="button" value="임시 그룹게시판 이동 버튼 그룹 2 회원 bbb" onclick="location.href='${conPath}/groupboard/groupDetil.do?gid=3&mid=bbb'">
-	  </p>
-	</div>
->>>>>>> babeadf72e944c959f5ccb566d2ecbc1c2b1cb4b
+<!-- 빈이가 만든 로그인 ------------------------------------------------------------------------------------------------------------------------------>	  
+	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

@@ -38,6 +38,6 @@ public class NotificationHistoryController {
 	@RequestMapping(value="updateUncheckNotification", method=RequestMethod.GET)
 	public String updateUncheckNotification(NotificationHistory notificationHistory, HttpSession session) {
 		notificationHistoryService.updateUncheckNotification(session, notificationHistory);
-		return "redirect:../main/mainto.do";
+		return "forward:../main/mainto.do";
 	}
 }

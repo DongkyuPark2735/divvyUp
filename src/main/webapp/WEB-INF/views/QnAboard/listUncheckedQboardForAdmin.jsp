@@ -29,13 +29,32 @@
 	<c:if test="${not empty writeAboardResult}">
 		<script>alert('답변글 작성 성공');</script>
 	</c:if>
-	<c:if test="${empty member and not empty admin }">
-	  <button onclick="location='${conPath}/main/mainforAdmin.do'">MAIN</button>
-	</c:if>
+	
+	<nav class="header">
+	  <div class="container">
+      	  <h1 class="logo"><a href="${conPath}/main/mainforAdmin.do">D<span>U</span></a></h1>
+      	  <ul>
+      	    <li>
+      	      <a href="#">${aid }님 ▶</a>
+      	        <ul class="submenu">
+               	  <li><a href="${conPath}/qboard/listUncheckedQboardForAdmin.do">처리 대기 목록</a></li>
+          	   	  <li><a href="${conPath}/qboard/listCheckedQboardForAdmin.do">처리 완료 목록</a></li>
+                  <li><a href="${conPath}/adminSearch/adminSearchMain.do">회원검색목록</a></li>
+             	</ul>
+      	    </li>
+      	    <li>
+      	      <a href="${conPath}/main/logoutForAdmin.do">
+                <img src= "${conPath}/icon/logout.png" class="imgLogout"/>
+              </a>
+      	    </li>
+      	  </ul>
+      	</div>
+	</nav>
+<!---------------------------------------------------- 여기까지 헤더 --------------------------------------------------------->		
 	<c:set var="iNum" value="${paging.totCnt - paging.startRow + 1 }"/>
 	
 	<div class="board_list_wrap">
-	<div class="main_title"><h1>Unchecked Question Board</h1></div>
+	<div class="main_title"><h1>문의글 처리 대기 목록</h1></div>
 	<table class ="board_list">
 	  <caption>처리 안된 문의글 게시판</caption>
 	  <thead>
@@ -95,5 +114,7 @@
 	  </div>
 	  
 	</div>
+	
+	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

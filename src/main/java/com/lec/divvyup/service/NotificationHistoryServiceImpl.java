@@ -64,8 +64,9 @@ public class NotificationHistoryServiceImpl implements NotificationHistoryServic
 	public int updateUncheckNotification(HttpSession session, NotificationHistory notificationHistory) {
 		// TODO Auto-generated method stub
 		notificationHistory.setNotreceiver((String)session.getAttribute("mid"));
+		System.out.println(notificationHistory);
 		int result = notificationHistoryDao.getUncheckdNotificationCnt(notificationHistory);
-		if(result != 0) {
+		if(result != 0) { 
 			notificationHistoryDao.updateUncheckNotification(notificationHistory);
 		}
 		return result;

@@ -18,6 +18,7 @@ import com.lec.divvyup.service.GroupBoardService;
 import com.lec.divvyup.service.GroupDetailService;
 import com.lec.divvyup.service.GroupsService;
 import com.lec.divvyup.service.NotificationHistoryService;
+import com.lec.divvyup.util.Paging;
 import com.lec.divvyup.vo.Groups;
 import com.lec.divvyup.vo.NotificationHistory;
 
@@ -43,9 +44,10 @@ public class GroupsController {
 	private NotificationHistoryService notificationHistoryService;
 	
 	@RequestMapping(value="groupList", method = RequestMethod.GET)
-	public String groupList(Model model, Groups groups, String mid) {
-		model.addAttribute("groupList", groupsService.groupList(mid));
-		model.addAttribute("followList", groupsService.followList(mid));
+	public String groupList(Model model, Groups groups, String mid, String pageNum) {
+		model.addAttribute("groupList", groupsService.groupList(pageNum, mid));
+		model.addAttribute("paging", new Paging(pageNum, groupsService.countGroups(mid)));
+		 model.addAttribute("followList", groupsService.followList(mid));
 		return "groups/groupList";
 	}
 	@RequestMapping(value="groupInfo", method = {RequestMethod.GET, RequestMethod.POST})
